@@ -37,4 +37,14 @@
         android:translationY="80sp"
         app:srcCompat="@drawable/background" />
 
+    <Button
+        android:id="@+id/allPrayers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#08FFFFFF"
+        android:text="All Prayers"
+        android:textColor="#6EF16E"
+        android:translationX="-5sp"
+        android:translationY="225sp" />
+
 </RelativeLayout>

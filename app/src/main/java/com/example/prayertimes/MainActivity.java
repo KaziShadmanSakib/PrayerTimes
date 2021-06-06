@@ -19,6 +19,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,8 +32,9 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
-    TextView cityLocation;
-    LocationManager locationManager;
+    private TextView cityLocation;
+    private LocationManager locationManager;
+    private Button allPrayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,13 +81,28 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         checkLocationIsEnabledOrNot();
         getLocation();
+
+        /* All Prayers Button */
+        allPrayers = (Button) findViewById(R.id.allPrayers);
+        allPrayers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAllPrayers();
+            }
+        });
+
+    }
+
+    private void openAllPrayers() {
+        Intent intent = new Intent(this, AllPrayers.class);
+        startActivity(intent);
     }
 
     private void getLocation() {
         try {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 5, (LocationListener) this);
-        } catch (SecurityException e) {
+        }catch (SecurityException e){
             e.printStackTrace();
         }
     }
@@ -98,37 +116,39 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         try {
             gpsEnabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
 
         try {
             networkEnabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
 
         if(!gpsEnabled && !networkEnabled){
             new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("To continue, please turn on device location, which uses Google's location serivice")
+                    .setTitle("Please Enable Location Service")
                     .setCancelable(false)
                     .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
                             /* If GPS is disabled this will redirect us to Location Settings */
+
                             startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                         }
-                    })
-                    .setNegativeButton("Cancel", null)
+                    }).setNegativeButton("Cancel", null)
                     .show();
         }
     }
 
     private void grantPermission() {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getApplicationContext(),
+        && ActivityCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
         }
     }
 
