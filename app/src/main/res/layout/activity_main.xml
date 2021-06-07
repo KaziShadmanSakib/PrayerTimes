@@ -41,6 +41,8 @@
         android:id="@+id/allPrayers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/backgroundHome"
+        android:layout_marginTop="7dp"
         android:background="#08FFFFFF"
         android:text="All Prayers"
         android:textColor="#6EF16E"

@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
@@ -70,15 +71,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
-        /*App bar config */
-        getSupportActionBar().setTitle("Home");
-
         /* Get User Specific Location */
 
-        grantPermission();
-
         cityLocation = findViewById(R.id.cityLocation);
-
+        grantPermission();
         checkLocationIsEnabledOrNot();
         getLocation();
 
@@ -90,6 +86,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 openAllPrayers();
             }
         });
+
+        /*App bar config */
+        getSupportActionBar().setTitle("Home");
 
     }
 
@@ -145,10 +144,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private void grantPermission() {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-        && ActivityCompat.checkSelfPermission(getApplicationContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                && ActivityCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+                    Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
         }
     }
 
