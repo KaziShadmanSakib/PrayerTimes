@@ -26,6 +26,13 @@ import android.widget.TextView;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import net.time4j.SystemClock;
+import net.time4j.android.ApplicationStarter;
+import net.time4j.calendar.HijriCalendar;
+import net.time4j.engine.StartOfDay;
+import net.time4j.format.expert.ChronoFormatter;
+import net.time4j.format.expert.PatternType;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -87,7 +94,40 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
+        /* Hijri Date */
+
+        ApplicationStarter.initialize(this, true);
+
+        ChronoFormatter<HijriCalendar> hijriFormat =
+                ChronoFormatter.setUp(HijriCalendar.family(), Locale.ENGLISH)
+                        .addEnglishOrdinal(HijriCalendar.DAY_OF_MONTH)
+                        .addPattern(" MMMM yyyy", PatternType.CLDR)
+                        .build()
+                        .withCalendarVariant(HijriCalendar.VARIANT_UMALQURA);
+
+// conversion from gregorian to hijri-umalqura valid at noon
+// (not really valid in the evening when next islamic day starts)
+        HijriCalendar today =
+                SystemClock.inLocalView().today().transform(
+                        HijriCalendar.class,
+                        HijriCalendar.VARIANT_UMALQURA
+                );
+        System.out.println(hijriFormat.format(today)); // 22nd Rajab 1438
+
+// taking into account the specific start of day for Hijri calendar
+        HijriCalendar todayExact =
+                SystemClock.inLocalView().now(
+                        HijriCalendar.family(),
+                        HijriCalendar.VARIANT_UMALQURA,
+                        StartOfDay.EVENING // simple approximation => 18:00
+                ).toDate();
+        System.out.println(hijriFormat.format(todayExact)); // 22nd Rajab 1438 (23rd after 18:00)
+
+        TextView hijriDate = (TextView) findViewById(R.id.hijriDate);
+        hijriDate.setText(hijriFormat.format(todayExact));
+
         /*App bar config */
+
         getSupportActionBar().setTitle("Home");
 
     }

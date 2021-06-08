@@ -49,4 +49,16 @@
         android:translationX="-5sp"
         android:translationY="225sp" />
 
+    <TextView
+        android:id="@+id/hijriDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cityLocation"
+        android:layout_marginBottom="-32dp"
+        android:text="Date"
+        android:textColor="#056608 "
+        android:textSize="12sp"
+        android:translationX="20dp"
+        android:translationY="0dp" />
+
 </RelativeLayout>
