@@ -23,12 +23,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.time4j.SystemClock;
 import net.time4j.android.ApplicationStarter;
 import net.time4j.calendar.HijriCalendar;
+import net.time4j.calendar.astro.GeoLocation;
 import net.time4j.engine.StartOfDay;
 import net.time4j.format.expert.ChronoFormatter;
 import net.time4j.format.expert.PatternType;
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private TextView cityLocation;
     private LocationManager locationManager;
     private Button allPrayers;
+    private FusedLocationProviderClient fusedLocationClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,16 +67,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.log:
                         startActivity(new Intent(getApplicationContext(), Log.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.home:
                         return true;
                     case R.id.duas:
                         startActivity(new Intent(getApplicationContext(), Duas.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                 }
                 return false;
@@ -80,7 +85,39 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         /* Get User Specific Location */
 
+        /* Gets Last Location from device */
+
         cityLocation = findViewById(R.id.cityLocation);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if(location != null){
+                    try {
+                        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                        List<Address> addresses = null;
+                        addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                        cityLocation.setText(addresses.get(0).getLocality());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        /* Gets the User's Location */
         grantPermission();
         checkLocationIsEnabledOrNot();
         getLocation();
