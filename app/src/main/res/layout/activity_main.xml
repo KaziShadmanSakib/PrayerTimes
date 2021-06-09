@@ -61,4 +61,15 @@
         android:translationX="20dp"
         android:translationY="0dp" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="188dp"
+        android:layout_marginBottom="165dp"
+        android:onClick="updateDB"
+        android:text="Button" />
+
 </RelativeLayout>

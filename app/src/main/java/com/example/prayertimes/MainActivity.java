@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -37,6 +38,8 @@ import net.time4j.format.expert.ChronoFormatter;
 import net.time4j.format.expert.PatternType;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -47,6 +50,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private LocationManager locationManager;
     private Button allPrayers;
     private FusedLocationProviderClient fusedLocationClient;
+
+
+    //abd's variables
+    public DatabaseHandler databaseHandler;
+    private Button calenderButton;
+    private int index = 0;
+    public SQLiteDatabase prayerDB;
+    Calendar calendar;
+    SimpleDateFormat simpleDateFormat;
 
 
     @Override
@@ -86,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         /* Get User Specific Location */
 
         /* Gets Last Location from device */
-
+ /*
         cityLocation = findViewById(R.id.cityLocation);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -117,11 +129,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
-        /* Gets the User's Location */
+        // Gets the User's Location
         grantPermission();
         checkLocationIsEnabledOrNot();
         getLocation();
-
+ */
         /* All Prayers Button */
         allPrayers = (Button) findViewById(R.id.allPrayers);
         allPrayers.setOnClickListener(new View.OnClickListener() {
@@ -238,4 +250,32 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             e.printStackTrace();
         }
     }
+
+
+    //abd's update Database
+
+    public void updateDB(View v) {
+
+        databaseHandler = new DatabaseHandler(this);
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String date = simpleDateFormat.format(calendar.getTime());
+
+
+        if (databaseHandler.getContact(date)._date == null) {
+            try {
+                Contact contact = new Contact(date, false, false, false, false, false);
+                databaseHandler.addContact(contact);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+
+            databaseHandler.updateCell(date, index);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
