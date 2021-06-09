@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //create database
+        databaseHandler = new DatabaseHandler(this);
+
         /* Initialize and Assign Variable for Bottom Navigation */
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -256,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     public void updateDB(View v) {
 
-        databaseHandler = new DatabaseHandler(this);
+
         calendar = Calendar.getInstance();
         simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());

@@ -15,6 +15,7 @@ import android.widget.CalendarView;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -79,6 +80,9 @@ public class Log extends AppCompatActivity {
 
 
                 if(databaseHandler.getContact(date)._date == null){
+
+                    Toast toast=Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT);
+                    toast.show();
 
                     doPopUp(true,date);
 
@@ -164,7 +168,11 @@ public class Log extends AppCompatActivity {
 
 
     private String intToString(int digit) {
-        String s = String.valueOf(digit);
+        String s;
+        if(digit>9)
+                   s = String.valueOf(digit);
+        else
+            s = "0"+String.valueOf(digit);
         return s;
     }
 }
