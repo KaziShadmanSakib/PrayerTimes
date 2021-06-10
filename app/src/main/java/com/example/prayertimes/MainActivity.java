@@ -313,10 +313,20 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
 
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Please Enable Location Service")
+                        .setCancelable(false)
+                        .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
+                                /* If GPS is disabled this will redirect us to Location Settings */
 
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
+                                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+
+                            }
+                        }).setNegativeButton("Cancel", null)
+                        .show();
             }
         } else {
             // if permissions aren't available,
