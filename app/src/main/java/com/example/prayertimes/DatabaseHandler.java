@@ -150,6 +150,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[] { contact.getDate() });
     }
     public void updateCell(String date, int prayerNo){
+
         String strSQL = "UPDATE " + TABLE_Prayers + " SET " +ALL_Prayers[prayerNo] + " = TRUE WHERE Date = " + date;
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(strSQL);

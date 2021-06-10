@@ -79,12 +79,12 @@ public class LogActivity extends AppCompatActivity {
                 String monthString = intToString(month);
                 String dayString = intToString(dayOfMonth);
                 String date = year+monthString+dayString;
+                Toast toast=Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT);
+                toast.show();
+
 
 
                 if(databaseHandler.getContact(date)._date == null){
-
-                    Toast toast=Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT);
-                    toast.show();
 
                     doPopUp(true,date);
 

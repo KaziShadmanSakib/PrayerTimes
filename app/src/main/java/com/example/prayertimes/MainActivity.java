@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
     private LocationManager locationManager;
     private Button allPrayers;
     private FusedLocationProviderClient fusedLocationClient;
+    private FusedLocationProviderClient fusedLocationClient2;
 
 
     //abd's variables
@@ -117,10 +118,7 @@ public class MainActivity extends AppCompatActivity {
     public double finalLong = 0;
 
     List<Address> addresses;
-    TextView textView;
     Geocoder geocoder;
-
-
 
 
     @Override
@@ -165,11 +163,31 @@ public class MainActivity extends AppCompatActivity {
         Geocoder gcd = new Geocoder(this, Locale.getDefault());
 
         geocoder = new Geocoder(this, Locale.getDefault());
-        textView = (TextView)findViewById(R.id.cityLocation);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient2 = LocationServices.getFusedLocationProviderClient(this);
         cityLocation = (TextView) findViewById(R.id.cityLocation);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationClient2.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                        }
+                    }
+                });
 
 
         getLastLocation();
@@ -234,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
                 String city = addresses.get(0).getLocality();
                 String country = addresses.get(0).getCountryName();
 
-                textView.setText(city+"    " +country);
+                cityLocation.setText(city);
             }
 
         } catch (IOException e) {
@@ -405,6 +423,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         try {
+            Toast toast=Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT);
+            toast.show();
 
             databaseHandler.updateCell(date, index);
         } catch (Exception e) {
