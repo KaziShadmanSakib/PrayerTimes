@@ -21,6 +21,7 @@
         android:id="@+id/cityLocation"
         android:layout_width="180dp"
         android:layout_height="29dp"
+        android:onClick="locationUpdate"
         android:text="Location"
         android:textColor="#056608 "
         android:textSize="18sp"
