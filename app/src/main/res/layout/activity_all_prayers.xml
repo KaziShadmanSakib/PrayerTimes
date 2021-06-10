@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,9 +14,164 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/background" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/fajrNamaz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B5006400"
+        android:text="Fajr"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="40dp"
+        android:translationY="35dp" />
+
+    <TextView
+        android:id="@+id/fazrNamazId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B5006400"
+        android:text="Fajr"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="200dp"
+        android:translationY="35dp" />
+
+    <TextView
+        android:id="@+id/ishaNamaz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B5006400"
+        android:text="Isha"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="40dp"
+        android:translationY="485dp" />
+
+    <TextView
+        android:id="@+id/ishaNamazId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B5006400"
+        android:text="Isha"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="200dp"
+        android:translationY="485dp" />
+
+    <TextView
+        android:id="@+id/magribNamaz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B5006400"
+        android:text="Magrib"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="40dp"
+        android:translationY="410dp" />
+
+    <TextView
+        android:id="@+id/magribNamazId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B5006400"
+        android:text="Magrib"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="200dp"
+        android:translationY="410dp" />
+
+    <TextView
+        android:id="@+id/asarNamaz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B5006400"
+        android:text="Asar"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="40dp"
+        android:translationY="260dp" />
+
+    <TextView
+        android:id="@+id/asarNamazId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B5006400"
+        android:text="Asar"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="200dp"
+        android:translationY="260dp" />
+
+    <TextView
+        android:id="@+id/dhuhrNamaz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B5006400"
+        android:text="Dhuhr"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="40dp"
+        android:translationY="185dp" />
+
+    <TextView
+        android:id="@+id/dhuhrNamazId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B5006400"
+        android:text="Dhuhr"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="200dp"
+        android:translationY="185dp" />
+
+    <TextView
+        android:id="@+id/sunrise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B58B0000"
+        android:text="Sunrise"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="40dp"
+        android:translationY="110dp" />
+
+    <TextView
+        android:id="@+id/sunriseId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B58B0000"
+        android:text="Sunrise"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="200dp"
+        android:translationY="110dp" />
+
+    <TextView
+        android:id="@+id/sunset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B58B0000"
+        android:text="Sunset"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="40dp"
+        android:translationY="335dp" />
+
+    <TextView
+        android:id="@+id/sunsetId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B58B0000"
+        android:text="Sunset"
+        android:textColor="#FFFFFF	"
+        android:textSize="24sp"
+        android:translationX="200dp"
+        android:translationY="335dp" />
+
+</RelativeLayout>

@@ -5,16 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Log">
+    tools:context=".LogActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        app:srcCompat="@drawable/background" />
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="410dp"
-        android:layout_height="428dp"
+        android:layout_width="match_parent"
+        android:layout_height="538dp"
         android:layout_above="@+id/bottom_navigation"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="131dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginBottom="138dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -32,7 +32,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.time4j.SystemClock;
 import net.time4j.android.ApplicationStarter;
 import net.time4j.calendar.HijriCalendar;
-import net.time4j.calendar.astro.GeoLocation;
 import net.time4j.engine.StartOfDay;
 import net.time4j.format.expert.ChronoFormatter;
 import net.time4j.format.expert.PatternType;
@@ -47,6 +46,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
     private TextView cityLocation;
+    private TextView countryLocation;
     private LocationManager locationManager;
     private Button allPrayers;
     private FusedLocationProviderClient fusedLocationClient;
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.log:
-                        startActivity(new Intent(getApplicationContext(), Log.class));
+                        startActivity(new Intent(getApplicationContext(), LogActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.home:
@@ -101,8 +101,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         /* Get User Specific Location */
 
         /* Gets Last Location from device */
- /*
+
         cityLocation = findViewById(R.id.cityLocation);
+        //countryLocation = findViewById(R.id.countryLocation);
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -125,6 +127,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                         List<Address> addresses = null;
                         addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                         cityLocation.setText(addresses.get(0).getLocality());
+                        //countryLocation.setText(addresses.get(0).getCountryName());
+
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -136,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         grantPermission();
         checkLocationIsEnabledOrNot();
         getLocation();
- */
+
         /* All Prayers Button */
         allPrayers = (Button) findViewById(R.id.allPrayers);
         allPrayers.setOnClickListener(new View.OnClickListener() {
@@ -249,6 +254,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
             cityLocation.setText(addresses.get(0).getLocality());
+            //countryLocation.setText(addresses.get(0).getCountryName());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
