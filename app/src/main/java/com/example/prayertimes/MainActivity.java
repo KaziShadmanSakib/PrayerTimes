@@ -43,8 +43,59 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
-public class MainActivity extends AppCompatActivity implements LocationListener {
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.os.Looper;
+import android.provider.Settings;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import net.time4j.SystemClock;
+import net.time4j.android.ApplicationStarter;
+import net.time4j.calendar.HijriCalendar;
+import net.time4j.calendar.astro.GeoLocation;
+import net.time4j.engine.StartOfDay;
+import net.time4j.format.expert.ChronoFormatter;
+import net.time4j.format.expert.PatternType;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+
+
+public class MainActivity extends AppCompatActivity {
 
     private TextView cityLocation;
     private LocationManager locationManager;
@@ -59,6 +110,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     public SQLiteDatabase prayerDB;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
+
+    int PERMISSION_ID = 44;
+    public double finalLat = 0;
+    public double finalLong = 0;
+
+    List<Address> addresses;
+    TextView textView;
+    Geocoder geocoder;
+
+
 
 
     @Override
@@ -84,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.log:
-                        startActivity(new Intent(getApplicationContext(), Log.class));
+                        startActivity(new Intent(getApplicationContext(), LogActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.home:
@@ -98,45 +159,25 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
-        /* Get User Specific Location */
+        /* Location */
 
-        /* Gets Last Location from device */
- /*
-        cityLocation = findViewById(R.id.cityLocation);
+        Geocoder gcd = new Geocoder(this, Locale.getDefault());
+
+        geocoder = new Geocoder(this, Locale.getDefault());
+        textView = (TextView)findViewById(R.id.cityLocation);
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if(location != null){
-                    try {
-                        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-                        List<Address> addresses = null;
-                        addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                        cityLocation.setText(addresses.get(0).getLocality());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+        cityLocation = (TextView) findViewById(R.id.cityLocation);
 
-        // Gets the User's Location
-        grantPermission();
-        checkLocationIsEnabledOrNot();
-        getLocation();
- */
+
+
+        getLastLocation();
+
+
+        convertLocation(finalLat,finalLong);
+
+
+
         /* All Prayers Button */
         allPrayers = (Button) findViewById(R.id.allPrayers);
         allPrayers.setOnClickListener(new View.OnClickListener() {
@@ -184,80 +225,156 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     }
 
-    private void openAllPrayers() {
-        Intent intent = new Intent(this, AllPrayers.class);
-        startActivity(intent);
-    }
-
-    private void getLocation() {
+    public void convertLocation(double latitute,double longitute){
         try {
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 5, (LocationListener) this);
-        }catch (SecurityException e){
-            e.printStackTrace();
-        }
-    }
+            addresses = geocoder.getFromLocation(latitute ,longitute, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            if(addresses.size()>0){
+                String city = addresses.get(0).getLocality();
+                String country = addresses.get(0).getCountryName();
 
-    /* This method will redirect us to Location Settings */
+                textView.setText(city+"    " +country);
+            }
 
-    private void checkLocationIsEnabledOrNot() {
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        boolean gpsEnabled = false;
-        boolean networkEnabled = false;
-
-        try {
-            gpsEnabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        try {
-            networkEnabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        if(!gpsEnabled && !networkEnabled){
-            new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("Please Enable Location Service")
-                    .setCancelable(false)
-                    .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            /* If GPS is disabled this will redirect us to Location Settings */
-
-                            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                        }
-                    }).setNegativeButton("Cancel", null)
-                    .show();
-        }
-    }
-
-    private void grantPermission() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getApplicationContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
-        }
-    }
-
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
-        try {
-            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-            cityLocation.setText(addresses.get(0).getLocality());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
+    private void openAllPrayers() {
+        Intent intent = new Intent(this, AllPrayers.class);
+        startActivity(intent);
+    }
+
+
+    @SuppressLint("MissingPermission")
+    private void getLastLocation() {
+        // check if permissions are given
+        if (checkPermissions()) {
+
+            // check if location is enabled
+            if (isLocationEnabled()) {
+
+                // getting last
+                // location from
+                // FusedLocationClient
+                // object
+                fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        Location location = task.getResult();
+                        if (location == null) {
+                            requestNewLocationData();
+                        } else {
+
+
+                            finalLat = location.getLatitude();
+                            finalLong = location.getLongitude();
+
+
+
+                        }
+                    }
+                });
+            } else {
+                Toast.makeText(this, "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        } else {
+            // if permissions aren't available,
+            // request for permissions
+            requestPermissions();
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private void requestNewLocationData() {
+
+        // Initializing LocationRequest
+        // object with appropriate methods
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(5);
+        mLocationRequest.setFastestInterval(0);
+        mLocationRequest.setNumUpdates(1);
+
+        // setting LocationRequest
+        // on FusedLocationClient
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+    }
+
+    private LocationCallback mLocationCallback = new LocationCallback() {
+
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            Location mLastLocation = locationResult.getLastLocation();
+
+            finalLat = mLastLocation.getLatitude();
+            finalLong = mLastLocation.getLongitude();
+
+
+        }
+    };
+
+    // method to check for permissions
+    private boolean checkPermissions() {
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ;
+        //&&ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
+
+    }
+
+    // method to request for permissions
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_ID);
+    }
+
+    // method to check
+    // if location is enabled
+    private boolean isLocationEnabled() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    // If everything is alright then
+    @Override
+    public void
+    onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSION_ID) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLastLocation();
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (checkPermissions()) {
+            getLastLocation();
+        }
+    }
+
+
+
+    //update Location
+    public void locationUpdate(View v){
+        convertLocation(finalLat,finalLong);
+    }
+
+
+
     //abd's update Database
 
     public void updateDB(View v) {
+
 
 
         calendar = Calendar.getInstance();
