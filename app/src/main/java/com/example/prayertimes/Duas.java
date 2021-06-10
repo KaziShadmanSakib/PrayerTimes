@@ -31,7 +31,7 @@ public class Duas extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.log:
-                        startActivity(new Intent(getApplicationContext(), Log.class));
+                        startActivity(new Intent(getApplicationContext(), LogActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:

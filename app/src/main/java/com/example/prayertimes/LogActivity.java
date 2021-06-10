@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Log extends AppCompatActivity {
+public class LogActivity extends AppCompatActivity {
 
     private DatabaseHandler databaseHandler;
     Button backMain;
@@ -63,6 +63,8 @@ public class Log extends AppCompatActivity {
 
 
         calendarView = (CalendarView)findViewById(R.id.calendarView);
+
+
 
         //openDB
         databaseHandler = new DatabaseHandler(this);
