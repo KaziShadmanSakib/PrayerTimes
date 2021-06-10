@@ -19,6 +19,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.view.MenuItem;
@@ -131,7 +132,14 @@ public class MainActivity extends AppCompatActivity {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         cityLocation = (TextView) findViewById(R.id.cityLocation);
 
+
+
         getLastLocation();
+
+
+
+
+
 
 
 
@@ -191,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void convertLocation(double latitute,double longitute){
         try {
-            addresses = geocoder.getFromLocation(latitute ,longitute, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            if(latitute!=0) addresses = geocoder.getFromLocation(latitute ,longitute, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
            if(addresses.size()>0){
                String city = addresses.get(0).getLocality();
                String country = addresses.get(0).getCountryName();
@@ -236,6 +244,12 @@ public class MainActivity extends AppCompatActivity {
 
                             finalLat = location.getLatitude();
                             finalLong = location.getLongitude();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    convertLocation(finalLat,finalLong);;
+                                }
+                            }, 1000);
 
 
 
@@ -279,6 +293,12 @@ public class MainActivity extends AppCompatActivity {
 
             finalLat = mLastLocation.getLatitude();
             finalLong = mLastLocation.getLongitude();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    convertLocation(finalLat,finalLong);;
+                }
+            }, 1000);
 
 
         }
@@ -342,10 +362,6 @@ public class MainActivity extends AppCompatActivity {
     public void updateDB(View v) {
 
 
-        {
-            Toast toast = Toast.makeText(getApplicationContext(),Double.toString(finalLat)+Double.toString(finalLong),Toast.LENGTH_SHORT);
-            toast.show();
-        }
 
         calendar = Calendar.getInstance();
         simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
