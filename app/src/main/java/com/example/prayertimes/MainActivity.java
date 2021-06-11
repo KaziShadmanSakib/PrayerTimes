@@ -3,8 +3,6 @@ package com.example.prayertimes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,7 +13,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,13 +25,11 @@ import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.time4j.SystemClock;
 import net.time4j.android.ApplicationStarter;
 import net.time4j.calendar.HijriCalendar;
-import net.time4j.calendar.astro.GeoLocation;
 import net.time4j.engine.StartOfDay;
 import net.time4j.format.expert.ChronoFormatter;
 import net.time4j.format.expert.PatternType;
@@ -44,75 +39,34 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
 import android.os.Looper;
-import android.provider.Settings;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import net.time4j.SystemClock;
-import net.time4j.android.ApplicationStarter;
-import net.time4j.calendar.HijriCalendar;
-import net.time4j.calendar.astro.GeoLocation;
-import net.time4j.engine.StartOfDay;
-import net.time4j.format.expert.ChronoFormatter;
-import net.time4j.format.expert.PatternType;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView cityLocation;
-    private LocationManager locationManager;
     private Button allPrayers;
     private FusedLocationProviderClient fusedLocationClient;
-    private FusedLocationProviderClient fusedLocationClient2;
     private String city;
     private String country;
 
 
     //abd's variables
     public DatabaseHandler databaseHandler;
-    private Button calenderButton;
-    private int index = 1;
-    public SQLiteDatabase prayerDB;
+    private int index = 4;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
 
@@ -136,29 +90,25 @@ public class MainActivity extends AppCompatActivity {
         /* Bottom Navigation */
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.log:
-                        startActivity(new Intent(getApplicationContext(), LogActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.home:
-                        return true;
-                    case R.id.duas:
-                        startActivity(new Intent(getApplicationContext(), Duas.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                }
-                return false;
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.log:
+                    startActivity(new Intent(getApplicationContext(), LogActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                case R.id.home:
+                    return true;
+                case R.id.duas:
+                    startActivity(new Intent(getApplicationContext(), Duas.class));
+                    overridePendingTransition(0, 0);
+                    return true;
             }
+            return false;
         });
 
         /* Location */
         geocoder = new Geocoder(this, Locale.getDefault());
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        fusedLocationClient2 = LocationServices.getFusedLocationProviderClient(this);
         cityLocation = (TextView) findViewById(R.id.cityLocation);
         if(finalLat != 0 && finalLong != 0){
             convertLocation(finalLat,finalLong);
@@ -169,55 +119,19 @@ public class MainActivity extends AppCompatActivity {
 
         /* All Prayers Button */
         allPrayers = (Button) findViewById(R.id.allPrayers);
-        allPrayers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openAllPrayers();
-            }
-        });
+        allPrayers.setOnClickListener(v -> openAllPrayers());
 
-        /* Hijri Date */
+        hijriUpdate();
 
-        ApplicationStarter.initialize(this, true);
 
-        ChronoFormatter<HijriCalendar> hijriFormat =
-                ChronoFormatter.setUp(HijriCalendar.family(), Locale.ENGLISH)
-                        .addEnglishOrdinal(HijriCalendar.DAY_OF_MONTH)
-                        .addPattern(" MMMM yyyy", PatternType.CLDR)
-                        .build()
-                        .withCalendarVariant(HijriCalendar.VARIANT_UMALQURA);
-        // conversion from gregorian to hijri-umalqura valid at noon
-        // (not really valid in the evening when next islamic day starts)
-        HijriCalendar today =
-                SystemClock.inLocalView().today().transform(
-                        HijriCalendar.class,
-                        HijriCalendar.VARIANT_UMALQURA
-                );
-        System.out.println(hijriFormat.format(today)); // 22nd Rajab 1438
-
-        // taking into account the specific start of day for Hijri calendar
-        HijriCalendar todayExact =
-                SystemClock.inLocalView().now(
-                        HijriCalendar.family(),
-                        HijriCalendar.VARIANT_UMALQURA,
-                        StartOfDay.EVENING // simple approximation => 18:00
-                ).toDate();
-        System.out.println(hijriFormat.format(todayExact)); // 22nd Rajab 1438 (23rd after 18:00)
-
-        TextView hijriDate = (TextView) findViewById(R.id.hijriDate);
-        hijriDate.setText(hijriFormat.format(todayExact));
-
-        /*App bar config */
-
-        getSupportActionBar().setTitle("Home");
 
     }
 
-    public void convertLocation(double latitute,double longitute){
+    public void convertLocation(double lat,double lon){
         try {
 
-            if(latitute != 0 && longitute != 0){
-                addresses = geocoder.getFromLocation(latitute ,longitute, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            if(lat != 0 && lon != 0){
+                addresses = geocoder.getFromLocation(lat ,lon, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
             }
 
@@ -258,27 +172,19 @@ public class MainActivity extends AppCompatActivity {
                 // location from
                 // FusedLocationClient
                 // object
-                fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-                        Location location = task.getResult();
-                        if (location == null) {
-                            requestNewLocationData();
-                        } else {
+                fusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
+                    Location location = task.getResult();
+                    if (location == null) {
+                        requestNewLocationData();
+                    } else {
 
 
-                            finalLat = location.getLatitude();
-                            finalLong = location.getLongitude();
+                        finalLat = location.getLatitude();
+                        finalLong = location.getLongitude();
 
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    convertLocation(finalLat,finalLong);;
-                                }
-                            }, 1000);
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> MainActivity.this.convertLocation(finalLat, finalLong), 1000);
 
 
-                        }
                     }
                 });
             } else {
@@ -287,15 +193,12 @@ public class MainActivity extends AppCompatActivity {
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle("Please Enable Location Service")
                         .setCancelable(false)
-                        .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        .setPositiveButton("Enable", (dialog, which) -> {
 
-                                /* If GPS is disabled this will redirect us to Location Settings */
+                            /* If GPS is disabled this will redirect us to Location Settings */
 
-                                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
 
-                            }
                         }).setNegativeButton("Cancel", null)
                         .show();
             }
@@ -332,12 +235,7 @@ public class MainActivity extends AppCompatActivity {
             finalLat = mLastLocation.getLatitude();
             finalLong = mLastLocation.getLongitude();
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    convertLocation(finalLat,finalLong);;
-                }
-            }, 1000);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> convertLocation(finalLat,finalLong), 1000);
 
         }
     };
@@ -393,6 +291,42 @@ public class MainActivity extends AppCompatActivity {
         convertLocation(finalLat,finalLong);
     }
 
+    //hijri update function
+    private void hijriUpdate(){
+        /* Hijri Date */
+
+        ApplicationStarter.initialize(this, true);
+
+        ChronoFormatter<HijriCalendar> hijriFormat =
+                ChronoFormatter.setUp(HijriCalendar.family(), Locale.ENGLISH)
+                        .addEnglishOrdinal(HijriCalendar.DAY_OF_MONTH)
+                        .addPattern(" MMMM yyyy", PatternType.CLDR)
+                        .build()
+                        .withCalendarVariant(HijriCalendar.VARIANT_UMALQURA);
+        // conversion from gregorian to hijri valid at noon
+        // (not really valid in the evening when next islamic day starts)
+        HijriCalendar today =
+                SystemClock.inLocalView().today().transform(
+                        HijriCalendar.class,
+                        HijriCalendar.VARIANT_UMALQURA
+                );
+
+        // taking into account the specific start of day for Hijri calendar
+        HijriCalendar todayExact =
+                SystemClock.inLocalView().now(
+                        HijriCalendar.family(),
+                        HijriCalendar.VARIANT_UMALQURA,
+                        StartOfDay.EVENING // simple approximation => 18:00
+                ).toDate();
+
+
+        TextView hijriDate = (TextView) findViewById(R.id.hijriDate);
+        hijriDate.setText(hijriFormat.format(todayExact));
+
+        /*App bar config */
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Home");
+    }
 
 
     //abd's update Database
