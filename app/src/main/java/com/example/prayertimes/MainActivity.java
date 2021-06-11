@@ -6,10 +6,8 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -18,7 +16,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -49,9 +46,7 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 
-import com.google.android.gms.tasks.Task;
 
 
 
@@ -62,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private String city;
     private String country;
+    private Boolean isLocationActive = false;
 
 
     //abd's variables
@@ -190,17 +186,22 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
 
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("Please Enable Location Service")
-                        .setCancelable(false)
-                        .setPositiveButton("Enable", (dialog, which) -> {
+                if(!isLocationActive){
+                    isLocationActive = true;
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Please Enable Location Service")
+                            .setCancelable(false)
+                            .setPositiveButton("Enable", (dialog, which) -> {
 
-                            /* If GPS is disabled this will redirect us to Location Settings */
+                                /* If GPS is disabled this will redirect us to Location Settings */
 
-                            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
 
-                        }).setNegativeButton("Cancel", null)
-                        .show();
+                            }).setNegativeButton("Cancel", null)
+                            .show();
+                }
+
+
             }
         } else {
             // if permissions aren't available,
