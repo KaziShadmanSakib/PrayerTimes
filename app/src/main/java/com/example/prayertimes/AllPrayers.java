@@ -44,7 +44,7 @@ import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Locale;
 
-public class AllPrayers extends AppCompatActivity implements LocationListener {
+public class AllPrayers extends AppCompatActivity{
 
     private static final String TAG = "tag";
     private LocationManager locationManager;
@@ -55,7 +55,7 @@ public class AllPrayers extends AppCompatActivity implements LocationListener {
 
 
     /* Url for fetching data */
-    String url = "http://api.aladhan.com/v1/timingsByCity?city=Dubai&country=United%20Arab%20Emirates&method=8";
+    String url;
 
     // Tag used to cancel the request
     String tag_json_obj = "json_obj_req";
@@ -63,12 +63,39 @@ public class AllPrayers extends AppCompatActivity implements LocationListener {
     //Progress dialog
     ProgressDialog pDialog;
 
+    Bundle extras;
+    private String city;
+    private String country;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_prayers);
+
+        if (savedInstanceState == null) {
+            /*fetching extra data passed with intents in a Bundle type variable*/
+
+            extras = getIntent().getExtras();
+
+            if(extras == null) {
+
+                city = null;
+
+            }
+
+            else {
+                /* fetching the string passed with intent using ‘extras’*/
+
+                city = extras.getString("city");
+                country = extras.getString("country");
+
+            }
+
+        }
+
+        //Toast.makeText(this, city, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, country,Toast.LENGTH_LONG).show();
 
         /*App bar config */
 
@@ -78,46 +105,6 @@ public class AllPrayers extends AppCompatActivity implements LocationListener {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        /* Get User Specific Location */
-
-        /* Gets Last Location from device */
-
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if(location != null){
-                    try {
-                        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-                        List<Address> addresses = null;
-                        addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                        cityLocation = addresses.get(0).getLocality().toString();
-                        countryLocation = addresses.get(0).getCountryName().toString();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-
-        // Gets the User's Location
-        grantPermission();
-        getLocation();
 
         /* Showing all waqts time on current day */
 
@@ -132,6 +119,8 @@ public class AllPrayers extends AppCompatActivity implements LocationListener {
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
         pDialog.show();
+
+        url = "http://api.aladhan.com/v1/timingsByCity?city="+ city +"&country="+ country +"&method=8";
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
@@ -177,36 +166,4 @@ public class AllPrayers extends AppCompatActivity implements LocationListener {
 
     }
 
-
-    private void getLocation() {
-        try {
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 5, (LocationListener) this);
-        }catch (SecurityException e){
-            e.printStackTrace();
-        }
-    }
-
-
-    private void grantPermission() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getApplicationContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
-        }
-    }
-
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
-        try {
-            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-            cityLocation = addresses.get(0).getLocality().toString();
-            countryLocation = addresses.get(0).getCountryName().toString();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

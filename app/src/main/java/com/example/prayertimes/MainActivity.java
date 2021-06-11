@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
     private Button allPrayers;
     private FusedLocationProviderClient fusedLocationClient;
     private FusedLocationProviderClient fusedLocationClient2;
+    private String city;
+    private String country;
 
 
     //abd's variables
@@ -188,7 +190,9 @@ public class MainActivity extends AppCompatActivity {
                 if(location != null){
                     try {
                         addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                        String city = addresses.get(0).getLocality();
+                        city = addresses.get(0).getLocality();
+                        country = addresses.get(0).getCountryName();
+
                         cityLocation.setText(city);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -257,8 +261,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if(addresses.size()>0){
-                String city = addresses.get(0).getLocality();
-                String country = addresses.get(0).getCountryName();
+                city = addresses.get(0).getLocality();
+                country = addresses.get(0).getCountryName();
 
                 cityLocation.setText(city);
             }
@@ -270,8 +274,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void openAllPrayers() {
+
         Intent intent = new Intent(this, AllPrayers.class);
+
+        intent.putExtra("city", city);
+        intent.putExtra("country", country);
+
         startActivity(intent);
+
     }
 
 
