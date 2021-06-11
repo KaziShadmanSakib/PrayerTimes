@@ -20,6 +20,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -110,14 +111,14 @@ public class MainActivity extends AppCompatActivity {
     //abd's variables
     public DatabaseHandler databaseHandler;
     private Button calenderButton;
-    private int index = 0;
+    private int index = 1;
     public SQLiteDatabase prayerDB;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
 
     int PERMISSION_ID = 44;
-    public double finalLat = 0;
-    public double finalLong = 0;
+    public static double finalLat = 0;
+    public static double finalLong = 0;
 
     List<Address> addresses;
     Geocoder geocoder;
@@ -131,16 +132,10 @@ public class MainActivity extends AppCompatActivity {
         //create database
         databaseHandler = new DatabaseHandler(this);
 
-        /* Initialize and Assign Variable for Bottom Navigation */
 
+        /* Bottom Navigation */
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-        /* Set Home Selected */
-
         bottomNavigationView.setSelectedItemId(R.id.home);
-
-        /* Perform Item Selected Listener */
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -161,48 +156,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /* Location */
-
-        Geocoder gcd = new Geocoder(this, Locale.getDefault());
-
         geocoder = new Geocoder(this, Locale.getDefault());
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         fusedLocationClient2 = LocationServices.getFusedLocationProviderClient(this);
         cityLocation = (TextView) findViewById(R.id.cityLocation);
-
-
-        /* gets Users Last Location */
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+        if(finalLat != 0 && finalLong != 0){
+            convertLocation(finalLat,finalLong);
         }
-        fusedLocationClient2.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if(location != null){
-                    try {
-                        addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                        city = addresses.get(0).getLocality();
-                        country = addresses.get(0).getCountryName();
-
-                        cityLocation.setText(city);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-
         getLastLocation();
+
 
 
         /* All Prayers Button */
@@ -224,9 +186,8 @@ public class MainActivity extends AppCompatActivity {
                         .addPattern(" MMMM yyyy", PatternType.CLDR)
                         .build()
                         .withCalendarVariant(HijriCalendar.VARIANT_UMALQURA);
-
-// conversion from gregorian to hijri-umalqura valid at noon
-// (not really valid in the evening when next islamic day starts)
+        // conversion from gregorian to hijri-umalqura valid at noon
+        // (not really valid in the evening when next islamic day starts)
         HijriCalendar today =
                 SystemClock.inLocalView().today().transform(
                         HijriCalendar.class,
@@ -234,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 );
         System.out.println(hijriFormat.format(today)); // 22nd Rajab 1438
 
-// taking into account the specific start of day for Hijri calendar
+        // taking into account the specific start of day for Hijri calendar
         HijriCalendar todayExact =
                 SystemClock.inLocalView().now(
                         HijriCalendar.family(),
