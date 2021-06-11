@@ -35,10 +35,12 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Locale;
 
@@ -140,17 +142,22 @@ public class AllPrayers extends AppCompatActivity implements LocationListener {
 
                         /* Get data from JSON */
 
-                        try {
+                        String urlJson = response.toString();
 
-                            String fajr = response.getJSONArray("data").getJSONObject(0).get("timings").toString();
-                            fazrNamazId.setText(fajr);
+                        JsonParser jsonParser = new JsonParser();
 
+                        jsonParser.setUrlString(urlJson);
 
+                        fazrNamazId.setText(jsonParser.fazrTime() + " - " + jsonParser.sunrise());
+                        sunriseId.setText(jsonParser.sunrise());
+                        dhuhrNamazId.setText(jsonParser.dhuhrTime() + " - " + jsonParser.asarTime());
+                        asarNamazId.setText(jsonParser.asarTime() + " - " + jsonParser.sunset());
+                        sunsetId.setText(jsonParser.sunset());
+                        magribNamazId.setText(jsonParser.magribTime() + " - " + jsonParser.ishaTime());
+                        ishaNamazId.setText(jsonParser.ishaTime() + " - " + "00:00");
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
                         pDialog.hide();
+
                     }
                 }, new Response.ErrorListener() {
 
