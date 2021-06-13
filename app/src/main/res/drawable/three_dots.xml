@@ -8,7 +8,7 @@
             android:layout_width="match_parent"
             android:shape="oval">
 
-            <solid android:color="#FFFF00" />
+            <solid android:color="#ffFF00" />
 
             <size
                 android:width="20dp"

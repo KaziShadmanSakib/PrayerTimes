@@ -19,6 +19,7 @@ import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 
 import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.ParseException;
@@ -82,6 +83,12 @@ public class LogActivity extends AppCompatActivity {
 
         showDots();
 
+        calendarView.setOnDayClickListener(new OnDayClickListener() {
+            @Override
+            public void onDayClick(EventDay eventDay) {
+                Calendar clickedDayCalendar = eventDay.getCalendar();
+            }
+        });
 /*
         //calender popUp
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -138,22 +145,23 @@ public class LogActivity extends AppCompatActivity {
             CalendarDateCount calendarDateCount = new CalendarDateCount(calendar,count);
             allCalendarDatesCount.add(calendarDateCount);
         }
+
         for(CalendarDateCount calendarDateCount : allCalendarDatesCount){
-            int prayerCount = calendarDateCount._count;
+            int prayerCount = calendarDateCount.get_count();
             if(prayerCount == 1){
-                events.add(new EventDay(calendarDateCount._calendar, R.drawable.one_dot));
+                events.add(new EventDay(calendarDateCount.get_calendar(), R.drawable.one_dot));
             }
             else if(prayerCount == 2){
-                events.add(new EventDay(calendarDateCount._calendar, R.drawable.two_dots));
+                events.add(new EventDay(calendarDateCount.get_calendar(), R.drawable.two_dots));
             }
             else if(prayerCount == 3){
-                events.add(new EventDay(calendarDateCount._calendar, R.drawable.three_dots));
+                events.add(new EventDay(calendarDateCount.get_calendar(), R.drawable.three_dots));
             }
             else if(prayerCount == 4){
-                events.add(new EventDay(calendarDateCount._calendar, R.drawable.four_dots));
+                events.add(new EventDay(calendarDateCount.get_calendar(), R.drawable.four_dots));
             }
             else if(prayerCount == 5){
-                events.add(new EventDay(calendarDateCount._calendar, R.drawable.five_dots));
+                events.add(new EventDay(calendarDateCount.get_calendar(), R.drawable.five_dots));
             }
 
 
