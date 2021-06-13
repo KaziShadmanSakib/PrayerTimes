@@ -129,14 +129,14 @@ public class MainActivity extends AppCompatActivity {
 
         /* Getting Sehri Time and Iftar Time */
 
-        /*sehriTimeId = (TextView) findViewById(R.id.sehriTimeId);
+        sehriTimeId = (TextView) findViewById(R.id.sehriTimeId);
         iftarTimeId = (TextView) findViewById(R.id.iftarTimeId);
 
         String sehri = PrefConfig.loadImsakTime(this);
         String iftar = PrefConfig.loadMagribTime(this);
 
         sehriTimeId.setText(sehri);
-        iftarTimeId.setText(iftar);*/
+        iftarTimeId.setText(iftar);
 
     }
 

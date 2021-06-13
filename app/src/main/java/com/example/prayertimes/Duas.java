@@ -20,7 +20,7 @@ public class Duas extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        /* Set Home Selected */
+        /* Set Dua Selected */
 
         bottomNavigationView.setSelectedItemId(R.id.duas);
 

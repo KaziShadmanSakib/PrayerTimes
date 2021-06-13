@@ -74,4 +74,72 @@
         android:onClick="updateDB"
         android:text="Button" />
 
+    <TextView
+        android:id="@+id/Today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="292dp"
+        android:layout_marginBottom="222dp"
+        android:text="Today -"
+        android:textColor="#000000 "
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/iftar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="253dp"
+        android:layout_marginBottom="120dp"
+        android:text="Iftar Time :"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        android:translationX="10sp"
+        android:translationY="-30sp" />
+
+    <TextView
+        android:id="@+id/iftarTimeId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="94dp"
+        android:layout_marginBottom="131dp"
+        android:text="Iftar"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        android:translationX="-75sp"
+        android:translationY="-17.5sp" />
+
+    <TextView
+        android:id="@+id/sehri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="237dp"
+        android:layout_marginBottom="187dp"
+        android:text="Sehri Time :"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        android:translationX="0sp"
+        android:translationY="0sp" />
+
+    <TextView
+        android:id="@+id/sehriTimeId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="196dp"
+        android:text="Sehri"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        android:translationX="-80sp"
+        android:translationY="10sp" />
+
 </RelativeLayout>

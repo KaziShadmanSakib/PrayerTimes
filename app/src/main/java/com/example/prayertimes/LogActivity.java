@@ -47,7 +47,7 @@ public class LogActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        /* Set Home Selected */
+        /* Set Log Selected */
 
         bottomNavigationView.setSelectedItemId(R.id.log);
 
@@ -72,10 +72,8 @@ public class LogActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
+        /*App bar config */
+        getSupportActionBar().setTitle("Log");
 
         //openDB
         databaseHandler = new DatabaseHandler(this);
@@ -93,8 +91,6 @@ public class LogActivity extends AppCompatActivity {
 
             }
         });
-
-
 
 
 
