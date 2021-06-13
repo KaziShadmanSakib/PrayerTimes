@@ -57,6 +57,7 @@ public class AllPrayers extends AppCompatActivity{
     private FusedLocationProviderClient fusedLocationClient;
     private TextView fazrNamazId, sunriseId, dhuhrNamazId, asarNamazId, sunsetId, magribNamazId, ishaNamazId;
     private String fazrNamazTime, sunriseTime, dhuhrNamazTime, asarNamazTime, sunsetTime, magribNamazTime, ishaNamazTime, imsakTime;
+    private TextView cityId, countryId;
 
     /* Url for fetching data */
     String url;
@@ -100,6 +101,11 @@ public class AllPrayers extends AppCompatActivity{
         sunsetId = findViewById(R.id.sunsetId);
         magribNamazId = findViewById(R.id.magribNamazId);
         ishaNamazId = findViewById(R.id.ishaNamazId);
+        cityId = findViewById(R.id.cityId);
+        countryId = findViewById(R.id.countryId);
+
+        cityId.setText(city);
+        countryId.setText(country);
 
         /*pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
@@ -179,6 +185,7 @@ public class AllPrayers extends AppCompatActivity{
         sunsetId.setText(sunsetTime);
         magribNamazId.setText(magribNamazTime + " - " + ishaNamazTime);
         ishaNamazId.setText(ishaNamazTime);
+
 
         /* Set Alert for all waqts */
 

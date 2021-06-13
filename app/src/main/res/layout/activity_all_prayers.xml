@@ -7,93 +7,91 @@
     android:layout_height="match_parent"
     tools:context=".AllPrayers">
 
-    <ImageView
-        android:id="@+id/allPrayersBackground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/background" />
-
     <TextView
         android:id="@+id/fajrNamaz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B5006400"
+        android:background="#FFFFFF	"
         android:text="Fajr"
-        android:textColor="#FFFFFF	"
+        android:textColor="#B5006400"
+        android:textSize="20sp"
+        android:translationX="40dp"
+        android:translationY="85dp" />
+
+    <TextView
+        android:id="@+id/today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF	"
+        android:text="Today -"
+        android:textColor="#000000 "
         android:textSize="24sp"
         android:translationX="40dp"
-        android:translationY="35dp" />
+        android:translationY="25dp" />
 
     <TextView
         android:id="@+id/fazrNamazId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B5006400"
+        android:background="#FFFFFF	"
         android:text="Fajr"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B5006400"
+        android:textSize="20sp"
         android:translationX="200dp"
-        android:translationY="35dp" />
+        android:translationY="85dp" />
 
     <TextView
         android:id="@+id/ishaNamaz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B5006400"
+        android:background="#FFFFFF	"
         android:text="Isha"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B5006400"
+        android:textSize="20sp"
         android:translationX="40dp"
-        android:translationY="485dp" />
+        android:translationY="440dp" />
 
     <TextView
         android:id="@+id/ishaNamazId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B5006400"
+        android:background="#FFFFFF	"
         android:text="Isha"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B5006400"
+        android:textSize="20sp"
         android:translationX="200dp"
-        android:translationY="485dp" />
+        android:translationY="440dp" />
 
     <TextView
         android:id="@+id/magribNamaz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B5006400"
+        android:background="#FFFFFF	"
         android:text="Magrib"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B5006400"
+        android:textSize="20sp"
         android:translationX="40dp"
-        android:translationY="410dp" />
+        android:translationY="380dp" />
 
     <TextView
         android:id="@+id/magribNamazId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B5006400"
+        android:background="#FFFFFF	"
         android:text="Magrib"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B5006400"
+        android:textSize="20sp"
         android:translationX="200dp"
-        android:translationY="410dp" />
+        android:translationY="380dp" />
 
     <TextView
         android:id="@+id/asarNamaz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B5006400"
+        android:background="#FFFFFF	"
         android:text="Asar"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B5006400"
+        android:textSize="20sp"
         android:translationX="40dp"
         android:translationY="260dp" />
 
@@ -101,10 +99,10 @@
         android:id="@+id/asarNamazId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B5006400"
+        android:background="#FFFFFF	"
         android:text="Asar"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B5006400"
+        android:textSize="20sp"
         android:translationX="200dp"
         android:translationY="260dp" />
 
@@ -112,66 +110,90 @@
         android:id="@+id/dhuhrNamaz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B5006400"
+        android:background="#FFFFFF	"
         android:text="Dhuhr"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B5006400"
+        android:textSize="20sp"
         android:translationX="40dp"
-        android:translationY="185dp" />
+        android:translationY="200dp" />
 
     <TextView
         android:id="@+id/dhuhrNamazId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B5006400"
+        android:background="#FFFFFF	"
         android:text="Dhuhr"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B5006400"
+        android:textSize="20sp"
         android:translationX="200dp"
-        android:translationY="185dp" />
+        android:translationY="200dp" />
 
     <TextView
         android:id="@+id/sunrise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B58B0000"
+        android:background="#FFFFFF	"
         android:text="Sunrise"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B58B0000"
+        android:textSize="20sp"
         android:translationX="40dp"
-        android:translationY="110dp" />
+        android:translationY="140dp" />
 
     <TextView
         android:id="@+id/sunriseId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B58B0000"
+        android:background="#FFFFFF	"
         android:text="Sunrise"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B58B0000"
+        android:textSize="20sp"
         android:translationX="200dp"
-        android:translationY="110dp" />
+        android:translationY="140dp" />
 
     <TextView
         android:id="@+id/sunset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B58B0000"
+        android:background="#FFFFFF	"
         android:text="Sunset"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B58B0000"
+        android:textSize="20sp"
         android:translationX="40dp"
-        android:translationY="335dp" />
+        android:translationY="320dp" />
 
     <TextView
         android:id="@+id/sunsetId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B58B0000"
+        android:background="#FFFFFF	"
         android:text="Sunset"
-        android:textColor="#FFFFFF	"
-        android:textSize="24sp"
+        android:textColor="#B58B0000"
+        android:textSize="20sp"
         android:translationX="200dp"
-        android:translationY="335dp" />
+        android:translationY="320dp" />
+
+    <TextView
+        android:id="@+id/cityId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="180dp"
+        android:layout_marginBottom="215dp"
+        android:text="City"
+        android:textColor="#000000 "
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/countryId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="214dp"
+        android:text="Country"
+        android:textColor="#000000 "
+        android:textSize="18sp" />
 
 </RelativeLayout>
