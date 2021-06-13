@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private String city;
     private String country;
     private Boolean isLocationActive = false;
+    private String sehri, iftar, fajrNamazTime, dhuhrnamazTime, asarNamazTime, magribNamazTime, ishaNamazTime, sunriseTime, sunsetTime;
 
 
     //abd's variables
@@ -132,11 +133,27 @@ public class MainActivity extends AppCompatActivity {
         sehriTimeId = (TextView) findViewById(R.id.sehriTimeId);
         iftarTimeId = (TextView) findViewById(R.id.iftarTimeId);
 
-        String sehri = PrefConfig.loadImsakTime(this);
-        String iftar = PrefConfig.loadMagribTime(this);
+        sehri = PrefConfig.loadImsakTime(this);
+        iftar = PrefConfig.loadMagribTime(this);
 
         sehriTimeId.setText(sehri);
         iftarTimeId.setText(iftar);
+
+        /* Setting timer */
+
+        Calendar calendar1 = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm");
+        String currentTime = simpleDateFormat1.format(calendar1.getTime());
+
+        fajrNamazTime = PrefConfig.loadFajrTime(this);
+        sunriseTime = PrefConfig.loadSunriseTime(this);
+        dhuhrnamazTime = PrefConfig.loadDhuhrTime(this);
+        asarNamazTime = PrefConfig.loadAsarTime(this);
+        sunsetTime = PrefConfig.loadSunsetTime(this);
+        magribNamazTime = PrefConfig.loadMagribTime(this);
+        ishaNamazTime = PrefConfig.loadIshaTime(this);
+
+
 
     }
 
@@ -201,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             } else {
-                Toast.makeText(this, "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Please turn on" + " your location", Toast.LENGTH_LONG).show();
 
                 if(!isLocationActive){
                     isLocationActive = true;

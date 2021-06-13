@@ -8,14 +8,14 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottom_navigation"
+        android:layout_alignParentBottom="true"
         app:itemBackground="@color/White"
-        app:itemTextColor="@drawable/selector"
         app:itemIconTint="@drawable/selector"
-        app:menu="@menu/menu_navigation"
-        android:layout_alignParentBottom="true"/>
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menu_navigation" />
 
     <TextView
         android:id="@+id/cityLocation"
@@ -141,5 +141,35 @@
         android:textSize="16sp"
         android:translationX="-80sp"
         android:translationY="10sp" />
+
+    <ImageView
+        android:id="@+id/timerBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/backgroundHome"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="25dp"
+        android:translationX="15dp"
+        android:translationY="100dp"
+        app:srcCompat="@drawable/timer" />
+
+    <TextView
+        android:id="@+id/timerId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/timerBackground"
+        android:layout_alignTop="@+id/timerBackground"
+        android:layout_alignEnd="@+id/timerBackground"
+        android:layout_alignBottom="@+id/timerBackground"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="53dp"
+        android:text="00:00:00"
+        android:textColor="#FFFFFF "
+        android:textSize="15.80sp"
+        android:translationX="17.5sp"
+        android:translationY="105sp" />
 
 </RelativeLayout>
