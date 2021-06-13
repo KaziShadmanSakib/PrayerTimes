@@ -8,7 +8,7 @@
             android:layout_width="match_parent"
             android:shape="oval">
 
-            <solid android:color="#ff00ff" />
+            <solid android:color="#FFFF00" />
 
             <size
                 android:width="20dp"
@@ -21,7 +21,7 @@
             android:shape="oval">
 
             <solid
-                android:color="#ff00ff"/>
+                android:color="#FFFF00"/>
 
             <size
                 android:width="20dp"
@@ -37,7 +37,7 @@
             android:shape="oval">
 
             <solid
-                android:color="#ff00ff"/>
+                android:color="#FFFF00"/>
 
             <size
                 android:width="20dp"

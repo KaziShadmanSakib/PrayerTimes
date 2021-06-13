@@ -105,7 +105,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return contact
         return contact;
     }
-/*
+
     // Getting All Contacts
     public List<Contact> getAllContacts() {
         List<Contact> contactList = new ArrayList<Contact>();
@@ -114,13 +114,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+        if(cursor.getCount()==0){
+            Contact contact = new Contact();
+            contactList.add(contact);
+            return contactList;
+        }
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Contact contact = new Contact();
-                contact.setDate(cursor.getString(0));
-                contact.setFajr(stringToBoolean(cursor.getString(1)));
+                Contact contact = new Contact(cursor.getString(0),
+                        stringToBoolean(cursor.getString(1)) ,
+                        stringToBoolean(cursor.getString(2)) ,
+                        stringToBoolean(cursor.getString(3)) ,
+                        stringToBoolean(cursor.getString(4)) ,
+                        stringToBoolean(cursor.getString(5))
+                );
+
 
                 // Adding contact to list
                 contactList.add(contact);
@@ -131,7 +141,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return contactList;
     }
 
- */
+
 
     // Updating single contact
     public int updateContact(Contact contact) {

@@ -11,13 +11,22 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.EventDay;
 
+import com.applandeo.materialcalendarview.EventDay;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class LogActivity extends AppCompatActivity {
 
@@ -62,14 +71,18 @@ public class LogActivity extends AppCompatActivity {
         });
 
 
-        calendarView = (CalendarView)findViewById(R.id.calendarView);
+
 
 
 
         //openDB
         databaseHandler = new DatabaseHandler(this);
 
+        calendarView = (CalendarView)findViewById(R.id.calendarView);
 
+        showDots();
+
+/*
         //calender popUp
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -99,12 +112,93 @@ public class LogActivity extends AppCompatActivity {
             }
         });
 
-        /*App bar config */
+        /*App bar config
         getSupportActionBar().setTitle("Log");
+        */
+
 
 
 
     }
+    private void showDots(){
+
+        List<Contact> allContact =  databaseHandler.getAllContacts();
+        List<CalendarDateCount>allCalendarDatesCount = new ArrayList<>();
+        List<EventDay> events = new ArrayList<>();
+        int count;
+
+
+        for(Contact contact : allContact){
+
+            count = prayerCount(contact);
+
+            String stringDate = stringToFormattedString(contact.getDate());
+            Calendar calendar = stringtoCalendar(stringDate);
+
+            CalendarDateCount calendarDateCount = new CalendarDateCount(calendar,count);
+            allCalendarDatesCount.add(calendarDateCount);
+        }
+        for(CalendarDateCount calendarDateCount : allCalendarDatesCount){
+            int prayerCount = calendarDateCount._count;
+            if(prayerCount == 1){
+                events.add(new EventDay(calendarDateCount._calendar, R.drawable.one_dot));
+            }
+            else if(prayerCount == 2){
+                events.add(new EventDay(calendarDateCount._calendar, R.drawable.two_dots));
+            }
+            else if(prayerCount == 3){
+                events.add(new EventDay(calendarDateCount._calendar, R.drawable.three_dots));
+            }
+            else if(prayerCount == 4){
+                events.add(new EventDay(calendarDateCount._calendar, R.drawable.four_dots));
+            }
+            else if(prayerCount == 5){
+                events.add(new EventDay(calendarDateCount._calendar, R.drawable.five_dots));
+            }
+
+
+        }
+        calendarView.setEvents(events);
+    }
+
+
+
+    private int prayerCount(Contact contact) {
+        int count=0;
+        if(contact.getFajr())count++;
+        if(contact.getDhuhr())count++;
+        if(contact.getAsar())count++;
+        if(contact.getMagrib())count++;
+        if(contact.getIsha())count++;
+        return count;
+    }
+
+    private Calendar stringtoCalendar(String stringDate) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = null;
+        try {
+            date = formatter.parse(stringDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
+    }
+
+    private String stringToFormattedString(String date) {
+        int intDate = Integer.parseInt(date);
+        int day = intDate%100;
+        intDate = intDate/100;
+        int month = intDate%100;
+        intDate = intDate/100;
+        int year = intDate;
+        String finalDate = day+"-"+month+"-"+year;
+        return  finalDate;
+    }
+
 
     private void doPopUp(boolean isNull, String date){
 
@@ -176,5 +270,24 @@ public class LogActivity extends AppCompatActivity {
         else
             s = "0"+String.valueOf(digit);
         return s;
+    }
+}
+class CalendarDateCount{
+    Calendar _calendar;
+    Integer _count;
+    public CalendarDateCount(){
+
+    }
+    public CalendarDateCount(Calendar calendar,int  _count){
+        this._calendar = calendar;
+        this._count = _count;
+    }
+
+    public Calendar get_calendar() {
+        return _calendar;
+    }
+
+    public Integer get_count() {
+        return _count;
     }
 }

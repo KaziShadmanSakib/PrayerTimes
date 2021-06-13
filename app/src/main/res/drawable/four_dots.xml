@@ -7,7 +7,7 @@
             android:shape="oval">
 
             <solid
-                android:color="#ff00ff"/>
+                android:color="#00ff00"/>
 
             <size
                 android:width="20dp"
@@ -24,7 +24,7 @@
 
 
             <solid
-                android:color="#ff00ff"/>
+                android:color="#00ff00"/>
 
 
 
@@ -39,7 +39,7 @@
             android:shape="oval">
 
             <solid
-                android:color="#0000ff"/>
+                android:color="#00ff00"/>
 
             <size
                 android:width="20dp"
@@ -52,7 +52,7 @@
             android:shape="oval">
 
             <solid
-                android:color="#0000ff"/>
+                android:color="#00ff00"/>
 
             <size
                 android:width="20dp"
