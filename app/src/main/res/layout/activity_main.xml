@@ -46,7 +46,8 @@
         android:layout_marginTop="7dp"
         android:background="#08FFFFFF"
         android:text="All Prayers"
-        android:textColor="#6EF16E"
+        android:textColor="#028B7C"
+        android:textStyle="bold"
         android:translationX="-5sp"
         android:translationY="225sp" />
 
