@@ -1,17 +1,12 @@
 package com.example.prayertimes;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-import android.widget.Toast;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -33,7 +28,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_Asar = "Asar";
     private static final String KEY_Magrib = "Magrib";
     private static final String KEY_Isha = "Isha";
-    private String ALL_Prayers[] = {"Fajr","Dhuhr","Asar","Magrib","Isha"};
+    private final String[] ALL_Prayers = {"Fajr","Dhuhr","Asar","Magrib","Isha"};
 
 
 
@@ -87,7 +82,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     Contact getContact(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_Prayers, new String[] { KEY_Date,
+        @SuppressLint("Recycle") Cursor cursor = db.query(TABLE_Prayers, new String[] { KEY_Date,
                         KEY_Fajr, KEY_Dhuhr,KEY_Asar,KEY_Magrib,KEY_Isha }, KEY_Date + "=?",
                 new String[] { date }, null, null, null, null);
         if (cursor != null)
@@ -111,12 +106,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting All Contacts
     public List<Contact> getAllContacts() {
-        List<Contact> contactList = new ArrayList<Contact>();
+        List<Contact> contactList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_Prayers;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selectQuery, null);
         if(cursor.getCount()==0){
             Contact contact = new Contact();
             contactList.add(contact);
@@ -200,12 +195,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
         }
         try {
-            if(isChecked) {
-                updateCell(date, index,isChecked);
-            }
-            else{
-                updateCell(date, index,isChecked);
-            }
+            updateCell(date, index,isChecked);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

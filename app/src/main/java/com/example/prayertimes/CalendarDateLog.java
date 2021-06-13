@@ -4,19 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.CheckedTextView;
-import android.widget.CompoundButton;
-import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Objects;
+
 
 public class CalendarDateLog extends AppCompatActivity {
     DatabaseHandler databaseHandler;
     String date;
-    CheckedTextView allPrayersCheckedList[];
+    CheckedTextView[] allPrayersCheckedList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,24 +21,26 @@ public class CalendarDateLog extends AppCompatActivity {
 
         /*App bar config */
 
-        getSupportActionBar().setTitle("Prayer Times");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Prayer Times");
 
         /* Back Button */
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //getDate from LogActivity
         Intent intent= getIntent();
         Bundle bundle = intent.getExtras();
-
         if(bundle!=null)
         {
             date =(String) bundle.get("clickedDate");
             date = formattedDate(date);
 
         }
+
+
         databaseHandler = new DatabaseHandler(this);
 
-        //set checkbox id
+        //set checkbox ids
         createCheckBoxId();
 
         //create checkbox
@@ -54,35 +52,35 @@ public class CalendarDateLog extends AppCompatActivity {
         else{
             checkBox(false,date);
 
-
         }
+
+        //change checkbox on Click and update DB
         for(int i = 0; i < 5; i++ ){
             int finalI = i;
-            allPrayersCheckedList[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(allPrayersCheckedList[finalI].isChecked()){
-                        databaseHandler.updateDatabase(date, finalI,true);
-                    }
-                    else{
-                        databaseHandler.updateDatabase(date, finalI,false);
-                    }
-                    allPrayersCheckedList[finalI].toggle();
+            allPrayersCheckedList[i].setOnClickListener(view -> {
+                if(allPrayersCheckedList[finalI].isChecked()){
+                    databaseHandler.updateDatabase(date, finalI,true);
                 }
+                else{
+                    databaseHandler.updateDatabase(date, finalI,false);
+                }
+                allPrayersCheckedList[finalI].toggle();
             });
         }
 
 
     }
 
+
     private void createCheckBoxId() {
         allPrayersCheckedList = new CheckedTextView[5];
-        allPrayersCheckedList[0] = (CheckedTextView) findViewById(R.id.checkedTextview1);
-        allPrayersCheckedList[1] = (CheckedTextView) findViewById(R.id.checkedTextview2);
-        allPrayersCheckedList[2] = (CheckedTextView) findViewById(R.id.checkedTextview3);
-        allPrayersCheckedList[3] = (CheckedTextView) findViewById(R.id.checkedTextview4);
-        allPrayersCheckedList[4] = (CheckedTextView) findViewById(R.id.checkedTextview5);
+        allPrayersCheckedList[0] =  findViewById(R.id.checkedTextview1);
+        allPrayersCheckedList[1] =  findViewById(R.id.checkedTextview2);
+        allPrayersCheckedList[2] =  findViewById(R.id.checkedTextview3);
+        allPrayersCheckedList[3] =  findViewById(R.id.checkedTextview4);
+        allPrayersCheckedList[4] =  findViewById(R.id.checkedTextview5);
     }
+
 
     private String formattedDate(String date) {
         int intDate = Integer.parseInt(date);
@@ -95,7 +93,7 @@ public class CalendarDateLog extends AppCompatActivity {
     private void checkBox(boolean isNull, String date){
 
 
-        if(isNull==true){
+        if(isNull){
             for(int i = 0; i < 5; i++ ){
                 allPrayersCheckedList[i].setChecked(false);
             }

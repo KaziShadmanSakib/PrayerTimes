@@ -1,42 +1,25 @@
 package com.example.prayertimes;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckedTextView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
-
-import com.applandeo.materialcalendarview.EventDay;
-import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class LogActivity extends AppCompatActivity {
 
     private DatabaseHandler databaseHandler;
-    Button backMain;
     CalendarView calendarView;
-    CheckedTextView checkedTextView;
-    CheckedTextView allPrayersCheckedList[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,62 +36,63 @@ public class LogActivity extends AppCompatActivity {
 
         /* Perform Item Selected Listener */
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.log:
-                        return true;
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.duas:
-                        startActivity(new Intent(getApplicationContext(), Duas.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.log:
+                    return true;
+                case R.id.home:
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.duas:
+                    startActivity(new Intent(getApplicationContext(), Duas.class));
+                    overridePendingTransition(0,0);
+                    return true;
             }
+            return false;
         });
 
+
+
         /*App bar config */
-        getSupportActionBar().setTitle("Log");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Log");
+
+
+
 
         //openDB
         databaseHandler = new DatabaseHandler(this);
 
-        calendarView = (CalendarView)findViewById(R.id.calendarView);
-
+        //create calender View with dots
+        calendarView = findViewById(R.id.calendarView);
         showDots();
 
-        calendarView.setOnDayClickListener(new OnDayClickListener() {
-            @Override
-            public void onDayClick(EventDay eventDay) {
-                Calendar clickedDayCalendar = eventDay.getCalendar();
-                String clickedDate = calendartoString(clickedDayCalendar);
-                changeToCalendarDateLog(clickedDate);
+        //new window on Clicking date
+        calendarView.setOnDayClickListener(eventDay -> {
+            Calendar clickedDayCalendar = eventDay.getCalendar();
+            String clickedDate = calendarToString(clickedDayCalendar);
+            changeToCalendarDateLog(clickedDate);
 
-            }
         });
 
 
 
     }
+
     private void changeToCalendarDateLog(String date){
         Intent i = new Intent(this,CalendarDateLog.class);
         i.putExtra("clickedDate",date);
         startActivity(i);
     }
 
-    private String calendartoString(Calendar cal){
+    private String calendarToString(Calendar cal){
 
 
         cal.add(Calendar.DATE, 1);
 
         Date date = cal.getTime();
 
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
 
         String inActiveDate = null;
 
@@ -144,7 +128,7 @@ public class LogActivity extends AppCompatActivity {
             count = prayerCount(contact);
 
             String stringDate = stringToFormattedString(contact.getDate());
-            Calendar calendar = stringtoCalendar(stringDate);
+            Calendar calendar = stringToCalendar(stringDate);
 
             CalendarDateCount calendarDateCount = new CalendarDateCount(calendar,count);
             allCalendarDatesCount.add(calendarDateCount);
@@ -187,9 +171,9 @@ public class LogActivity extends AppCompatActivity {
         return count;
     }
 
-    private Calendar stringtoCalendar(String stringDate) {
+    private Calendar stringToCalendar(String stringDate) {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date = null;
         try {
             date = formatter.parse(stringDate);
@@ -209,8 +193,7 @@ public class LogActivity extends AppCompatActivity {
         int month = intDate%100;
         intDate = intDate/100;
         int year = intDate;
-        String finalDate = day+"-"+month+"-"+year;
-        return  finalDate;
+        return day+"-"+month+"-"+year;
     }
 
 
