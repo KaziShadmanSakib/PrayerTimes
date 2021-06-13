@@ -7,8 +7,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -159,12 +162,58 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return db.update(TABLE_Prayers, values, KEY_Date + " = ?",
                 new String[] { contact.getDate() });
     }
-    public void updateCell(String date, int prayerNo){
+    public void updateCell(String date, int prayerNo,boolean isChecked){
+        String  strSQL;
+        if(isChecked){
+            strSQL = "UPDATE " + TABLE_Prayers + " SET " +ALL_Prayers[prayerNo] + " = FALSE WHERE Date = " + date;
+        }
+        else{
+            strSQL = "UPDATE " + TABLE_Prayers + " SET " +ALL_Prayers[prayerNo] + " = TRUE WHERE Date = " + date;
+        }
 
-        String strSQL = "UPDATE " + TABLE_Prayers + " SET " +ALL_Prayers[prayerNo] + " = TRUE WHERE Date = " + date;
+
+
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(strSQL);
     }
+
+    Boolean stringToBoolean(String s){
+        if(Integer.parseInt(s) ==0 )return false;
+        else
+            return true;
+    }
+    public void updateDatabase(String date, int index,boolean isChecked) {
+
+
+
+
+       // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+       // String date = simpleDateFormat.format(calendar.getTime());
+
+
+        if (getContact(date)._date == null) {
+            try {
+                Contact contact = new Contact(date, false, false, false, false, false);
+                addContact(contact);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            if(isChecked) {
+                updateCell(date, index,isChecked);
+            }
+            else{
+                updateCell(date, index,isChecked);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+
+
     /*
         // Deleting single contact
         public void deleteContact(Contact contact) {
@@ -173,24 +222,4 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     new String[] { String.valueOf(contact.getID()) });
             db.close();
         }
-
-
-        // Getting contacts Count
-        public int getContactsCount() {
-            String countQuery = "SELECT  * FROM " + TABLE_Prayers;
-            SQLiteDatabase db = this.getReadableDatabase();
-            Cursor cursor = db.rawQuery(countQuery, null);
-            cursor.close();
-
-            // return count
-            return cursor.getCount();
-        }
-
      */
-    Boolean stringToBoolean(String s){
-        if(Integer.parseInt(s) ==0 )return false;
-        else
-            return true;
-    }
-
-}

@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         //create database
         databaseHandler = new DatabaseHandler(this);
+        databaseHandler.getDatabaseName();
 
 
         /* Bottom Navigation */
@@ -369,28 +370,12 @@ public class MainActivity extends AppCompatActivity {
     public void updateDB(View v) {
 
 
-
         calendar = Calendar.getInstance();
         simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());
+        databaseHandler.updateDatabase(date,index,false);
 
-
-        if (databaseHandler.getContact(date)._date == null) {
-            try {
-                Contact contact = new Contact(date, false, false, false, false, false);
-                databaseHandler.addContact(contact);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        try {
-            Toast toast=Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT);
-            toast.show();
-
-            databaseHandler.updateCell(date, index);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
+
 
 }

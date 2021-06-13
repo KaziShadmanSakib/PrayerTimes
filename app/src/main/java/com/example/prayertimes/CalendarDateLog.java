@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class CalendarDateLog extends AppCompatActivity {
     DatabaseHandler databaseHandler;
@@ -37,6 +42,10 @@ public class CalendarDateLog extends AppCompatActivity {
         }
         databaseHandler = new DatabaseHandler(this);
 
+        //set checkbox id
+        createCheckBoxId();
+
+        //create checkbox
         if(databaseHandler.getContact(date)._date == null){
 
             checkBox(true,date);
@@ -47,6 +56,32 @@ public class CalendarDateLog extends AppCompatActivity {
 
 
         }
+        for(int i = 0; i < 5; i++ ){
+            int finalI = i;
+            allPrayersCheckedList[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(allPrayersCheckedList[finalI].isChecked()){
+                        databaseHandler.updateDatabase(date, finalI,true);
+                    }
+                    else{
+                        databaseHandler.updateDatabase(date, finalI,false);
+                    }
+                    allPrayersCheckedList[finalI].toggle();
+                }
+            });
+        }
+
+
+    }
+
+    private void createCheckBoxId() {
+        allPrayersCheckedList = new CheckedTextView[5];
+        allPrayersCheckedList[0] = (CheckedTextView) findViewById(R.id.checkedTextview1);
+        allPrayersCheckedList[1] = (CheckedTextView) findViewById(R.id.checkedTextview2);
+        allPrayersCheckedList[2] = (CheckedTextView) findViewById(R.id.checkedTextview3);
+        allPrayersCheckedList[3] = (CheckedTextView) findViewById(R.id.checkedTextview4);
+        allPrayersCheckedList[4] = (CheckedTextView) findViewById(R.id.checkedTextview5);
     }
 
     private String formattedDate(String date) {
@@ -58,13 +93,6 @@ public class CalendarDateLog extends AppCompatActivity {
 
 
     private void checkBox(boolean isNull, String date){
-
-        allPrayersCheckedList = new CheckedTextView[5];
-        allPrayersCheckedList[0] = (CheckedTextView) findViewById(R.id.checkedTextview1);
-        allPrayersCheckedList[1] = (CheckedTextView) findViewById(R.id.checkedTextview2);
-        allPrayersCheckedList[2] = (CheckedTextView) findViewById(R.id.checkedTextview3);
-        allPrayersCheckedList[3] = (CheckedTextView) findViewById(R.id.checkedTextview4);
-        allPrayersCheckedList[4] = (CheckedTextView) findViewById(R.id.checkedTextview5);
 
 
         if(isNull==true){
@@ -84,6 +112,7 @@ public class CalendarDateLog extends AppCompatActivity {
             allPrayersCheckedList[4].setChecked(contact._isha);
         }
     }
+
 
 
 }
