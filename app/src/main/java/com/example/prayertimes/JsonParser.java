@@ -10,6 +10,7 @@ public class JsonParser {
     private String sunset;
     private String magribNamazTime;
     private String ishaNamazTime;
+    private String imsakTime;
 
     public void setUrlString(String urlString){
         this.urlString = urlString;
@@ -77,6 +78,15 @@ public class JsonParser {
         ishaNamazTime = urlString.substring(intIndex+7, intIndex+12);
 
         return ishaNamazTime;
+    }
+
+    public String imsakTime(){
+
+        int intIndex = urlString.indexOf("Imsak");
+
+        imsakTime = urlString.substring(intIndex+8, intIndex+13);
+
+        return imsakTime;
     }
 
 }

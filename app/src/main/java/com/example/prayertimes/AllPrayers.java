@@ -18,6 +18,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -41,18 +43,20 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class AllPrayers extends AppCompatActivity{
 
     private static final String TAG = "tag";
     private LocationManager locationManager;
     private FusedLocationProviderClient fusedLocationClient;
-    private String cityLocation;
-    private String countryLocation;
     private TextView fazrNamazId, sunriseId, dhuhrNamazId, asarNamazId, sunsetId, magribNamazId, ishaNamazId;
-
+    private String fazrNamazTime, sunriseTime, dhuhrNamazTime, asarNamazTime, sunsetTime, magribNamazTime, ishaNamazTime, imsakTime;
 
     /* Url for fetching data */
     String url;
@@ -61,9 +65,8 @@ public class AllPrayers extends AppCompatActivity{
     String tag_json_obj = "json_obj_req";
 
     //Progress dialog
-    ProgressDialog pDialog;
+    //ProgressDialog pDialog;
 
-    Bundle extras;
     private String city;
     private String country;
 
@@ -73,26 +76,8 @@ public class AllPrayers extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_prayers);
 
-        if (savedInstanceState == null) {
-            /*fetching extra data passed with intents in a Bundle type variable*/
-
-            extras = getIntent().getExtras();
-
-            if(extras == null) {
-
-                city = null;
-
-            }
-
-            else {
-                /* fetching the string passed with intent using ‘extras’*/
-
-                city = extras.getString("city");
-                country = extras.getString("country");
-
-            }
-
-        }
+        city = PrefConfig.loadCurrentCity(this);
+        country = PrefConfig.loadCurrentCountry(this);
 
         //Toast.makeText(this, city, Toast.LENGTH_SHORT).show();
         //Toast.makeText(this, country,Toast.LENGTH_LONG).show();
@@ -116,11 +101,11 @@ public class AllPrayers extends AppCompatActivity{
         magribNamazId = findViewById(R.id.magribNamazId);
         ishaNamazId = findViewById(R.id.ishaNamazId);
 
-        pDialog = new ProgressDialog(this);
+        /*pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
-        pDialog.show();
+        pDialog.show();*/
 
-        url = "http://api.aladhan.com/v1/timingsByCity?city="+ city +"&country="+ country +"&method=8";
+        url = "http://api.aladhan.com/v1/timingsByCity?city="+ city +"&country="+ country +"&method=1&school=1";
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
@@ -137,15 +122,28 @@ public class AllPrayers extends AppCompatActivity{
 
                         jsonParser.setUrlString(urlJson);
 
-                        fazrNamazId.setText(jsonParser.fazrTime() + " - " + jsonParser.sunrise());
-                        sunriseId.setText(jsonParser.sunrise());
-                        dhuhrNamazId.setText(jsonParser.dhuhrTime() + " - " + jsonParser.asarTime());
-                        asarNamazId.setText(jsonParser.asarTime() + " - " + jsonParser.sunset());
-                        sunsetId.setText(jsonParser.sunset());
-                        magribNamazId.setText(jsonParser.magribTime() + " - " + jsonParser.ishaTime());
-                        ishaNamazId.setText(jsonParser.ishaTime() + " - " + "00:00");
 
-                        pDialog.hide();
+                        fazrNamazTime = jsonParser.fazrTime();
+                        sunriseTime = jsonParser.sunrise();
+                        dhuhrNamazTime = jsonParser.dhuhrTime();
+                        asarNamazTime = jsonParser.asarTime();
+                        sunsetTime = jsonParser.sunset();
+                        magribNamazTime = jsonParser.magribTime();
+                        ishaNamazTime = jsonParser.ishaTime();
+                        imsakTime = jsonParser.imsakTime();
+
+                        /* Saving all the waqts in PrefConfig (SharedPreferences) */
+
+                        PrefConfig.saveFajrTime(getApplicationContext(), fazrNamazTime);
+                        PrefConfig.saveSunriseTime(getApplicationContext(), sunriseTime);
+                        PrefConfig.saveDhuhrTime(getApplicationContext(), dhuhrNamazTime);
+                        PrefConfig.saveAsarTime(getApplicationContext(), asarNamazTime);
+                        PrefConfig.saveSunsetTime(getApplicationContext(), sunsetTime);
+                        PrefConfig.saveMagribTime(getApplicationContext(), magribNamazTime);
+                        PrefConfig.saveIshaTime(getApplicationContext(), ishaNamazTime);
+                        PrefConfig.saveImsakTime(getApplicationContext(), imsakTime);
+
+                        //pDialog.hide();
 
                     }
                 }, new Response.ErrorListener() {
@@ -154,15 +152,40 @@ public class AllPrayers extends AppCompatActivity{
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
 
-                Toast.makeText(AllPrayers.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AllPrayers.this, "Please turn on location or internet to be always updated", Toast.LENGTH_SHORT).show();
 
                 // hide the progress dialog
-                pDialog.hide();
+                //pDialog.hide();
             }
         });
 
 // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+        /* Setting all waqts time */
+
+        fazrNamazTime = PrefConfig.loadFajrTime(this);
+        sunriseTime = PrefConfig.loadSunriseTime(this);
+        dhuhrNamazTime = PrefConfig.loadDhuhrTime(this);
+        asarNamazTime = PrefConfig.loadAsarTime(this);
+        sunsetTime = PrefConfig.loadSunsetTime(this);
+        magribNamazTime = PrefConfig.loadMagribTime(this);
+        ishaNamazTime = PrefConfig.loadIshaTime(this);
+
+        fazrNamazId.setText(fazrNamazTime + " - " + sunriseTime);
+        sunriseId.setText(sunriseTime);
+        dhuhrNamazId.setText(dhuhrNamazTime + " - " + asarNamazTime);
+        asarNamazId.setText(asarNamazTime + " - " + sunsetTime);
+        sunsetId.setText(sunsetTime);
+        magribNamazId.setText(magribNamazTime + " - " + ishaNamazTime);
+        ishaNamazId.setText(ishaNamazTime);
+
+        /* Set Alert for all waqts */
+
+
+
+
+
 
     }
 

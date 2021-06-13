@@ -52,7 +52,7 @@ import com.google.android.gms.location.LocationResult;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView cityLocation;
+    private TextView cityLocation, sehriTimeId, iftarTimeId;
     private Button allPrayers;
     private FusedLocationProviderClient fusedLocationClient;
     private String city;
@@ -117,9 +117,26 @@ public class MainActivity extends AppCompatActivity {
         allPrayers = (Button) findViewById(R.id.allPrayers);
         allPrayers.setOnClickListener(v -> openAllPrayers());
 
+        /* Setting Location to TextView Location */
+
+        city = PrefConfig.loadCurrentCity(this);
+        cityLocation.setText(city);
+
+
+        /* Hijri date is appeared using this function */
         hijriUpdate();
 
 
+        /* Getting Sehri Time and Iftar Time */
+
+        /*sehriTimeId = (TextView) findViewById(R.id.sehriTimeId);
+        iftarTimeId = (TextView) findViewById(R.id.iftarTimeId);
+
+        String sehri = PrefConfig.loadImsakTime(this);
+        String iftar = PrefConfig.loadMagribTime(this);
+
+        sehriTimeId.setText(sehri);
+        iftarTimeId.setText(iftar);*/
 
     }
 
@@ -135,7 +152,10 @@ public class MainActivity extends AppCompatActivity {
                 city = addresses.get(0).getLocality();
                 country = addresses.get(0).getCountryName();
 
-                cityLocation.setText(city);
+                /* Saves the location to PrefConfig (SharedPreferences) */
+
+                PrefConfig.saveCurrentCity(getApplicationContext(), city);
+                PrefConfig.saveCurrentCountry(getApplicationContext(), country);
             }
 
         } catch (IOException e) {
@@ -147,9 +167,6 @@ public class MainActivity extends AppCompatActivity {
     private void openAllPrayers() {
 
         Intent intent = new Intent(this, AllPrayers.class);
-
-        intent.putExtra("city", city);
-        intent.putExtra("country", country);
 
         startActivity(intent);
 
@@ -317,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
                 SystemClock.inLocalView().now(
                         HijriCalendar.family(),
                         HijriCalendar.VARIANT_UMALQURA,
-                        StartOfDay.EVENING // simple approximation => 18:00
+                        StartOfDay.MIDNIGHT // simple approximation => 18:00
                 ).toDate();
 
 
