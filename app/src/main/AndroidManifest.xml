@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PrayerTimes"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CalendarDateLog"></activity>
+        <activity android:name=".CalendarDateLog"
+            android:parentActivityName=".LogActivity"></activity>
         <activity
             android:name=".AllPrayers"
             android:parentActivityName=".MainActivity"></activity>

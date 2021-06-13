@@ -18,6 +18,14 @@ public class CalendarDateLog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_date_log);
 
+        /*App bar config */
+
+        getSupportActionBar().setTitle("Prayer Times");
+
+        /* Back Button */
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent= getIntent();
         Bundle bundle = intent.getExtras();
 
