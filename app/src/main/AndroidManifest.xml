@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.prayertimes">
-
     <!-- API for User Specific Location -->
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:allowBackup="true"
         android:name=".AppController"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
-        android:usesCleartextTraffic="true"
-
-        android:theme="@style/Theme.PrayerTimes">
-
-        <activity android:name=".AllPrayers"
-
-            android:parentActivityName=".MainActivity">
-
-        </activity>
+        android:theme="@style/Theme.PrayerTimes"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".CalendarDateLog"></activity>
+        <activity
+            android:name=".AllPrayers"
+            android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".Duas" />
         <activity android:name=".LogActivity" />
         <activity android:name=".MainActivity">
@@ -39,8 +32,9 @@
             </intent-filter>
         </activity>
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>
