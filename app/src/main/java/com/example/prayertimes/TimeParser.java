@@ -2,40 +2,35 @@ package com.example.prayertimes;
 
 public class TimeParser {
 
-    private int parsedTime;
-    private String fajr, sunrise, dhuhr, asar, sunset, magrib, isha;
+    private long parsedTime;
 
-    public void setFajr(String fajr){
-        this.fajr = fajr;
+    public long timeParserMethod(String timeToParse){
+
+        String hour = timeToParse.substring(0,2);
+        String min = timeToParse.substring(3,5);
+
+        long hourInt = Integer.parseInt(hour);
+        long minInt = Integer.parseInt(min);
+
+        parsedTime = hourInt * 3600000;
+        parsedTime = parsedTime + (minInt * 60000);
+
+        return parsedTime;
     }
 
-    public void setSunrise(String sunrise){
-        this.sunrise = sunrise;
-    }
+    public long timeParserMethodForCurrentTime(String timeToParse){
 
-    public void setDhuhr(String dhuhr){
-        this.dhuhr = dhuhr;
-    }
+        String hour = timeToParse.substring(0,2);
+        String min = timeToParse.substring(3,5);
+        String sec = timeToParse.substring(6,8);
 
-    public void setAsar(String asar){
-        this.asar = asar;
-    }
+        long hourInt = Integer.parseInt(hour);
+        long minInt = Integer.parseInt(min);
+        long secInt = Integer.parseInt(sec);
 
-    public void setSunset(String sunset){
-        this.sunset = sunset;
-    }
-
-    public void setMagrib(String magrib){
-        this.magrib = magrib;
-    }
-
-    public void setIsha(String isha){
-        this.isha = isha;
-    }
-
-    public int timeParserMethod(String timeToParse){
-
-        //String hour = timeToParse.charAt(0) + timeToParse.charAt(1);
+        parsedTime = hourInt * 3600000;
+        parsedTime = parsedTime + (minInt * 60000);
+        parsedTime = parsedTime + (secInt * 1000);
 
         return parsedTime;
     }

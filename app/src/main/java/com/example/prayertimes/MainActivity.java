@@ -13,6 +13,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
@@ -58,8 +59,12 @@ public class MainActivity extends AppCompatActivity {
     private String city;
     private String country;
     private Boolean isLocationActive = false;
-    private String sehri, iftar, fajrNamazTime, dhuhrnamazTime, asarNamazTime, magribNamazTime, ishaNamazTime, sunriseTime, sunsetTime;
-
+    private String currentTime, imsakTime, sehri, iftar, fajrNamazTime, dhuhrnamazTime, asarNamazTime, magribNamazTime, ishaNamazTime, sunriseTime, sunsetTime;
+    private TextView timerId;
+    private CountDownTimer countDownTimer;
+    private boolean isTimerRunning;
+    long startTime;
+    long timeLeftInMillies = startTime;
 
     //abd's variables
     public DatabaseHandler databaseHandler;
@@ -143,8 +148,10 @@ public class MainActivity extends AppCompatActivity {
         /* Setting timer */
 
         Calendar calendar1 = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm");
-        String currentTime = simpleDateFormat1.format(calendar1.getTime());
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm:ss");
+        currentTime = simpleDateFormat1.format(calendar1.getTime());
+        PrefConfig.saveCurrentTime(getApplicationContext(), currentTime);
+
 
         fajrNamazTime = PrefConfig.loadFajrTime(this);
         sunriseTime = PrefConfig.loadSunriseTime(this);
@@ -153,8 +160,124 @@ public class MainActivity extends AppCompatActivity {
         sunsetTime = PrefConfig.loadSunsetTime(this);
         magribNamazTime = PrefConfig.loadMagribTime(this);
         ishaNamazTime = PrefConfig.loadIshaTime(this);
+        currentTime = PrefConfig.loadCurrentTime(this);
+        imsakTime = PrefConfig.loadImsakTime(this);
 
 
+        /* Setting timer */
+
+        setTimer();
+
+
+    }
+
+    public void setTimer() {
+
+        /* Converting String time to Milliseconds */
+
+        TimeParser timeParser = new TimeParser();
+        long fazrTime = timeParser.timeParserMethod(fajrNamazTime);
+        long sunrise = timeParser.timeParserMethod(sunriseTime);
+        long dhuhrTime = timeParser.timeParserMethod(dhuhrnamazTime);
+        long asarTime = timeParser.timeParserMethod(asarNamazTime);
+        long sunset = timeParser.timeParserMethod(sunsetTime);
+        long magribTime = timeParser.timeParserMethod(magribNamazTime);
+        long ishaTime = timeParser.timeParserMethod(ishaNamazTime);
+        long imsak = timeParser.timeParserMethod(imsakTime);
+        long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
+
+        if(currentTime1 >= imsak && currentTime1 < fazrTime){
+
+            startTime = fazrTime - currentTime1;
+            timeLeftInMillies = startTime;
+
+            timerId = findViewById(R.id.timerId);
+
+            startTimer();
+
+        }
+
+        if(currentTime1 >= sunrise && currentTime1 < dhuhrTime ){
+
+            startTime = dhuhrTime - currentTime1;
+            timeLeftInMillies = startTime;
+
+            timerId = findViewById(R.id.timerId);
+
+            startTimer();
+
+        }
+
+        if(currentTime1 >= dhuhrTime && currentTime1 < asarTime){
+
+            startTime = asarTime - currentTime1;
+
+            timeLeftInMillies = startTime;
+
+            timerId = findViewById(R.id.timerId);
+
+            startTimer();
+
+        }
+
+        if(currentTime1 >= asarTime && currentTime1 < magribTime){
+
+            startTime = magribTime - currentTime1;
+
+            timeLeftInMillies = startTime;
+
+            timerId = findViewById(R.id.timerId);
+
+            startTimer();
+
+        }
+
+        if(currentTime1 >= magribTime && currentTime1 < ishaTime){
+
+            startTime = ishaTime - currentTime1;
+
+            timeLeftInMillies = startTime;
+
+            timerId = findViewById(R.id.timerId);
+
+            startTimer();
+        }
+
+    }
+
+    private void startTimer() {
+
+        countDownTimer = new CountDownTimer(timeLeftInMillies, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillies = millisUntilFinished;
+                PrefConfig.saveTimerValue(getApplicationContext(), timeLeftInMillies);
+                updateCountDownText();
+
+            }
+
+            @Override
+            public void onFinish() {
+
+                isTimerRunning = false;
+
+            }
+        }.start();
+
+        isTimerRunning = true;
+
+    }
+
+    private void updateCountDownText() {
+
+        int hours   = (int) ((timeLeftInMillies / (1000*60*60)) % 24);
+        int minutes = (int) ((timeLeftInMillies / (1000*60)) % 60);
+        int seconds = (int) (timeLeftInMillies / 1000) % 60 ;
+
+        String timeLeftFormatted = String.format(Locale.getDefault(),"%02d:%02d:%02d", hours, minutes, seconds);
+
+        timerId.setText(timeLeftFormatted);
 
     }
 

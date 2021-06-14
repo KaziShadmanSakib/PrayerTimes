@@ -16,6 +16,17 @@ public class PrefConfig {
     private static final String Pref_Sunrise_Key = "pref_sunrise_key";
     private static final String Pref_Sunset_Key = "pref_sunset_key";
     private static final String Pref_Imsak_Key = "pref_imsak_key";
+    private static final String Pref_CurrentTime_Key = "pref_currentTime_key";
+    private static final String Pref_Timer_Value_Key  = "pref_timer_value_key";
+
+    public static void saveCurrentTime(Context context, String currentTime){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Pref_CurrentTime_Key, currentTime);
+        editor.commit();
+
+    }
 
     public static void saveCurrentCity(Context context, String city){
 
@@ -104,6 +115,29 @@ public class PrefConfig {
         SharedPreferences.Editor editor = pref.edit();
         editor.putString(Pref_Sunset_Key, sunset);
         editor.commit();
+
+    }
+
+    public static void saveTimerValue(Context context, long timerValue){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putLong(Pref_Timer_Value_Key, timerValue);
+        editor.commit();
+
+    }
+
+    public static long loadTimerValue(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getLong(Pref_Timer_Value_Key, 0);
+
+    }
+
+    public static String loadCurrentTime(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getString(Pref_CurrentTime_Key, "Current Time");
 
     }
 
