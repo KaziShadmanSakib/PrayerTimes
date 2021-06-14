@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckedTextView;
+import android.widget.TextView;
 
 import java.util.Objects;
 
@@ -13,6 +14,7 @@ public class CalendarDateLog extends AppCompatActivity {
     DatabaseHandler databaseHandler;
     String date;
     CheckedTextView[] allPrayersCheckedList;
+    TextView dateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +35,13 @@ public class CalendarDateLog extends AppCompatActivity {
         if(bundle!=null)
         {
             date =(String) bundle.get("clickedDate");
-            date = formattedDate(date);
+            date = modifiedDate(date);
 
         }
+        dateTextView = findViewById(R.id.datetextView);
+        dateTextView.setText(formattedDate(date));
+
+
 
 
         databaseHandler = new DatabaseHandler(this);
@@ -82,7 +88,7 @@ public class CalendarDateLog extends AppCompatActivity {
     }
 
 
-    private String formattedDate(String date) {
+    private String modifiedDate(String date) {
         int intDate = Integer.parseInt(date);
         intDate -= 1;
         date = String.valueOf(intDate);
@@ -111,6 +117,15 @@ public class CalendarDateLog extends AppCompatActivity {
         }
     }
 
+    public String formattedDate(String s){
+        int intDate = Integer.parseInt(s);
+        int day = intDate%100;
+        intDate = intDate/100;
+        int month = intDate%100;
+        intDate = intDate/100;
+        int year = intDate;
+        return day+"/"+month+"/"+year;
+    }
 
 
 }

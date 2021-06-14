@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp">
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="213dp">
 
         <CheckedTextView
             android:id="@+id/checkedTextview1"
@@ -23,6 +25,7 @@
             android:checkMark="?android:attr/listChoiceIndicatorMultiple"
             android:checked="true"
             android:gravity="center"
+            android:padding="25dp"
             android:text="    Fajr"
             android:textSize="20sp"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,11 +36,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/checkedTextview3"
-            android:layout_marginTop="35dp"
             android:checkMark="?android:attr/listChoiceIndicatorMultiple"
             android:checked="true"
-
             android:gravity="center"
+            android:padding="25dp"
             android:text="   Dhuhr"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/checkedTextview1"
@@ -48,10 +50,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/checkedTextview4"
-            android:layout_marginTop="35dp"
             android:checkMark="?android:attr/listChoiceIndicatorMultiple"
             android:checked="true"
             android:gravity="center"
+            android:padding="25dp"
             android:text="   Asar"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/checkedTextview2"
@@ -62,10 +64,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/checkedTextview5"
-            android:layout_marginTop="35dp"
             android:checkMark="?android:attr/listChoiceIndicatorMultiple"
             android:checked="true"
             android:gravity="center"
+            android:padding="25dp"
             android:text="   Magrib"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/checkedTextview3"
@@ -76,13 +78,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="35dp"
             android:checkMark="?android:attr/listChoiceIndicatorMultiple"
             android:checked="true"
             android:gravity="center"
+            android:padding="25dp"
             android:text="   Isha"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/checkedTextview4"
             tools:layout_editor_absoluteX="0dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/datetextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="30sp"
+        android:textColor="@color/BlueViolet"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginTop="29dp"
+        android:layout_marginBottom="94dp"
+        android:text="TextView" />
 </RelativeLayout>

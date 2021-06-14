@@ -87,7 +87,13 @@ public class MainActivity extends AppCompatActivity {
 
         //create database
         databaseHandler = new DatabaseHandler(this);
-        databaseHandler.getDatabaseName();
+        new Thread(new Runnable() {
+            public void run() {
+                databaseHandler.getContact("20210101");
+            }
+        }).start();
+
+
 
 
         /* Bottom Navigation */
@@ -490,13 +496,15 @@ public class MainActivity extends AppCompatActivity {
 
     //abd's update Database
 
+    @SuppressLint("SimpleDateFormat")
     public void updateDB(View v) {
 
 
         calendar = Calendar.getInstance();
         simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());
-        databaseHandler.updateDatabase(date,index,false);
+        new Thread(() -> databaseHandler.updateDatabase(date, index, false)).start();
+
 
     }
 
