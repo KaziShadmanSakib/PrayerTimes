@@ -118,22 +118,6 @@ public class PrefConfig {
 
     }
 
-    public static void saveTimerValue(Context context, long timerValue){
-
-        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putLong(Pref_Timer_Value_Key, timerValue);
-        editor.commit();
-
-    }
-
-    public static long loadTimerValue(Context context){
-
-        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getLong(Pref_Timer_Value_Key, 0);
-
-    }
-
     public static String loadCurrentTime(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);

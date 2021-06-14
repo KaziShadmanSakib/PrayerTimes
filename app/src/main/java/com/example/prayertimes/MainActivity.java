@@ -258,7 +258,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillies = millisUntilFinished;
-                PrefConfig.saveTimerValue(getApplicationContext(), timeLeftInMillies);
                 updateCountDownText();
 
             }
