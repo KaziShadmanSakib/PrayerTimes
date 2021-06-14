@@ -172,4 +172,82 @@
         android:translationX="17.5sp"
         android:translationY="105sp" />
 
+    <TextView
+        android:id="@+id/haveYouPrayed"
+        android:layout_width="252dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="-2dp"
+        android:layout_marginBottom="534dp"
+        android:layout_toStartOf="@+id/timerBackground"
+        android:text="Have you prayed?"
+        android:textColor="#FFFFFF "
+        android:textSize="18.5sp"
+        android:translationX="5dp"
+        android:translationY="-25dp" />
+
+    <TextView
+        android:id="@+id/nowPrayerName"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="-45dp"
+        android:layout_marginBottom="534dp"
+        android:layout_toStartOf="@+id/timerBackground"
+        android:text="Now -"
+        android:textColor="#FFFFFF "
+        android:textSize="18sp"
+        android:translationX="220dp"
+        android:translationY="-25dp" />
+
+    <TextView
+        android:id="@+id/next"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="-7dp"
+        android:layout_marginBottom="534dp"
+        android:layout_toStartOf="@+id/timerBackground"
+        android:text="Next"
+        android:textColor="#FFFFFF "
+        android:textSize="15sp"
+        android:translationX="5dp"
+        android:translationY="40dp" />
+
+    <TextView
+        android:id="@+id/nextPrayerName"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="-7dp"
+        android:layout_marginBottom="534dp"
+        android:layout_toStartOf="@+id/timerBackground"
+        android:textColor="#FFFFFF "
+        android:textSize="20sp"
+        android:translationX="5dp"
+        android:translationY="70dp" />
+
+    <TextView
+        android:id="@+id/nextPrayerTime"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="-7dp"
+        android:layout_marginBottom="534dp"
+        android:layout_toStartOf="@+id/timerBackground"
+        android:textColor="#FFFFFF "
+        android:textSize="18sp"
+        android:translationX="5dp"
+        android:translationY="100dp" />
+
 </RelativeLayout>

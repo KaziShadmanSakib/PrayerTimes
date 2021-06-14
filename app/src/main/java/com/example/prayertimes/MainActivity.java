@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -53,13 +52,13 @@ import com.google.android.gms.location.LocationResult;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView cityLocation, sehriTimeId, iftarTimeId;
+    private TextView cityLocation, sehriTimeId, iftarTimeId, nextPrayerName, nextPrayerTime, haveYouPrayed, nowPrayerName;
     private Button allPrayers;
     private FusedLocationProviderClient fusedLocationClient;
     private String city;
     private String country;
     private Boolean isLocationActive = false;
-    private String currentTime, imsakTime, sehri, iftar, fajrNamazTime, dhuhrnamazTime, asarNamazTime, magribNamazTime, ishaNamazTime, sunriseTime, sunsetTime;
+    private String currentTime, imsakTime, sehri, iftar, fajrNamazTime, dhuhrNamazTime, asarNamazTime, magribNamazTime, ishaNamazTime, sunriseTime, sunsetTime;
     private TextView timerId;
     private CountDownTimer countDownTimer;
     private boolean isTimerRunning;
@@ -161,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
         fajrNamazTime = PrefConfig.loadFajrTime(this);
         sunriseTime = PrefConfig.loadSunriseTime(this);
-        dhuhrnamazTime = PrefConfig.loadDhuhrTime(this);
+        dhuhrNamazTime = PrefConfig.loadDhuhrTime(this);
         asarNamazTime = PrefConfig.loadAsarTime(this);
         sunsetTime = PrefConfig.loadSunsetTime(this);
         magribNamazTime = PrefConfig.loadMagribTime(this);
@@ -174,17 +173,29 @@ public class MainActivity extends AppCompatActivity {
 
         setTimer();
 
+        /* Setting Now and Next prayer time */
+
+
+        nowPrayerName = findViewById(R.id.nowPrayerName);
+        nextPrayerTime = findViewById(R.id.nextPrayerTime);
+        nextPrayerName = findViewById(R.id.nextPrayerName);
+        haveYouPrayed = findViewById(R.id.haveYouPrayed);
+
+        setNowAndNext();
+
 
     }
 
-    public void setTimer() {
+    private void setNowAndNext() {
+
+        long midNight = 0;
 
         /* Converting String time to Milliseconds */
 
         TimeParser timeParser = new TimeParser();
         long fazrTime = timeParser.timeParserMethod(fajrNamazTime);
         long sunrise = timeParser.timeParserMethod(sunriseTime);
-        long dhuhrTime = timeParser.timeParserMethod(dhuhrnamazTime);
+        long dhuhrTime = timeParser.timeParserMethod(dhuhrNamazTime);
         long asarTime = timeParser.timeParserMethod(asarNamazTime);
         long sunset = timeParser.timeParserMethod(sunsetTime);
         long magribTime = timeParser.timeParserMethod(magribNamazTime);
@@ -192,7 +203,87 @@ public class MainActivity extends AppCompatActivity {
         long imsak = timeParser.timeParserMethod(imsakTime);
         long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
 
-        if(currentTime1 >= imsak && currentTime1 < fazrTime){
+        if(currentTime1 >= fazrTime){
+
+            haveYouPrayed.setText("Get ready for the next Prayer");
+            nowPrayerName.setText("Now - Fajr");
+            nextPrayerName.setText("Dhuhr");
+            nextPrayerTime.setText(dhuhrNamazTime);
+
+        }
+
+        if(currentTime1 >= sunrise){
+
+            haveYouPrayed.setText("Have you prayed Fajr?");
+            nowPrayerName.setText("Good Morning");
+
+        }
+
+
+        if(currentTime1 >= dhuhrTime){
+
+            haveYouPrayed.setText("Have you prayed Fajr?");
+            nowPrayerName.setText("Now - Dhuhr");
+            nextPrayerName.setText("Asar");
+            nextPrayerTime.setText(asarNamazTime);
+
+        }
+
+        if(currentTime1 >= asarTime){
+
+            haveYouPrayed.setText("Have you prayed Dhuhr?");
+            nowPrayerName.setText("Now - Asar");
+            nextPrayerName.setText("Magrib");
+            nextPrayerTime.setText(magribNamazTime);
+
+        }
+
+        if(currentTime1 >= magribTime){
+
+            haveYouPrayed.setText("Have you prayed Asar?");
+            nowPrayerName.setText("Now - Magrib");
+            nextPrayerName.setText("Isha");
+            nextPrayerTime.setText(ishaNamazTime);
+
+        }
+
+        if(currentTime1 >= ishaTime){
+
+            haveYouPrayed.setText("Have you prayed Magrib?");
+            nowPrayerName.setText("Now - Isha");
+            nextPrayerName.setText("Have a good sleep");
+            nextPrayerTime.setText("Sehri Time - " + imsakTime);
+        }
+
+        if(currentTime1 >= midNight){
+
+            haveYouPrayed.setText("Have you prayed Isha?");
+            nowPrayerName.setText("Now - Midnight");
+            nextPrayerName.setText("Fajr");
+            nextPrayerTime.setText(fajrNamazTime);
+
+        }
+
+    }
+
+    public void setTimer() {
+
+        long midNight = 0;
+
+        /* Converting String time to Milliseconds */
+
+        TimeParser timeParser = new TimeParser();
+        long fazrTime = timeParser.timeParserMethod(fajrNamazTime);
+        long sunrise = timeParser.timeParserMethod(sunriseTime);
+        long dhuhrTime = timeParser.timeParserMethod(dhuhrNamazTime);
+        long asarTime = timeParser.timeParserMethod(asarNamazTime);
+        long sunset = timeParser.timeParserMethod(sunsetTime);
+        long magribTime = timeParser.timeParserMethod(magribNamazTime);
+        long ishaTime = timeParser.timeParserMethod(ishaNamazTime);
+        long imsak = timeParser.timeParserMethod(imsakTime);
+        long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
+
+        if(currentTime1 >= midNight && currentTime1 < fazrTime){
 
             startTime = fazrTime - currentTime1;
             timeLeftInMillies = startTime;
