@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -65,13 +66,24 @@ public class LogActivity extends AppCompatActivity {
 
         //create calender View with dots
         calendarView = findViewById(R.id.calendarView);
-        showDots();
+
+            new Thread(() -> {
+
+               try {
+                   showDots();
+               }
+               catch (Exception e){
+                   e.printStackTrace();
+               }
+            }).start();
+
+
 
         //new window on Clicking date
         calendarView.setOnDayClickListener(eventDay -> {
             Calendar clickedDayCalendar = eventDay.getCalendar();
             String clickedDate = calendarToString(clickedDayCalendar);
-            changeToCalendarDateLog(clickedDate);
+            goToCalendarDateLog(clickedDate);
 
         });
 
@@ -79,7 +91,7 @@ public class LogActivity extends AppCompatActivity {
 
     }
 
-    private void changeToCalendarDateLog(String date){
+    private void goToCalendarDateLog(String date){
         Intent i = new Intent(this,CalendarDateLog.class);
         i.putExtra("clickedDate",date);
         startActivity(i);
@@ -182,6 +194,7 @@ public class LogActivity extends AppCompatActivity {
         }
 
         Calendar calendar = Calendar.getInstance();
+        assert date != null;
         calendar.setTime(date);
         return calendar;
     }
@@ -199,4 +212,11 @@ public class LogActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+
+
 }
+
