@@ -216,6 +216,9 @@ public class MainActivity extends AppCompatActivity {
 
             haveYouPrayed.setText("Have you prayed Fajr?");
             nowPrayerName.setText("Good Morning");
+            nextPrayerName.setText("Dhuhr");
+            nextPrayerTime.setText(dhuhrNamazTime);
+
 
         }
 
@@ -250,8 +253,8 @@ public class MainActivity extends AppCompatActivity {
         if(currentTime1 >= ishaTime && currentTime1 > midNight){
             haveYouPrayed.setText("Have you prayed Magrib?");
             nowPrayerName.setText("Now - Isha");
-            nextPrayerName.setText("Have a good sleep");
-            nextPrayerTime.setText("Sehri Time - " + imsakTime);
+            nextPrayerName.setText("Fajr");
+            nextPrayerTime.setText(fajrNamazTime);
         }
 
         if(currentTime1 >= midNight && currentTime1 < fazrTime){
@@ -282,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
         long imsak = timeParser.timeParserMethod(imsakTime);
         long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
 
-        if(currentTime1 >= midNight && currentTime1 < fazrTime){
+        if(currentTime1 >= ishaTime && currentTime1 > fazrTime || currentTime1 >= midNight && currentTime1 < fazrTime){
 
             startTime = fazrTime - currentTime1;
             timeLeftInMillies = startTime;
