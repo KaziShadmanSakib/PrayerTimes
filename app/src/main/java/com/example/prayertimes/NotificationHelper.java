@@ -51,7 +51,7 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification() {
-        Intent clickedIntent = new Intent(this,MainActivity.class);
+        Intent clickedIntent = new Intent(this,CalendarDateLog.class);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());

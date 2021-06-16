@@ -28,7 +28,11 @@ public class DoNotification {
 
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR, 04);
+        c.set(Calendar.MINUTE, 14);
+        c.set(Calendar.SECOND,00 );
+        startAlarm(c);
 
         String currentTimeString = sdf.format(currentTime);
         int currentHour = convertTimeHour(currentTimeString);
@@ -36,7 +40,7 @@ public class DoNotification {
         int currentSec = toSeconds(currentHour,currentMin);
 
         if(currentSec>prayerSec[0]&&currentSec<prayerSec[1]){
-            runNotification(prayerHour[1],prayerMin[1]);
+            //runNotification(prayerHour[1],prayerMin[1]);
         }
         if(currentSec>prayerSec[1]&&currentSec<prayerSec[2]){
             runNotification(prayerHour[2],prayerMin[2]);
