@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView cityLocation, sehriTimeId, iftarTimeId, nextPrayerName, nextPrayerTime, haveYouPrayed, nowPrayerName;
     private Button allPrayers;
     private FusedLocationProviderClient fusedLocationClient;
-    private String city;
-    private String country;
+    private String city = "Seattle";
+    private String country = "United States";
     private Boolean isLocationActive = false;
     private String currentTime, imsakTime, sehri, iftar, fajrNamazTime, dhuhrNamazTime, asarNamazTime, magribNamazTime, ishaNamazTime, sunriseTime, sunsetTime;
     private TextView timerId;
@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setTimer() {
 
-        long midNight = 0;
+        long midNight = 86400000;
 
         /* Converting String time to Milliseconds */
 
@@ -285,14 +285,17 @@ public class MainActivity extends AppCompatActivity {
         long imsak = timeParser.timeParserMethod(imsakTime);
         long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
 
-        if(currentTime1 >= ishaTime && currentTime1 > fazrTime || currentTime1 >= midNight && currentTime1 < fazrTime){
+        if(currentTime1 >= ishaTime || currentTime1 >= 0 && currentTime1 < fazrTime){
 
-            startTime = fazrTime - currentTime1;
+
+            startTime = (midNight - currentTime1) + fazrTime;
             timeLeftInMillies = startTime;
 
             timerId = findViewById(R.id.timerId);
 
             startTimer();
+
+
 
         }
 
