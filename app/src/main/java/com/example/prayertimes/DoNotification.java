@@ -29,6 +29,7 @@ public class DoNotification {
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
 
+
         String currentTimeString = sdf.format(currentTime);
         int currentHour = convertTimeHour(currentTimeString);
         int currentMin = convertTimeMin(currentTimeString);
