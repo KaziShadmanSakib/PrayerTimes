@@ -611,10 +611,14 @@ public class MainActivity extends AppCompatActivity {
     public void updateDB(View v) {
 
 
+
         calendar = Calendar.getInstance();
         simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());
-        new Thread(() -> databaseHandler.updateDatabase(date, index, false)).start();
+        Intent i = new Intent(this,CalendarDateLog.class);
+        i.putExtra("clickedDate",date);
+        startActivity(i);
+
 
 
     }
