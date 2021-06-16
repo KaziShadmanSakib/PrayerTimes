@@ -28,6 +28,7 @@ public class PrefConfig {
 
     }
 
+
     public static void saveCurrentCity(Context context, String city){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
@@ -192,6 +193,20 @@ public class PrefConfig {
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
         return pref.getString(Pref_Sunset_Key, "Sunset");
+
+    }
+    public static void savefirstTime(Context context, String firstTime){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("first_time_key", firstTime);
+        editor.commit();
+
+    }
+    public static String loadFirstTime(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getString("first_time_key", "FirstTime");
 
     }
 

@@ -53,6 +53,7 @@ import java.util.TimerTask;
 public class AllPrayers extends AppCompatActivity{
 
     private static final String TAG = "tag";
+    private static Boolean isTrue = false;
     private LocationManager locationManager;
     private FusedLocationProviderClient fusedLocationClient;
     private TextView fazrNamazId, sunriseId, dhuhrNamazId, asarNamazId, sunsetId, magribNamazId, ishaNamazId;
@@ -164,6 +165,7 @@ public class AllPrayers extends AppCompatActivity{
                 //pDialog.hide();
             }
         });
+
 
 // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);

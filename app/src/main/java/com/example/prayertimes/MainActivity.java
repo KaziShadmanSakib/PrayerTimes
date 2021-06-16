@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView cityLocation, sehriTimeId, iftarTimeId, nextPrayerName, nextPrayerTime, haveYouPrayed, nowPrayerName;
     private Button allPrayers;
+    private static Boolean isAllPrayer = false;
     private FusedLocationProviderClient fusedLocationClient;
     private String city = "Seattle";
     private String country = "United States";
@@ -91,6 +92,19 @@ public class MainActivity extends AppCompatActivity {
                 databaseHandler.getContact("20210101");
             }
         }).start();
+        if(PrefConfig.loadFirstTime(this)=="FirstTime"){
+            PrefConfig.savefirstTime(this,"NotFirstTime");
+            PrefConfig.saveCurrentCity(this,"Dhaka");
+            PrefConfig.saveCurrentCountry(this,"Bangladesh");
+            if(!isAllPrayer){
+                Intent intent = new Intent(this, AllPrayers.class);
+
+                startActivity(intent);
+
+                isAllPrayer = true;
+            }
+
+        }
 
 
 
@@ -156,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm:ss");
         currentTime = simpleDateFormat1.format(calendar1.getTime());
         PrefConfig.saveCurrentTime(getApplicationContext(), currentTime);
+
+
 
 
         fajrNamazTime = PrefConfig.loadFajrTime(this);
