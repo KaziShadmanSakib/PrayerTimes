@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView cityLocation, sehriTimeId, iftarTimeId, nextPrayerName, nextPrayerTime, haveYouPrayed, nowPrayerName;
     private Button allPrayers;
-    private static Boolean isAllPrayer = false;
     private FusedLocationProviderClient fusedLocationClient;
     private String city = "Seattle";
     private String country = "United States";
@@ -92,19 +93,14 @@ public class MainActivity extends AppCompatActivity {
                 databaseHandler.getContact("20210101");
             }
         }).start();
-        if(PrefConfig.loadFirstTime(this)=="FirstTime"){
-            PrefConfig.savefirstTime(this,"NotFirstTime");
-            PrefConfig.saveCurrentCity(this,"Dhaka");
-            PrefConfig.saveCurrentCountry(this,"Bangladesh");
-            if(!isAllPrayer){
-                Intent intent = new Intent(this, AllPrayers.class);
 
-                startActivity(intent);
+        firstTimeFunction();
 
-                isAllPrayer = true;
-            }
+        DoNotification doNotification = new DoNotification(getApplicationContext());
+        doNotification.setNotification();
 
-        }
+
+
 
 
 
@@ -200,6 +196,22 @@ public class MainActivity extends AppCompatActivity {
         setNowAndNext();
 
 
+    }
+
+    private void firstTimeFunction() {
+        if(PrefConfig.loadFirstTime(this)=="FirstTime"){
+
+            PrefConfig.savefirstTime(this,"NotFirstTime");
+            PrefConfig.saveCurrentCity(this,"Dhaka");
+            PrefConfig.saveCurrentCountry(this,"Bangladesh");
+
+
+            Intent intent = new Intent(this, AllPrayers.class);
+            startActivity(intent);
+
+
+
+        }
     }
 
     private void setNowAndNext() {
@@ -622,6 +634,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
 
 }
