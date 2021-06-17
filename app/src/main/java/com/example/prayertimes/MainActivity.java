@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
         /* Bottom Navigation */
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -628,6 +630,9 @@ public class MainActivity extends AppCompatActivity {
         simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());
         Intent i = new Intent(this,CalendarDateLog.class);
+        int dateInt = Integer.parseInt(date);
+        dateInt +=1;
+        date = String.valueOf(dateInt);
         i.putExtra("clickedDate",date);
         startActivity(i);
 

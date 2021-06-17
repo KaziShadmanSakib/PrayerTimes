@@ -55,6 +55,9 @@ public class NotificationHelper extends ContextWrapper {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());
+        int dateInt = Integer.parseInt(date);
+        dateInt +=1;
+        date = String.valueOf(dateInt);
         clickedIntent.putExtra("clickedDate",date);
         PendingIntent clickedPendingIntent = PendingIntent.getActivities(this,1, new Intent[]{clickedIntent},PendingIntent.FLAG_UPDATE_CURRENT);
 
