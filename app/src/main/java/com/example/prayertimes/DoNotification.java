@@ -76,6 +76,8 @@ public class DoNotification {
         prayerMiliSec[2]=convertToMiliSecond.getAsarInMili();
         prayerMiliSec[3]=convertToMiliSecond.getMagribInMili();
         prayerMiliSec[4]=convertToMiliSecond.getIshaInMili();
+
+
         
     }
 
