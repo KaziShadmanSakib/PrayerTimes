@@ -6,4 +6,145 @@
     android:layout_height="match_parent"
     tools:context=".AboutUsOption">
 
+    <TextView
+        android:id="@+id/aboutUs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="540dp"
+        android:background="#FFFFFF	"
+        android:text="About Us"
+        android:textColor="#000000 "
+        android:textSize="24sp"
+        android:translationY="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/arabicName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="468dp"
+        android:background="#FFFFFF	"
+        android:text="أوقات الصلاة "
+        android:textColor="#000000 "
+        android:textSize="34sp"
+        android:translationY="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/englishName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="424dp"
+        android:background="#FFFFFF	"
+        android:text="Prayer Times"
+        android:textColor="#000000 "
+        android:textSize="34sp"
+        android:translationY="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/createdBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="352dp"
+        android:background="#FFFFFF	"
+        android:text="Created by -"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/producedBy01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="316dp"
+        android:background="#FFFFFF	"
+        android:text="Kazi Shadman Sakib"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        android:translationY="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/departmentName01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="316dp"
+        android:background="#FFFFFF	"
+        android:text="Computer Science and Engineering"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        android:translationY="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/universityName01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="316dp"
+        android:background="#FFFFFF	"
+        android:text="University of Dhaka"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        android:translationY="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/producedBy02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="316dp"
+        android:background="#FFFFFF	"
+        android:text="Abdullah Ibne Masud"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        android:translationY="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/departmentName02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="316dp"
+        android:background="#FFFFFF	"
+        android:text="Computer Science and Engineering"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        android:translationY="175dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/universityName02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="316dp"
+        android:background="#FFFFFF	"
+        android:text="University of Dhaka"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        android:translationY="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
