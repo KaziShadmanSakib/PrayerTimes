@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".SettingsOption">
 
+    <TextView
+        android:id="@+id/internetSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="544dp"
+        android:background="#FFFFFF"
+        android:onClick="onClickInternetSettings"
+        android:text="Internet Settings"
+        android:textColor="#000000 "
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/locationSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="544dp"
+        android:background="#FFFFFF"
+        android:onClick="onClickLocationSettings"
+        android:text="Location Settings"
+        android:textColor="#000000 "
+        android:textSize="20dp"
+        android:translationY="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
