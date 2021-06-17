@@ -2,6 +2,7 @@ package com.example.prayertimes;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -82,7 +83,7 @@ public class ConvertToMiliSecond {
     }
     public Integer getCurrentTimeInMiliSec(Date date){
 
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String currentTimeString = sdf.format(date);
         int currentHour = convertTimeHour(currentTimeString);
         int currentMin = convertTimeMin(currentTimeString);

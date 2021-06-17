@@ -4,9 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -48,7 +45,7 @@ public class DoNotification {
             AlertReceiver.setContentTitle("Isha has started");
             AlertReceiver.setContentText("Have you prayed Magrib?");
         }
-        if(currentMiliSec>prayerMiliSec[4]&&currentMiliSec<24*3600){
+        if(currentMiliSec>prayerMiliSec[4]&&currentMiliSec<24*3600*1000){
             startAlarm(c,prayerMiliSec[0]);
             AlertReceiver.setContentTitle("Fajr has started");
             AlertReceiver.setContentText("Have you prayed Isha?");
@@ -76,12 +73,22 @@ public class DoNotification {
         prayerMiliSec[2]=convertToMiliSecond.getAsarInMili();
         prayerMiliSec[3]=convertToMiliSecond.getMagribInMili();
         prayerMiliSec[4]=convertToMiliSecond.getIshaInMili();
+
         
     }
 
 
 
     private void startAlarm(Calendar c,int miliSecond) {
+
+
+        miliSecond = miliSecond/1000;
+        int hour = miliSecond/3600;
+        int min = (miliSecond%3600)/60;
+        c.set(Calendar.HOUR_OF_DAY, hour);
+        c.set(Calendar.MINUTE, min);
+        c.set(Calendar.SECOND, 0);
+
         AlarmManager alarmManager =  (AlarmManager) _context.getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(_context, AlertReceiver.class);
@@ -89,7 +96,7 @@ public class DoNotification {
         if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
         }
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, miliSecond/1000, pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
     }
     private void cancelAlarm() {
