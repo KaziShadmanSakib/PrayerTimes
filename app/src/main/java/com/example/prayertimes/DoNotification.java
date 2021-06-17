@@ -28,11 +28,7 @@ public class DoNotification {
 
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR, 04);
-        c.set(Calendar.MINUTE, 14);
-        c.set(Calendar.SECOND,00 );
-        startAlarm(c);
+
 
         String currentTimeString = sdf.format(currentTime);
         int currentHour = convertTimeHour(currentTimeString);
@@ -40,22 +36,34 @@ public class DoNotification {
         int currentSec = toSeconds(currentHour,currentMin);
 
         if(currentSec>prayerSec[0]&&currentSec<prayerSec[1]){
-            //runNotification(prayerHour[1],prayerMin[1]);
+            runNotification(prayerHour[1],prayerMin[1]);
+            AlertReceiver.setContentTitle("Dhuhr has started");
+            AlertReceiver.setContentText("Have you prayed Fajr?");
         }
         if(currentSec>prayerSec[1]&&currentSec<prayerSec[2]){
             runNotification(prayerHour[2],prayerMin[2]);
+            AlertReceiver.setContentTitle("Asar has started");
+            AlertReceiver.setContentText("Have you prayed Dhuhr?");
         }
         if(currentSec>prayerSec[2]&&currentSec<prayerSec[3]){
             runNotification(prayerHour[3],prayerMin[3]);
+            AlertReceiver.setContentTitle("Magrib has started");
+            AlertReceiver.setContentText("Have you prayed Asar?");
         }
         if(currentSec>prayerSec[3]&&currentSec<prayerSec[4]){
             runNotification(prayerHour[4],prayerMin[4]);
+            AlertReceiver.setContentTitle("Isha has started");
+            AlertReceiver.setContentText("Have you prayed Magrib?");
         }
         if(currentSec>prayerSec[4]&&currentSec<24*3600){
             runNotification(prayerHour[0],prayerMin[0]);
+            AlertReceiver.setContentTitle("Fajr has started");
+            AlertReceiver.setContentText("Have you prayed Isha?");
         }
         if(currentSec>0&&currentSec<prayerSec[0]){
             runNotification(prayerHour[0],prayerMin[0]);
+            AlertReceiver.setContentTitle("Fajr has started");
+            AlertReceiver.setContentText("Have you prayed Isha?");
         }
 
 

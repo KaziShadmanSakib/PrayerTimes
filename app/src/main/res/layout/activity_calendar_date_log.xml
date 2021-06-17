@@ -12,9 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginBottom="213dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
         android:background="#FFFFFF	">
 
         <CheckedTextView
@@ -22,14 +21,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/checkedTextview2"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="80dp"
             android:checkMark="?android:attr/listChoiceIndicatorMultiple"
             android:checked="true"
             android:gravity="center"
             android:padding="25dp"
             android:text="    Fajr"
             android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/datetextView"
             tools:layout_editor_absoluteX="0dp" />
 
         <CheckedTextView
@@ -87,19 +86,20 @@
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/checkedTextview4"
             tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/datetextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF	"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/BlueViolet"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="6dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/datetextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="29dp"
-        android:layout_marginBottom="94dp"
-        android:background="#FFFFFF	"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/BlueViolet"
-        android:textSize="30sp"
-        android:textStyle="bold" />
 </RelativeLayout>
