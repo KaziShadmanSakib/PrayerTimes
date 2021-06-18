@@ -149,26 +149,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        setBottomNavigation();
 
 
-        /* Bottom Navigation */
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.home);
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.log:
-                    startActivity(new Intent(getApplicationContext(), LogActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                case R.id.home:
-                    return true;
-                case R.id.duas:
-                    startActivity(new Intent(getApplicationContext(), Duas.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-            }
-            return false;
-        });
 
         /* Location */
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -242,6 +225,27 @@ public class MainActivity extends AppCompatActivity {
         setNowAndNext();
 
 
+    }
+
+    private void setBottomNavigation() {
+        /* Bottom Navigation */
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.log:
+                    startActivity(new Intent(getApplicationContext(), LogActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                case R.id.home:
+                    return true;
+                case R.id.duas:
+                    startActivity(new Intent(getApplicationContext(), Duas.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+            }
+            return false;
+        });
     }
 
     private void firstTimeFunction() {

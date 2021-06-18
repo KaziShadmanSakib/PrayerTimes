@@ -27,31 +27,7 @@ public class LogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
-        /* Initialize and Assign Variable for Bottom Navigation */
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-        /* Set Log Selected */
-
-        bottomNavigationView.setSelectedItemId(R.id.log);
-
-        /* Perform Item Selected Listener */
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()){
-                case R.id.log:
-                    return true;
-                case R.id.home:
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0,0);
-                    return true;
-                case R.id.duas:
-                    startActivity(new Intent(getApplicationContext(), Duas.class));
-                    overridePendingTransition(0,0);
-                    return true;
-            }
-            return false;
-        });
+        setBottomNavigation();
 
 
 
@@ -89,6 +65,34 @@ public class LogActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void setBottomNavigation() {
+        /* Initialize and Assign Variable for Bottom Navigation */
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        /* Set Log Selected */
+
+        bottomNavigationView.setSelectedItemId(R.id.log);
+
+        /* Perform Item Selected Listener */
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.log:
+                    return true;
+                case R.id.home:
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.duas:
+                    startActivity(new Intent(getApplicationContext(), Duas.class));
+                    overridePendingTransition(0,0);
+                    return true;
+            }
+            return false;
+        });
     }
 
     private void goToCalendarDateLog(String date){

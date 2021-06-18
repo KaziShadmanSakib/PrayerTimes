@@ -77,7 +77,7 @@ public class CalendarDateLog extends AppCompatActivity {
                     Toast toast = Toast.makeText(this,"You con only change the log of past 30 days",Toast.LENGTH_SHORT);
                     toast.show();
                 }
-                else if(currentDate>clickedDate){
+                else if(currentDate+1>=clickedDate){
                     if(allPrayersCheckedList[finalI].isChecked()){
                         databaseHandler.updateDatabase(date, finalI,true);
                     }

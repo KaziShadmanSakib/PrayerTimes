@@ -16,6 +16,15 @@ public class Duas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_duas);
 
+
+
+        setBottomNavigation();
+
+        /*App bar config */
+        getSupportActionBar().setTitle("Duas");
+    }
+
+    private void setBottomNavigation() {
         /* Initialize and Assign Variable for Bottom Navigation */
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -44,8 +53,5 @@ public class Duas extends AppCompatActivity {
                 return false;
             }
         });
-
-        /*App bar config */
-        getSupportActionBar().setTitle("Duas");
     }
 }
