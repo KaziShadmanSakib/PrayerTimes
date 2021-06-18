@@ -4,6 +4,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -27,33 +29,34 @@ public class DoNotification {
 
         if(currentMiliSec>prayerMiliSec[0]&&currentMiliSec<prayerMiliSec[1]){
             startAlarm(c,prayerMiliSec[1]);
-            AlertReceiver.setContentTitle("Dhuhr has started");
-            AlertReceiver.setContentText("Have you prayed Fajr?");
+            NotificationHelper.setContentTitle("Dhuhr has started");
+            NotificationHelper.setContentText("Have you prayed Fajr?");
         }
         if(currentMiliSec>prayerMiliSec[1]&&currentMiliSec<prayerMiliSec[2]){
             startAlarm(c,prayerMiliSec[2]);
-            AlertReceiver.setContentTitle("Asar has started");
-            AlertReceiver.setContentText("Have you prayed Dhuhr?");
+
+            NotificationHelper.setContentTitle("Asar has started");
+            NotificationHelper.setContentText("Have you prayed Dhuhr?");
         }
         if(currentMiliSec>prayerMiliSec[2]&&currentMiliSec<prayerMiliSec[3]){
             startAlarm(c,prayerMiliSec[3]);
-            AlertReceiver.setContentTitle("Magrib has started");
-            AlertReceiver.setContentText("Have you prayed Asar?");
+            NotificationHelper.setContentTitle("Magrib has started");
+            NotificationHelper.setContentText("Have you prayed Asae?");
         }
         if(currentMiliSec>prayerMiliSec[3]&&currentMiliSec<prayerMiliSec[4]){
             startAlarm(c,prayerMiliSec[4]);
-            AlertReceiver.setContentTitle("Isha has started");
-            AlertReceiver.setContentText("Have you prayed Magrib?");
+            NotificationHelper.setContentTitle("Isha has started");
+            NotificationHelper.setContentText("Have you prayed Magrib?");
         }
         if(currentMiliSec>prayerMiliSec[4]&&currentMiliSec<24*3600*1000){
             startAlarm(c,prayerMiliSec[0]);
-            AlertReceiver.setContentTitle("Fajr has started");
-            AlertReceiver.setContentText("Have you prayed Isha?");
+            NotificationHelper.setContentTitle("Fajr has started");
+            NotificationHelper.setContentText("Have you prayed Isha?");
         }
         if(currentMiliSec>0&&currentMiliSec<prayerMiliSec[0]){
             startAlarm(c,prayerMiliSec[0]);
-            AlertReceiver.setContentTitle("Fajr has started");
-            AlertReceiver.setContentText("Have you prayed Isha?");
+            NotificationHelper.setContentTitle("Fajr has started");
+            NotificationHelper.setContentText("Have you prayed Isha?");
         }
 
 
