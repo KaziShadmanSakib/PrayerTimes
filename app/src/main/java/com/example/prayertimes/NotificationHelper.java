@@ -11,6 +11,7 @@ import android.media.AudioAttributes;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -21,6 +22,8 @@ import java.util.Calendar;
 public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
     public static final String channelName = "Channel Name";
+    private static String contentTitle = "prayer";
+    private static String contentText = "Have you prayed";
 
     private NotificationManager mManager;
     Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.kalimba);
@@ -32,7 +35,14 @@ public class NotificationHelper extends ContextWrapper {
         }
     }
 
+    public static void setContentTitle(String contentTitle) {
+         NotificationHelper.contentTitle = contentTitle;
 
+    }
+
+    public static void setContentText(String contentText) {
+        NotificationHelper.contentText = contentText;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createChannel() {
@@ -51,6 +61,7 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification() {
+
         Intent clickedIntent = new Intent(this,CalendarDateLog.class);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -60,10 +71,9 @@ public class NotificationHelper extends ContextWrapper {
         date = String.valueOf(dateInt);
         clickedIntent.putExtra("clickedDate",date);
         PendingIntent clickedPendingIntent = PendingIntent.getActivities(this,1, new Intent[]{clickedIntent},PendingIntent.FLAG_UPDATE_CURRENT);
-
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
-                .setContentTitle("Alarm!")
-                .setContentText("Have you prayed")
+                .setContentTitle(contentTitle)
+                .setContentText(contentText)
                 .setSmallIcon(R.drawable.ic_android)
                 .setAutoCancel(true)
                 .setContentIntent(clickedPendingIntent)

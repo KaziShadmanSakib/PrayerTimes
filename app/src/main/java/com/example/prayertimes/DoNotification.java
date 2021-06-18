@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -26,34 +27,34 @@ public class DoNotification {
         
 
         if(currentMiliSec>prayerMiliSec[0]&&currentMiliSec<prayerMiliSec[1]){
+            NotificationHelper.setContentTitle("Dhuhr has started");
+            NotificationHelper.setContentText("Have you prayed Fajr?");
             startAlarm(c,prayerMiliSec[1]);
-            AlertReceiver.setContentTitle("Dhuhr has started");
-            AlertReceiver.setContentText("Have you prayed Fajr?");
         }
         if(currentMiliSec>prayerMiliSec[1]&&currentMiliSec<prayerMiliSec[2]){
+            NotificationHelper.setContentTitle("Asar has started");
+            NotificationHelper.setContentText("Have you prayed Dhuhr?");
             startAlarm(c,prayerMiliSec[2]);
-            AlertReceiver.setContentTitle("Asar has started");
-            AlertReceiver.setContentText("Have you prayed Dhuhr?");
         }
         if(currentMiliSec>prayerMiliSec[2]&&currentMiliSec<prayerMiliSec[3]){
+            NotificationHelper.setContentTitle("Magrib has started");
+            NotificationHelper.setContentText("Have you prayed Asae?");
             startAlarm(c,prayerMiliSec[3]);
-            AlertReceiver.setContentTitle("Magrib has started");
-            AlertReceiver.setContentText("Have you prayed Asar?");
         }
         if(currentMiliSec>prayerMiliSec[3]&&currentMiliSec<prayerMiliSec[4]){
+            NotificationHelper.setContentTitle("Isha has started");
+            NotificationHelper.setContentText("Have you prayed Magrib?");
             startAlarm(c,prayerMiliSec[4]);
-            AlertReceiver.setContentTitle("Isha has started");
-            AlertReceiver.setContentText("Have you prayed Magrib?");
         }
         if(currentMiliSec>prayerMiliSec[4]&&currentMiliSec<24*3600*1000){
+            NotificationHelper.setContentTitle("Fajr has started");
+            NotificationHelper.setContentText("Have you prayed Isha?");
             startAlarm(c,prayerMiliSec[0]);
-            AlertReceiver.setContentTitle("Fajr has started");
-            AlertReceiver.setContentText("Have you prayed Isha?");
         }
         if(currentMiliSec>0&&currentMiliSec<prayerMiliSec[0]){
+            NotificationHelper.setContentTitle("Fajr has started");
+            NotificationHelper.setContentText("Have you prayed Isha?");
             startAlarm(c,prayerMiliSec[0]);
-            AlertReceiver.setContentTitle("Fajr has started");
-            AlertReceiver.setContentText("Have you prayed Isha?");
         }
 
 
@@ -63,16 +64,16 @@ public class DoNotification {
     }
 
     private void getData() {
-        ConvertToMiliSecond convertToMiliSecond = new ConvertToMiliSecond(_context);
-        convertToMiliSecond.toMiliSec();
+        PrayerTimeInMiliSecond prayerTimeToMiliSecond = new PrayerTimeInMiliSecond(_context);
+        prayerTimeToMiliSecond.toMiliSec();
 
         Date currentTime = Calendar.getInstance().getTime();
-        currentMiliSec = convertToMiliSecond.getCurrentTimeInMiliSec(currentTime);
-        prayerMiliSec[0]=convertToMiliSecond.getFajrInMili();
-        prayerMiliSec[1]=convertToMiliSecond.getDhuhrInMili();
-        prayerMiliSec[2]=convertToMiliSecond.getAsarInMili();
-        prayerMiliSec[3]=convertToMiliSecond.getMagribInMili();
-        prayerMiliSec[4]=convertToMiliSecond.getIshaInMili();
+        currentMiliSec = prayerTimeToMiliSecond.getCurrentTimeInMiliSec(currentTime);
+        prayerMiliSec[0]=prayerTimeToMiliSecond.getFajrInMili();
+        prayerMiliSec[1]=prayerTimeToMiliSecond.getDhuhrInMili();
+        prayerMiliSec[2]=prayerTimeToMiliSecond.getAsarInMili();
+        prayerMiliSec[3]=prayerTimeToMiliSecond.getMagribInMili();
+        prayerMiliSec[4]=prayerTimeToMiliSecond.getIshaInMili();
 
         
     }
