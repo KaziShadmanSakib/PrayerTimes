@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +73,11 @@ public class CalendarDateLog extends AppCompatActivity {
         for(int i = 0; i < 5; i++ ){
             int finalI = i;
             allPrayersCheckedList[i].setOnClickListener(view -> {
-                if(currentDate>clickedDate){
+                if((currentDate-clickedDate)>99){
+                    Toast toast = Toast.makeText(this,"You con only change the log of past 30 days",Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else if(currentDate>clickedDate){
                     if(allPrayersCheckedList[finalI].isChecked()){
                         databaseHandler.updateDatabase(date, finalI,true);
                     }
@@ -81,10 +86,12 @@ public class CalendarDateLog extends AppCompatActivity {
                     }
                     allPrayersCheckedList[finalI].toggle();
                 }
+
                 else{
                     Toast toast = Toast.makeText(this,"Invalid Day",Toast.LENGTH_SHORT);
                     toast.show();
                 }
+
 
             });
         }

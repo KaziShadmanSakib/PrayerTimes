@@ -8,13 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class ConvertToMiliSecond extends TimeParser {
+public class PrayerTimeInMiliSecond extends TimeParser {
     Context _context;
     String fazrNamazTime, dhuhrNamazTime, asarNamazTime, magribNamazTime, ishaNamazTime;
     int[] prayerMiliSec = new int[5];
 
 
-    public ConvertToMiliSecond(Context applicationContext) {
+    public PrayerTimeInMiliSecond(Context applicationContext) {
         _context = applicationContext;
     }
 

@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -66,16 +65,16 @@ public class DoNotification {
     }
 
     private void getData() {
-        ConvertToMiliSecond convertToMiliSecond = new ConvertToMiliSecond(_context);
-        convertToMiliSecond.toMiliSec();
+        PrayerTimeInMiliSecond prayerTimeToMiliSecond = new PrayerTimeInMiliSecond(_context);
+        prayerTimeToMiliSecond.toMiliSec();
 
         Date currentTime = Calendar.getInstance().getTime();
-        currentMiliSec = convertToMiliSecond.getCurrentTimeInMiliSec(currentTime);
-        prayerMiliSec[0]=convertToMiliSecond.getFajrInMili();
-        prayerMiliSec[1]=convertToMiliSecond.getDhuhrInMili();
-        prayerMiliSec[2]=convertToMiliSecond.getAsarInMili();
-        prayerMiliSec[3]=convertToMiliSecond.getMagribInMili();
-        prayerMiliSec[4]=convertToMiliSecond.getIshaInMili();
+        currentMiliSec = prayerTimeToMiliSecond.getCurrentTimeInMiliSec(currentTime);
+        prayerMiliSec[0]=prayerTimeToMiliSecond.getFajrInMili();
+        prayerMiliSec[1]=prayerTimeToMiliSecond.getDhuhrInMili();
+        prayerMiliSec[2]=prayerTimeToMiliSecond.getAsarInMili();
+        prayerMiliSec[3]=prayerTimeToMiliSecond.getMagribInMili();
+        prayerMiliSec[4]=prayerTimeToMiliSecond.getIshaInMili();
 
         
     }
