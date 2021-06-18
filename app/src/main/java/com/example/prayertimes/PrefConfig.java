@@ -18,6 +18,36 @@ public class PrefConfig {
     private static final String Pref_Imsak_Key = "pref_imsak_key";
     private static final String Pref_CurrentTime_Key = "pref_currentTime_key";
     private static final String Pref_Timer_Value_Key  = "pref_timer_value_key";
+    private static final String Pref_Longitude_Key  = "pref_longitude_key";
+    private static final String Pref_Latitude_Key  = "pref_latitude_key";
+    private static final String Pref_Altitude_Key  = "pref_altitude_key";
+
+    public static void saveLongitude(Context context, float longitude){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putFloat(Pref_Longitude_Key, longitude);
+        editor.commit();
+
+    }
+
+    public static void saveLatitude(Context context, float latitude){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putFloat(Pref_Latitude_Key, latitude);
+        editor.commit();
+
+    }
+
+    public static void saveAltitude(Context context, float altitude){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putFloat(Pref_Altitude_Key, altitude);
+        editor.commit();
+
+    }
 
     public static void saveCurrentTime(Context context, String currentTime){
 
@@ -210,4 +240,24 @@ public class PrefConfig {
 
     }
 
+    public static float loadLongitude(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getFloat(Pref_Longitude_Key, 0);
+
+    }
+
+    public static float loadLatitude(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getFloat(Pref_Latitude_Key, 0);
+
+    }
+
+    public static float loadAltitude(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getFloat(Pref_Altitude_Key, 0);
+
+    }
 }

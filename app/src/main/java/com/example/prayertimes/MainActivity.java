@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     int PERMISSION_ID = 44;
     public static double finalLat = 0;
     public static double finalLong = 0;
+    public static double finalAlti = 0;
 
     List<Address> addresses;
     Geocoder geocoder;
@@ -510,6 +511,11 @@ public class MainActivity extends AppCompatActivity {
 
                         finalLat = location.getLatitude();
                         finalLong = location.getLongitude();
+                        finalAlti = location.getAltitude();
+
+                        PrefConfig.saveLongitude(getApplicationContext(), (float) finalLong);
+                        PrefConfig.saveLatitude(getApplicationContext(), (float) finalLat);
+                        PrefConfig.saveAltitude(getApplicationContext(), (float) finalAlti);
 
                         new Handler(Looper.getMainLooper()).postDelayed(() -> MainActivity.this.convertLocation(finalLat, finalLong), 1000);
 
@@ -568,6 +574,11 @@ public class MainActivity extends AppCompatActivity {
 
             finalLat = mLastLocation.getLatitude();
             finalLong = mLastLocation.getLongitude();
+            finalAlti = mLastLocation.getAltitude();
+
+            PrefConfig.saveLongitude(getApplicationContext(), (float) finalLong);
+            PrefConfig.saveLatitude(getApplicationContext(), (float) finalLat);
+            PrefConfig.saveAltitude(getApplicationContext(), (float) finalAlti);
 
             new Handler(Looper.getMainLooper()).postDelayed(() -> convertLocation(finalLat,finalLong), 1000);
 
