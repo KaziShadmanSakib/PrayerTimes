@@ -8,11 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class ConvertToMiliSecond {
+public class ConvertToMiliSecond extends TimeParser {
     Context _context;
     String fazrNamazTime, dhuhrNamazTime, asarNamazTime, magribNamazTime, ishaNamazTime;
-    int[] prayerHour = new int[5];
-    int[] prayerMin = new int[5];
     int[] prayerMiliSec = new int[5];
 
 
@@ -26,34 +24,16 @@ public class ConvertToMiliSecond {
     }
 
     private void getConvertedTime() {
-        prayerHour[0] = convertTimeHour(fazrNamazTime);
-        prayerHour[1] = convertTimeHour(dhuhrNamazTime);
-        prayerHour[2] = convertTimeHour(asarNamazTime);
-        prayerHour[3] = convertTimeHour(magribNamazTime);
-        prayerHour[4] = convertTimeHour(ishaNamazTime);
 
-        prayerMin[0] = convertTimeMin(fazrNamazTime);
-        prayerMin[1] = convertTimeMin(dhuhrNamazTime);
-        prayerMin[2] = convertTimeMin(asarNamazTime);
-        prayerMin[3] = convertTimeMin(magribNamazTime);
-        prayerMin[4] = convertTimeMin(ishaNamazTime);
 
-        for(int i = 0 ; i < 5 ;i++){
-            prayerMiliSec[i] = toSeconds(prayerHour[i],prayerMin[i])*1000;
-        }
-    }
+        prayerMiliSec[0] = (int) timeParserMethod(fazrNamazTime);
+        prayerMiliSec[1] = (int) timeParserMethod(dhuhrNamazTime);
+        prayerMiliSec[2] = (int) timeParserMethod(asarNamazTime);
+        prayerMiliSec[3] = (int) timeParserMethod(magribNamazTime);
+        prayerMiliSec[4] = (int) timeParserMethod(ishaNamazTime);
 
-    private Integer convertTimeHour(String timeToParse) {
-        String hour = timeToParse.substring(0,2);
-        return  Integer.parseInt(hour);
 
-    }
-    private Integer convertTimeMin(String timeToParse) {
-        String min = timeToParse.substring(3,5);
-        return Integer.parseInt(min);
-    }
-    private Integer toSeconds(Integer hour, Integer min){
-        return  hour*3600+min*60;
+
     }
 
 
@@ -81,14 +61,13 @@ public class ConvertToMiliSecond {
     public Integer getIshaInMili(){
         return prayerMiliSec[4];
     }
+
     public Integer getCurrentTimeInMiliSec(Date date){
 
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         String currentTimeString = sdf.format(date);
-        int currentHour = convertTimeHour(currentTimeString);
-        int currentMin = convertTimeMin(currentTimeString);
-        int currentSec = toSeconds(currentHour,currentMin);
-        return currentSec*1000;
+        int currentSec = (int) timeParserMethodForCurrentTime(currentTimeString);
+        return currentSec;
 
     }
 

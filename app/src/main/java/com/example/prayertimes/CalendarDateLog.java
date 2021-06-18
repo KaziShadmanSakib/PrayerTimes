@@ -6,13 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Objects;
 
 
 public class CalendarDateLog extends AppCompatActivity {
     DatabaseHandler databaseHandler;
     String date;
+    int currentDate;
+    int clickedDate;
     CheckedTextView[] allPrayersCheckedList;
     TextView dateTextView;
 
@@ -35,6 +40,8 @@ public class CalendarDateLog extends AppCompatActivity {
         if(bundle!=null)
         {
             date =(String) bundle.get("clickedDate");
+            clickedDate = Integer.valueOf(date);
+
             date = modifiedDate(date);
 
         }
@@ -59,22 +66,37 @@ public class CalendarDateLog extends AppCompatActivity {
             checkBox(false,date);
 
         }
+        currentDateSet();
 
         //change checkbox on Click and update DB
         for(int i = 0; i < 5; i++ ){
             int finalI = i;
             allPrayersCheckedList[i].setOnClickListener(view -> {
-                if(allPrayersCheckedList[finalI].isChecked()){
-                    databaseHandler.updateDatabase(date, finalI,true);
+                if(currentDate>clickedDate){
+                    if(allPrayersCheckedList[finalI].isChecked()){
+                        databaseHandler.updateDatabase(date, finalI,true);
+                    }
+                    else{
+                        databaseHandler.updateDatabase(date, finalI,false);
+                    }
+                    allPrayersCheckedList[finalI].toggle();
                 }
                 else{
-                    databaseHandler.updateDatabase(date, finalI,false);
+                    Toast toast = Toast.makeText(this,"Invalid Day",Toast.LENGTH_SHORT);
+                    toast.show();
                 }
-                allPrayersCheckedList[finalI].toggle();
+
             });
         }
 
 
+    }
+
+    private void currentDateSet() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String date = simpleDateFormat.format(calendar.getTime());
+        currentDate = Integer.parseInt(date);
     }
 
 
