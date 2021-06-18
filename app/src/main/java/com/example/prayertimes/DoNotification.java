@@ -27,35 +27,34 @@ public class DoNotification {
         
 
         if(currentMiliSec>prayerMiliSec[0]&&currentMiliSec<prayerMiliSec[1]){
-            startAlarm(c,prayerMiliSec[1]);
             NotificationHelper.setContentTitle("Dhuhr has started");
             NotificationHelper.setContentText("Have you prayed Fajr?");
+            startAlarm(c,prayerMiliSec[1]);
         }
         if(currentMiliSec>prayerMiliSec[1]&&currentMiliSec<prayerMiliSec[2]){
-            startAlarm(c,prayerMiliSec[2]);
-
             NotificationHelper.setContentTitle("Asar has started");
             NotificationHelper.setContentText("Have you prayed Dhuhr?");
+            startAlarm(c,prayerMiliSec[2]);
         }
         if(currentMiliSec>prayerMiliSec[2]&&currentMiliSec<prayerMiliSec[3]){
-            startAlarm(c,prayerMiliSec[3]);
             NotificationHelper.setContentTitle("Magrib has started");
             NotificationHelper.setContentText("Have you prayed Asae?");
+            startAlarm(c,prayerMiliSec[3]);
         }
         if(currentMiliSec>prayerMiliSec[3]&&currentMiliSec<prayerMiliSec[4]){
-            startAlarm(c,prayerMiliSec[4]);
             NotificationHelper.setContentTitle("Isha has started");
             NotificationHelper.setContentText("Have you prayed Magrib?");
+            startAlarm(c,prayerMiliSec[4]);
         }
         if(currentMiliSec>prayerMiliSec[4]&&currentMiliSec<24*3600*1000){
-            startAlarm(c,prayerMiliSec[0]);
             NotificationHelper.setContentTitle("Fajr has started");
             NotificationHelper.setContentText("Have you prayed Isha?");
+            startAlarm(c,prayerMiliSec[0]);
         }
         if(currentMiliSec>0&&currentMiliSec<prayerMiliSec[0]){
-            startAlarm(c,prayerMiliSec[0]);
             NotificationHelper.setContentTitle("Fajr has started");
             NotificationHelper.setContentText("Have you prayed Isha?");
+            startAlarm(c,prayerMiliSec[0]);
         }
 
 

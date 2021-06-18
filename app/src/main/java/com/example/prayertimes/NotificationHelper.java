@@ -35,8 +35,8 @@ public class NotificationHelper extends ContextWrapper {
         }
     }
 
-    public static void setContentTitle(String s) {
-         NotificationHelper.contentTitle = s;
+    public static void setContentTitle(String contentTitle) {
+         NotificationHelper.contentTitle = contentTitle;
 
     }
 
