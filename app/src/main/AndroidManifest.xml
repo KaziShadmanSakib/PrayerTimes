@@ -19,11 +19,25 @@
         android:theme="@style/Theme.PrayerTimes"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AboutUsOption"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity
+            android:name=".SettingsOption"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity
+            android:name=".QiblaDirectionOption"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity
             android:name=".CalendarDateLog"
             android:parentActivityName=".LogActivity" />
+
         <activity
             android:name=".AllPrayers"
             android:parentActivityName=".MainActivity" />
+
         <activity android:name=".Duas" />
         <activity android:name=".LogActivity" />
         <activity android:name=".MainActivity">
@@ -33,6 +47,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver android:name=".AlertReceiver" />
 
         <uses-library
