@@ -143,12 +143,6 @@ public class MainActivity extends AppCompatActivity {
         doNotification.setNotification();
 
 
-        /* Option bar */
-
-
-
-
-
 
         setBottomNavigation();
 
@@ -253,8 +247,8 @@ public class MainActivity extends AppCompatActivity {
         if(PrefConfig.loadFirstTime(this)=="FirstTime"){
 
             PrefConfig.savefirstTime(this,"NotFirstTime");
-            PrefConfig.saveCurrentCity(this,"Dhaka");
-            PrefConfig.saveCurrentCountry(this,"Bangladesh");
+            PrefConfig.saveCurrentCity(this,"Seattle");
+            PrefConfig.saveCurrentCountry(this,"United States");
 
 
             Intent intent = new Intent(this, AllPrayers.class);
