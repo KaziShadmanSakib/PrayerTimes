@@ -14,6 +14,7 @@ import org.json.JSONObject;
 public class JasonFetcher {
     private static final String TAG = "tag";
     private String fazrNamazTime, sunriseTime, dhuhrNamazTime, asarNamazTime, sunsetTime, magribNamazTime, ishaNamazTime, imsakTime;
+    String fajrNamazAMPM, sunriseAMPM, dhuhrNamazAMPM, asarNamazAMPM, sunsetAMPM, magribNamazAMPM, ishaNamazAMPM, imsakTimeAMPM;
 
     String url;
     Context context;
@@ -60,8 +61,25 @@ public class JasonFetcher {
                         ishaNamazTime = jsonParser.ishaTime();
                         imsakTime = jsonParser.imsakTime();
 
+                        /* Converting time to AMPM */
+
+                        TimeParser timeParser = new TimeParser();
+
+
+                        fajrNamazAMPM = timeParser.timeParseToAMPM(fazrNamazTime);
+                        sunriseAMPM = timeParser.timeParseToAMPM(sunriseTime);
+                        dhuhrNamazAMPM = timeParser.timeParseToAMPM(dhuhrNamazTime);
+                        asarNamazAMPM = timeParser.timeParseToAMPM(asarNamazTime);
+                        sunsetAMPM = timeParser.timeParseToAMPM(sunsetTime);
+                        magribNamazAMPM = timeParser.timeParseToAMPM(magribNamazTime);
+                        ishaNamazAMPM = timeParser.timeParseToAMPM(ishaNamazTime);
+                        imsakTimeAMPM = timeParser.timeParseToAMPM(imsakTime);
+
+
 
                         /* Saving all the waqts in PrefConfig (SharedPreferences) */
+
+                        /* Time in 24hr format */
 
                         PrefConfig.saveFajrTime(context, fazrNamazTime);
                         PrefConfig.saveSunriseTime(context, sunriseTime);
@@ -72,7 +90,17 @@ public class JasonFetcher {
                         PrefConfig.saveIshaTime(context, ishaNamazTime);
                         PrefConfig.saveImsakTime(context, imsakTime);
 
-                        //pDialog.hide();
+                        /* Time in 12hr format */
+
+                        PrefConfig.saveFajrTimeAMPM(context, fajrNamazAMPM);
+                        PrefConfig.saveSunriseTimeAMPM(context, sunriseAMPM);
+                        PrefConfig.saveDhuhrTimeAMPM(context, dhuhrNamazAMPM);
+                        PrefConfig.saveAsarTimeAMPM(context, asarNamazAMPM);
+                        PrefConfig.saveSunsetTimeAMPM(context, sunsetAMPM);
+                        PrefConfig.saveMagribTimeAMPM(context, magribNamazAMPM);
+                        PrefConfig.saveIshaTimeAMPM(context, ishaNamazAMPM);
+                        PrefConfig.saveImsakTimeAMPM(context, imsakTimeAMPM);
+
 
                     }
                 }, new Response.ErrorListener() {
