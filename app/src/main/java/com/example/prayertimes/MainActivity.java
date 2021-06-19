@@ -276,12 +276,12 @@ public class MainActivity extends AppCompatActivity {
         long imsak = timeParser.timeParserMethod(imsakTime);
         long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
 
-        if(currentTime1 >= fazrTime && currentTime1 < dhuhrTime){
+        if(currentTime1 >= fazrTime && currentTime1 < sunrise){
 
             haveYouPrayed.setText("Get ready for the next Prayer");
             nowPrayerName.setText("Now - Fajr");
-            nextPrayerName.setText("Dhuhr");
-            nextPrayerTime.setText(dhuhrNamazTime);
+            nextPrayerName.setText("Sunrise");
+            nextPrayerTime.setText(sunriseTime);
 
         }
 
@@ -372,7 +372,22 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        if(currentTime1 >= fazrTime && currentTime1 < dhuhrTime ){
+        // fazr -> sunrise
+
+        if(currentTime1 >= fazrTime && currentTime1 < sunrise ){
+
+            startTime = sunrise - currentTime1;
+            timeLeftInMillies = startTime;
+
+            timerId = findViewById(R.id.timerId);
+
+            startTimer();
+
+        }
+
+        // sunrise -> dhuhr
+
+        if(currentTime1 >= sunrise && currentTime1 < dhuhrTime ){
 
             startTime = dhuhrTime - currentTime1;
             timeLeftInMillies = startTime;
