@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,23 +195,47 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
         }
-        try {
-            updateCell(date, index,isChecked);
+        else{
+            Contact tempContact = getContact(date);
+            Contact contact = new Contact(  tempContact.getDate(),
+                                            tempContact.getFajr(),
+                                            tempContact.getDhuhr(),
+                                            tempContact.getAsar(),
+                                            tempContact.getMagrib(),
+                                            tempContact.getIsha());
+            if(index == 0){
+                contact.setFajr(!isChecked);
+            }
+            else if(index == 1){
+                contact.setDhuhr(!isChecked);
+            }
+            else if(index == 2){
+                contact.setAsar(!isChecked);
+            }
+            else if(index == 3){
+                contact.setMagrib(!isChecked);
+            }
+            else if(index == 4){
+                contact.setIsha(!isChecked);
+            }
+            deleteContact(tempContact);
+            addContact(contact);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+
+
         }
+    }
+    public void deleteContact(Contact contact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_Prayers, KEY_Date + " = ?",
+                new String[] { String.valueOf(contact.getDate()) });
+        db.close();
     }
 
 }
 
 
-    /*
-        // Deleting single contact
-        public void deleteContact(Contact contact) {
-            SQLiteDatabase db = this.getWritableDatabase();
-            db.delete(TABLE_Prayers, KEY_ID + " = ?",
-                    new String[] { String.valueOf(contact.getID()) });
-            db.close();
-        }
-     */
+
+
+
