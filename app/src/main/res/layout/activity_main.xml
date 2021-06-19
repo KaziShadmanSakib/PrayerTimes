@@ -103,7 +103,7 @@
         android:text="Iftar"
         android:textColor="#000000 "
         android:textSize="16sp"
-        android:translationX="-75sp"
+        android:translationX="-70dp"
         android:translationY="-17.5sp" />
 
     <TextView
@@ -133,7 +133,7 @@
         android:text="Sehri"
         android:textColor="#000000 "
         android:textSize="16sp"
-        android:translationX="-80sp"
+        android:translationX="-75dp"
         android:translationY="10sp" />
 
     <ImageView

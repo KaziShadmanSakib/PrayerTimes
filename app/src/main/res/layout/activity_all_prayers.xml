@@ -37,7 +37,7 @@
         android:text="Fajr"
         android:textColor="#B5006400"
         android:textSize="20sp"
-        android:translationX="200dp"
+        android:translationX="150dp"
         android:translationY="85dp" />
 
     <TextView
@@ -59,7 +59,7 @@
         android:text="Isha"
         android:textColor="#B5006400"
         android:textSize="20sp"
-        android:translationX="200dp"
+        android:translationX="150dp"
         android:translationY="440dp" />
 
     <TextView
@@ -81,7 +81,7 @@
         android:text="Magrib"
         android:textColor="#B5006400"
         android:textSize="20sp"
-        android:translationX="200dp"
+        android:translationX="150dp"
         android:translationY="380dp" />
 
     <TextView
@@ -103,7 +103,7 @@
         android:text="Asar"
         android:textColor="#B5006400"
         android:textSize="20sp"
-        android:translationX="200dp"
+        android:translationX="150dp"
         android:translationY="260dp" />
 
     <TextView
@@ -125,7 +125,7 @@
         android:text="Dhuhr"
         android:textColor="#B5006400"
         android:textSize="20sp"
-        android:translationX="200dp"
+        android:translationX="150dp"
         android:translationY="200dp" />
 
     <TextView
@@ -147,7 +147,7 @@
         android:text="Sunrise"
         android:textColor="#B58B0000"
         android:textSize="20sp"
-        android:translationX="200dp"
+        android:translationX="150dp"
         android:translationY="140dp" />
 
     <TextView
@@ -169,7 +169,7 @@
         android:text="Sunset"
         android:textColor="#B58B0000"
         android:textSize="20sp"
-        android:translationX="200dp"
+        android:translationX="150dp"
         android:translationY="320dp" />
 
     <TextView

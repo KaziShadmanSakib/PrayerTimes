@@ -23,6 +23,16 @@ public class PrefConfig {
     private static final String Pref_Altitude_Key  = "pref_altitude_key";
     private static final String Pref_Quote_Key  = "pref_quote_key";
 
+    private static final String Pref_Fajr_AM_PM_Key = "pref_fajr_am_pm_key";
+    private static final String Pref_Dhuhr_AM_PM_Key = "pref_dhuhr_am_pm_key";
+    private static final String Pref_Asar_AM_PM_Key = "pref_asar_am_pm_key";
+    private static final String Pref_Magrib_AM_PM_Key = "pref_magrib_am_pm_key";
+    private static final String Pref_Isha_AM_PM_Key = "pref_isha_am_pm_key";
+    private static final String Pref_Sunrise_AM_PM_Key = "pref_sunrise_am_pm_key";
+    private static final String Pref_Sunset_AM_PM_Key = "pref_sunset_am_pm_key";
+    private static final String Pref_Imsak_AM_PM_Key = "pref_imsak_am_pm_key";
+
+
 
     public static void saveQuoteOfTheDay(Context context, String quote){
 
@@ -95,6 +105,80 @@ public class PrefConfig {
         editor.commit();
 
     }
+
+    public static void saveFajrTimeAMPM(Context context, String fajrTimeAMPM){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Pref_Fajr_AM_PM_Key, fajrTimeAMPM);
+        editor.commit();
+
+    }
+
+    public static void saveDhuhrTimeAMPM(Context context, String dhuhrTimeAMPM){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Pref_Dhuhr_AM_PM_Key, dhuhrTimeAMPM);
+        editor.commit();
+
+    }
+
+    public static void saveAsarTimeAMPM(Context context, String asarTimeAMPM){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Pref_Asar_AM_PM_Key, asarTimeAMPM);
+        editor.commit();
+
+    }
+
+    public static void saveMagribTimeAMPM(Context context, String magribTimeAMPM){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Pref_Magrib_AM_PM_Key, magribTimeAMPM);
+        editor.commit();
+
+    }
+
+    public static void saveIshaTimeAMPM(Context context, String ishaTimeAMPM){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Pref_Isha_AM_PM_Key, ishaTimeAMPM);
+        editor.commit();
+
+    }
+
+    public static void saveImsakTimeAMPM(Context context, String imsakTimeAMPM){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Pref_Imsak_AM_PM_Key, imsakTimeAMPM);
+        editor.commit();
+
+    }
+
+    public static void saveSunriseTimeAMPM(Context context, String sunriseAMPM){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Pref_Sunrise_AM_PM_Key, sunriseAMPM);
+        editor.commit();
+
+    }
+
+    public static void saveSunsetTimeAMPM(Context context, String sunsetAMPM){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Pref_Sunset_AM_PM_Key, sunsetAMPM);
+        editor.commit();
+
+    }
+
+
 
     public static void saveFajrTime(Context context, String fajrTime){
 
@@ -244,6 +328,64 @@ public class PrefConfig {
         return pref.getString(Pref_Sunset_Key, "Sunset");
 
     }
+
+    public static String loadFajrTimeAMPM(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getString(Pref_Fajr_AM_PM_Key, "Fajr");
+
+    }
+
+    public static String loadDhuhrTimeAMPM(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getString(Pref_Dhuhr_AM_PM_Key, "Dhuhr");
+
+    }
+
+    public static String loadAsarTimeAMPM(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getString(Pref_Asar_AM_PM_Key, "Asar");
+
+    }
+
+    public static String loadMagribTimeAMPM(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getString(Pref_Magrib_AM_PM_Key, "Magrib");
+
+    }
+
+    public static String loadIshaTimeAMPM(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getString(Pref_Isha_AM_PM_Key, "Isha");
+
+    }
+
+    public static String loadImsakTimeAMPM(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getString(Pref_Imsak_AM_PM_Key, "Imsak");
+
+    }
+
+    public static String loadSunriseTimeAMPM(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getString(Pref_Sunrise_AM_PM_Key, "Sunrise");
+
+    }
+
+    public static String loadSunsetTimeAMPM(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getString(Pref_Sunset_AM_PM_Key, "Sunset");
+
+    }
+
+
     public static void savefirstTime(Context context, String firstTime){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);

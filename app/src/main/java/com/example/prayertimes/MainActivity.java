@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
     long timeLeftInMillies = startTime;
     private TextView quoteOfTheDay;
 
+    private String fajrNamazTimeAMPM, sunriseTimeAMPM, dhuhrNamazTimeAMPM, asarNamazTimeAMPM, sunsetTimeAMPM, magribNamazTimeAMPM, ishaNamazTimeAMPM;
+
     //abd's variables
     public DatabaseHandler databaseHandler;
     Calendar calendar;
@@ -183,8 +185,12 @@ public class MainActivity extends AppCompatActivity {
         sehri = PrefConfig.loadImsakTime(this);
         iftar = PrefConfig.loadMagribTime(this);
 
-        sehriTimeId.setText(sehri);
-        iftarTimeId.setText(iftar);
+
+        String sehriAMPM = PrefConfig.loadImsakTimeAMPM(this);
+        String iftarAMPM = PrefConfig.loadMagribTimeAMPM(this);
+
+        sehriTimeId.setText(sehriAMPM);
+        iftarTimeId.setText(iftarAMPM);
 
         /* Setting timer */
 
@@ -194,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
         PrefConfig.saveCurrentTime(getApplicationContext(), currentTime);
 
 
-
+        /* Time in 24hr format */
 
         fajrNamazTime = PrefConfig.loadFajrTime(this);
         sunriseTime = PrefConfig.loadSunriseTime(this);
@@ -205,6 +211,16 @@ public class MainActivity extends AppCompatActivity {
         ishaNamazTime = PrefConfig.loadIshaTime(this);
         currentTime = PrefConfig.loadCurrentTime(this);
         imsakTime = PrefConfig.loadImsakTime(this);
+
+        /* Time in 12hr format */
+
+        fajrNamazTimeAMPM = PrefConfig.loadFajrTimeAMPM(this);
+        sunriseTimeAMPM = PrefConfig.loadSunriseTimeAMPM(this);
+        dhuhrNamazTimeAMPM = PrefConfig.loadDhuhrTimeAMPM(this);
+        asarNamazTimeAMPM = PrefConfig.loadAsarTimeAMPM(this);
+        sunsetTimeAMPM = PrefConfig.loadSunsetTimeAMPM(this);
+        magribNamazTimeAMPM = PrefConfig.loadMagribTimeAMPM(this);
+        ishaNamazTimeAMPM = PrefConfig.loadIshaTimeAMPM(this);
 
 
         /* Setting timer */
@@ -330,12 +346,13 @@ public class MainActivity extends AppCompatActivity {
         long imsak = timeParser.timeParserMethod(imsakTime);
         long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
 
+
         if(currentTime1 >= fazrTime && currentTime1 < sunrise){
 
             haveYouPrayed.setText("Get ready for the next Prayer");
             nowPrayerName.setText("Now - Fajr");
             nextPrayerName.setText("Sunrise");
-            nextPrayerTime.setText(sunriseTime);
+            nextPrayerTime.setText(sunriseTimeAMPM);
 
         }
 
@@ -344,7 +361,7 @@ public class MainActivity extends AppCompatActivity {
             haveYouPrayed.setText("Have you prayed Fajr?");
             nowPrayerName.setText("Good Morning");
             nextPrayerName.setText("Dhuhr");
-            nextPrayerTime.setText(dhuhrNamazTime);
+            nextPrayerTime.setText(dhuhrNamazTimeAMPM);
 
 
         }
@@ -355,7 +372,7 @@ public class MainActivity extends AppCompatActivity {
             haveYouPrayed.setText("Have you prayed Fajr?");
             nowPrayerName.setText("Now - Dhuhr");
             nextPrayerName.setText("Asar");
-            nextPrayerTime.setText(asarNamazTime);
+            nextPrayerTime.setText(asarNamazTimeAMPM);
 
         }
 
@@ -364,7 +381,7 @@ public class MainActivity extends AppCompatActivity {
             haveYouPrayed.setText("Have you prayed Dhuhr?");
             nowPrayerName.setText("Now - Asar");
             nextPrayerName.setText("Magrib");
-            nextPrayerTime.setText(magribNamazTime);
+            nextPrayerTime.setText(magribNamazTimeAMPM);
 
         }
 
@@ -373,7 +390,7 @@ public class MainActivity extends AppCompatActivity {
             haveYouPrayed.setText("Have you prayed Asar?");
             nowPrayerName.setText("Now - Magrib");
             nextPrayerName.setText("Isha");
-            nextPrayerTime.setText(ishaNamazTime);
+            nextPrayerTime.setText(ishaNamazTimeAMPM);
 
         }
 
@@ -381,7 +398,7 @@ public class MainActivity extends AppCompatActivity {
             haveYouPrayed.setText("Have you prayed Magrib?");
             nowPrayerName.setText("Now - Isha");
             nextPrayerName.setText("Fajr");
-            nextPrayerTime.setText(fajrNamazTime);
+            nextPrayerTime.setText(fajrNamazTimeAMPM);
         }
 
         if(currentTime1 >= midNight && currentTime1 < fazrTime){
@@ -389,7 +406,7 @@ public class MainActivity extends AppCompatActivity {
             haveYouPrayed.setText("Have you prayed Isha?");
             nowPrayerName.setText("Now - Midnight");
             nextPrayerName.setText("Fajr");
-            nextPrayerTime.setText(fajrNamazTime);
+            nextPrayerTime.setText(fajrNamazTimeAMPM);
 
         }
 
