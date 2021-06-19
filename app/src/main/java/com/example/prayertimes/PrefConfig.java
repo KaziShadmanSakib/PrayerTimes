@@ -21,7 +21,26 @@ public class PrefConfig {
     private static final String Pref_Longitude_Key  = "pref_longitude_key";
     private static final String Pref_Latitude_Key  = "pref_latitude_key";
     private static final String Pref_Altitude_Key  = "pref_altitude_key";
+    private static final String Pref_Quote_Key  = "pref_quote_key";
 
+
+    public static void saveQuoteOfTheDay(Context context, String quote){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Pref_Quote_Key, quote);
+        editor.commit();
+
+    }
+
+    public static String loadQuoteOfTheDay(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getString(Pref_Quote_Key, "Quote");
+
+    }
+    
+    
     public static void saveLongitude(Context context, float longitude){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);

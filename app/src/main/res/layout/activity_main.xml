@@ -245,4 +245,31 @@
         android:translationX="5dp"
         android:translationY="100dp" />
 
+    <TextView
+        android:id="@+id/quoteOfTheDay"
+        android:layout_width="147dp"
+        android:layout_height="26dp"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="100dp"
+        android:background="#FFFFFF	"
+        android:text="Quote of the day -"
+        android:textColor="#000000 "
+        android:textSize="17sp"
+        android:translationY="10dp" />
+
+    <TextView
+        android:id="@+id/quote"
+        android:layout_width="312dp"
+        android:layout_height="69dp"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="13dp"
+        android:text="Quote"
+        android:textColor="#000000 "
+        android:textSize="16sp"
+        android:translationY="10dp" />
+
 </RelativeLayout>

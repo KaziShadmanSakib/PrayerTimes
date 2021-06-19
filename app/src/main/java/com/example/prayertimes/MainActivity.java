@@ -37,6 +37,7 @@ import net.time4j.format.expert.ChronoFormatter;
 import net.time4j.format.expert.PatternType;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isTimerRunning;
     long startTime;
     long timeLeftInMillies = startTime;
+    private TextView quoteOfTheDay;
 
     //abd's variables
     public DatabaseHandler databaseHandler;
@@ -218,6 +220,50 @@ public class MainActivity extends AppCompatActivity {
 
         setNowAndNext();
 
+
+        /* Quote of the day */
+
+        quoteOfTheDay = (TextView) findViewById(R.id.quote);
+        quoteOfTheDayFunction();
+
+
+    }
+
+    private void quoteOfTheDayFunction() {
+
+        int min = 0;
+        int max = 99;
+        String text = "";
+        try {
+
+            InputStream is = getAssets().open("quoteOfTheDay.txt");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            text = new String(buffer);
+
+            TimeParser timeParser = new TimeParser();
+            long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
+            String[] lines = text.split(System.getProperty("line.separator"));
+
+            if(currentTime1 == 0){
+
+                int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
+                String quote = lines[random_int];
+
+                PrefConfig.saveQuoteOfTheDay(getApplicationContext(), quote);
+
+            }
+
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        String quote = PrefConfig.loadQuoteOfTheDay(this);
+        quoteOfTheDay.setText(quote);
 
     }
 
