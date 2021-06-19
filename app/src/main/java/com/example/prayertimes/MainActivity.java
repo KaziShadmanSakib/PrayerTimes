@@ -313,40 +313,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            PrefConfig.savefirstTime(this,"NotFirstTime");
+
             PrefConfig.saveCurrentCity(this,"Seattle");
             PrefConfig.saveCurrentCountry(this,"United States");
 
             JasonFetcher jasonFetcher = new JasonFetcher(this);
             Log.i("uga","maaaan");
 
-            LoadingDialog loadingDialog = new LoadingDialog(this);
-            loadingDialog.startLoadingDialog();
 
 
             jasonFetcher.getData();
-
-            loadingDialog.dismissDialog();
-
-
-
 
 
 
 
         }
     }
-    private void showProgressDialog() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("Please Wait");
-        progressDialog.show();
-    }
 
-    private void dismissProgressDialog() {
-        if(progressDialog != null)
-            progressDialog.dismiss();
-    }
 
     private void setNowAndNext() {
 
