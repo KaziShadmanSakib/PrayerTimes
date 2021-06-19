@@ -60,7 +60,7 @@ public class NotificationHelper extends ContextWrapper {
         return mManager;
     }
 
-    public NotificationCompat.Builder getChannelNotification() {
+    public NotificationCompat.Builder getChannelNotification(String title, String text ) {
 
         Intent clickedIntent = new Intent(this,CalendarDateLog.class);
         Calendar calendar = Calendar.getInstance();
@@ -72,8 +72,8 @@ public class NotificationHelper extends ContextWrapper {
         clickedIntent.putExtra("clickedDate",date);
         PendingIntent clickedPendingIntent = PendingIntent.getActivities(this,1, new Intent[]{clickedIntent},PendingIntent.FLAG_UPDATE_CURRENT);
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
-                .setContentTitle(contentTitle)
-                .setContentText(contentText)
+                .setContentTitle(title)
+                .setContentText(text)
                 .setSmallIcon(R.drawable.ic_android)
                 .setAutoCancel(true)
                 .setContentIntent(clickedPendingIntent)
