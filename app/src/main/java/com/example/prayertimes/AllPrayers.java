@@ -54,6 +54,7 @@ public class AllPrayers extends AppCompatActivity{
 
     private TextView fazrNamazId, sunriseId, dhuhrNamazId, asarNamazId, sunsetId, magribNamazId, ishaNamazId;
     private String fazrNamazTime, sunriseTime, dhuhrNamazTime, asarNamazTime, sunsetTime, magribNamazTime, ishaNamazTime, imsakTime;
+    String fajrNamazAMPM, sunriseAMPM, dhuhrNamazAMPM, asarNamazAMPM, sunsetAMPM, magribNamazAMPM, ishaNamazAMPM, imsakTimeAMPM;
     private TextView cityId, countryId;
     private String city;
     private String country;
@@ -95,7 +96,9 @@ public class AllPrayers extends AppCompatActivity{
         cityId.setText(city);
         countryId.setText(country);
 
-        /* Setting all waqts time */
+        /* Setting all waqts time /
+
+        / Time in 24hr format /
 
         fazrNamazTime = PrefConfig.loadFajrTime(this);
         sunriseTime = PrefConfig.loadSunriseTime(this);
@@ -105,13 +108,25 @@ public class AllPrayers extends AppCompatActivity{
         magribNamazTime = PrefConfig.loadMagribTime(this);
         ishaNamazTime = PrefConfig.loadIshaTime(this);
 
-        fazrNamazId.setText(fazrNamazTime + " - " + sunriseTime);
-        sunriseId.setText(sunriseTime);
-        dhuhrNamazId.setText(dhuhrNamazTime + " - " + asarNamazTime);
-        asarNamazId.setText(asarNamazTime + " - " + sunsetTime);
-        sunsetId.setText(sunsetTime);
-        magribNamazId.setText(magribNamazTime + " - " + ishaNamazTime);
-        ishaNamazId.setText(ishaNamazTime);
+        / Time in 12hr format */
+
+        fajrNamazAMPM = PrefConfig.loadFajrTimeAMPM(this);
+        sunriseAMPM = PrefConfig.loadSunriseTimeAMPM(this);
+        dhuhrNamazAMPM = PrefConfig.loadDhuhrTimeAMPM(this);
+        asarNamazAMPM = PrefConfig.loadAsarTimeAMPM(this);
+        sunsetAMPM = PrefConfig.loadSunsetTimeAMPM(this);
+        magribNamazAMPM = PrefConfig.loadMagribTimeAMPM(this);
+        ishaNamazAMPM = PrefConfig.loadIshaTimeAMPM(this);
+
+
+        fazrNamazId.setText(fajrNamazAMPM + " - " + sunriseAMPM);
+        sunriseId.setText(sunriseAMPM);
+        dhuhrNamazId.setText(dhuhrNamazAMPM + " - " + asarNamazAMPM);
+        asarNamazId.setText(asarNamazAMPM + " - " + sunsetAMPM);
+        sunsetId.setText(sunsetAMPM);
+        magribNamazId.setText(magribNamazAMPM + " - " + ishaNamazAMPM);
+        ishaNamazId.setText(ishaNamazAMPM);
+
     }
 
     private void getTextviewId() {
