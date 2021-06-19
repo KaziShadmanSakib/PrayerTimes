@@ -1,6 +1,5 @@
 package com.example.prayertimes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -29,13 +28,6 @@ public class JasonFetcher {
 
 
     public void getData(){
-        LoadingDialog loadingDialog = new LoadingDialog((Activity) context);
-
-        if(PrefConfig.loadFirstTime(context)=="FirstTime") {
-
-            loadingDialog.startLoadingDialog();
-        }
-
 
         String city = PrefConfig.loadCurrentCity(context);;
         String country = PrefConfig.loadCurrentCountry(context);
@@ -81,10 +73,7 @@ public class JasonFetcher {
                         PrefConfig.saveImsakTime(context, imsakTime);
 
                         //pDialog.hide();
-                        if(PrefConfig.loadFirstTime(context)=="FirstTime") {
-                            PrefConfig.savefirstTime(context,"NotFirstTime");
-                            loadingDialog.dismissDialog();
-                        }
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -99,7 +88,6 @@ public class JasonFetcher {
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
 
     }
 
