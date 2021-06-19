@@ -192,56 +192,56 @@ public class PrefConfig {
     public static String loadFajrTime(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Fajr_Key, "Fajr");
+        return pref.getString(Pref_Fajr_Key, "00:00");
 
     }
 
     public static String loadDhuhrTime(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Dhuhr_Key, "Dhuhr");
+        return pref.getString(Pref_Dhuhr_Key, "00:00");
 
     }
 
     public static String loadAsarTime(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Asar_Key, "Asar");
+        return pref.getString(Pref_Asar_Key, "00:00");
 
     }
 
     public static String loadMagribTime(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Magrib_Key, "Magrib");
+        return pref.getString(Pref_Magrib_Key, "00:00");
 
     }
 
     public static String loadIshaTime(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Isha_Key, "Isha");
+        return pref.getString(Pref_Isha_Key, "00:00");
 
     }
 
     public static String loadImsakTime(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Imsak_Key, "Imsak");
+        return pref.getString(Pref_Imsak_Key, "00:00");
 
     }
 
     public static String loadSunriseTime(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Sunrise_Key, "Sunrise");
+        return pref.getString(Pref_Sunrise_Key, "00:00");
 
     }
 
     public static String loadSunsetTime(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Sunset_Key, "Sunset");
+        return pref.getString(Pref_Sunset_Key, "00:00");
 
     }
     public static void savefirstTime(Context context, String firstTime){

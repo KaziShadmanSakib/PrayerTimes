@@ -316,21 +316,17 @@ public class MainActivity extends AppCompatActivity {
             PrefConfig.savefirstTime(this,"NotFirstTime");
             PrefConfig.saveCurrentCity(this,"Seattle");
             PrefConfig.saveCurrentCountry(this,"United States");
+
             JasonFetcher jasonFetcher = new JasonFetcher(this);
             Log.i("uga","maaaan");
 
-            showProgressDialog();
-
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    jasonFetcher.getData();
-                    dismissProgressDialog();
-
-                }
-            }).start();
+            LoadingDialog loadingDialog = new LoadingDialog(this);
+            loadingDialog.startLoadingDialog();
 
 
+            jasonFetcher.getData();
+
+            loadingDialog.dismissDialog();
 
 
 
@@ -343,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
     private void showProgressDialog() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("Downloading files...");
+        progressDialog.setMessage("Please Wait");
         progressDialog.show();
     }
 
