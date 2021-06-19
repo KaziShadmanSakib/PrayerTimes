@@ -267,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
                 PrefConfig.saveQuoteOfTheDay(getApplicationContext(), "There is no god but Allah, and Muhammad is the messenger of Allah.");
             }
 
-            if(currentTime1 == 0){
+            if(currentTime1 >= 0){
 
                 int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
                 String quote = lines[random_int];

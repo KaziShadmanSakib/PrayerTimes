@@ -254,9 +254,10 @@
         android:layout_marginEnd="200dp"
         android:layout_marginBottom="100dp"
         android:background="#FFFFFF	"
-        android:text="Quote of the day -"
+        android:text="Quotes of the day -"
         android:textColor="#000000 "
         android:textSize="17sp"
+        android:translationX="1dp"
         android:translationY="10dp" />
 
     <TextView
