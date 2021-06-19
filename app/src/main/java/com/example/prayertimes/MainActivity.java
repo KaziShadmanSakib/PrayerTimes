@@ -7,6 +7,7 @@ import android.Manifest;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,6 +19,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -86,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
     List<Address> addresses;
     Geocoder geocoder;
 
+    ProgressDialog progressDialog;
+
+
+
     /* Getting into the Option bar items */
 
     @Override
@@ -126,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,15 +141,22 @@ public class MainActivity extends AppCompatActivity {
         //create database
         databaseHandler = new DatabaseHandler(this);
         new Thread(new Runnable() {
+            @Override
             public void run() {
                 databaseHandler.getContact("20210101");
             }
         }).start();
 
+
+
+
         firstTimeFunction();
+
 
         DoNotification doNotification = new DoNotification(getApplicationContext());
         doNotification.setNotification();
+
+
 
 
 
@@ -302,15 +316,40 @@ public class MainActivity extends AppCompatActivity {
             PrefConfig.savefirstTime(this,"NotFirstTime");
             PrefConfig.saveCurrentCity(this,"Seattle");
             PrefConfig.saveCurrentCountry(this,"United States");
+            JasonFetcher jasonFetcher = new JasonFetcher(this);
+            Log.i("uga","maaaan");
+
+            showProgressDialog();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    jasonFetcher.getData();
+                    dismissProgressDialog();
+
+                }
+            }).start();
 
 
 
-            Intent intent = new Intent(this, AllPrayers.class);
-            startActivity(intent);
+
+
+
 
 
 
         }
+    }
+    private void showProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Downloading files...");
+        progressDialog.show();
+    }
+
+    private void dismissProgressDialog() {
+        if(progressDialog != null)
+            progressDialog.dismiss();
     }
 
     private void setNowAndNext() {

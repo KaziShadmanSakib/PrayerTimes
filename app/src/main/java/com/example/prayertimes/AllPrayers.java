@@ -52,23 +52,9 @@ import java.util.TimerTask;
 
 public class AllPrayers extends AppCompatActivity{
 
-    private static final String TAG = "tag";
-    private static Boolean isTrue = false;
-    private LocationManager locationManager;
-    private FusedLocationProviderClient fusedLocationClient;
     private TextView fazrNamazId, sunriseId, dhuhrNamazId, asarNamazId, sunsetId, magribNamazId, ishaNamazId;
     private String fazrNamazTime, sunriseTime, dhuhrNamazTime, asarNamazTime, sunsetTime, magribNamazTime, ishaNamazTime, imsakTime;
     private TextView cityId, countryId;
-
-    /* Url for fetching data */
-    String url;
-
-    // Tag used to cancel the request
-    String tag_json_obj = "json_obj_req";
-
-    //Progress dialog
-    //ProgressDialog pDialog;
-
     private String city;
     private String country;
 
@@ -78,11 +64,8 @@ public class AllPrayers extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_prayers);
 
-        city = PrefConfig.loadCurrentCity(this);
-        country = PrefConfig.loadCurrentCountry(this);
 
-        //Toast.makeText(this, city, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this, country,Toast.LENGTH_LONG).show();
+
 
         /*App bar config */
 
@@ -92,83 +75,25 @@ public class AllPrayers extends AppCompatActivity{
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //use Jason to get Data and save it to preConfig
+        JasonFetcher jasonFetcher = new JasonFetcher(this);
+        jasonFetcher.getData();
 
-        /* Showing all waqts time on current day */
 
-        fazrNamazId = findViewById(R.id.fazrNamazId);
-        sunriseId = findViewById(R.id.sunriseId);
-        dhuhrNamazId = findViewById(R.id.dhuhrNamazId);
-        asarNamazId = findViewById(R.id.asarNamazId);
-        sunsetId = findViewById(R.id.sunsetId);
-        magribNamazId = findViewById(R.id.magribNamazId);
-        ishaNamazId = findViewById(R.id.ishaNamazId);
-        cityId = findViewById(R.id.cityId);
-        countryId = findViewById(R.id.countryId);
+        getTextviewId();
+        showDataonTextView();
 
+
+    }
+
+    private void showDataonTextView() {
+
+
+
+        city = PrefConfig.loadCurrentCity(this);
+        country = PrefConfig.loadCurrentCountry(this);
         cityId.setText(city);
         countryId.setText(country);
-
-        /*pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading...");
-        pDialog.show();*/
-
-        url = "http://api.aladhan.com/v1/timingsByCity?city="+ city +"&country="+ country +"&method=1&school=1";
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url, null,
-                new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        /* Get data from JSON */
-
-                        String urlJson = response.toString();
-
-                        JsonParser jsonParser = new JsonParser();
-
-                        jsonParser.setUrlString(urlJson);
-
-
-                        fazrNamazTime = jsonParser.fazrTime();
-                        sunriseTime = jsonParser.sunrise();
-                        dhuhrNamazTime = jsonParser.dhuhrTime();
-                        asarNamazTime = jsonParser.asarTime();
-                        sunsetTime = jsonParser.sunset();
-                        magribNamazTime = jsonParser.magribTime();
-                        ishaNamazTime = jsonParser.ishaTime();
-                        imsakTime = jsonParser.imsakTime();
-
-                        /* Saving all the waqts in PrefConfig (SharedPreferences) */
-
-                        PrefConfig.saveFajrTime(getApplicationContext(), fazrNamazTime);
-                        PrefConfig.saveSunriseTime(getApplicationContext(), sunriseTime);
-                        PrefConfig.saveDhuhrTime(getApplicationContext(), dhuhrNamazTime);
-                        PrefConfig.saveAsarTime(getApplicationContext(), asarNamazTime);
-                        PrefConfig.saveSunsetTime(getApplicationContext(), sunsetTime);
-                        PrefConfig.saveMagribTime(getApplicationContext(), magribNamazTime);
-                        PrefConfig.saveIshaTime(getApplicationContext(), ishaNamazTime);
-                        PrefConfig.saveImsakTime(getApplicationContext(), imsakTime);
-
-                        //pDialog.hide();
-
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-
-                Toast.makeText(AllPrayers.this, "Please turn on location or internet to be always updated", Toast.LENGTH_SHORT).show();
-
-                // hide the progress dialog
-                //pDialog.hide();
-            }
-        });
-
-
-// Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
         /* Setting all waqts time */
 
@@ -187,15 +112,19 @@ public class AllPrayers extends AppCompatActivity{
         sunsetId.setText(sunsetTime);
         magribNamazId.setText(magribNamazTime + " - " + ishaNamazTime);
         ishaNamazId.setText(ishaNamazTime);
+    }
 
+    private void getTextviewId() {
 
-        /* Set Alert for all waqts */
-
-
-
-
-
-
+        fazrNamazId = findViewById(R.id.fazrNamazId);
+        sunriseId = findViewById(R.id.sunriseId);
+        dhuhrNamazId = findViewById(R.id.dhuhrNamazId);
+        asarNamazId = findViewById(R.id.asarNamazId);
+        sunsetId = findViewById(R.id.sunsetId);
+        magribNamazId = findViewById(R.id.magribNamazId);
+        ishaNamazId = findViewById(R.id.ishaNamazId);
+        cityId = findViewById(R.id.cityId);
+        countryId = findViewById(R.id.countryId);
     }
 
 }
