@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
     //abd's variables
     public DatabaseHandler databaseHandler;
-    private int index = 4;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
 
@@ -246,9 +245,12 @@ public class MainActivity extends AppCompatActivity {
     private void firstTimeFunction() {
         if(PrefConfig.loadFirstTime(this)=="FirstTime"){
 
+
+
             PrefConfig.savefirstTime(this,"NotFirstTime");
             PrefConfig.saveCurrentCity(this,"Seattle");
             PrefConfig.saveCurrentCountry(this,"United States");
+
 
 
             Intent intent = new Intent(this, AllPrayers.class);
