@@ -43,7 +43,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -55,7 +54,6 @@ public class AllPrayers extends AppCompatActivity{
 
     private TextView fazrNamazId, sunriseId, dhuhrNamazId, asarNamazId, sunsetId, magribNamazId, ishaNamazId;
     private String fazrNamazTime, sunriseTime, dhuhrNamazTime, asarNamazTime, sunsetTime, magribNamazTime, ishaNamazTime, imsakTime;
-    String fajrNamazAMPM, sunriseAMPM, dhuhrNamazAMPM, asarNamazAMPM, sunsetAMPM, magribNamazAMPM, ishaNamazAMPM, imsakTimeAMPM;
     private TextView cityId, countryId;
     private String city;
     private String country;
@@ -66,15 +64,16 @@ public class AllPrayers extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_prayers);
 
-        /*App bar config */
 
+
+
+        /*App bar config */
 
         getSupportActionBar().setTitle("All Prayers");
 
         /* Back Button */
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         //use Jason to get Data and save it to preConfig
         JasonFetcher jasonFetcher = new JasonFetcher(this);
@@ -98,8 +97,6 @@ public class AllPrayers extends AppCompatActivity{
 
         /* Setting all waqts time */
 
-        /* Time in 24hr format */
-
         fazrNamazTime = PrefConfig.loadFajrTime(this);
         sunriseTime = PrefConfig.loadSunriseTime(this);
         dhuhrNamazTime = PrefConfig.loadDhuhrTime(this);
@@ -108,25 +105,13 @@ public class AllPrayers extends AppCompatActivity{
         magribNamazTime = PrefConfig.loadMagribTime(this);
         ishaNamazTime = PrefConfig.loadIshaTime(this);
 
-        /* Time in 12hr format */
-
-        fajrNamazAMPM = PrefConfig.loadFajrTimeAMPM(this);
-        sunriseAMPM = PrefConfig.loadSunriseTimeAMPM(this);
-        dhuhrNamazAMPM = PrefConfig.loadDhuhrTimeAMPM(this);
-        asarNamazAMPM = PrefConfig.loadAsarTimeAMPM(this);
-        sunsetAMPM = PrefConfig.loadSunsetTimeAMPM(this);
-        magribNamazAMPM = PrefConfig.loadMagribTimeAMPM(this);
-        ishaNamazAMPM = PrefConfig.loadIshaTimeAMPM(this);
-
-
-        fazrNamazId.setText(fajrNamazAMPM + " - " + sunriseAMPM);
-        sunriseId.setText(sunriseAMPM);
-        dhuhrNamazId.setText(dhuhrNamazAMPM + " - " + asarNamazAMPM);
-        asarNamazId.setText(asarNamazAMPM + " - " + sunsetAMPM);
-        sunsetId.setText(sunsetAMPM);
-        magribNamazId.setText(magribNamazAMPM + " - " + ishaNamazAMPM);
-        ishaNamazId.setText(ishaNamazAMPM);
-
+        fazrNamazId.setText(fazrNamazTime + " - " + sunriseTime);
+        sunriseId.setText(sunriseTime);
+        dhuhrNamazId.setText(dhuhrNamazTime + " - " + asarNamazTime);
+        asarNamazId.setText(asarNamazTime + " - " + sunsetTime);
+        sunsetId.setText(sunsetTime);
+        magribNamazId.setText(magribNamazTime + " - " + ishaNamazTime);
+        ishaNamazId.setText(ishaNamazTime);
     }
 
     private void getTextviewId() {

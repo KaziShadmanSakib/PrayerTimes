@@ -1,7 +1,5 @@
 package com.example.prayertimes;
 
-import android.content.Context;
-
 public class TimeParser {
 
     private long parsedTime;
@@ -18,51 +16,6 @@ public class TimeParser {
         parsedTime = parsedTime + (minInt * 60000);
 
         return parsedTime;
-    }
-
-    public String timeParseToAMPM(String timeToParse){
-
-        String hour = timeToParse.substring(0,2);
-        String min = timeToParse.substring(3,5);
-
-        long hourInt = Integer.parseInt(hour);
-
-        if(hourInt > 11){
-
-            hourInt = hourInt - 12;
-
-            if(hourInt == 10 || hourInt == 11){
-
-                return String.valueOf(hourInt) + ":" + min + " PM";
-
-            }
-
-            if(hourInt == 0){
-
-                return "12" + ":" + min + " PM";
-
-            }
-
-            else {
-
-                return "0" + String.valueOf(hourInt) + ":" + min + " PM";
-
-            }
-
-        }
-
-        else {
-
-            if(hourInt == 0){
-
-                return "12" + ":" + min + " AM";
-
-            }
-
-            return hour + ":" + min + " AM";
-
-        }
-
     }
 
     public long timeParserMethodForCurrentTime(String timeToParse){
