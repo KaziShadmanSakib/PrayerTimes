@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView timerId;
     private CountDownTimer countDownTimer;
     private boolean isTimerRunning;
+    private static boolean isFirstTimeQuote = true;
     long startTime;
     long timeLeftInMillies = startTime;
     private TextView quoteOfTheDay;
@@ -222,8 +223,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         /* Quote of the day */
-
         quoteOfTheDay = (TextView) findViewById(R.id.quote);
+
         quoteOfTheDayFunction();
 
 
@@ -246,6 +247,11 @@ public class MainActivity extends AppCompatActivity {
             TimeParser timeParser = new TimeParser();
             long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
             String[] lines = text.split(System.getProperty("line.separator"));
+
+            if(isFirstTimeQuote){
+                isFirstTimeQuote = false;
+                PrefConfig.saveQuoteOfTheDay(getApplicationContext(), "There is no god but Allah, and Muhammad is the messenger of Allah.");
+            }
 
             if(currentTime1 == 0){
 

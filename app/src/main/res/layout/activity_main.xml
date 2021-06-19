@@ -270,6 +270,6 @@
         android:text="Quote"
         android:textColor="#000000 "
         android:textSize="16sp"
-        android:translationY="10dp" />
+        android:translationY="5dp" />
 
 </RelativeLayout>
