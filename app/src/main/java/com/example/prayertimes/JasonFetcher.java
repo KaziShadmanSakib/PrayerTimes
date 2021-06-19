@@ -15,7 +15,7 @@ import org.json.JSONObject;
 public class JasonFetcher {
     private static final String TAG = "tag";
     private String fazrNamazTime, sunriseTime, dhuhrNamazTime, asarNamazTime, sunsetTime, magribNamazTime, ishaNamazTime, imsakTime;
-
+    private String fajrNamazTimeAMPM, sunriseTimeAMPM, dhuhrNamazTimeAMPM, asarNamazTimeAMPM, sunsetTimeAMPM, magribNamazTimeAMPM, ishaNamazTimeAMPM, imsakTimeAMPM;
     String url;
     Context context;
 
@@ -35,7 +35,6 @@ public class JasonFetcher {
 
             loadingDialog.startLoadingDialog();
         }
-
 
         String city = PrefConfig.loadCurrentCity(context);;
         String country = PrefConfig.loadCurrentCountry(context);
@@ -69,7 +68,25 @@ public class JasonFetcher {
                         imsakTime = jsonParser.imsakTime();
 
 
+
+                        /* Converting time to AMPM */
+
+                        TimeParser timeParser = new TimeParser();
+
+
+                        fajrNamazTimeAMPM = timeParser.timeParseToAMPM(fazrNamazTime);
+                        sunriseTimeAMPM = timeParser.timeParseToAMPM(sunriseTime);
+                        dhuhrNamazTimeAMPM = timeParser.timeParseToAMPM(dhuhrNamazTime);
+                        asarNamazTimeAMPM = timeParser.timeParseToAMPM(asarNamazTime);
+                        sunsetTimeAMPM = timeParser.timeParseToAMPM(sunsetTime);
+                        magribNamazTimeAMPM = timeParser.timeParseToAMPM(magribNamazTime);
+                        ishaNamazTimeAMPM = timeParser.timeParseToAMPM(ishaNamazTime);
+                        imsakTimeAMPM = timeParser.timeParseToAMPM(imsakTime);
+
+
                         /* Saving all the waqts in PrefConfig (SharedPreferences) */
+
+                        /* Time in 24hr format */
 
                         PrefConfig.saveFajrTime(context, fazrNamazTime);
                         PrefConfig.saveSunriseTime(context, sunriseTime);
@@ -80,11 +97,22 @@ public class JasonFetcher {
                         PrefConfig.saveIshaTime(context, ishaNamazTime);
                         PrefConfig.saveImsakTime(context, imsakTime);
 
+                        /* Time in 12hr format */
+
+                        PrefConfig.saveFajrTimeAMPM(context, fajrNamazTimeAMPM);
+                        PrefConfig.saveSunriseTimeAMPM(context, sunriseTimeAMPM);
+                        PrefConfig.saveDhuhrTimeAMPM(context, dhuhrNamazTimeAMPM);
+                        PrefConfig.saveAsarTimeAMPM(context, asarNamazTimeAMPM);
+                        PrefConfig.saveSunsetTimeAMPM(context, sunsetTimeAMPM);
+                        PrefConfig.saveMagribTimeAMPM(context, magribNamazTimeAMPM);
+                        PrefConfig.saveIshaTimeAMPM(context, ishaNamazTimeAMPM);
+                        PrefConfig.saveImsakTimeAMPM(context, imsakTimeAMPM);
                         //pDialog.hide();
                         if(PrefConfig.loadFirstTime(context)=="FirstTime") {
                             PrefConfig.savefirstTime(context,"NotFirstTime");
                             loadingDialog.dismissDialog();
                         }
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -99,7 +127,6 @@ public class JasonFetcher {
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
 
     }
 
