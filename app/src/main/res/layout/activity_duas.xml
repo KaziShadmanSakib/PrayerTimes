@@ -17,10 +17,11 @@
         app:menu="@menu/menu_navigation"
         android:layout_alignParentBottom="true"/>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="288dp"
-        android:layout_height="141dp"
-        android:text="TextView" />
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/expandListView"/>
+
+
 
 </RelativeLayout>

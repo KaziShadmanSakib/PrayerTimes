@@ -3,6 +3,7 @@ package com.example.prayertimes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
@@ -48,7 +49,9 @@ public class CalendarDateLog extends AppCompatActivity {
 
         }
         dateTextView = findViewById(R.id.datetextView);
-        dateTextView.setText(formattedDate(date));
+        dateTextView.setText("Current Date : " + formattedDate(date));
+        dateTextView.setTextColor(Color.parseColor("#028B7C"));
+        dateTextView.setTextSize(26);
 
 
 
@@ -76,7 +79,7 @@ public class CalendarDateLog extends AppCompatActivity {
             allPrayersCheckedList[i].setOnClickListener(view -> {
 
                 if((currentDate-clickedDate)>99){
-                    Toast toast = Toast.makeText(this,"You con only change the log of past 30 days",Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(this,"You can only change the log of past 30 days",Toast.LENGTH_SHORT);
                     toast.show();
                 }
 
