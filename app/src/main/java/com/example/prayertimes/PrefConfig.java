@@ -31,6 +31,23 @@ public class PrefConfig {
     private static final String Pref_Sunrise_AM_PM_Key = "pref_sunrise_am_pm_key";
     private static final String Pref_Sunset_AM_PM_Key = "pref_sunset_am_pm_key";
     private static final String Pref_Imsak_AM_PM_Key = "pref_imsak_am_pm_key";
+    private static final String Pref_Index_Key = "pref_index_key";
+
+    public static void saveCurrentPrayerIndex(Context context, int index){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_Index_Key, index);
+        editor.commit();
+
+    }
+
+    public static int loadCurrentPrayerIndex(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_Index_Key, 6);
+
+    }
 
 
 
