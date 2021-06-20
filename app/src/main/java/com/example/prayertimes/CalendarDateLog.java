@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -20,6 +21,7 @@ public class CalendarDateLog extends AppCompatActivity {
     int clickedDate;
     CheckedTextView[] allPrayersCheckedList;
     TextView dateTextView;
+    int currentMiliSec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,19 +74,26 @@ public class CalendarDateLog extends AppCompatActivity {
         for(int i = 0; i < 5; i++ ){
             int finalI = i;
             allPrayersCheckedList[i].setOnClickListener(view -> {
+
                 if((currentDate-clickedDate)>99){
                     Toast toast = Toast.makeText(this,"You con only change the log of past 30 days",Toast.LENGTH_SHORT);
                     toast.show();
                 }
-                else if(currentDate+1>=clickedDate){
-                    if(allPrayersCheckedList[finalI].isChecked()){
-                        databaseHandler.updateCell(date, finalI,true);
-                    }
-                    else{
-                        databaseHandler.updateCell(date, finalI,false);
-                    }
-                    allPrayersCheckedList[finalI].toggle();
+
+
+                else if(currentDate+1>clickedDate){
+
+                    updateChecked(finalI);
+
                 }
+
+
+
+                else if(currentDate+1==clickedDate){
+                    setCOnditionForCurrentDate(finalI);
+                }
+
+
 
                 else{
                     Toast toast = Toast.makeText(this,"Invalid Day",Toast.LENGTH_SHORT);
@@ -96,6 +105,28 @@ public class CalendarDateLog extends AppCompatActivity {
         }
 
 
+    }
+
+    private void setCOnditionForCurrentDate(int finalI) {
+        int[] prayerTime = getData();
+        if(currentMiliSec>prayerTime[finalI]){
+            updateChecked(finalI);
+        }
+        else{
+            Toast toast = Toast.makeText(this,"Prayer Waqt hasn't started",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+    }
+
+    private void updateChecked(int finalI) {
+        if(allPrayersCheckedList[finalI].isChecked()){
+            databaseHandler.updateCell(date, finalI,true);
+        }
+        else{
+            databaseHandler.updateCell(date, finalI,false);
+        }
+        allPrayersCheckedList[finalI].toggle();
     }
 
     private void currentDateSet() {
@@ -137,13 +168,14 @@ public class CalendarDateLog extends AppCompatActivity {
         else{
 
             Contact contact = databaseHandler.getContact(date);
-            allPrayersCheckedList[0].setChecked(contact._fajr);
-            allPrayersCheckedList[1].setChecked(contact._dhuhr);
-            allPrayersCheckedList[2].setChecked(contact._asar);
-            allPrayersCheckedList[3].setChecked(contact._magrib);
-            allPrayersCheckedList[4].setChecked(contact._isha);
+            allPrayersCheckedList[0].setChecked(contact.getFajr());
+            allPrayersCheckedList[1].setChecked(contact.getDhuhr());
+            allPrayersCheckedList[2].setChecked(contact.getAsar());
+            allPrayersCheckedList[3].setChecked(contact.getMagrib());
+            allPrayersCheckedList[4].setChecked(contact.getIsha());
         }
     }
+
 
     public String formattedDate(String s){
         int intDate = Integer.parseInt(s);
@@ -153,6 +185,24 @@ public class CalendarDateLog extends AppCompatActivity {
         intDate = intDate/100;
         int year = intDate;
         return day+"/"+month+"/"+year;
+    }
+    private int[] getData() {
+
+        int[] prayerMiliSec = new int[5];
+        PrayerTimeInMiliSecond prayerTimeToMiliSecond = new PrayerTimeInMiliSecond(this);
+        prayerTimeToMiliSecond.toMiliSec();
+
+        Date currentTime = Calendar.getInstance().getTime();
+        currentMiliSec = prayerTimeToMiliSecond.getCurrentTimeInMiliSec(currentTime);
+        prayerMiliSec[0]=prayerTimeToMiliSecond.getFajrInMili();
+        prayerMiliSec[1]=prayerTimeToMiliSecond.getDhuhrInMili();
+        prayerMiliSec[2]=prayerTimeToMiliSecond.getAsarInMili();
+        prayerMiliSec[3]=prayerTimeToMiliSecond.getMagribInMili();
+        prayerMiliSec[4]=prayerTimeToMiliSecond.getIshaInMili();
+        return prayerMiliSec;
+
+
+
     }
 
 
