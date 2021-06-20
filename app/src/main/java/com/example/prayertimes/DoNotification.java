@@ -12,6 +12,7 @@ public class DoNotification {
     Context _context;
     int[] prayerMiliSec = new int[5];
     int currentMiliSec;
+    private static final String[] ALL_Prayers = {"Fajr","Dhuhr","Asar","Magrib","Isha"};
 
     public DoNotification(Context applicationContext) {
         
@@ -24,39 +25,19 @@ public class DoNotification {
         getData();
 
         Calendar c = Calendar.getInstance();
-        
+        for(int i = 0 ; i < 4 ; i++){
+            if(currentMiliSec>prayerMiliSec[i]&&currentMiliSec<prayerMiliSec[i+1]){
+                AlertReceiver.setContentTitle(ALL_Prayers[i+1] + " has started");
+                AlertReceiver.setContentText("Have you prayed "+ALL_Prayers[i]+ "?");
+                startAlarm(c,prayerMiliSec[i+1]);
+            }
+        }
 
-        if(currentMiliSec>prayerMiliSec[0]&&currentMiliSec<prayerMiliSec[1]){
-            AlertReceiver.setContentTitle("Dhuhr has started");
-            AlertReceiver.setContentText("Have you prayed Fajr?");
-            startAlarm(c,prayerMiliSec[1]);
-        }
-        if(currentMiliSec>prayerMiliSec[1]&&currentMiliSec<prayerMiliSec[2]){
-            AlertReceiver.setContentTitle("Asar has started");
-            AlertReceiver.setContentText("Have you prayed Dhuhr?");
-            startAlarm(c,prayerMiliSec[2]);
-        }
-        if(currentMiliSec>prayerMiliSec[2]&&currentMiliSec<prayerMiliSec[3]){
-            AlertReceiver.setContentTitle("Magrib has started");
-            AlertReceiver.setContentText("Have you prayed Asae?");
-            startAlarm(c,prayerMiliSec[3]);
-        }
-        if(currentMiliSec>prayerMiliSec[3]&&currentMiliSec<prayerMiliSec[4]){
-            AlertReceiver.setContentTitle("Isha has started");
-            AlertReceiver.setContentText("Have you prayed Magrib?");
-            startAlarm(c,prayerMiliSec[4]);
-        }
-        if(currentMiliSec>prayerMiliSec[4]&&currentMiliSec<24*3600*1000){
+        if((currentMiliSec>prayerMiliSec[4]&&currentMiliSec<24*3600*1000)||(currentMiliSec>0&&currentMiliSec<prayerMiliSec[0])){
             AlertReceiver.setContentTitle("Fajr has started");
             AlertReceiver.setContentText("Have you prayed Isha?");
             startAlarm(c,prayerMiliSec[0]);
         }
-        if(currentMiliSec>0&&currentMiliSec<prayerMiliSec[0]){
-            AlertReceiver.setContentTitle("Fajr has started");
-            AlertReceiver.setContentText("Have you prayed Isha?");
-            startAlarm(c,prayerMiliSec[0]);
-        }
-
 
 
         

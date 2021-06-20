@@ -10,8 +10,8 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 public class AlertReceiver extends BroadcastReceiver {
-    private static String contentTitle = "prayer";
-    private static String contentText = "Have you prayed";
+    private static String contentTitle = "New prayer";
+    private static String contentText = "Have you prayed the last prayer";
 
 
 

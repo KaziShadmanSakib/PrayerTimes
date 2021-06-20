@@ -80,7 +80,6 @@ public class CalendarDateLog extends AppCompatActivity {
                     toast.show();
                 }
 
-
                 else if(currentDate+1>clickedDate){
 
                     updateChecked(finalI);
@@ -96,7 +95,7 @@ public class CalendarDateLog extends AppCompatActivity {
 
 
                 else{
-                    Toast toast = Toast.makeText(this,"Invalid Day",Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(this,"Wait for the day to come",Toast.LENGTH_SHORT);
                     toast.show();
                 }
 
