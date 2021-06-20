@@ -157,17 +157,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
         }
-        else{
-            Contact contact = getContact(date);
-            ContentValues values = new ContentValues();
-            values.put(KEY_Date,date);
-            values.put(ALL_Prayers[index],!isChecked);
-
-            SQLiteDatabase db = this.getWritableDatabase();
-            db.update(TABLE_Prayers,values, KEY_Date + " = ?", new String[]{contact.getDate()});
 
 
-        }
+        Contact contact = getContact(date);
+        ContentValues values = new ContentValues();
+        values.put(KEY_Date,date);
+        values.put(ALL_Prayers[index],!isChecked);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update(TABLE_Prayers,values, KEY_Date + " = ?", new String[]{contact.getDate()});
+
+
     }
 
 

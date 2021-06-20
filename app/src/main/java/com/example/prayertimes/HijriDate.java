@@ -1,7 +1,6 @@
 package com.example.prayertimes;
 
 import android.content.Context;
-import android.widget.TextView;
 
 import net.time4j.SystemClock;
 import net.time4j.android.ApplicationStarter;
@@ -11,7 +10,6 @@ import net.time4j.format.expert.ChronoFormatter;
 import net.time4j.format.expert.PatternType;
 
 import java.util.Locale;
-import java.util.Objects;
 
 public class HijriDate {
     Context context;
