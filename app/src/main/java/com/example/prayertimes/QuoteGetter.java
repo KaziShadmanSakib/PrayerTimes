@@ -7,17 +7,15 @@ import java.io.InputStream;
 
 public class QuoteGetter {
     Context context;
-    Boolean isFirstTimeQuote;
-    String currentTime;
-    QuoteGetter(Context c,Boolean b,String currentTime){
+    long currentTime;
+    QuoteGetter(Context c, long currentTime){
         context = c;
-        isFirstTimeQuote = b;
         this.currentTime = currentTime;
     }
     public String  quoteOfTheDayFunction() {
 
         int min = 0;
-        int max = 99;
+        int max = 100;
         String text = "";
         try {
 
@@ -28,16 +26,10 @@ public class QuoteGetter {
             is.close();
             text = new String(buffer);
 
-            TimeParser timeParser = new TimeParser();
-            long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
+
             String[] lines = text.split(System.getProperty("line.separator"));
 
-            if(isFirstTimeQuote){
-                isFirstTimeQuote = false;
-                PrefConfig.saveQuoteOfTheDay(context, "There is no god but Allah, and Muhammad is the messenger of Allah.");
-            }
-
-            if(currentTime1 >= 0){
+            if(currentTime >= 0){
 
                 int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
                 String quote = lines[random_int];

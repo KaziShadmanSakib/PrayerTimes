@@ -83,10 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,18 +108,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -253,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
             haveYouPrayed.setText("Have you prayed Dhuhr?");
             nowPrayerName.setText("Now - Asar");
             nextPrayerName.setText("Magrib");
-            nextPrayerTime.setText(magribNamazTime);
+            nextPrayerTime.setText(magribNamazAMPM);
 
         }
 
@@ -594,10 +578,12 @@ public class MainActivity extends AppCompatActivity {
         currentTime = PrefConfig.loadCurrentTime(this);
         imsakTime = PrefConfig.loadImsakTime(this);
     }
+
     //update Location
     public void locationUpdate(View v){
         convertLocation(finalLat,finalLong);
     }
+
     public void openAllPrayers(View v) {
 
         Intent intent = new Intent(this, AllPrayers.class);
@@ -605,6 +591,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
     //abd's update Database
     @SuppressLint("SimpleDateFormat")
     public void updateDB(View v) {
@@ -624,6 +611,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     private void setBottomNavigation() {
         /* Bottom Navigation */
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -647,6 +635,7 @@ public class MainActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("Home");
     }
+
     private void setLocation() {
         geocoder = new Geocoder(this, Locale.getDefault());
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -656,6 +645,7 @@ public class MainActivity extends AppCompatActivity {
         }
         getLastLocation();
     }
+
     private void setDataBase(){
         databaseHandler = new DatabaseHandler(this);
         new Thread(new Runnable() {
@@ -665,11 +655,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
+
     private void setHijriDate() {
         HijriDate hijriDate = new HijriDate(this);
         TextView hijriDateTextview = (TextView) findViewById(R.id.hijriDate);
         hijriDateTextview.setText(hijriDate.hijriUpdate());
     }
+
     private void setTextviewid() {
         allPrayers = (Button) findViewById(R.id.allPrayers);
         quoteOfTheDay = (TextView) findViewById(R.id.quote);
@@ -680,10 +672,12 @@ public class MainActivity extends AppCompatActivity {
         sehriTimeId = (TextView) findViewById(R.id.sehriTimeId);
         iftarTimeId = (TextView) findViewById(R.id.iftarTimeId);
     }
+
     private void setNotification() {
         DoNotification doNotification = new DoNotification(getApplicationContext());
         doNotification.setNotification();
     }
+
     private void setSahriIftariCityText() {
 
         String sehriAMPM = PrefConfig.loadImsakTimeAMPM(this);
@@ -693,20 +687,22 @@ public class MainActivity extends AppCompatActivity {
         sehriTimeId.setText(sehriAMPM);
         iftarTimeId.setText(iftarAMPM);
     }
+
     private void setQuote() {
-        QuoteGetter quoteGetter = new QuoteGetter(this,isFirstTimeQuote,currentTime);
+
+        TimeParser timeParser = new TimeParser();
+        long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
+        QuoteGetter quoteGetter = new QuoteGetter(this, currentTime1);
         quoteOfTheDay.setText(quoteGetter.quoteOfTheDayFunction());
 
     }
+
     private void setCurrentTime() {
         Calendar calendar1 = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm:ss");
         currentTime = simpleDateFormat1.format(calendar1.getTime());
         PrefConfig.saveCurrentTime(getApplicationContext(), currentTime);
     }
-
-
-
 
 
 }
