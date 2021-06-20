@@ -181,12 +181,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void updateDatabase(String date, int index,boolean isChecked) {
 
 
-
-
-       // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-       // String date = simpleDateFormat.format(calendar.getTime());
-
-
         if (getContact(date)._date == null) {
             try {
                 Contact contact = new Contact(date, false, false, false, false, false);
@@ -196,31 +190,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
         }
         else{
-            Contact tempContact = getContact(date);
-            Contact contact = new Contact(  tempContact.getDate(),
-                                            tempContact.getFajr(),
-                                            tempContact.getDhuhr(),
-                                            tempContact.getAsar(),
-                                            tempContact.getMagrib(),
-                                            tempContact.getIsha());
-            if(index == 0){
-                contact.setFajr(!isChecked);
-            }
-            else if(index == 1){
-                contact.setDhuhr(!isChecked);
-            }
-            else if(index == 2){
-                contact.setAsar(!isChecked);
-            }
-            else if(index == 3){
-                contact.setMagrib(!isChecked);
-            }
-            else if(index == 4){
-                contact.setIsha(!isChecked);
-            }
-            deleteContact(tempContact);
-            addContact(contact);
+            Contact contact = getContact(date);
+            ContentValues values = new ContentValues();
+            values.put(KEY_Date,date);
+            values.put(ALL_Prayers[index],!isChecked);
 
+            SQLiteDatabase db = this.getWritableDatabase();
+            int update = db.update(TABLE_Prayers,values, KEY_Date + " = ?", new String[]{contact.getDate()});
 
 
         }
