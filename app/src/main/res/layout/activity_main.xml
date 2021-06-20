@@ -45,6 +45,7 @@
         android:layout_alignTop="@+id/backgroundHome"
         android:layout_marginTop="7dp"
         android:background="#08FFFFFF"
+        android:onClick="openAllPrayers"
         android:text="All Prayers"
         android:textColor="#028B7C"
         android:textStyle="bold"

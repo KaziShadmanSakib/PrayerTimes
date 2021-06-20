@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -30,13 +28,6 @@ import android.widget.TextView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import net.time4j.SystemClock;
-import net.time4j.android.ApplicationStarter;
-import net.time4j.calendar.HijriCalendar;
-import net.time4j.engine.StartOfDay;
-import net.time4j.format.expert.ChronoFormatter;
-import net.time4j.format.expert.PatternType;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -89,9 +80,64 @@ public class MainActivity extends AppCompatActivity {
     List<Address> addresses;
     Geocoder geocoder;
 
-    ProgressDialog progressDialog;
 
 
+
+
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //after first time installing
+        firstTimeFunction();
+
+
+        getDataFrormPreConfig();
+
+        setCurrentTime();
+        setDataBase();
+        setLocation();
+        setBottomNavigation();
+        setHijriDate();
+        setTextviewid();
+        setNotification();
+        setSahriIftariCityText();
+        setTimer();
+        setNowAndNext();
+        setQuote();
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* Option bar */
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu_options, menu);
+
+        return true;
+    }
 
     /* Getting into the Option bar items */
 
@@ -121,196 +167,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /* Option bar */
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuInflater inflater = getMenuInflater();
-
-        inflater.inflate(R.menu.menu_options, menu);
-
-        return true;
-    }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        //create database
-        databaseHandler = new DatabaseHandler(this);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                databaseHandler.getContact("20210101");
-            }
-        }).start();
-
-
-
-
-        firstTimeFunction();
-
-
-        DoNotification doNotification = new DoNotification(getApplicationContext());
-        doNotification.setNotification();
-
-
-
-
-
-        setBottomNavigation();
-
-
-
-        /* Location */
-        geocoder = new Geocoder(this, Locale.getDefault());
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        cityLocation = (TextView) findViewById(R.id.cityLocation);
-        if(finalLat != 0 && finalLong != 0){
-            convertLocation(finalLat,finalLong);
-        }
-        getLastLocation();
-
-
-
-        /* All Prayers Button */
-        allPrayers = (Button) findViewById(R.id.allPrayers);
-        allPrayers.setOnClickListener(v -> openAllPrayers());
-
-        /* Setting Location to TextView Location */
-
-        city = PrefConfig.loadCurrentCity(this);
-        cityLocation.setText(city);
-
-
-        /* Hijri date is appeared using this function */
-        hijriUpdate();
-
-
-        /* Getting Sehri Time and Iftar Time */
-
-        sehriTimeId = (TextView) findViewById(R.id.sehriTimeId);
-        iftarTimeId = (TextView) findViewById(R.id.iftarTimeId);
-
-        sehri = PrefConfig.loadImsakTime(this);
-        iftar = PrefConfig.loadMagribTime(this);
-
-        String sehriAMPM = PrefConfig.loadImsakTimeAMPM(this);
-        String iftarAMPM = PrefConfig.loadMagribTimeAMPM(this);
-
-        sehriTimeId.setText(sehriAMPM);
-        iftarTimeId.setText(iftarAMPM);
-
-        /* Setting timer */
-
-        Calendar calendar1 = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm:ss");
-        currentTime = simpleDateFormat1.format(calendar1.getTime());
-        PrefConfig.saveCurrentTime(getApplicationContext(), currentTime);
-
-
-
-
-        fajrNamazTime = PrefConfig.loadFajrTime(this);
-        sunriseTime = PrefConfig.loadSunriseTime(this);
-        dhuhrNamazTime = PrefConfig.loadDhuhrTime(this);
-        asarNamazTime = PrefConfig.loadAsarTime(this);
-        sunsetTime = PrefConfig.loadSunsetTime(this);
-        magribNamazTime = PrefConfig.loadMagribTime(this);
-        ishaNamazTime = PrefConfig.loadIshaTime(this);
-        currentTime = PrefConfig.loadCurrentTime(this);
-        imsakTime = PrefConfig.loadImsakTime(this);
-
-
-        /* Setting timer */
-
-        setTimer();
-
-        /* Setting Now and Next prayer time */
-
-
-        nowPrayerName = findViewById(R.id.nowPrayerName);
-        nextPrayerTime = findViewById(R.id.nextPrayerTime);
-        nextPrayerName = findViewById(R.id.nextPrayerName);
-        haveYouPrayed = findViewById(R.id.haveYouPrayed);
-
-        setNowAndNext();
-
-
-        /* Quote of the day */
-        quoteOfTheDay = (TextView) findViewById(R.id.quote);
-
-        quoteOfTheDayFunction();
-
-
-    }
-
-    private void quoteOfTheDayFunction() {
-
-        int min = 0;
-        int max = 99;
-        String text = "";
-        try {
-
-            InputStream is = getAssets().open("quoteOfTheDay.txt");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            text = new String(buffer);
-
-            TimeParser timeParser = new TimeParser();
-            long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
-            String[] lines = text.split(System.getProperty("line.separator"));
-
-            if(isFirstTimeQuote){
-                isFirstTimeQuote = false;
-                PrefConfig.saveQuoteOfTheDay(getApplicationContext(), "There is no god but Allah, and Muhammad is the messenger of Allah.");
-            }
-
-            if(currentTime1 >= 0){
-
-                int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
-                String quote = lines[random_int];
-
-                PrefConfig.saveQuoteOfTheDay(getApplicationContext(), quote);
-
-            }
-
-
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        String quote = PrefConfig.loadQuoteOfTheDay(this);
-        quoteOfTheDay.setText(quote);
-
-    }
-
-    private void setBottomNavigation() {
-        /* Bottom Navigation */
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.home);
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.log:
-                    startActivity(new Intent(getApplicationContext(), LogActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                case R.id.home:
-                    return true;
-                case R.id.duas:
-                    startActivity(new Intent(getApplicationContext(), Duas.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-            }
-            return false;
-        });
-    }
 
     private void firstTimeFunction() {
         if(PrefConfig.loadFirstTime(this)=="FirstTime"){
@@ -579,13 +437,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void openAllPrayers() {
 
-        Intent intent = new Intent(this, AllPrayers.class);
-
-        startActivity(intent);
-
-    }
 
 
     @SuppressLint("MissingPermission")
@@ -728,52 +580,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void getDataFrormPreConfig() {
 
+        sehri = PrefConfig.loadImsakTime(this);
+        iftar = PrefConfig.loadMagribTime(this);
+        fajrNamazTime = PrefConfig.loadFajrTime(this);
+        sunriseTime = PrefConfig.loadSunriseTime(this);
+        dhuhrNamazTime = PrefConfig.loadDhuhrTime(this);
+        asarNamazTime = PrefConfig.loadAsarTime(this);
+        sunsetTime = PrefConfig.loadSunsetTime(this);
+        magribNamazTime = PrefConfig.loadMagribTime(this);
+        ishaNamazTime = PrefConfig.loadIshaTime(this);
+        currentTime = PrefConfig.loadCurrentTime(this);
+        imsakTime = PrefConfig.loadImsakTime(this);
+    }
     //update Location
     public void locationUpdate(View v){
         convertLocation(finalLat,finalLong);
     }
+    public void openAllPrayers(View v) {
 
-    //hijri update function
-    private void hijriUpdate(){
-        /* Hijri Date */
+        Intent intent = new Intent(this, AllPrayers.class);
 
-        ApplicationStarter.initialize(this, true);
+        startActivity(intent);
 
-        ChronoFormatter<HijriCalendar> hijriFormat =
-                ChronoFormatter.setUp(HijriCalendar.family(), Locale.ENGLISH)
-                        .addEnglishOrdinal(HijriCalendar.DAY_OF_MONTH)
-                        .addPattern(" MMMM yyyy", PatternType.CLDR)
-                        .build()
-                        .withCalendarVariant(HijriCalendar.VARIANT_UMALQURA);
-        // conversion from gregorian to hijri valid at noon
-        // (not really valid in the evening when next islamic day starts)
-        HijriCalendar today =
-                SystemClock.inLocalView().today().transform(
-                        HijriCalendar.class,
-                        HijriCalendar.VARIANT_UMALQURA
-                );
-
-        // taking into account the specific start of day for Hijri calendar
-        HijriCalendar todayExact =
-                SystemClock.inLocalView().now(
-                        HijriCalendar.family(),
-                        HijriCalendar.VARIANT_UMALQURA,
-                        StartOfDay.MIDNIGHT // simple approximation => 18:00
-                ).toDate();
-
-
-        TextView hijriDate = (TextView) findViewById(R.id.hijriDate);
-        hijriDate.setText(hijriFormat.format(todayExact));
-
-        /*App bar config */
-
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Home");
     }
-
-
     //abd's update Database
-
     @SuppressLint("SimpleDateFormat")
     public void updateDB(View v) {
 
@@ -792,6 +624,87 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    private void setBottomNavigation() {
+        /* Bottom Navigation */
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.log:
+                    startActivity(new Intent(getApplicationContext(), LogActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                case R.id.home:
+                    return true;
+                case R.id.duas:
+                    startActivity(new Intent(getApplicationContext(), Duas.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+            }
+            return false;
+        });
+        /*App bar config */
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Home");
+    }
+    private void setLocation() {
+        geocoder = new Geocoder(this, Locale.getDefault());
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        cityLocation = (TextView) findViewById(R.id.cityLocation);
+        if(finalLat != 0 && finalLong != 0){
+            convertLocation(finalLat,finalLong);
+        }
+        getLastLocation();
+    }
+    private void setDataBase(){
+        databaseHandler = new DatabaseHandler(this);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                databaseHandler.getContact("20210101");
+            }
+        }).start();
+    }
+    private void setHijriDate() {
+        HijriDate hijriDate = new HijriDate(this);
+        TextView hijriDateTextview = (TextView) findViewById(R.id.hijriDate);
+        hijriDateTextview.setText(hijriDate.hijriUpdate());
+    }
+    private void setTextviewid() {
+        allPrayers = (Button) findViewById(R.id.allPrayers);
+        quoteOfTheDay = (TextView) findViewById(R.id.quote);
+        nowPrayerName = findViewById(R.id.nowPrayerName);
+        nextPrayerTime = findViewById(R.id.nextPrayerTime);
+        nextPrayerName = findViewById(R.id.nextPrayerName);
+        haveYouPrayed = findViewById(R.id.haveYouPrayed);
+        sehriTimeId = (TextView) findViewById(R.id.sehriTimeId);
+        iftarTimeId = (TextView) findViewById(R.id.iftarTimeId);
+    }
+    private void setNotification() {
+        DoNotification doNotification = new DoNotification(getApplicationContext());
+        doNotification.setNotification();
+    }
+    private void setSahriIftariCityText() {
+
+        String sehriAMPM = PrefConfig.loadImsakTimeAMPM(this);
+        String iftarAMPM = PrefConfig.loadMagribTimeAMPM(this);
+        city = PrefConfig.loadCurrentCity(this);
+        cityLocation.setText(city);
+        sehriTimeId.setText(sehriAMPM);
+        iftarTimeId.setText(iftarAMPM);
+    }
+    private void setQuote() {
+        QuoteGetter quoteGetter = new QuoteGetter(this,isFirstTimeQuote,currentTime);
+        quoteOfTheDay.setText(quoteGetter.quoteOfTheDayFunction());
+
+    }
+    private void setCurrentTime() {
+        Calendar calendar1 = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm:ss");
+        currentTime = simpleDateFormat1.format(calendar1.getTime());
+        PrefConfig.saveCurrentTime(getApplicationContext(), currentTime);
+    }
+
 
 
 

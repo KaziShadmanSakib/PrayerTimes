@@ -15,11 +15,10 @@ public class AboutUsOption extends AppCompatActivity {
 
         /* Back Button */
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 
-
-        /*App bar config */
+        /* App bar config */
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("About Us");
 
