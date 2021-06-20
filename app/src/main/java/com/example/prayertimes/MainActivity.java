@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -30,7 +29,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -73,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
     SimpleDateFormat simpleDateFormat;
 
     int PERMISSION_ID = 44;
-    public static double finalLat = 0;
-    public static double finalLong = 0;
+    public static double finalLat = 0.0;
+    public static double finalLong = 0.0;
     public static double finalAlti = 0;
 
     List<Address> addresses;
@@ -105,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
         setTimer();
         setNowAndNext();
         setQuote();
+
+
+
 
 
     }
@@ -158,20 +159,10 @@ public class MainActivity extends AppCompatActivity {
         if(PrefConfig.loadFirstTime(this)=="FirstTime"){
 
 
-
-
-            PrefConfig.saveCurrentCity(this,"Seattle");
-            PrefConfig.saveCurrentCountry(this,"United States");
-
+            PrefConfig.saveCurrentCity(this,"Dhaka");
+            PrefConfig.saveCurrentCountry(this,"Bangladesh");
             JasonFetcher jasonFetcher = new JasonFetcher(this);
-            Log.i("uga","maaaan");
-
-
-
             jasonFetcher.getData();
-
-
-
 
         }
     }

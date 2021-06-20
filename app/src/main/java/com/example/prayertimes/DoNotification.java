@@ -27,6 +27,7 @@ public class DoNotification {
         Calendar c = Calendar.getInstance();
         for(int i = 0 ; i < 4 ; i++){
             if(currentMiliSec>prayerMiliSec[i]&&currentMiliSec<prayerMiliSec[i+1]){
+                cancelAlarm();
                 AlertReceiver.setContentTitle(ALL_Prayers[i+1] + " has started");
                 AlertReceiver.setContentText("Have you prayed "+ALL_Prayers[i]+ "?");
                 startAlarm(c,prayerMiliSec[i+1]);
@@ -34,6 +35,7 @@ public class DoNotification {
         }
 
         if((currentMiliSec>prayerMiliSec[4]&&currentMiliSec<24*3600*1000)||(currentMiliSec>0&&currentMiliSec<prayerMiliSec[0])){
+            cancelAlarm();
             AlertReceiver.setContentTitle("Fajr has started");
             AlertReceiver.setContentText("Have you prayed Isha?");
             startAlarm(c,prayerMiliSec[0]);
