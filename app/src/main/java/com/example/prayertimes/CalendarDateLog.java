@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,10 +78,10 @@ public class CalendarDateLog extends AppCompatActivity {
                 }
                 else if(currentDate+1>=clickedDate){
                     if(allPrayersCheckedList[finalI].isChecked()){
-                        databaseHandler.updateDatabase(date, finalI,true);
+                        databaseHandler.updateCell(date, finalI,true);
                     }
                     else{
-                        databaseHandler.updateDatabase(date, finalI,false);
+                        databaseHandler.updateCell(date, finalI,false);
                     }
                     allPrayersCheckedList[finalI].toggle();
                 }
