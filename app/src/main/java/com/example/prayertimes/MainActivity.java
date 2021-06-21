@@ -159,8 +159,8 @@ public class MainActivity extends AppCompatActivity {
         if(PrefConfig.loadFirstTime(this)=="FirstTime"){
 
 
-            PrefConfig.saveCurrentCity(this,"Dhaka");
-            PrefConfig.saveCurrentCountry(this,"Bangladesh");
+            PrefConfig.saveCurrentCity(this,"Seattle");
+            PrefConfig.saveCurrentCountry(this,"United States");
             JasonFetcher jasonFetcher = new JasonFetcher(this);
             jasonFetcher.getData();
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
