@@ -20,6 +20,7 @@ public class SettingsFragment extends PreferenceFragment {
         locationPref();
 
     }
+
     @SuppressWarnings("deprecation")
     private void locationPref() {
         Preference myPref = findPreference("pref_location");

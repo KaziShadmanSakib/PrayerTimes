@@ -113,15 +113,23 @@ public class Duas extends AppCompatActivity {
 
                 final String selected = (String) expandableListAdapter.getChild(groupPosition, childPosition);
 
-                Intent intent;
+
 
                 switch (selected){
 
                     case "When opening your fast":
 
-                        intent = new Intent(Duas.this, RamadanActivity_01.class);
-                        startActivity(intent);
+                        changeIntent(1,2);
                         break;
+                    case "For the night of destiny (Lailatul Qadr)":
+
+                        changeIntent(3,0);
+                        break;
+                    case "For someone who provides you with Iftar":
+
+                        changeIntent(4,5);
+                        break;
+
 
                 }
 
@@ -129,6 +137,15 @@ public class Duas extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void changeIntent(int i,int j) {
+        Intent intent;
+        intent = new Intent(Duas.this, RamadanActivity_01.class);
+        intent.putExtra("index",i);
+        intent.putExtra("index2",j);
+        startActivity(intent);
 
     }
 
