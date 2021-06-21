@@ -35,7 +35,6 @@ public class DoNotification {
         }
 
         if((currentMiliSec>prayerMiliSec[4]&&currentMiliSec<24*3600*1000)||(currentMiliSec>0&&currentMiliSec<prayerMiliSec[0])){
-            cancelAlarm();
             PrefConfig.saveCurrentPrayerIndex(_context,0);
             startAlarm(c,prayerMiliSec[0]);
         }

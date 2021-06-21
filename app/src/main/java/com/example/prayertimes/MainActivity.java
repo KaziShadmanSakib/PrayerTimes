@@ -163,6 +163,8 @@ public class MainActivity extends AppCompatActivity {
             PrefConfig.saveCurrentCountry(this,"Bangladesh");
             JasonFetcher jasonFetcher = new JasonFetcher(this);
             jasonFetcher.getData();
+            finish();
+            startActivity(getIntent());
 
         }
     }
