@@ -113,6 +113,8 @@ public class JasonFetcher {
                             PrefConfig.savefirstTime(context,"NotFirstTime");
                             loadingDialog.dismissDialog();
 
+
+
                         }
 
                     }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PrayerTimes</string>
+    <string name="location_settings">Location Settings</string>
+    <string name="internet_settings">Internet Settings</string>
 </resources>

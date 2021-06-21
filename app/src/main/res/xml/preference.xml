@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:id="@+id/notificationChecker"
+        android:key="pref_notification"
+        android:title="Notification"
+        android:summary="Do you want to allow notification"
+        android:defaultValue="true"
+        />
+    <Preference
+        android:id="@+id/internetSettings"
+        android:key="pref_network"
+        android:onClick="onClickInternetSettings"
+        android:summary="Open Wireless Settings"
+        android:title="Internet Settings" />
+    <Preference
+        android:id="@+id/locationSettings"
+        android:key="pref_location"
+        android:onClick="onClickLocationSettings"
+        android:summary="Open Wireless Settings"
+        android:title="Location Settings" />
+
+</PreferenceScreen>

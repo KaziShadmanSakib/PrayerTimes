@@ -26,6 +26,14 @@ public class SettingsOption extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("Settings");
 
+        if(findViewById(R.id.frameLayout)!=null){
+            if(savedInstanceState!=null)return;
+            else
+            {
+                getFragmentManager().beginTransaction().add(R.id.frameLayout,new SettingsFragment()).commit();
+            }
+        }
+
 
     }
 
