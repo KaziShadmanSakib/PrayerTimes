@@ -1,4 +1,4 @@
-package com.example.prayertimes.Notification;
+package com.example.prayertimes.notification;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

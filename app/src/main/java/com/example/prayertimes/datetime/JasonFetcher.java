@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.prayertimes.activity.MainActivity;
 import com.example.prayertimes.others.AppController;
 import com.example.prayertimes.others.LoadingDialog;
 import com.example.prayertimes.others.PrefConfig;
@@ -113,8 +114,11 @@ public class JasonFetcher {
                         PrefConfig.saveImsakTimeAMPM(context, imsakTimeAMPM);
                         //pDialog.hide();
                         if(PrefConfig.loadFirstTime(context)=="FirstTime") {
+                            NowAndNextPrayer nowAndNextPrayer = new NowAndNextPrayer(context);
+                            nowAndNextPrayer.setNowAndNext();
                             PrefConfig.savefirstTime(context,"NotFirstTime");
                             loadingDialog.dismissDialog();
+
 
 
 

@@ -23,7 +23,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.prayertimes.Notification.DoNotification;
+import com.example.prayertimes.datetime.NowAndNextPrayer;
+import com.example.prayertimes.notification.DoNotification;
 import com.example.prayertimes.activity.dua.Duas;
 import com.example.prayertimes.others.PrefConfig;
 import com.example.prayertimes.others.QuoteGetter;
@@ -174,6 +175,12 @@ public class MainActivity extends AppCompatActivity {
             PrefConfig.saveCurrentCountry(this,"United States");
             JasonFetcher jasonFetcher = new JasonFetcher(this);
             jasonFetcher.getData();
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                if((PrefConfig.loadFirstTime(this)!="FirstTime")){
+                    setNowAndNext();
+                }
+            }, 5000);
+
 
 
 
@@ -183,92 +190,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setNowAndNext() {
 
-        long midNight = 0;
-
-        /* Converting String time to Milliseconds */
-
-        TimeParser timeParser = new TimeParser();
-        long fazrTime = timeParser.timeParserMethod(fajrNamazTime);
-        long sunrise = timeParser.timeParserMethod(sunriseTime);
-        long dhuhrTime = timeParser.timeParserMethod(dhuhrNamazTime);
-        long asarTime = timeParser.timeParserMethod(asarNamazTime);
-        long sunset = timeParser.timeParserMethod(sunsetTime);
-        long magribTime = timeParser.timeParserMethod(magribNamazTime);
-        long ishaTime = timeParser.timeParserMethod(ishaNamazTime);
-        long imsak = timeParser.timeParserMethod(imsakTime);
-        long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
-
-        fajrNamazAMPM = PrefConfig.loadFajrTimeAMPM(this);
-        sunriseAMPM = PrefConfig.loadSunriseTimeAMPM(this);
-        dhuhrNamazAMPM = PrefConfig.loadDhuhrTimeAMPM(this);
-        asarNamazAMPM = PrefConfig.loadAsarTimeAMPM(this);
-        sunsetAMPM = PrefConfig.loadSunsetTimeAMPM(this);
-        magribNamazAMPM = PrefConfig.loadMagribTimeAMPM(this);
-        ishaNamazAMPM = PrefConfig.loadIshaTimeAMPM(this);
-
-
-        if(currentTime1 >= fazrTime && currentTime1 < sunrise){
-
-            haveYouPrayed.setText("Get ready for the next Prayer");
-            nowPrayerName.setText("Now - Fajr");
-            nextPrayerName.setText("Sunrise");
-            nextPrayerTime.setText(sunriseAMPM);
-
-        }
-
-        if(currentTime1 >= sunrise && currentTime1 < dhuhrTime){
-
-            haveYouPrayed.setText("Have you prayed Fajr?");
-            nowPrayerName.setText("Good Morning");
-            nextPrayerName.setText("Dhuhr");
-            nextPrayerTime.setText(dhuhrNamazAMPM);
-
-
-        }
-
-
-        if(currentTime1 >= dhuhrTime && currentTime1 < asarTime){
-
-            haveYouPrayed.setText("Have you prayed Fajr?");
-            nowPrayerName.setText("Now - Dhuhr");
-            nextPrayerName.setText("Asar");
-            nextPrayerTime.setText(asarNamazAMPM);
-
-        }
-
-        if(currentTime1 >= asarTime && currentTime1 < magribTime){
-
-            haveYouPrayed.setText("Have you prayed Dhuhr?");
-            nowPrayerName.setText("Now - Asar");
-            nextPrayerName.setText("Magrib");
-            nextPrayerTime.setText(magribNamazAMPM);
-
-        }
-
-        if(currentTime1 >= magribTime && currentTime1 <ishaTime){
-
-            haveYouPrayed.setText("Have you prayed Asar?");
-            nowPrayerName.setText("Now - Magrib");
-            nextPrayerName.setText("Isha");
-            nextPrayerTime.setText(ishaNamazAMPM);
-
-        }
-
-        if(currentTime1 >= ishaTime && currentTime1 > midNight){
-            haveYouPrayed.setText("Have you prayed Magrib?");
-            nowPrayerName.setText("Now - Isha");
-            nextPrayerName.setText("Fajr");
-            nextPrayerTime.setText(fajrNamazAMPM);
-        }
-
-        if(currentTime1 >= midNight && currentTime1 < fazrTime){
-
-            haveYouPrayed.setText("Have you prayed Isha?");
-            nowPrayerName.setText("Now - Midnight");
-            nextPrayerName.setText("Fajr");
-            nextPrayerTime.setText(fajrNamazAMPM);
-
-        }
+        NowAndNextPrayer nowAndNextPrayer = new NowAndNextPrayer(this);
+        nowAndNextPrayer.setNowAndNext();
+        haveYouPrayed.setText(nowAndNextPrayer.getHaveYouPrayed());
+        nowPrayerName.setText(nowAndNextPrayer.getNowPrayerName());
+        nextPrayerName.setText(nowAndNextPrayer.getNextPrayerName());
+        nextPrayerTime.setText(nowAndNextPrayer.getNextPrayerTime());
 
     }
 
