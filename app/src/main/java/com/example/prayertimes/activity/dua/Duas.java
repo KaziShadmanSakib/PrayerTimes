@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.activity.dua;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +10,12 @@ import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
+import com.example.prayertimes.R;
+import com.example.prayertimes.activity.LogActivity;
+import com.example.prayertimes.activity.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;

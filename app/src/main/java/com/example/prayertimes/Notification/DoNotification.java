@@ -1,11 +1,12 @@
-package com.example.prayertimes;
+package com.example.prayertimes.Notification;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcel;
-import android.os.Parcelable;
+
+import com.example.prayertimes.datetime.PrayerTimeInMiliSecond;
+import com.example.prayertimes.others.PrefConfig;
 
 import java.util.Calendar;
 import java.util.Date;

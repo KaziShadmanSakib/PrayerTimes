@@ -1,8 +1,10 @@
-package com.example.prayertimes;
+package com.example.prayertimes.options;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.prayertimes.R;
 
 import java.util.Objects;
 

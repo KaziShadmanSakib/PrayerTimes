@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.activity.dua;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.widget.ImageView;
+
+import com.example.prayertimes.R;
 
 public class RamadanActivity_01 extends AppCompatActivity {
 

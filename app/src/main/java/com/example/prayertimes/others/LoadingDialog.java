@@ -1,8 +1,10 @@
-package com.example.prayertimes;
+package com.example.prayertimes.others;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
+
+import com.example.prayertimes.R;
 
 public class LoadingDialog {
 

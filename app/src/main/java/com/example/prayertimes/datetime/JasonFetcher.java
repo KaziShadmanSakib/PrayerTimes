@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.datetime;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.prayertimes.others.AppController;
+import com.example.prayertimes.others.LoadingDialog;
+import com.example.prayertimes.others.PrefConfig;
 
 import org.json.JSONObject;
 
@@ -22,7 +25,7 @@ public class JasonFetcher {
     // Tag used to cancel the request
     String tag_json_obj = "json_obj_req";
 
-    JasonFetcher(Context context){
+    public JasonFetcher(Context context){
         this.context = context;
 
     }

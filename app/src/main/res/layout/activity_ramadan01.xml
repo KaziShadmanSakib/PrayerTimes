@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RamadanActivity_01">
+    tools:context=".activity.dua.RamadanActivity_01">
 
     <ImageView
         android:id="@+id/ramadanDua_01_01"

@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.datetime;
 
 import android.content.Context;
 
@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public class HijriDate {
     Context context;
-    HijriDate(Context c){
+    public HijriDate(Context c){
         context = c;
     }
     public String hijriUpdate(){

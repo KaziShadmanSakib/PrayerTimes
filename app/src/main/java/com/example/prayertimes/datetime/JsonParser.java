@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.datetime;
 
 public class JsonParser {
 

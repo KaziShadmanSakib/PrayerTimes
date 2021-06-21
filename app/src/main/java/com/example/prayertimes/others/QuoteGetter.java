@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.others;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import java.io.InputStream;
 public class QuoteGetter {
     Context context;
     long currentTime;
-    QuoteGetter(Context c, long currentTime){
+    public QuoteGetter(Context c, long currentTime){
         context = c;
         this.currentTime = currentTime;
     }

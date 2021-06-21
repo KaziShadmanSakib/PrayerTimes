@@ -1,8 +1,9 @@
-package com.example.prayertimes;
+package com.example.prayertimes.datetime;
 
 
 import android.content.Context;
-import android.util.Log;
+
+import com.example.prayertimes.others.PrefConfig;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
