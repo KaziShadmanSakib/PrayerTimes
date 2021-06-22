@@ -138,6 +138,18 @@
         android:translationY="10sp" />
 
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:indeterminateOnly="false"
+        android:progress="60"
+        android:progressDrawable="@drawable/circle"
+        android:translationX="200dp"
+        android:translationY="110dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/timerId"
         android:layout_width="wrap_content"
@@ -153,8 +165,8 @@
         android:text="00:00:00"
         android:textColor="#FFFFFF "
         android:textSize="15.80sp"
-        android:translationX="240dp"
-        android:translationY="155sp" />
+        android:translationX="215dp"
+        android:translationY="135sp" />
 
     <TextView
         android:id="@+id/haveYouPrayed"
@@ -175,7 +187,7 @@
 
     <TextView
         android:id="@+id/nowPrayerName"
-        android:layout_width="176dp"
+        android:layout_width="169dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginStart="12dp"
@@ -186,7 +198,7 @@
         android:text="Now -"
         android:textColor="#FFFFFF "
         android:textSize="18sp"
-        android:translationX="220dp"
+        android:translationX="230dp"
         android:translationY="-25dp" />
 
     <TextView
