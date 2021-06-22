@@ -20,7 +20,7 @@
         android:theme="@style/Theme.PrayerTimes"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.dua.RamadanActivity_01"
+            android:name=".activity.dua.SetDuaOfEachOption"
             android:parentActivityName=".activity.dua.Duas" />
         <activity
             android:name=".options.AboutUsOption"

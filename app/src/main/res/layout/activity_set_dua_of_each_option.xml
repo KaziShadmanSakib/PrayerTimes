@@ -7,10 +7,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.dua.RamadanActivity_01">
+    tools:context=".activity.dua.SetDuaOfEachOption">
 
     <ImageView
-        android:id="@+id/ramadanDua_01_01"
+        android:id="@+id/dua01"
         android:layout_width="match_parent"
         android:layout_height="304dp"
         android:layout_alignParentTop="true"
@@ -19,7 +19,7 @@
          />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/dua02"
         android:layout_width="match_parent"
         android:layout_height="298dp"
         android:translationY="290dp"

@@ -129,7 +129,11 @@ public class Duas extends AppCompatActivity {
                         break;
                     case "For someone who provides you with Iftar":
 
-                        changeIntent(4,5);
+                        changeIntent(4,0);
+                        break;
+                    case "On the sighting of the crescent moon":
+
+                        changeIntent(5, 0);
                         break;
 
 
@@ -144,7 +148,7 @@ public class Duas extends AppCompatActivity {
 
     private void changeIntent(int i,int j) {
         Intent intent;
-        intent = new Intent(Duas.this, RamadanActivity_01.class);
+        intent = new Intent(Duas.this, SetDuaOfEachOption.class);
         intent.putExtra("index",i);
         intent.putExtra("index2",j);
         startActivity(intent);
