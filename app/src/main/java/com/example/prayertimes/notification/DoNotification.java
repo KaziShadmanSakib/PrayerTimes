@@ -68,8 +68,8 @@ public class DoNotification {
         miliSecond = miliSecond/1000;
         int hour = miliSecond/3600;
         int min = (miliSecond%3600)/60;
-        c.set(Calendar.HOUR_OF_DAY, 19);
-        c.set(Calendar.MINUTE, 56);
+        c.set(Calendar.HOUR_OF_DAY, hour);
+        c.set(Calendar.MINUTE, min);
         c.set(Calendar.SECOND, 0);
 
         AlarmManager alarmManager =  (AlarmManager) _context.getSystemService(Context.ALARM_SERVICE);
