@@ -143,7 +143,8 @@
         android:layout_height="150dp"
         android:indeterminateOnly="false"
         android:progressDrawable="@drawable/circle"
-
+        android:progress="60"
+        
         android:layout_above="@+id/bottom_navigation"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="-2dp"
