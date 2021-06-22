@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".Notification.AlertReceiver" />
+        <receiver android:name=".notification.AlertReceiver" />
 
         <uses-library
             android:name="org.apache.http.legacy"

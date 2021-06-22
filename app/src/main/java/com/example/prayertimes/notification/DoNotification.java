@@ -1,4 +1,4 @@
-package com.example.prayertimes.Notification;
+package com.example.prayertimes.notification;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -82,7 +82,7 @@ public class DoNotification {
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
     }
-    private void cancelAlarm() {
+    public void cancelAlarm() {
         AlarmManager alarmManager = (AlarmManager) _context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(_context, AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(_context, 1, intent, 0);

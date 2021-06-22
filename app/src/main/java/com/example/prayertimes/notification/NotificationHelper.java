@@ -1,4 +1,4 @@
-package com.example.prayertimes.Notification;
+package com.example.prayertimes.notification;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

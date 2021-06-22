@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,7 +24,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.prayertimes.Notification.DoNotification;
+import com.example.prayertimes.datetime.NowAndNextPrayer;
+import com.example.prayertimes.notification.DoNotification;
 import com.example.prayertimes.activity.dua.Duas;
 import com.example.prayertimes.others.PrefConfig;
 import com.example.prayertimes.others.QuoteGetter;
@@ -61,13 +63,11 @@ import com.google.android.gms.location.LocationResult;
 public class MainActivity extends AppCompatActivity {
 
     private TextView cityLocation, sehriTimeId, iftarTimeId, nextPrayerName, nextPrayerTime, haveYouPrayed, nowPrayerName;
-    private Button allPrayers;
     private FusedLocationProviderClient fusedLocationClient;
     private String city = "Seattle";
     private String country = "United States";
     private Boolean isLocationActive = false;
     private String currentTime, imsakTime, sehri, iftar, fajrNamazTime, dhuhrNamazTime, asarNamazTime, magribNamazTime, ishaNamazTime, sunriseTime, sunsetTime;
-    String fajrNamazAMPM, sunriseAMPM, dhuhrNamazAMPM, asarNamazAMPM, sunsetAMPM, magribNamazAMPM, ishaNamazAMPM, imsakTimeAMPM;
     private TextView timerId;
     private CountDownTimer countDownTimer;
     private boolean isTimerRunning;
@@ -80,12 +80,10 @@ public class MainActivity extends AppCompatActivity {
     public DatabaseHandler databaseHandler;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
-
     int PERMISSION_ID = 44;
     public static double finalLat = 0.0;
     public static double finalLong = 0.0;
     public static double finalAlti = 0;
-
     List<Address> addresses;
     Geocoder geocoder;
 
@@ -174,6 +172,12 @@ public class MainActivity extends AppCompatActivity {
             PrefConfig.saveCurrentCountry(this,"United States");
             JasonFetcher jasonFetcher = new JasonFetcher(this);
             jasonFetcher.getData();
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                if((PrefConfig.loadFirstTime(this)!="FirstTime")){
+                    setNowAndNext();
+                }
+            }, 5000);
+
 
 
 
@@ -181,96 +185,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void setNowAndNext() {
 
-        long midNight = 0;
-
-        /* Converting String time to Milliseconds */
-
-        TimeParser timeParser = new TimeParser();
-        long fazrTime = timeParser.timeParserMethod(fajrNamazTime);
-        long sunrise = timeParser.timeParserMethod(sunriseTime);
-        long dhuhrTime = timeParser.timeParserMethod(dhuhrNamazTime);
-        long asarTime = timeParser.timeParserMethod(asarNamazTime);
-        long sunset = timeParser.timeParserMethod(sunsetTime);
-        long magribTime = timeParser.timeParserMethod(magribNamazTime);
-        long ishaTime = timeParser.timeParserMethod(ishaNamazTime);
-        long imsak = timeParser.timeParserMethod(imsakTime);
-        long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
-
-        fajrNamazAMPM = PrefConfig.loadFajrTimeAMPM(this);
-        sunriseAMPM = PrefConfig.loadSunriseTimeAMPM(this);
-        dhuhrNamazAMPM = PrefConfig.loadDhuhrTimeAMPM(this);
-        asarNamazAMPM = PrefConfig.loadAsarTimeAMPM(this);
-        sunsetAMPM = PrefConfig.loadSunsetTimeAMPM(this);
-        magribNamazAMPM = PrefConfig.loadMagribTimeAMPM(this);
-        ishaNamazAMPM = PrefConfig.loadIshaTimeAMPM(this);
-
-
-        if(currentTime1 >= fazrTime && currentTime1 < sunrise){
-
-            haveYouPrayed.setText("Get ready for the next Prayer");
-            nowPrayerName.setText("Now - Fajr");
-            nextPrayerName.setText("Sunrise");
-            nextPrayerTime.setText(sunriseAMPM);
-
-        }
-
-        if(currentTime1 >= sunrise && currentTime1 < dhuhrTime){
-
-            haveYouPrayed.setText("Have you prayed Fajr?");
-            nowPrayerName.setText("Good Morning");
-            nextPrayerName.setText("Dhuhr");
-            nextPrayerTime.setText(dhuhrNamazAMPM);
-
-
-        }
-
-
-        if(currentTime1 >= dhuhrTime && currentTime1 < asarTime){
-
-            haveYouPrayed.setText("Have you prayed Fajr?");
-            nowPrayerName.setText("Now - Dhuhr");
-            nextPrayerName.setText("Asar");
-            nextPrayerTime.setText(asarNamazAMPM);
-
-        }
-
-        if(currentTime1 >= asarTime && currentTime1 < magribTime){
-
-            haveYouPrayed.setText("Have you prayed Dhuhr?");
-            nowPrayerName.setText("Now - Asar");
-            nextPrayerName.setText("Magrib");
-            nextPrayerTime.setText(magribNamazAMPM);
-
-        }
-
-        if(currentTime1 >= magribTime && currentTime1 <ishaTime){
-
-            haveYouPrayed.setText("Have you prayed Asar?");
-            nowPrayerName.setText("Now - Magrib");
-            nextPrayerName.setText("Isha");
-            nextPrayerTime.setText(ishaNamazAMPM);
-
-        }
-
-        if(currentTime1 >= ishaTime && currentTime1 > midNight){
-            haveYouPrayed.setText("Have you prayed Magrib?");
-            nowPrayerName.setText("Now - Isha");
-            nextPrayerName.setText("Fajr");
-            nextPrayerTime.setText(fajrNamazAMPM);
-        }
-
-        if(currentTime1 >= midNight && currentTime1 < fazrTime){
-
-            haveYouPrayed.setText("Have you prayed Isha?");
-            nowPrayerName.setText("Now - Midnight");
-            nextPrayerName.setText("Fajr");
-            nextPrayerTime.setText(fajrNamazAMPM);
-
-        }
-
-    }
 
     public void setTimer() {
 
@@ -401,28 +316,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void convertLocation(double lat,double lon){
-        try {
 
-            if(lat != 0 && lon != 0){
-                addresses = geocoder.getFromLocation(lat ,lon, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-            }
-
-            if(addresses.size()>0){
-                city = addresses.get(0).getLocality();
-                country = addresses.get(0).getCountryName();
-
-                /* Saves the location to PrefConfig (SharedPreferences) */
-
-                PrefConfig.saveCurrentCity(getApplicationContext(), city);
-                PrefConfig.saveCurrentCountry(getApplicationContext(), country);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 
 
@@ -567,6 +461,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void convertLocation(double lat,double lon){
+        try {
+
+            if(lat != 0 && lon != 0){
+                addresses = geocoder.getFromLocation(lat ,lon, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+            }
+
+            if(addresses.size()>0){
+                city = addresses.get(0).getLocality();
+                country = addresses.get(0).getCountryName();
+
+                /* Saves the location to PrefConfig (SharedPreferences) */
+
+                PrefConfig.saveCurrentCity(getApplicationContext(), city);
+                PrefConfig.saveCurrentCountry(getApplicationContext(), country);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void getDataFrormPreConfig() {
 
@@ -652,12 +569,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setDataBase(){
         databaseHandler = new DatabaseHandler(this);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                databaseHandler.getContact("20210101");
-            }
-        }).start();
+        new Thread(() -> databaseHandler.getContact("20210101")).start();
     }
 
     private void setHijriDate() {
@@ -667,7 +579,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTextviewid() {
-        allPrayers = (Button) findViewById(R.id.allPrayers);
         quoteOfTheDay = (TextView) findViewById(R.id.quote);
         nowPrayerName = findViewById(R.id.nowPrayerName);
         nextPrayerTime = findViewById(R.id.nextPrayerTime);
@@ -679,7 +590,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void setNotification() {
         DoNotification doNotification = new DoNotification(getApplicationContext());
-        doNotification.setNotification();
+        if(PrefConfig.loadNotificationIndex(this)==1){
+            doNotification.setNotification();
+        }
+
+        else{
+            doNotification.cancelAlarm();
+        }
     }
 
     private void setSahriIftariCityText() {
@@ -703,9 +620,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void setCurrentTime() {
         Calendar calendar1 = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm:ss");
         currentTime = simpleDateFormat1.format(calendar1.getTime());
         PrefConfig.saveCurrentTime(getApplicationContext(), currentTime);
+    }
+    private void setNowAndNext() {
+
+        NowAndNextPrayer nowAndNextPrayer = new NowAndNextPrayer(this);
+        nowAndNextPrayer.setNowAndNext();
+        haveYouPrayed.setText(nowAndNextPrayer.getHaveYouPrayed());
+        nowPrayerName.setText(nowAndNextPrayer.getNowPrayerName());
+        nextPrayerName.setText(nowAndNextPrayer.getNextPrayerName());
+        nextPrayerTime.setText(nowAndNextPrayer.getNextPrayerTime());
+
     }
 
 

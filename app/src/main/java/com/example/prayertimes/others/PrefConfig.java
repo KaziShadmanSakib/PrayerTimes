@@ -32,13 +32,13 @@ public class PrefConfig {
     private static final String Pref_Sunset_AM_PM_Key = "pref_sunset_am_pm_key";
     private static final String Pref_Imsak_AM_PM_Key = "pref_imsak_am_pm_key";
     private static final String Pref_Index_Key = "pref_index_key";
-
+    private static final String Pref_notification_Key = "pref_notification_key";
     public static void saveCurrentPrayerIndex(Context context, int index){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt(Pref_Index_Key, index);
-        editor.commit();
+        editor.apply();
 
     }
 
@@ -46,6 +46,21 @@ public class PrefConfig {
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
         return pref.getInt(Pref_Index_Key, 6);
+
+    }
+    public static void saveNotificationIndex(Context context, int index){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_notification_Key, index);
+        editor.apply();
+
+    }
+
+    public static int loadNotificationIndex(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_notification_Key, 1);
 
     }
 

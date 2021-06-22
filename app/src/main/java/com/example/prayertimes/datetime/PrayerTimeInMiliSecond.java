@@ -11,8 +11,8 @@ import java.util.Date;
 
 public class PrayerTimeInMiliSecond extends TimeParser {
     Context _context;
-    String fazrNamazTime, dhuhrNamazTime, asarNamazTime, magribNamazTime, ishaNamazTime;
-    int[] prayerMiliSec = new int[5];
+    String fazrNamazTime, dhuhrNamazTime, asarNamazTime, magribNamazTime, ishaNamazTime,sunriseTime,sunsetTime,imsakTime;
+    int[] prayerMiliSec = new int[8];
 
 
     public PrayerTimeInMiliSecond(Context applicationContext) {
@@ -32,6 +32,10 @@ public class PrayerTimeInMiliSecond extends TimeParser {
         prayerMiliSec[2] = (int) timeParserMethod(asarNamazTime);
         prayerMiliSec[3] = (int) timeParserMethod(magribNamazTime);
         prayerMiliSec[4] = (int) timeParserMethod(ishaNamazTime);
+        prayerMiliSec[5] = (int) timeParserMethod(sunriseTime);
+        prayerMiliSec[6] = (int) timeParserMethod(sunsetTime);
+        prayerMiliSec[7] = (int) timeParserMethod(imsakTime);
+
 
 
 
@@ -45,6 +49,9 @@ public class PrayerTimeInMiliSecond extends TimeParser {
         asarNamazTime = PrefConfig.loadAsarTime(_context);
         magribNamazTime = PrefConfig.loadMagribTime(_context);
         ishaNamazTime = PrefConfig.loadIshaTime(_context);
+        sunriseTime = PrefConfig.loadSunriseTime(_context);
+        sunsetTime = PrefConfig.loadSunsetTime(_context);
+        imsakTime = PrefConfig.loadImsakTime(_context);
 
     }
     public Integer getFajrInMili(){
@@ -61,6 +68,15 @@ public class PrayerTimeInMiliSecond extends TimeParser {
     }
     public Integer getIshaInMili(){
         return prayerMiliSec[4];
+    }
+    public Integer getSunriseInMili(){
+        return prayerMiliSec[5];
+    }
+    public Integer getSunsetInMili(){
+        return prayerMiliSec[6];
+    }
+    public Integer getImsakInMili(){
+        return prayerMiliSec[7];
     }
 
     public Integer getCurrentTimeInMiliSec(Date date){
