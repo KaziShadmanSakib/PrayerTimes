@@ -137,17 +137,7 @@
         android:translationX="-80sp"
         android:translationY="10sp" />
 
-    <ImageView
-        android:id="@+id/timerBackground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/backgroundHome"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="25dp"
-        android:translationX="15dp"
-        android:translationY="100dp"
-        app:srcCompat="@drawable/timer" />
+
 
     <TextView
         android:id="@+id/timerId"
@@ -164,8 +154,8 @@
         android:text="00:00:00"
         android:textColor="#FFFFFF "
         android:textSize="15.80sp"
-        android:translationX="17.5sp"
-        android:translationY="105sp" />
+        android:translationX="280dp"
+        android:translationY="155sp" />
 
     <TextView
         android:id="@+id/haveYouPrayed"
