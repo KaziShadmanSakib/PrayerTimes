@@ -38,7 +38,7 @@ public class PrefConfig {
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt(Pref_Index_Key, index);
-        editor.commit();
+        editor.apply();
 
     }
 
@@ -53,7 +53,7 @@ public class PrefConfig {
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt(Pref_notification_Key, index);
-        editor.commit();
+        editor.apply();
 
     }
 

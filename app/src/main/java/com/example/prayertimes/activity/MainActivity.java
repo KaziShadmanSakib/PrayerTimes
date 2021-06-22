@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
     private String country = "United States";
     private Boolean isLocationActive = false;
     private String currentTime, imsakTime, sehri, iftar, fajrNamazTime, dhuhrNamazTime, asarNamazTime, magribNamazTime, ishaNamazTime, sunriseTime, sunsetTime;
-    String fajrNamazAMPM, sunriseAMPM, dhuhrNamazAMPM, asarNamazAMPM, sunsetAMPM, magribNamazAMPM, ishaNamazAMPM, imsakTimeAMPM;
     private TextView timerId;
     private CountDownTimer countDownTimer;
     private boolean isTimerRunning;
@@ -81,12 +80,10 @@ public class MainActivity extends AppCompatActivity {
     public DatabaseHandler databaseHandler;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
-
     int PERMISSION_ID = 44;
     public static double finalLat = 0.0;
     public static double finalLong = 0.0;
     public static double finalAlti = 0;
-
     List<Address> addresses;
     Geocoder geocoder;
 
@@ -572,12 +569,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setDataBase(){
         databaseHandler = new DatabaseHandler(this);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                databaseHandler.getContact("20210101");
-            }
-        }).start();
+        new Thread(() -> databaseHandler.getContact("20210101")).start();
     }
 
     private void setHijriDate() {
@@ -628,7 +620,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setCurrentTime() {
         Calendar calendar1 = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm:ss");
         currentTime = simpleDateFormat1.format(calendar1.getTime());
         PrefConfig.saveCurrentTime(getApplicationContext(), currentTime);
     }
