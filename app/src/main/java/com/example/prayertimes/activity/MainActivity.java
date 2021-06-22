@@ -22,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.prayertimes.datetime.NowAndNextPrayer;
@@ -210,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
             startTime = (midNight - currentTime1) + fazrTime;
             timeLeftInMillies = startTime;
 
+
             timerId = findViewById(R.id.timerId);
 
             startTimer();
@@ -252,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
 
             timerId = findViewById(R.id.timerId);
 
+
             startTimer();
 
         }
@@ -280,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
     private void startTimer() {
 
