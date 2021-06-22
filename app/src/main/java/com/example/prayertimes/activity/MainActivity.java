@@ -72,10 +72,16 @@ public class MainActivity extends AppCompatActivity {
     private TextView timerId;
     private CountDownTimer countDownTimer;
     private boolean isTimerRunning;
+    private boolean isProgressBarRunning;
     private static boolean isFirstTimeQuote = true;
     long startTime;
     long timeLeftInMillies = startTime;
     private TextView quoteOfTheDay;
+
+
+    ProgressBar progressBar;
+    CountDownTimer progressBarCountDownTimer;
+    int i = 100;
 
     //abd's variables
     public DatabaseHandler databaseHandler;
@@ -115,6 +121,22 @@ public class MainActivity extends AppCompatActivity {
         setQuote();
 
 
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        //progressBar.setProgress(100);
+
+        progressBarCountDownTimer = new CountDownTimer(100000, 1000)
+        {
+            public void onTick(long millisUntilFinished)
+            {
+                progressBar.setProgress(i);
+                i--;
+            }
+
+            public void onFinish()
+            {
+                progressBar.setProgress(i);
+            }
+        }.start();
 
 
 
@@ -210,7 +232,6 @@ public class MainActivity extends AppCompatActivity {
 
             startTime = (midNight - currentTime1) + fazrTime;
             timeLeftInMillies = startTime;
-
 
             timerId = findViewById(R.id.timerId);
 
