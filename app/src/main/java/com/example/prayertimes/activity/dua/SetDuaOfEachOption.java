@@ -117,6 +117,123 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
         }
 
+        else if(i==6){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Hajj / Umrah");
+
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setImageResource(R.drawable.hajj01);
+
+            imageView.setTranslationY(-100);
+
+        }
+
+        else if(i==7){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Hajj / Umrah");
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setImageResource(R.drawable.hajj02);
+
+            imageView.setTranslationY(-100);
+
+        }
+
+        else if(i==8){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Hajj / Umrah");
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setImageResource(R.drawable.hajj03);
+
+            imageView.setTranslationY(-100);
+
+        }
+
+        else if(i==9){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Hajj / Umrah");
+
+            imageView.setImageResource(R.drawable.hajj04);
+
+            imageView.setTranslationY(-100);
+
+        }
+
+        else if(i==10){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Hajj / Umrah");
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setImageResource(R.drawable.hajj05);
+
+            imageView.setTranslationY(-100);
+
+        }
+
+        else if(i==11){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Hajj / Umrah");
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setImageResource(R.drawable.hajj06);
+
+            imageView.setTranslationY(-100);
+
+        }
+
+
+        else if(i==12){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Hajj / Umrah");
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setImageResource(R.drawable.hajj07);
+
+            imageView.setTranslationY(-100);
+
+        }
+
+        else if(i==13){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Hajj / Umrah");
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setImageResource(R.drawable.hajj08);
+
+            imageView.setTranslationY(-100);
+
+        }
+
+        else if(i==14){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Hajj / Umrah");
+
+            imageView.setImageResource(R.drawable.hajj09);
+
+            imageView.setTranslationY(-100);
+
+        }
+
     }
 }
 

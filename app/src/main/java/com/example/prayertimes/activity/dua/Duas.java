@@ -136,6 +136,51 @@ public class Duas extends AppCompatActivity {
                         changeIntent(5, 0);
                         break;
 
+                    case "Talbiyah":
+
+                        changeIntent(6, 0);
+                        break;
+
+                    case "Takbeer when passing the black stone":
+
+                        changeIntent(7, 0);
+                        break;
+
+                    case "Upon reaching the Yemeni corner during Tawaf":
+
+                        changeIntent(8, 0);
+                        break;
+
+                    case "When going to Mount Safa":
+
+                        changeIntent(9, 0);
+                        break;
+
+                    case "When at Mount Safa and Mount Marwah":
+
+                        changeIntent(10, 0);
+                        break;
+
+
+                    case "For reciting at Al-Mash'ar Al-Haraam (Muzdalifah)":
+
+                        changeIntent(11, 0);
+                        break;
+
+                    case "When throwing stones at Jamaraat":
+
+                        changeIntent(12, 0);
+                        break;
+
+                    case "At Arafat":
+
+                        changeIntent(13, 0);
+                        break;
+
+                    case "When sacrificing an animal":
+
+                        changeIntent(14, 0);
+                        break;
 
                 }
 
