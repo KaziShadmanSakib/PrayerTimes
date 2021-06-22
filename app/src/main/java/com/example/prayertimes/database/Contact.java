@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.database;
 
 public class Contact {
 

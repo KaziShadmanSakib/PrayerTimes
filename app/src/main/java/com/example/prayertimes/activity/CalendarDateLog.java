@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,11 @@ import android.os.Bundle;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.prayertimes.database.Contact;
+import com.example.prayertimes.database.DatabaseHandler;
+import com.example.prayertimes.datetime.PrayerTimeInMiliSecond;
+import com.example.prayertimes.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -62,7 +67,7 @@ public class CalendarDateLog extends AppCompatActivity {
         createCheckBoxId();
 
         //create checkbox
-        if(databaseHandler.getContact(date)._date == null){
+        if(databaseHandler.getContact(date).getDate() == null){
 
             checkBox(true,date);
 

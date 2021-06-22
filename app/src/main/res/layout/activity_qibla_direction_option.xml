@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#47478F"
-    tools:context=".QiblaDirectionOption">
+    tools:context=".options.QiblaDirectionOption">
 
     <TextView
         android:id="@+id/heading"

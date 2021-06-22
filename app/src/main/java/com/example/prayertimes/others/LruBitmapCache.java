@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.others;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;

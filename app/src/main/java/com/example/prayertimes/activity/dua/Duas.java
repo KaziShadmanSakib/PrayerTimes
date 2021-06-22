@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.activity.dua;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +10,12 @@ import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
+import com.example.prayertimes.R;
+import com.example.prayertimes.activity.LogActivity;
+import com.example.prayertimes.activity.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -113,15 +115,23 @@ public class Duas extends AppCompatActivity {
 
                 final String selected = (String) expandableListAdapter.getChild(groupPosition, childPosition);
 
-                Intent intent;
+
 
                 switch (selected){
 
                     case "When opening your fast":
 
-                        intent = new Intent(Duas.this, RamadanActivity_01.class);
-                        startActivity(intent);
+                        changeIntent(1,2);
                         break;
+                    case "For the night of destiny (Lailatul Qadr)":
+
+                        changeIntent(3,0);
+                        break;
+                    case "For someone who provides you with Iftar":
+
+                        changeIntent(4,5);
+                        break;
+
 
                 }
 
@@ -129,6 +139,15 @@ public class Duas extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void changeIntent(int i,int j) {
+        Intent intent;
+        intent = new Intent(Duas.this, RamadanActivity_01.class);
+        intent.putExtra("index",i);
+        intent.putExtra("index2",j);
+        startActivity(intent);
 
     }
 

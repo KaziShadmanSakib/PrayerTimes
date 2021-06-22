@@ -1,7 +1,11 @@
-package com.example.prayertimes;
+package com.example.prayertimes.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.example.prayertimes.others.PrefConfig;
+import com.example.prayertimes.R;
+import com.example.prayertimes.datetime.JasonFetcher;
 
 
 public class AllPrayers extends AppCompatActivity{

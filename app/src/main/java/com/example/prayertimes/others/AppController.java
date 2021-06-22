@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.others;
 
 import android.app.Application;
 import android.text.TextUtils;

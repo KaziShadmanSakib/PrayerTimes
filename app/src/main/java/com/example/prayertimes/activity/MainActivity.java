@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +23,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.prayertimes.Notification.DoNotification;
+import com.example.prayertimes.activity.dua.Duas;
+import com.example.prayertimes.others.PrefConfig;
+import com.example.prayertimes.others.QuoteGetter;
+import com.example.prayertimes.R;
+import com.example.prayertimes.database.DatabaseHandler;
+import com.example.prayertimes.datetime.HijriDate;
+import com.example.prayertimes.datetime.JasonFetcher;
+import com.example.prayertimes.datetime.TimeParser;
+import com.example.prayertimes.options.AboutUsOption;
+import com.example.prayertimes.options.QiblaDirectionOption;
+import com.example.prayertimes.options.SettingsOption;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -594,7 +605,7 @@ public class MainActivity extends AppCompatActivity {
         calendar = Calendar.getInstance();
         simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());
-        Intent i = new Intent(this,CalendarDateLog.class);
+        Intent i = new Intent(this, CalendarDateLog.class);
         int dateInt = Integer.parseInt(date);
         dateInt +=1;
         date = String.valueOf(dateInt);

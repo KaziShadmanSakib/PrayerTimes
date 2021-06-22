@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutUsOption">
+    android:background="#D1C9C9"
+    tools:context=".options.AboutUsOption">
+
 
     <TextView
         android:id="@+id/aboutUs"

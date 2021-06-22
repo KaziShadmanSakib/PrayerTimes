@@ -1,18 +1,13 @@
-package com.example.prayertimes;
+package com.example.prayertimes.options;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.prayertimes.others.PrefConfig;
+import com.example.prayertimes.R;
 
 import java.util.Objects;
 

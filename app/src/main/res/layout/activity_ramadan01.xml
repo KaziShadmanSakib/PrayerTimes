@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RamadanActivity_01">
+    tools:context=".activity.dua.RamadanActivity_01">
 
     <ImageView
         android:id="@+id/ramadanDua_01_01"
@@ -16,14 +16,14 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="100dp"
         android:translationY="-105dp"
-        app:srcCompat="@drawable/ramadan01_01" />
+         />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="match_parent"
         android:layout_height="298dp"
         android:translationY="290dp"
-        app:srcCompat="@drawable/ramadan01_02" />
+         />
 
 </RelativeLayout>
 

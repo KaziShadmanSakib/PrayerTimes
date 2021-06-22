@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.activity.dua;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.prayertimes.R;
 
 import java.util.List;
 import java.util.Map;

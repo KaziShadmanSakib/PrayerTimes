@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.Notification;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.content.Intent;
 
 
 import androidx.core.app.NotificationCompat;
+
+import com.example.prayertimes.others.PrefConfig;
 
 public class AlertReceiver extends BroadcastReceiver {
     private static String contentTitle = "New prayer";

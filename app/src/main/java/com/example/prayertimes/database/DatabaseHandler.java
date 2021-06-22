@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.database;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -78,7 +78,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Getting single contact
-    Contact getContact(String date) {
+    public Contact getContact(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         @SuppressLint("Recycle") Cursor cursor = db.query(TABLE_Prayers, new String[] { KEY_Date,

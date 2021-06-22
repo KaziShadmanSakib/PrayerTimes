@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.options;
 
 import android.app.Service;
 import android.content.Context;

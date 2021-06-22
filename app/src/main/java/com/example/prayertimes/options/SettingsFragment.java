@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.options;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.example.prayertimes.R;
+
 public class SettingsFragment extends PreferenceFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -20,6 +22,7 @@ public class SettingsFragment extends PreferenceFragment {
         locationPref();
 
     }
+
     @SuppressWarnings("deprecation")
     private void locationPref() {
         Preference myPref = findPreference("pref_location");

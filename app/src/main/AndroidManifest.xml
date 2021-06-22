@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".AppController"
+        android:name=".others.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,26 +20,26 @@
         android:theme="@style/Theme.PrayerTimes"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".RamadanActivity_01"
-            android:parentActivityName=".Duas" />
+            android:name=".activity.dua.RamadanActivity_01"
+            android:parentActivityName=".activity.dua.Duas" />
         <activity
-            android:name=".AboutUsOption"
-            android:parentActivityName=".MainActivity" />
+            android:name=".options.AboutUsOption"
+            android:parentActivityName=".activity.MainActivity" />
         <activity
-            android:name=".SettingsOption"
-            android:parentActivityName=".MainActivity" />
+            android:name=".options.SettingsOption"
+            android:parentActivityName=".activity.MainActivity" />
         <activity
-            android:name=".QiblaDirectionOption"
-            android:parentActivityName=".MainActivity" />
+            android:name=".options.QiblaDirectionOption"
+            android:parentActivityName=".activity.MainActivity" />
         <activity
-            android:name=".CalendarDateLog"
-            android:parentActivityName=".LogActivity" />
+            android:name=".activity.CalendarDateLog"
+            android:parentActivityName=".activity.LogActivity" />
         <activity
-            android:name=".AllPrayers"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".Duas" />
-        <activity android:name=".LogActivity" />
-        <activity android:name=".MainActivity">
+            android:name=".activity.AllPrayers"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity android:name=".activity.dua.Duas" />
+        <activity android:name=".activity.LogActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".AlertReceiver" />
+        <receiver android:name=".Notification.AlertReceiver" />
 
         <uses-library
             android:name="org.apache.http.legacy"

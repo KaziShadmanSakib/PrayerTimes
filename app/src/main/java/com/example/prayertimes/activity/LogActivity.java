@@ -1,4 +1,4 @@
-package com.example.prayertimes;
+package com.example.prayertimes.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,11 @@ import android.os.Bundle;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
+import com.example.prayertimes.R;
+import com.example.prayertimes.activity.dua.Duas;
+import com.example.prayertimes.database.CalendarDateCount;
+import com.example.prayertimes.database.Contact;
+import com.example.prayertimes.database.DatabaseHandler;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -96,7 +101,7 @@ public class LogActivity extends AppCompatActivity {
     }
 
     private void goToCalendarDateLog(String date){
-        Intent i = new Intent(this,CalendarDateLog.class);
+        Intent i = new Intent(this, CalendarDateLog.class);
         i.putExtra("clickedDate",date);
         startActivity(i);
     }
