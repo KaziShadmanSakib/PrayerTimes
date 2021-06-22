@@ -3,6 +3,8 @@ package com.example.prayertimes.notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 
 
 import androidx.core.app.NotificationCompat;
@@ -22,9 +24,14 @@ public class AlertReceiver extends BroadcastReceiver {
         int index = PrefConfig.loadCurrentPrayerIndex(context);
         contentTitle = ALL_Prayers[index+1]+" has Started";
         contentText = "Have you prayed "+ALL_Prayers[index]+"?";
+        long[] vibrate = { 0, 100, 200, 300 };
+
 
         NotificationHelper notificationHelper = new NotificationHelper(context);
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification(contentTitle,contentText);
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        nb.setSound(alarmSound);
+        nb.setVibrate(vibrate);
         notificationHelper.getManager().notify(1, nb.build());
     }
 

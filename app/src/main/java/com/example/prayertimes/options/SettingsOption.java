@@ -38,22 +38,5 @@ public class SettingsOption extends AppCompatActivity {
 
     }
 
-    /* Going to Internet Settings */
-
-    public void onClickInternetSettings(View view){
-
-        startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-
-
-    }
-
-    /* Going to Location Settings */
-
-    public void onClickLocationSettings(View view){
-
-        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-
-
-    }
 
 }
