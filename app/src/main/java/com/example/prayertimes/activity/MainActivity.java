@@ -137,9 +137,9 @@ public class MainActivity extends AppCompatActivity {
 
         TimeParser tP = new TimeParser();
 
-        long emni1 = tP.timeParserMethod("02:10");
-        long emni2 = tP.timeParserMethod("02:15");
-        long emniCurr = tP.timeParserMethodForCurrentTime("02:11:00");
+        /*long emni1 = tP.timeParserMethod("02:10");
+        long emni2 = tP.timeParserMethod("03:15");
+        long emniCurr = tP.timeParserMethodForCurrentTime("02:11:00");*/
 
         long isha = tP.timeParserMethod(ishaNamazTime);
         long current = tP.timeParserMethodForCurrentTime(currentTime);
@@ -152,19 +152,20 @@ public class MainActivity extends AppCompatActivity {
         long sunset = tP.timeParserMethod(sunsetTime);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
         //progressBar.setProgress(i);
 
 
-        if(emniCurr >= emni1 && emniCurr < emni2){
+        /*if(emniCurr >= emni1 && emniCurr < emni2){
 
             startTime2 = (int) emni2 - (int) emniCurr;
 
 
             startProgressBar();
 
-        }
+        }*/
 
-        /*if(current >= isha || current >= 0 && current < fazr){
+        if(current >= isha || current >= 0 && current < fazr){
 
 
             startTime2 = (int) (midNight - current) + (int) fazr;
@@ -174,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        }*/
+        }
 
         // fazr -> sunrise
 
