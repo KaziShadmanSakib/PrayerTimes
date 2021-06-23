@@ -2,4 +2,18 @@
     <string name="app_name">PrayerTimes</string>
     <string name="location_settings">Location Settings</string>
     <string name="internet_settings">Internet Settings</string>
+
+    <string-array name="notification_type">
+        <item>Make Sound and popup</item>
+        <item>Make sound</item>
+        <item>No sound or visual interruption</item>
+
+    </string-array>
+
+    <string-array name="notification_details">
+        <item>"High"</item>
+        <item>"Default"</item>
+        <item>"Low"</item>
+
+    </string-array>
 </resources>

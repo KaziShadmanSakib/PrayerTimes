@@ -15,6 +15,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.prayertimes.activity.CalendarDateLog;
 import com.example.prayertimes.R;
+import com.example.prayertimes.others.PrefConfig;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,31 +23,34 @@ import java.util.Calendar;
 public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
     public static final String channelName = "Channel Name";
-    private static String contentTitle = "prayer";
-    private static String contentText = "Have you prayed";
+    private int importance = 1;
 
     private NotificationManager mManager;
     Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.kalimba);
 
     public NotificationHelper(Context base) {
         super(base);
+        importance = PrefConfig.loadCurrentNotificationType(base);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             createChannel();
         }
     }
 
-    public static void setContentTitle(String contentTitle) {
-         NotificationHelper.contentTitle = contentTitle;
 
-    }
-
-    public static void setContentText(String contentText) {
-        NotificationHelper.contentText = contentText;
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createChannel() {
-        NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
+        NotificationChannel channel;
+        if(importance == 0){
+            channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_LOW);
+        }
+        else if(importance == 2){
+            channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
+        }
+        else{
+            channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_DEFAULT);
+        }
+
 
 
 

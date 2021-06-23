@@ -1,23 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference
-        android:id="@+id/notificationChecker"
-        android:key="pref_notification"
-        android:title="Notification"
-        android:summary="Do you want to allow notification"
-        android:defaultValue="true"
-        />
-    <Preference
-        android:id="@+id/internetSettings"
-        android:key="pref_network"
-        android:onClick="onClickInternetSettings"
-        android:summary="Open Wireless Settings"
-        android:title="Internet Settings" />
-    <Preference
-        android:id="@+id/locationSettings"
-        android:key="pref_location"
-        android:onClick="onClickLocationSettings"
-        android:summary="Open Wireless Settings"
-        android:title="Location Settings" />
+    <PreferenceCategory
+        android:key="notifications_category"
+        android:title="Notifications">
+        <CheckBoxPreference
+            android:id="@+id/notificationChecker"
+            android:key="pref_notification"
+            android:title="Notification"
+            android:summary="Do you want to allow notification"
+            android:defaultValue="true" />
+
+        <ListPreference
+            android:dependency="pref_notification"
+            android:key="notification_importance"
+            android:title="Notification Type"
+            android:entries="@array/notification_type"
+            android:entryValues="@array/notification_details"
+            android:dialogTitle="Choose a type" />
+        <Preference
+            android:dependency="pref_notification"
+            android:id="@+id/soundSettings"
+            android:key="pref_sound"
+            android:summary="Set notification Sound"
+            android:title="Sound" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="other_category"
+        android:title="others">
+
+        <Preference
+            android:id="@+id/internetSettings"
+            android:key="pref_network"
+            android:onClick="onClickInternetSettings"
+            android:summary="Open Wireless Settings"
+            android:title="Internet Settings" />
+        <Preference
+            android:id="@+id/locationSettings"
+            android:key="pref_location"
+            android:onClick="onClickLocationSettings"
+            android:summary="Open Wireless Settings"
+            android:title="Location Settings" />
+        ></PreferenceCategory>
+
 
 </PreferenceScreen>

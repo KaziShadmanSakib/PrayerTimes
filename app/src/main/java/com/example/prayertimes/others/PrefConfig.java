@@ -33,6 +33,23 @@ public class PrefConfig {
     private static final String Pref_Imsak_AM_PM_Key = "pref_imsak_am_pm_key";
     private static final String Pref_Index_Key = "pref_index_key";
     private static final String Pref_notification_Key = "pref_notification_key";
+    private static final String Pref_notification_type_Key = "pref_notification_type_key";
+
+    public static void saveCurrentNotificationType(Context context, int index){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_notification_type_Key, index);
+        editor.apply();
+
+    }
+
+    public static int loadCurrentNotificationType(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_notification_type_Key, 1);
+
+    }
     public static void saveCurrentPrayerIndex(Context context, int index){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
