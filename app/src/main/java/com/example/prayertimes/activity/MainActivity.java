@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isProgressBarRunning;
     private static boolean isFirstTimeQuote = true;
     long startTime;
+    int startTime2;
     long timeLeftInMillies = startTime;
     private TextView quoteOfTheDay;
 
@@ -119,46 +120,113 @@ public class MainActivity extends AppCompatActivity {
         setTimer();
         setNowAndNext();
         setQuote();
-        //setProgressBarTimer();
-
-
-        TimeParser tP = new TimeParser();
-        long iTime = tP.timeParserMethod(ishaNamazTime);
-        long ct = tP.timeParserMethodForCurrentTime(currentTime);
-        long mT = tP.timeParserMethod(magribNamazTime);
-
-        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        progressBar.setProgress(i);
-
-
-        if(ct >= mT && ct < iTime){
-
-            int startTime = (int) iTime - (int) ct;
-
-            timerId = findViewById(R.id.timerId);
-
-            progressBarCountDownTimer = new CountDownTimer(startTime, 1000)
-            {
-                public void onTick(long millisUntilFinished)
-                {
-                    i++;
-                    progressBar.setProgress((int)i*100/(startTime/1000));
-                }
-
-                public void onFinish()
-                {
-                    i++;
-                    progressBar.setProgress(100);
-                }
-            }.start();
-
-        }
+        setProgressBarTimer();
 
 
 
     }
 
 
+    /* Progress bar */
+    public void setProgressBarTimer(){
+
+        long midNight = 86400000;
+
+        /* Converting String time to Milliseconds */
+
+
+        TimeParser tP = new TimeParser();
+        long isha = tP.timeParserMethod("02:10");
+        long current = tP.timeParserMethodForCurrentTime("02:11:02");
+        long magrib = tP.timeParserMethod(magribNamazTime);
+        long imsak = tP.timeParserMethod(imsakTime);
+        long fazr = tP.timeParserMethod("02:15");
+        long sunrise = tP.timeParserMethod(sunriseTime);
+        long dhuhr = tP.timeParserMethod(dhuhrNamazTime);
+        long asar = tP.timeParserMethod(asarNamazTime);
+        long sunset = tP.timeParserMethod(sunsetTime);
+
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        progressBar.setProgress(i);
+
+
+        if(current >= isha && current < fazr){
+
+
+            startTime2 = (int) fazr - (int)  current;
+
+
+            startProgressBar();
+
+
+
+        }
+
+        // fazr -> sunrise
+
+        if(current >= fazr && current < sunrise ){
+
+            startTime2 = (int) sunrise - (int) current;
+
+            startProgressBar();
+
+        }
+
+        // sunrise -> dhuhr
+
+        if(current >= sunrise && current < dhuhr ){
+
+            startTime2 = (int) dhuhr - (int) current;
+
+            startProgressBar();
+
+        }
+
+        if(current >= dhuhr && current < asar){
+
+            startTime2 = (int) asar - (int) current;
+            startProgressBar();
+
+        }
+
+        if(current >= asar && current < magrib){
+
+            startTime2 = (int) magrib - (int) current;
+            startProgressBar();
+
+        }
+
+        if(current >= magrib && current < isha){
+
+            startTime2 = (int) isha - (int) current;
+
+            startProgressBar();
+        }
+
+
+
+
+    }
+
+    private void startProgressBar(){
+
+        progressBarCountDownTimer = new CountDownTimer(startTime2, 1000)
+        {
+            public void onTick(long millisUntilFinished)
+            {
+                i++;
+                progressBar.setProgress((int)i*100/(startTime2/1000));
+            }
+
+            public void onFinish()
+            {
+                i++;
+                progressBar.setProgress(100);
+            }
+        }.start();
+
+
+    }
 
     /* Option bar */
 
