@@ -15,6 +15,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.prayertimes.R;
+import com.example.prayertimes.database.DatabaseHandler;
 import com.example.prayertimes.notification.DoNotification;
 import com.example.prayertimes.others.PrefConfig;
 @SuppressWarnings("deprecation")
@@ -52,7 +53,8 @@ public class SettingsFragment extends PreferenceFragment {
                             .setCancelable(false)
                             .setPositiveButton("Yes", (dialog, which) -> {
 
-
+                                DatabaseHandler databaseHandler = new DatabaseHandler(getContext());
+                                databaseHandler.deleteAll();
 
                             }).setNegativeButton("No", null)
                             .show();

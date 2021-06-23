@@ -169,6 +169,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     }
+    public void deleteAll(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_Prayers);
+        onCreate(db);
+    }
+    private void deleteContact(Contact contact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_Prayers, KEY_Date + " = ?",
+                new String[] { String.valueOf(contact.getDate()) });
+        db.close();
+    }
 
 
 }
