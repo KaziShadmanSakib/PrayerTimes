@@ -1,6 +1,7 @@
 package com.example.prayertimes.options;
 
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -18,7 +19,8 @@ import com.example.prayertimes.notification.DoNotification;
 import com.example.prayertimes.others.PrefConfig;
 @SuppressWarnings("deprecation")
 public class SettingsFragment extends PreferenceFragment {
-    CheckBoxPreference checkBoxPreference;
+    CheckBoxPreference notificationCheckBoxPreference;
+    CheckBoxPreference logAccessCheckBoxPreference;
     ListPreference notification_preference;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,15 +29,59 @@ public class SettingsFragment extends PreferenceFragment {
 
 
         notification_preference = (ListPreference) findPreference("notification_importance");
-        checkBoxPreference = (CheckBoxPreference) findPreference("pref_notification");
+        notificationCheckBoxPreference = (CheckBoxPreference) findPreference("pref_notification");
+        logAccessCheckBoxPreference = (CheckBoxPreference)findPreference("pref_change_log") ;
 
-
-
+        deleteLog();
+        logAccessPref();
         internetPref();
         locationPref();
         notificationPref();
         soundPref();
         notificationImportancePref();
+    }
+
+    private void deleteLog() {
+        Preference myPref = findPreference("pref_delete_log");
+        if(myPref!=null){
+            myPref.setOnPreferenceClickListener(preference -> {
+                if(PrefConfig.loadLogAccessPref(getContext())==0){
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Are You Sure")
+                            .setMessage("All the Calendar log Data will be removed")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", (dialog, which) -> {
+
+
+
+                            }).setNegativeButton("No", null)
+                            .show();
+                }
+                return true;
+            });
+        }
+    }
+
+    private void logAccessPref() {
+
+        if(logAccessCheckBoxPreference!=null){
+            if(PrefConfig.loadLogAccessPref(getContext())==1)logAccessCheckBoxPreference.setChecked(true);
+            else
+                logAccessCheckBoxPreference.setChecked(false);
+
+
+            logAccessCheckBoxPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                if(logAccessCheckBoxPreference.isChecked()){
+                    PrefConfig.saveLogAccessPref(getContext(),0);
+
+                }
+                else if(!logAccessCheckBoxPreference.isChecked()){
+                    PrefConfig.saveLogAccessPref(getContext(),1);
+
+                }
+                return true;
+            });
+        }
     }
 
     private void notificationImportancePref() {
@@ -87,23 +133,27 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     private void notificationPref() {
-        if(PrefConfig.loadNotificationIndex(getContext())==1)checkBoxPreference.setChecked(true);
-        else
-            checkBoxPreference.setChecked(true);
 
-        DoNotification doNotification = new DoNotification(getContext());
-        checkBoxPreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            if(checkBoxPreference.isChecked()){
-                PrefConfig.saveNotificationIndex(getContext(),0);
-                doNotification.cancelAlarm();
+        if(notificationCheckBoxPreference!=null){
+            if(PrefConfig.loadNotificationIndex(getContext())==1)notificationCheckBoxPreference.setChecked(true);
+            else
+                notificationCheckBoxPreference.setChecked(false);
 
-            }
-            else if(!checkBoxPreference.isChecked()){
-                PrefConfig.saveNotificationIndex(getContext(),1);
-                doNotification.setNotification();
-            }
-            return true;
-        });
+            DoNotification doNotification = new DoNotification(getContext());
+            notificationCheckBoxPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                if(notificationCheckBoxPreference.isChecked()){
+                    PrefConfig.saveNotificationIndex(getContext(),0);
+                    doNotification.cancelAlarm();
+
+                }
+                else if(!notificationCheckBoxPreference.isChecked()){
+                    PrefConfig.saveNotificationIndex(getContext(),1);
+                    doNotification.setNotification();
+                }
+                return true;
+            });
+        }
+
 
 
     }

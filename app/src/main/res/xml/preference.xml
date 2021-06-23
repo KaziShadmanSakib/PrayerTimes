@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress DeprecatedClassUsageInspection -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:key="notifications_category"
@@ -26,19 +27,33 @@
 
     </PreferenceCategory>
     <PreferenceCategory
+        android:key="log_category"
+        android:title="Log">
+
+        <CheckBoxPreference
+            android:id="@+id/changelog"
+            android:key="pref_change_log"
+            android:summary="A warning is given if you want to change the data which is more than 30 days ago. Do you want to stop the warning"
+            android:title="Log Access"
+            android:defaultValue="false"/>
+        <Preference
+            android:id="@+id/deletelog"
+            android:key="pref_delete_log"
+            android:summary="Delete All log Data"
+            android:title="Delete" />
+        ></PreferenceCategory>
+    <PreferenceCategory
         android:key="other_category"
-        android:title="others">
+        android:title="Others">
 
         <Preference
             android:id="@+id/internetSettings"
             android:key="pref_network"
-            android:onClick="onClickInternetSettings"
-            android:summary="Open Wireless Settings"
+            android:summary="Open Internet Settings"
             android:title="Internet Settings" />
         <Preference
             android:id="@+id/locationSettings"
             android:key="pref_location"
-            android:onClick="onClickLocationSettings"
             android:summary="Open Wireless Settings"
             android:title="Location Settings" />
         ></PreferenceCategory>

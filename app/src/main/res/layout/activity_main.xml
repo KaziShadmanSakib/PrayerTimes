@@ -187,7 +187,7 @@
 
     <TextView
         android:id="@+id/nowPrayerName"
-        android:layout_width="169dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginStart="12dp"
@@ -198,7 +198,7 @@
         android:text="Now -"
         android:textColor="#FFFFFF "
         android:textSize="18sp"
-        android:translationX="230dp"
+        android:translationX="245dp"
         android:translationY="-25dp" />
 
     <TextView

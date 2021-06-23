@@ -34,6 +34,23 @@ public class PrefConfig {
     private static final String Pref_Index_Key = "pref_index_key";
     private static final String Pref_notification_Key = "pref_notification_key";
     private static final String Pref_notification_type_Key = "pref_notification_type_key";
+    private static final String Pref_log_access_Key = "pref_log_access_key";
+
+    public static void saveLogAccessPref(Context context, int index){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_log_access_Key, index);
+        editor.apply();
+
+    }
+
+    public static int loadLogAccessPref(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_log_access_Key, 0);
+
+    }
 
     public static void saveCurrentNotificationType(Context context, int index){
 
@@ -62,7 +79,7 @@ public class PrefConfig {
     public static int loadCurrentPrayerIndex(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getInt(Pref_Index_Key, 6);
+        return pref.getInt(Pref_Index_Key, 5);
 
     }
     public static void saveNotificationIndex(Context context, int index){

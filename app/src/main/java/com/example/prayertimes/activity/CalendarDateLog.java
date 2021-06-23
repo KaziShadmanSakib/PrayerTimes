@@ -2,9 +2,14 @@ package com.example.prayertimes.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.ActionMode;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +18,7 @@ import com.example.prayertimes.database.Contact;
 import com.example.prayertimes.database.DatabaseHandler;
 import com.example.prayertimes.datetime.PrayerTimeInMiliSecond;
 import com.example.prayertimes.R;
+import com.example.prayertimes.others.PrefConfig;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,18 +59,24 @@ public class CalendarDateLog extends AppCompatActivity {
             date = modifiedDate(date);
 
         }
+
+
+
         dateTextView = findViewById(R.id.datetextView);
-        dateTextView.setText("Current Date : " + formattedDate(date));
-        dateTextView.setTextColor(Color.parseColor("#028B7C"));
-        dateTextView.setTextSize(26);
-
-
+        dateTextView.setText("Selected Date : " + formattedDate(date));
 
 
         databaseHandler = new DatabaseHandler(this);
+        currentDateSet();
 
         //set checkbox ids
         createCheckBoxId();
+        if(currentDate+1==clickedDate){
+
+            //allPrayersCheckedList[PrefConfig.loadCurrentPrayerIndex(this)-1].setBackgroundResource(R.drawable.border);
+
+
+        }
 
         //create checkbox
         if(databaseHandler.getContact(date).getDate() == null){
@@ -76,7 +88,7 @@ public class CalendarDateLog extends AppCompatActivity {
             checkBox(false,date);
 
         }
-        currentDateSet();
+
 
         //change checkbox on Click and update DB
         for(int i = 0; i < 5; i++ ){
@@ -84,8 +96,23 @@ public class CalendarDateLog extends AppCompatActivity {
             allPrayersCheckedList[i].setOnClickListener(view -> {
 
                 if((currentDate-clickedDate)>99){
-                    Toast toast = Toast.makeText(this,"You can only change the log of past 30 days",Toast.LENGTH_SHORT);
-                    toast.show();
+                    if(PrefConfig.loadLogAccessPref(this)==0){
+                        new AlertDialog.Builder(this)
+                                .setTitle("Are You Sure")
+                                .setMessage("You can stop the warning from settings")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", (dialog, which) -> {
+
+                                    updateChecked(finalI);
+
+                                }).setNegativeButton("No", null)
+                                .show();
+                    }
+
+
+                    else{
+                        updateChecked(finalI);
+                    }
                 }
 
                 else if(currentDate+1>clickedDate){
