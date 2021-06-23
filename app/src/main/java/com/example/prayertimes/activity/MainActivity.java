@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
     CountDownTimer progressBarCountDownTimer;
-    int i = 100;
+    int i = 0;
 
     //abd's variables
     public DatabaseHandler databaseHandler;
@@ -119,24 +119,40 @@ public class MainActivity extends AppCompatActivity {
         setTimer();
         setNowAndNext();
         setQuote();
+        //setProgressBarTimer();
 
+
+        TimeParser tP = new TimeParser();
+        long iTime = tP.timeParserMethod(ishaNamazTime);
+        long ct = tP.timeParserMethodForCurrentTime(currentTime);
+        long mT = tP.timeParserMethod(magribNamazTime);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        //progressBar.setProgress(100);
+        progressBar.setProgress(i);
 
-        progressBarCountDownTimer = new CountDownTimer(100000, 1000)
-        {
-            public void onTick(long millisUntilFinished)
-            {
-                progressBar.setProgress(i);
-                i--;
-            }
 
-            public void onFinish()
+        if(ct >= mT && ct < iTime){
+
+            int startTime = (int) iTime - (int) ct;
+
+            timerId = findViewById(R.id.timerId);
+
+            progressBarCountDownTimer = new CountDownTimer(startTime, 1000)
             {
-                progressBar.setProgress(i);
-            }
-        }.start();
+                public void onTick(long millisUntilFinished)
+                {
+                    i++;
+                    progressBar.setProgress((int)i*100/(startTime/1000));
+                }
+
+                public void onFinish()
+                {
+                    i++;
+                    progressBar.setProgress(100);
+                }
+            }.start();
+
+        }
 
 
 
