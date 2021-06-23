@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
     CountDownTimer progressBarCountDownTimer;
-    int i = 0;
 
     //abd's variables
     public DatabaseHandler databaseHandler;
@@ -153,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         long sunset = tP.timeParserMethod(sunsetTime);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        progressBar.setProgress(i);
+        //progressBar.setProgress(i);
 
 
         if(emniCurr >= emni1 && emniCurr < emni2){
@@ -224,6 +223,8 @@ public class MainActivity extends AppCompatActivity {
 
         progressBarCountDownTimer = new CountDownTimer(startTime2, 1000)
         {
+            int i = 0;
+
             public void onTick(long millisUntilFinished)
             {
                 i++;
