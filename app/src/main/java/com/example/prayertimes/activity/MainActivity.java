@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /* Progress bar */
+
     public void setProgressBarTimer(){
 
         long midNight = 86400000;
@@ -136,11 +137,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         TimeParser tP = new TimeParser();
-        long isha = tP.timeParserMethod("02:10");
-        long current = tP.timeParserMethodForCurrentTime("02:11:02");
+
+        long emni1 = tP.timeParserMethod("02:10");
+        long emni2 = tP.timeParserMethod("02:15");
+        long emniCurr = tP.timeParserMethodForCurrentTime("02:11:00");
+
+        long isha = tP.timeParserMethod(ishaNamazTime);
+        long current = tP.timeParserMethodForCurrentTime(currentTime);
         long magrib = tP.timeParserMethod(magribNamazTime);
         long imsak = tP.timeParserMethod(imsakTime);
-        long fazr = tP.timeParserMethod("02:15");
+        long fazr = tP.timeParserMethod(fajrNamazTime);
         long sunrise = tP.timeParserMethod(sunriseTime);
         long dhuhr = tP.timeParserMethod(dhuhrNamazTime);
         long asar = tP.timeParserMethod(asarNamazTime);
@@ -150,17 +156,26 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setProgress(i);
 
 
-        if(current >= isha && current < fazr){
+        if(emniCurr >= emni1 && emniCurr < emni2){
+
+            startTime2 = (int) emni2 - (int) emniCurr;
 
 
-            startTime2 = (int) fazr - (int)  current;
+            startProgressBar();
+
+        }
+
+        /*if(current >= isha || current >= 0 && current < fazr){
+
+
+            startTime2 = (int) (midNight - current) + (int) fazr;
 
 
             startProgressBar();
 
 
 
-        }
+        }*/
 
         // fazr -> sunrise
 
@@ -198,13 +213,10 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= magrib && current < isha){
 
-            startTime2 = (int) isha - (int) current;
+            startTime2 = (int) isha - (int)current;
 
             startProgressBar();
         }
-
-
-
 
     }
 
