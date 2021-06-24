@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
     CountDownTimer progressBarCountDownTimer;
-    int i = 0;
+    int i;
 
     //abd's variables
     public DatabaseHandler databaseHandler;
@@ -138,9 +138,9 @@ public class MainActivity extends AppCompatActivity {
 
         TimeParser tP = new TimeParser();
 
-        /*long emni1 = tP.timeParserMethod("02:10");
+        long emni1 = tP.timeParserMethod("02:10");
         long emni2 = tP.timeParserMethod("03:15");
-        long emniCurr = tP.timeParserMethodForCurrentTime("02:11:00");*/
+        long emniCurr = tP.timeParserMethodForCurrentTime("02:11:00");
 
         long isha = tP.timeParserMethod(ishaNamazTime);
         long current = tP.timeParserMethodForCurrentTime(currentTime);
@@ -154,19 +154,20 @@ public class MainActivity extends AppCompatActivity {
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
-        //progressBar.setProgress(i);
+        i = PrefConfig.loadProgressBar(this);
+        progressBar.setProgress(i);
 
 
-        /*if(emniCurr >= emni1 && emniCurr < emni2){
+        if(emniCurr >= emni1 && emniCurr < emni2){
 
             startTime2 = (int) emni2 - (int) emniCurr;
 
 
             startProgressBar();
 
-        }*/
+        }
 
-        if(current >= isha || current >= 0 && current < fazr){
+        /*if(current >= isha || current >= 0 && current < fazr){
 
 
             startTime2 = (int) (midNight - current) + (int) fazr;
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        }
+        }*/
 
         // fazr -> sunrise
 
@@ -229,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished)
             {
                 i++;
+                PrefConfig.saveProgressBar(MainActivity.this, i);
                 progressBar.setProgress((int)i*100/(startTime2/1000));
             }
 
@@ -291,6 +293,9 @@ public class MainActivity extends AppCompatActivity {
 
             PrefConfig.saveCurrentCity(this,"Seattle");
             PrefConfig.saveCurrentCountry(this,"United States");
+
+            PrefConfig.saveProgressBar(this, 0);
+
             JasonFetcher jasonFetcher = new JasonFetcher(this);
             jasonFetcher.getData();
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
@@ -298,7 +303,6 @@ public class MainActivity extends AppCompatActivity {
                     setNowAndNext();
                 }
             }, 5000);
-
 
 
 
