@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
     CountDownTimer progressBarCountDownTimer;
+    int i = 0;
 
     //abd's variables
     public DatabaseHandler databaseHandler;
@@ -224,7 +225,6 @@ public class MainActivity extends AppCompatActivity {
 
         progressBarCountDownTimer = new CountDownTimer(startTime2, 1000)
         {
-            int i = 0;
 
             public void onTick(long millisUntilFinished)
             {
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onFinish()
             {
-                i++;
+                i = 0;
                 progressBar.setProgress(100);
             }
         }.start();

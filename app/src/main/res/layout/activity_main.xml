@@ -104,7 +104,7 @@
         android:text="Iftar"
         android:textColor="#000000 "
         android:textSize="16sp"
-        android:translationX="-75sp"
+        android:translationX="-65sp"
         android:translationY="-17.5sp" />
 
     <TextView
@@ -134,7 +134,7 @@
         android:text="Sehri"
         android:textColor="#000000 "
         android:textSize="16sp"
-        android:translationX="-80sp"
+        android:translationX="-70sp"
         android:translationY="10sp" />
 
 
@@ -154,10 +154,6 @@
         android:id="@+id/timerId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/timerBackground"
-        android:layout_alignTop="@+id/timerBackground"
-        android:layout_alignEnd="@+id/timerBackground"
-        android:layout_alignBottom="@+id/timerBackground"
         android:layout_marginStart="36dp"
         android:layout_marginTop="46dp"
         android:layout_marginEnd="36dp"
@@ -170,14 +166,13 @@
 
     <TextView
         android:id="@+id/haveYouPrayed"
-        android:layout_width="252dp"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginStart="12dp"
         android:layout_marginTop="105dp"
         android:layout_marginEnd="-2dp"
         android:layout_marginBottom="534dp"
-        android:layout_toStartOf="@+id/timerBackground"
         android:onClick="updateDB"
         android:text="Have you prayed?"
         android:textColor="#FFFFFF "
@@ -194,23 +189,21 @@
         android:layout_marginTop="105dp"
         android:layout_marginEnd="-45dp"
         android:layout_marginBottom="534dp"
-        android:layout_toStartOf="@+id/timerBackground"
         android:text="Now -"
         android:textColor="#FFFFFF "
         android:textSize="18sp"
-        android:translationX="245dp"
+        android:translationX="230dp"
         android:translationY="-25dp" />
 
     <TextView
         android:id="@+id/next"
-        android:layout_width="257dp"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginStart="12dp"
         android:layout_marginTop="105dp"
         android:layout_marginEnd="-7dp"
         android:layout_marginBottom="534dp"
-        android:layout_toStartOf="@+id/timerBackground"
         android:text="Next"
         android:textColor="#FFFFFF "
         android:textSize="15sp"
@@ -219,14 +212,14 @@
 
     <TextView
         android:id="@+id/nextPrayerName"
-        android:layout_width="257dp"
+        android:layout_width="183dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginStart="12dp"
         android:layout_marginTop="105dp"
-        android:layout_marginEnd="-7dp"
+        android:layout_marginEnd="-183dp"
         android:layout_marginBottom="534dp"
-        android:layout_toStartOf="@+id/timerBackground"
+        android:layout_toStartOf="@id/next"
         android:textColor="#FFFFFF "
         android:textSize="20sp"
         android:translationX="5dp"
@@ -234,14 +227,14 @@
 
     <TextView
         android:id="@+id/nextPrayerTime"
-        android:layout_width="257dp"
+        android:layout_width="186dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginStart="12dp"
         android:layout_marginTop="105dp"
-        android:layout_marginEnd="-7dp"
+        android:layout_marginEnd="-186dp"
         android:layout_marginBottom="534dp"
-        android:layout_toStartOf="@+id/timerBackground"
+        android:layout_toStartOf="@id/nextPrayerName"
         android:textColor="#FFFFFF "
         android:textSize="18sp"
         android:translationX="5dp"
@@ -270,6 +263,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="13dp"
+        android:background="#FFFFFF	"
         android:text="Quote"
         android:textColor="#000000 "
         android:textSize="16sp"
