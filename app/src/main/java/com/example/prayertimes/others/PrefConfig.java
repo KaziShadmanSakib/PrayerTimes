@@ -36,6 +36,23 @@ public class PrefConfig {
     private static final String Pref_notification_type_Key = "pref_notification_type_key";
     private static final String Pref_log_access_Key = "pref_log_access_key";
     private static final String Pref_ProgressBar_Key = "pref_progressbar_key";
+    private static final String Pref_StartTimeProgressBar_Key = "pref_start_time_progress_bar_key";
+
+    public static int loadStartTimeProgressBar(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_StartTimeProgressBar_Key, 0);
+
+    }
+
+    public static void saveStartTimeProgressBar(Context context, int value){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_StartTimeProgressBar_Key, value);
+        editor.commit();
+
+    }
 
     public static int loadProgressBar(Context context){
 
