@@ -46,7 +46,7 @@ public class SettingsFragment extends PreferenceFragment {
         Preference myPref = findPreference("pref_delete_log");
         if(myPref!=null){
             myPref.setOnPreferenceClickListener(preference -> {
-                if(PrefConfig.loadLogAccessPref(getContext())==0){
+                {
                     new AlertDialog.Builder(getContext())
                             .setTitle("Are You Sure")
                             .setMessage("All the Calendar log Data will be removed")

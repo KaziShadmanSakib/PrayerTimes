@@ -15,6 +15,7 @@ public class DoNotification {
     Context _context;
     int[] prayerMiliSec = new int[5];
     int currentMiliSec;
+    int sunrise;
 
 
     public DoNotification(Context applicationContext) {
@@ -39,6 +40,10 @@ public class DoNotification {
             PrefConfig.saveCurrentPrayerIndex(_context,0);
             startAlarm(c,prayerMiliSec[0]);
         }
+        if(currentMiliSec>prayerMiliSec[0]&&currentMiliSec<sunrise){
+            PrefConfig.saveCurrentPrayerIndex(_context,6);
+            startAlarm(c,sunrise);
+        }
 
 
         
@@ -56,6 +61,7 @@ public class DoNotification {
         prayerMiliSec[2]=prayerTimeToMiliSecond.getAsarInMili();
         prayerMiliSec[3]=prayerTimeToMiliSecond.getMagribInMili();
         prayerMiliSec[4]=prayerTimeToMiliSecond.getIshaInMili();
+        sunrise = prayerTimeToMiliSecond.getSunriseInMili();
 
         
     }

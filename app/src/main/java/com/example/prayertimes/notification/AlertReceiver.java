@@ -22,8 +22,14 @@ public class AlertReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         int index = PrefConfig.loadCurrentPrayerIndex(context);
-        contentTitle = ALL_Prayers[index+1]+" has Started";
-        contentText = "Have you prayed "+ALL_Prayers[index]+"?";
+        if(index<5) {
+            contentTitle = ALL_Prayers[index + 1] + " has Started";
+            contentText = "Have you prayed " + ALL_Prayers[index] + "?";
+        }
+        else{
+            contentTitle = "Sunrise Time";
+            contentText = "Fajr waqt has finished. Good morning";
+        }
         long[] vibrate = { 0, 100, 200, 300 };
 
 
