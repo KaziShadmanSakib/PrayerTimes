@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,8 +68,9 @@ public class CalendarDateLog extends AppCompatActivity {
         //set checkbox ids
         createCheckBoxId();
         if(currentDate+1==clickedDate){
+            Log.i("uga",String.valueOf(PrefConfig.loadCurrentPrayerIndex(this)-1));
 
-            //allPrayersCheckedList[PrefConfig.loadCurrentPrayerIndex(this)-1].setBackgroundResource(R.drawable.border);
+            allPrayersCheckedList[PrefConfig.loadCurrentPrayerIndex(this)-1].setBackgroundResource(R.drawable.selected_rect_shape);
 
 
         }

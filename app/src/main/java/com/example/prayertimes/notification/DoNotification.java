@@ -41,7 +41,7 @@ public class DoNotification {
             startAlarm(c,prayerMiliSec[0]);
         }
         if(currentMiliSec>prayerMiliSec[0]&&currentMiliSec<sunrise){
-            PrefConfig.saveCurrentPrayerIndex(_context,6);
+            PrefConfig.saveCurrentPrayerIndex(_context,5);
             startAlarm(c,sunrise);
         }
 

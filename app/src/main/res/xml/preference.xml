@@ -40,7 +40,7 @@
             android:title="Log Access"
             android:defaultValue="false"/>
         <Preference
-            android:id="@+id/deletelog"
+            android:id="@+id/deleteLog"
             android:key="pref_delete_log"
             android:summary="Delete All log Data"
             android:title="Delete" />
