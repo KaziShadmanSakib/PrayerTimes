@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D1C9C9"
+    android:background="#FAF6F6"
     tools:context=".activity.AllPrayers">
 
     <TextView

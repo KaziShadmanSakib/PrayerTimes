@@ -7,6 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FAF6F6"
     tools:context=".activity.dua.SetDuaOfEachOption">
 
     <ImageView
@@ -15,15 +16,13 @@
         android:layout_height="304dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="100dp"
-        android:translationY="-105dp"
-         />
+        android:translationY="-105dp" />
 
     <ImageView
         android:id="@+id/dua02"
         android:layout_width="match_parent"
         android:layout_height="298dp"
-        android:translationY="290dp"
-         />
+        android:translationY="290dp" />
 
 </RelativeLayout>
 
