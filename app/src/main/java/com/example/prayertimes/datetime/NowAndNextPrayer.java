@@ -2,7 +2,7 @@ package com.example.prayertimes.datetime;
 
 import android.content.Context;
 
-import com.example.prayertimes.others.PrefConfig;
+import com.example.prayertimes.options.PrefConfig;
 
 import java.util.Calendar;
 import java.util.Date;

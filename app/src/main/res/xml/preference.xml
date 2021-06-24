@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress DeprecatedClassUsageInspection -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
     <PreferenceCategory
         android:key="notifications_category"
         android:title="Notifications">
-        <CheckBoxPreference
+        <SwitchPreference
             android:id="@+id/notificationChecker"
             android:key="pref_notification"
             android:title="Notification"
@@ -26,6 +27,8 @@
             android:title="Sound" />
 
     </PreferenceCategory>
+
+
     <PreferenceCategory
         android:key="log_category"
         android:title="Log">
@@ -42,6 +45,37 @@
             android:summary="Delete All log Data"
             android:title="Delete" />
         ></PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:key="location_category"
+        android:summary="Dhaka,Bangladesh has been set as Default Location"
+        android:title="Location">
+
+
+        <SwitchPreference
+            android:id="@+id/locationChecker"
+            android:key="pref_location_check"
+            android:title="Manual Location"
+            android:summary="Set Location Manually"
+            android:defaultValue="false" />
+        <EditTextPreference
+            android:dependency="pref_location_check"
+            android:id="@+id/location_setter"
+            android:key="pref_location_input"
+            android:dialogMessage="Format    : city,country \nExample : Dhaka,Bangladesh "
+            android:summary="Dhaka,Bangladesh"
+            android:title="Set City and Country" />
+        <Preference
+            android:id="@+id/locationSettings"
+            android:key="pref_location"
+            android:summary="Open Wireless Settings"
+            android:title="Location Settings" />
+        ></PreferenceCategory>
+
+
+
+
     <PreferenceCategory
         android:key="other_category"
         android:title="Others">
@@ -51,11 +85,7 @@
             android:key="pref_network"
             android:summary="Open Internet Settings"
             android:title="Internet Settings" />
-        <Preference
-            android:id="@+id/locationSettings"
-            android:key="pref_location"
-            android:summary="Open Wireless Settings"
-            android:title="Location Settings" />
+
         ></PreferenceCategory>
 
 

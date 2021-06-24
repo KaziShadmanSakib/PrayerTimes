@@ -9,7 +9,7 @@ import android.net.Uri;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.prayertimes.others.PrefConfig;
+import com.example.prayertimes.options.PrefConfig;
 
 public class AlertReceiver extends BroadcastReceiver {
     private static String contentTitle = "New prayer";

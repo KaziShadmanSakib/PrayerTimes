@@ -4,12 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.view.ActionMode;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +13,7 @@ import com.example.prayertimes.database.Contact;
 import com.example.prayertimes.database.DatabaseHandler;
 import com.example.prayertimes.datetime.PrayerTimeInMiliSecond;
 import com.example.prayertimes.R;
-import com.example.prayertimes.others.PrefConfig;
+import com.example.prayertimes.options.PrefConfig;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.prayertimes.others.PrefConfig;
 import com.example.prayertimes.R;
 
 import java.util.Objects;

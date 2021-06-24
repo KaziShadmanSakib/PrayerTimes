@@ -3,7 +3,7 @@ package com.example.prayertimes.datetime;
 
 import android.content.Context;
 
-import com.example.prayertimes.others.PrefConfig;
+import com.example.prayertimes.options.PrefConfig;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

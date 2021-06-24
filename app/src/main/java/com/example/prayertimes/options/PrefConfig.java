@@ -1,4 +1,4 @@
-package com.example.prayertimes.others;
+package com.example.prayertimes.options;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -33,10 +33,26 @@ public class PrefConfig {
     private static final String Pref_Imsak_AM_PM_Key = "pref_imsak_am_pm_key";
     private static final String Pref_Index_Key = "pref_index_key";
     private static final String Pref_notification_Key = "pref_notification_key";
+    private static final String Pref_location_set_Key = "pref_location_set_key";
     private static final String Pref_notification_type_Key = "pref_notification_type_key";
     private static final String Pref_log_access_Key = "pref_log_access_key";
     private static final String Pref_ProgressBar_Key = "pref_progressbar_key";
     private static final String Pref_StartTimeProgressBar_Key = "pref_start_time_progress_bar_key";
+
+    public static int loadLocationType(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_location_set_Key, 0);
+
+    }
+    public static void saveLocationIndex(Context context, int type){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_location_set_Key, type);
+        editor.apply();
+
+    }
 
     public static int loadStartTimeProgressBar(Context context){
 

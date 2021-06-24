@@ -21,14 +21,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.prayertimes.datetime.NowAndNextPrayer;
 import com.example.prayertimes.notification.DoNotification;
 import com.example.prayertimes.activity.dua.Duas;
-import com.example.prayertimes.others.PrefConfig;
+import com.example.prayertimes.options.PrefConfig;
 import com.example.prayertimes.others.QuoteGetter;
 import com.example.prayertimes.R;
 import com.example.prayertimes.database.DatabaseHandler;
@@ -687,11 +686,16 @@ public class MainActivity extends AppCompatActivity {
     private void setLocation() {
         geocoder = new Geocoder(this, Locale.getDefault());
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        cityLocation = (TextView) findViewById(R.id.cityLocation);
-        if(finalLat != 0 && finalLong != 0){
-            convertLocation(finalLat,finalLong);
+        if(PrefConfig.loadLocationType(this)==0){
+
+
+
+            if(finalLat != 0 && finalLong != 0){
+                convertLocation(finalLat,finalLong);
+            }
+            getLastLocation();
         }
-        getLastLocation();
+
     }
 
     private void setDataBase(){
@@ -706,6 +710,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTextviewid() {
+        cityLocation = (TextView) findViewById(R.id.cityLocation);
         quoteOfTheDay = (TextView) findViewById(R.id.quote);
         nowPrayerName = findViewById(R.id.nowPrayerName);
         nextPrayerTime = findViewById(R.id.nextPrayerTime);

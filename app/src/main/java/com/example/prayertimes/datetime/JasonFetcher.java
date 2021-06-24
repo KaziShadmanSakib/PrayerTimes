@@ -2,6 +2,7 @@ package com.example.prayertimes.datetime;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -9,10 +10,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.prayertimes.activity.MainActivity;
 import com.example.prayertimes.others.AppController;
 import com.example.prayertimes.others.LoadingDialog;
-import com.example.prayertimes.others.PrefConfig;
+import com.example.prayertimes.options.PrefConfig;
 
 import org.json.JSONObject;
 
@@ -22,12 +22,26 @@ public class JasonFetcher {
     private String fajrNamazTimeAMPM, sunriseTimeAMPM, dhuhrNamazTimeAMPM, asarNamazTimeAMPM, sunsetTimeAMPM, magribNamazTimeAMPM, ishaNamazTimeAMPM, imsakTimeAMPM;
     String url;
     Context context;
+    Boolean isOk = true;
+    String city,country;
 
     // Tag used to cancel the request
     String tag_json_obj = "json_obj_req";
 
     public JasonFetcher(Context context){
         this.context = context;
+        city = PrefConfig.loadCurrentCity(context);;
+        country = PrefConfig.loadCurrentCountry(context);
+
+    }
+
+    public boolean isNoError(){
+        return isOk;
+    }
+    public void getTempData(String tempCity , String tempCountry){
+        city = tempCity;
+        country = tempCountry;
+        getData();
 
     }
 
@@ -41,8 +55,7 @@ public class JasonFetcher {
             loadingDialog.startLoadingDialog();
         }
 
-        String city = PrefConfig.loadCurrentCity(context);;
-        String country = PrefConfig.loadCurrentCountry(context);
+
 
 
         url = "http://api.aladhan.com/v1/timingsByCity?city="+ city +"&country="+ country +"&method=1&school=1";
@@ -129,6 +142,7 @@ public class JasonFetcher {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                isOk = false;
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
 
                 Toast.makeText(context, "Please turn on location or internet to be always updated", Toast.LENGTH_SHORT).show();

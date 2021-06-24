@@ -2,6 +2,8 @@ package com.example.prayertimes.others;
 
 import android.content.Context;
 
+import com.example.prayertimes.options.PrefConfig;
+
 import java.io.IOException;
 import java.io.InputStream;
 

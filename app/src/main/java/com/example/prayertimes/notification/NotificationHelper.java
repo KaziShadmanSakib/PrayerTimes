@@ -15,7 +15,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.prayertimes.activity.CalendarDateLog;
 import com.example.prayertimes.R;
-import com.example.prayertimes.others.PrefConfig;
+import com.example.prayertimes.options.PrefConfig;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
