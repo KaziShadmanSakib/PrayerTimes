@@ -38,17 +38,22 @@ public class SettingsFragment extends PreferenceFragment {
     CheckBoxPreference logAccessCheckBoxPreference;
     ListPreference notification_preference;
     ListPreference mazhabPreference;
+    SwitchPreference extraTimePref;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preference);
 
+        extraTimePref = (SwitchPreference)findPreference("pref_extra");
         locationPreference = (SwitchPreference)findPreference("pref_location_check") ;
         notification_preference = (ListPreference) findPreference("notification_importance");
         notificationPreference = (SwitchPreference) findPreference("pref_notification");
         logAccessCheckBoxPreference = (CheckBoxPreference)findPreference("pref_change_log") ;
         mazhabPreference = (ListPreference)findPreference("mazhab_type");
 
+
+        extraMinutePref();
+        extratimePref();
         mazhabPref();
         deleteLog();
         logAccessPref();
@@ -60,10 +65,83 @@ public class SettingsFragment extends PreferenceFragment {
         notificationImportancePref();
     }
 
+    private void extraMinutePref() {
+
+        String s = String.valueOf(PrefConfig.loadExtraMinutesCount(getContext()));
+        EditTextPreference extraMinuteEditText  = (EditTextPreference) findPreference("pref_extra_time_input");
+
+
+        if(extraMinuteEditText!=null){
+
+            extraMinuteEditText.setSummary(s);
+            extraMinuteEditText.setText(s);
+
+            extraMinuteEditText.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                    String minutes = newValue.toString();
+
+
+                    if(minutes!=null){
+                        int min = Integer.parseInt(minutes);
+
+                        if(min>=0&&min<11) {
+
+                                PrefConfig.saveExtraMinutes(getContext(),min);
+                                extraMinuteEditText.setSummary(String.valueOf(min));
+                                extraMinuteEditText.setText(String.valueOf(min));
+
+                        }
+                        else{
+                                Toast toast = Toast.makeText(getContext(), "Input value is out of range", Toast.LENGTH_SHORT);
+                                toast.show();
+                        }
+
+
+                    }
+
+
+
+
+
+                    return true;
+                }
+            });
+
+
+
+
+        }
+    }
+
+    private void extratimePref() {
+        if(extraTimePref!=null){
+            if(PrefConfig.loadExtraTimePref(getContext())==1)extraTimePref.setChecked(true);
+            else
+                extraTimePref.setChecked(false);
+
+
+            extraTimePref.setOnPreferenceChangeListener((preference, newValue) -> {
+                if(extraTimePref.isChecked()){
+                    PrefConfig.saveExtraTimePref(getContext(),0);
+
+
+                }
+                else if(!extraTimePref.isChecked()){
+                    PrefConfig.saveExtraTimePref(getContext(),1);
+                }
+                return true;
+            });
+        }
+
+
+    }
+
     private void mazhabPref() {
         if(mazhabPreference!=null){
 
-            if(PrefConfig.loadMazhabType(getContext())==0){
+            if(PrefConfig.loadMazhabType(getContext())==1){
                 mazhabPreference.setSummary("Hanafi");
             }
 
@@ -87,14 +165,15 @@ public class SettingsFragment extends PreferenceFragment {
 
                     if(s.equals("Hanafi")){
 
-                        PrefConfig.saveMazhabType(getContext(),0);
+                        PrefConfig.saveMazhabType(getContext(),1);
                         mazhabPreference.setSummary("Hanafi");
                     }
                     else{
-                        PrefConfig.saveMazhabType(getContext(),1);
+                        PrefConfig.saveMazhabType(getContext(),0);
                         mazhabPreference.setSummary("Shafeii");
                     }
                     JasonFetcher jasonFetcher = new JasonFetcher(getContext());
+                    jasonFetcher.getData();
                 }
 
             });

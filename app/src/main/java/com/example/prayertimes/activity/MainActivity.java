@@ -25,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.prayertimes.datetime.NowAndNextPrayer;
+import com.example.prayertimes.datetime.PrayerTimeInMiliSecond;
 import com.example.prayertimes.notification.DoNotification;
 import com.example.prayertimes.activity.dua.Duas;
 import com.example.prayertimes.options.PrefConfig;
@@ -115,11 +116,11 @@ public class MainActivity extends AppCompatActivity {
         setHijriDate();
         setTextviewid();
         setNotification();
-        setSahriIftariCityText();
         setTimer();
         setNowAndNext();
         setQuote();
         setProgressBarTimer();
+        setSahriIftariCityText();
 
 
 
@@ -732,9 +733,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setSahriIftariCityText() {
+        String sehriAMPM = "00:00";
+        String iftarAMPM = "00:00";
 
-        String sehriAMPM = PrefConfig.loadImsakTimeAMPM(this);
-        String iftarAMPM = PrefConfig.loadMagribTimeAMPM(this);
+        if(PrefConfig.loadExtraTimePref(this)==0){
+            sehriAMPM = PrefConfig.loadImsakTimeAMPM(this);
+            iftarAMPM = PrefConfig.loadMagribTimeAMPM(this);
+        }
+        else{
+
+            int extraMin = PrefConfig.loadExtraMinutesCount(this);
+            PrayerTimeInMiliSecond prayerTimeInMiliSecond = new PrayerTimeInMiliSecond(this);
+            prayerTimeInMiliSecond.toMiliSec();
+
+
+            int sehri = prayerTimeInMiliSecond.getFajrInMili();
+            Log.i("uga",String.valueOf(sehri));
+            sehri = sehri - extraMin*60*1000;
+            Log.i("uga",String.valueOf(sehri));
+            String sehriTime = prayerTimeInMiliSecond.militoHour(sehri);
+            Log.i("uga",String.valueOf(sehriTime));
+            sehriTime = prayerTimeInMiliSecond.timeParseToAMPM(sehriTime);
+            Log.i("uga",String.valueOf(sehriTime));
+            sehriAMPM = sehriTime;
+
+
+            int iftari = prayerTimeInMiliSecond.getMagribInMili();
+            iftari = iftari + extraMin*60*1000;
+            String iftariTime = prayerTimeInMiliSecond.militoHour(iftari);
+            iftariTime = prayerTimeInMiliSecond.timeParseToAMPM(iftariTime);
+            iftarAMPM = iftariTime;
+
+        }
+
         city = PrefConfig.loadCurrentCity(this);
         cityLocation.setText(city);
         sehriTimeId.setText(sehriAMPM);

@@ -55,10 +55,12 @@ public class JasonFetcher {
             loadingDialog.startLoadingDialog();
         }
 
+        String schholType = String.valueOf(PrefConfig.loadMazhabType(context));
+
 
 
         url = "";
-        url = "http://api.aladhan.com/v1/timingsByCity?city="+ city +"&country="+ country +"&method=1&school=1";
+        url = "http://api.aladhan.com/v1/timingsByCity?city="+ city +"&country="+ country +"&method=1&school="+schholType;
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,

@@ -49,7 +49,7 @@ public class PrefConfig {
     public static int loadMazhabType(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getInt(Pref_Mazhab_Key, 0);
+        return pref.getInt(Pref_Mazhab_Key, 1);
 
     }
     public static void saveMazhabType(Context context, int type){

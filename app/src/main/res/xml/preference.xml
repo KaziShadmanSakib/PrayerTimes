@@ -42,7 +42,7 @@
             android:id="@+id/extraTime"
             android:key="pref_extra"
             android:title="Extra time for caution"
-            android:summary=" Do you want to add/subtract extra time for Sahri and Iftar?(1-10)"
+            android:summary="Do you want to add/subtract extra time for Sahri and Iftar?"
             android:defaultValue="false" />
         <EditTextPreference
             android:dependency="pref_extra"
@@ -51,7 +51,7 @@
             android:numeric="integer"
             android:dialogMessage="How many minutes do you want to add / subtract? "
             android:summary="0 min"
-            android:title="Set minutes"
+            android:title="Set minutes(1-10)"
             tools:ignore="Deprecated" />
 
 
