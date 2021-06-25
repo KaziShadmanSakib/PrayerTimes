@@ -748,13 +748,9 @@ public class MainActivity extends AppCompatActivity {
 
 
             int sehri = prayerTimeInMiliSecond.getFajrInMili();
-            Log.i("uga",String.valueOf(sehri));
             sehri = sehri - extraMin*60*1000;
-            Log.i("uga",String.valueOf(sehri));
             String sehriTime = prayerTimeInMiliSecond.militoHour(sehri);
-            Log.i("uga",String.valueOf(sehriTime));
             sehriTime = prayerTimeInMiliSecond.timeParseToAMPM(sehriTime);
-            Log.i("uga",String.valueOf(sehriTime));
             sehriAMPM = sehriTime;
 
 

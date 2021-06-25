@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.prayertimes.datetime.PrayerTimeInMiliSecond;
 import com.example.prayertimes.options.PrefConfig;
 import com.example.prayertimes.R;
 import com.example.prayertimes.datetime.JasonFetcher;
@@ -78,12 +79,57 @@ public class AllPrayers extends AppCompatActivity{
 
 
         fazrNamazId.setText(fajrNamazAMPM + " - " + sunriseAMPM);
-        sunriseId.setText(sunriseAMPM);
+        setSunrise();
         dhuhrNamazId.setText(dhuhrNamazAMPM + " - " + asarNamazAMPM);
         asarNamazId.setText(asarNamazAMPM + " - " + sunsetAMPM);
-        sunsetId.setText(sunsetAMPM);
+        setSunset();
         magribNamazId.setText(magribNamazAMPM + " - " + ishaNamazAMPM);
         ishaNamazId.setText(ishaNamazAMPM);
+
+    }
+
+    private void setSunrise() {
+
+        int time;
+        if(PrefConfig.loadMazhabType(this)==0){
+            time = 15;
+        }
+        else{
+            time = 23;
+        }
+
+        String s = PrefConfig.loadSunriseTime(this);
+        PrayerTimeInMiliSecond prayerTimeInMiliSecond = new PrayerTimeInMiliSecond(this);
+        prayerTimeInMiliSecond.toMiliSec();
+
+        int sunrise = prayerTimeInMiliSecond.getSunriseInMili();
+        sunrise = sunrise + time*60*1000;
+        String sunriseEnd = prayerTimeInMiliSecond.militoHour(sunrise);
+        sunriseEnd = prayerTimeInMiliSecond.timeParseToAMPM(sunriseEnd);
+        sunriseId.setText(sunriseAMPM + " - " + sunriseEnd);
+
+
+    }
+    private void setSunset() {
+
+        int time;
+        if(PrefConfig.loadMazhabType(this)==0){
+            time = 15;
+        }
+        else{
+            time = 23;
+        }
+
+        String s = PrefConfig.loadSunsetTime(this);
+        PrayerTimeInMiliSecond prayerTimeInMiliSecond = new PrayerTimeInMiliSecond(this);
+        prayerTimeInMiliSecond.toMiliSec();
+
+        int sunset = prayerTimeInMiliSecond.getSunsetInMili();
+        sunset = sunset - time*60*1000;
+        String sunsetStart = prayerTimeInMiliSecond.militoHour(sunset);
+        sunsetStart = prayerTimeInMiliSecond.timeParseToAMPM(sunsetStart);
+        sunsetId.setText(sunsetStart+ " - " +sunsetAMPM  );
+
 
     }
 

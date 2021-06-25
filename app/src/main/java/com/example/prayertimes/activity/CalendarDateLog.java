@@ -71,9 +71,12 @@ public class CalendarDateLog extends AppCompatActivity {
 
         if(currentDate+1==clickedDate){
 
-
+            if(PrefConfig.loadCurrentPrayerIndex(this)!=0)
             allPrayersCheckedList[PrefConfig.loadCurrentPrayerIndex(this)-1].setBackgroundResource(R.drawable.selected_rect_shape);
-
+            else if(PrefConfig.loadCurrentPrayerIndex(this)==5)
+                allPrayersCheckedList[0].setBackgroundResource(R.drawable.selected_rect_shape);
+            else
+                allPrayersCheckedList[4].setBackgroundResource(R.drawable.selected_rect_shape);
 
         }
 
