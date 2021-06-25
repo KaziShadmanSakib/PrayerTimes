@@ -11,6 +11,7 @@ import com.example.prayertimes.options.PrefConfig;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class NowAndNextPrayer {
     Context context;
@@ -19,6 +20,7 @@ public class NowAndNextPrayer {
      String nowPrayerName;
      String nextPrayerName;
      String nextPrayerTime;
+     public static String day = "today";
     private static final String[] ALL_Prayers = {"Isha","Fajr","Dhuhr","Asar","Magrib","Isha"};
     public NowAndNextPrayer(Context c){
         context = c;
@@ -70,6 +72,9 @@ public class NowAndNextPrayer {
             setPrayed("Fajr");
             nowPrayerName = "Good Morning";
             nextPrayerName = "Dhuhr";
+            if(getWeekDay()=="Friday"){
+                nextPrayerName = "Jumu'ah";
+            }
             nextPrayerTime = dhuhrNamazAMPM;
 
 
@@ -80,6 +85,9 @@ public class NowAndNextPrayer {
 
             setPrayed("Dhuhr");
             nowPrayerName = "Now - Dhuhr";
+            if(getWeekDay()=="Friday"){
+                nowPrayerName = "Now - Jumu'ah";
+            }
             nextPrayerName = "Asar";
             nextPrayerTime = asarNamazAMPM;
 
@@ -136,6 +144,9 @@ public class NowAndNextPrayer {
             contact = databaseHandler.getContact(currentDateSet());
 
         }
+        if(getWeekDay()=="Friday"){
+            s = "Have you prayed Jumu'ah?";
+        }
 
 
 
@@ -152,6 +163,15 @@ public class NowAndNextPrayer {
                 s = "You've prayed "+ prayer;
                 if(prayer=="Ishaa"){
                     s = "You've prayed isha";
+                }
+
+
+                if(prayer=="Dhuhr"){
+
+                    if(getWeekDay()=="Friday"){
+                        s = "You've prayed Jumu'ah";
+                    }
+
                 }
             }
 
@@ -175,7 +195,6 @@ public class NowAndNextPrayer {
         int dateInt = Integer.parseInt(s);
         dateInt--;
         s = String.valueOf(dateInt);
-        Log.i("uga",s);
         return s;
     }
 
@@ -190,6 +209,18 @@ public class NowAndNextPrayer {
     }
     public String getNextPrayerTime(){
         return nextPrayerTime;
+    }
+    public static String getWeekDay(){
+        if(day == "today"){
+            Date date=new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            day = new SimpleDateFormat("EEEE").format(date);
+            Log.i("uga",day);
+        }
+
+
+        return day;
     }
 
 

@@ -732,7 +732,7 @@ public class MainActivity extends AppCompatActivity {
 
     //abd's update Database
     @SuppressLint("SimpleDateFormat")
-    public void updateDB(View v) {
+    public void toClaendarDateLog(View v) {
         NowAndNextPrayer nowAndNextPrayer = new NowAndNextPrayer(this);
         nowAndNextPrayer.setNowAndNext();
 
@@ -754,17 +754,13 @@ public class MainActivity extends AppCompatActivity {
             int fajr = prayerTimeInMiliSecond.getFajrInMili();
 
 
-            if(currentTime>0&&currentTime<fajr){
-                i.putExtra("clickedDate",date);
-                startActivity(i);
-            }
-            else{
+            if (currentTime <= 0 || currentTime >= fajr) {
                 int dateInt = Integer.parseInt(date);
-                dateInt +=1;
+                dateInt += 1;
                 date = String.valueOf(dateInt);
-                i.putExtra("clickedDate",date);
-                startActivity(i);
             }
+            i.putExtra("clickedDate",date);
+            startActivity(i);
 
 
         }

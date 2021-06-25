@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.prayertimes.datetime.NowAndNextPrayer;
 import com.example.prayertimes.datetime.PrayerTimeInMiliSecond;
 import com.example.prayertimes.options.PrefConfig;
 import com.example.prayertimes.R;
@@ -85,6 +86,11 @@ public class AllPrayers extends AppCompatActivity{
         setSunset();
         magribNamazId.setText(magribNamazAMPM + " - " + ishaNamazAMPM);
         ishaNamazId.setText(ishaNamazAMPM);
+
+        if(NowAndNextPrayer.getWeekDay()=="Friday"){
+            TextView dhuhrNamaz = findViewById(R.id.dhuhrNamaz);
+            dhuhrNamaz.setText("Jumu'ah");
+        }
 
     }
 
