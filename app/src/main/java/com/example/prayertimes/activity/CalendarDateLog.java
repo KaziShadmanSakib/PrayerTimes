@@ -60,17 +60,22 @@ public class CalendarDateLog extends AppCompatActivity {
 
         dateTextView = findViewById(R.id.datetextView);
         dateTextView.setText("Selected Date : " + formattedDate(date));
+        //set checkbox ids
+        createCheckBoxId();
 
 
         databaseHandler = new DatabaseHandler(this);
         currentDateSet();
+        if(PrefConfig.loadCurrentPrayerIndex(this)==1&&currentDate+1==clickedDate){
+            date = getLastDate();
+            allPrayersCheckedList[4].setBackgroundResource(R.drawable.selected_rect_shape);
+        }
 
-        //set checkbox ids
-        createCheckBoxId();
+
         if(currentDate+1==clickedDate){
-            Log.i("uga",String.valueOf(PrefConfig.loadCurrentPrayerIndex(this)-1));
 
-            allPrayersCheckedList[PrefConfig.loadCurrentPrayerIndex(this)-1].setBackgroundResource(R.drawable.selected_rect_shape);
+            if(PrefConfig.loadCurrentPrayerIndex(this)>1)
+            allPrayersCheckedList[PrefConfig.loadCurrentPrayerIndex(this)-2].setBackgroundResource(R.drawable.selected_rect_shape);
 
 
         }
@@ -217,6 +222,8 @@ public class CalendarDateLog extends AppCompatActivity {
         int year = intDate;
         return day+"/"+month+"/"+year;
     }
+
+
     private int[] getData() {
 
         int[] prayerMiliSec = new int[5];
@@ -235,6 +242,14 @@ public class CalendarDateLog extends AppCompatActivity {
 
 
     }
+    private String getLastDate() {
+        String s;
+        int dateInt = currentDate;
+        dateInt--;
+        s = String.valueOf(dateInt);
+        return s;
+    }
 
 
-}
+
+    }
