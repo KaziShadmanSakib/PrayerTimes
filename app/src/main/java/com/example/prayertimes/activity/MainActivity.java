@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     CountDownTimer progressBarCountDownTimer;
     int i;
+    private boolean isProgressBarRunningFirstTime = true;
 
     //abd's variables
     public DatabaseHandler databaseHandler;
@@ -168,8 +169,19 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= isha || current >= 0 && current < fazr){
 
+            if(isProgressBarRunningFirstTime){
 
-            startTime2 = (int) (midNight - current) + (int) fazr;
+                isProgressBarRunningFirstTime = false;
+
+                startTime2 = (int) (midNight - current) + (int) fazr;
+
+            }
+
+            else{
+
+                startTime2 = (int) (midNight - isha) + (int) fazr;
+
+            }
 
 
             startProgressBar();
@@ -182,7 +194,23 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= fazr && current < sunrise ){
 
-            startTime2 = (int) sunrise - (int) current;
+            //startTime2 = (int) sunrise - (int) current;
+
+
+            if(isProgressBarRunningFirstTime){
+
+                isProgressBarRunningFirstTime = false;
+
+                startTime2 = (int) sunrise - (int) current;
+
+            }
+
+            else{
+
+                startTime2 = (int) sunrise - (int) fazr;
+
+            }
+
 
             startProgressBar();
 
@@ -192,7 +220,23 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= sunrise && current < dhuhr ){
 
-            startTime2 = (int) dhuhr - (int) current;
+            //startTime2 = (int) dhuhr - (int) current;
+
+
+            if(isProgressBarRunningFirstTime){
+
+                isProgressBarRunningFirstTime = false;
+
+                startTime2 = (int) dhuhr - (int) current;
+
+            }
+
+            else{
+
+                startTime2 = (int) dhuhr - (int) sunrise;
+
+            }
+
 
             startProgressBar();
 
@@ -200,21 +244,66 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= dhuhr && current < asar){
 
-            startTime2 = (int) asar - (int) current;
+            //startTime2 = (int) asar - (int) current;
+
+            if(isProgressBarRunningFirstTime){
+
+                isProgressBarRunningFirstTime = false;
+
+                startTime2 = (int) asar - (int) current;
+
+            }
+
+            else{
+
+                startTime2 = (int) asar - (int) dhuhr;
+
+            }
+
             startProgressBar();
 
         }
 
         if(current >= asar && current < magrib){
 
-            startTime2 = (int) magrib - (int) current;
+            //startTime2 = (int) magrib - (int) current;
+
+            if(isProgressBarRunningFirstTime){
+
+                isProgressBarRunningFirstTime = false;
+
+                startTime2 = (int) magrib - (int) current;
+
+            }
+
+            else{
+
+                startTime2 = (int) magrib - (int) asar;
+
+            }
+
             startProgressBar();
 
         }
 
         if(current >= magrib && current < isha){
 
-            startTime2 = (int) isha - (int)current;
+            //startTime2 = (int) isha - (int)current;
+
+            if(isProgressBarRunningFirstTime){
+
+                isProgressBarRunningFirstTime = false;
+
+                startTime2 = (int) isha - (int) current;
+
+            }
+
+            else{
+
+                startTime2 = (int) isha - (int) magrib;
+
+            }
+
 
             startProgressBar();
         }
