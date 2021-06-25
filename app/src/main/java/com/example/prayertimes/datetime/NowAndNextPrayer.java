@@ -112,7 +112,7 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= midNight && currentTime1 < fazrTime){
 
-            setPrayed("Isha");
+            haveYouPrayed  = "Get ready for the next Prayer";
             nowPrayerName = "Now - Midnight";
             nextPrayerName = "Fajr";
             nextPrayerTime = fajrNamazAMPM;
