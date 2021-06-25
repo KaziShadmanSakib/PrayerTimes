@@ -31,13 +31,63 @@ public class PrefConfig {
     private static final String Pref_Sunrise_AM_PM_Key = "pref_sunrise_am_pm_key";
     private static final String Pref_Sunset_AM_PM_Key = "pref_sunset_am_pm_key";
     private static final String Pref_Imsak_AM_PM_Key = "pref_imsak_am_pm_key";
+
+    private static final String Pref_ProgressBar_Key = "pref_progressbar_key";
+    private static final String Pref_StartTimeProgressBar_Key = "pref_start_time_progress_bar_key";
+
+
     private static final String Pref_Index_Key = "pref_index_key";
     private static final String Pref_notification_Key = "pref_notification_key";
     private static final String Pref_location_set_Key = "pref_location_set_key";
     private static final String Pref_notification_type_Key = "pref_notification_type_key";
     private static final String Pref_log_access_Key = "pref_log_access_key";
-    private static final String Pref_ProgressBar_Key = "pref_progressbar_key";
-    private static final String Pref_StartTimeProgressBar_Key = "pref_start_time_progress_bar_key";
+    private static final String Pref_Mazhab_Key = "pref_mazhab_key";
+    private static final String Pref_extra_time_Key = "pref_extra_time_key";
+    private static final String Pref_extra_minutes_Key = "pref_extra_minutes_key";
+
+
+    public static int loadMazhabType(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_Mazhab_Key, 0);
+
+    }
+    public static void saveMazhabType(Context context, int type){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_Mazhab_Key, type);
+        editor.apply();
+
+    }
+    public static int loadExtraTimePref(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_extra_time_Key, 0);
+
+    }
+    public static void saveExtraTimePref(Context context, int type){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_extra_time_Key, type);
+        editor.apply();
+
+    }
+    public static int loadExtraMinutesCount(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_extra_minutes_Key, 0);
+
+    }
+    public static void saveExtraMinutes(Context context, int count){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_extra_minutes_Key, count);
+        editor.apply();
+
+    }
 
     public static int loadLocationType(Context context){
 

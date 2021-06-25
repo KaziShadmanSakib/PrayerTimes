@@ -66,16 +66,13 @@ public class CalendarDateLog extends AppCompatActivity {
 
         databaseHandler = new DatabaseHandler(this);
         currentDateSet();
-        if(PrefConfig.loadCurrentPrayerIndex(this)==1&&currentDate+1==clickedDate){
-            date = getLastDate();
-            allPrayersCheckedList[4].setBackgroundResource(R.drawable.selected_rect_shape);
-        }
+
 
 
         if(currentDate+1==clickedDate){
 
-            if(PrefConfig.loadCurrentPrayerIndex(this)>1)
-            allPrayersCheckedList[PrefConfig.loadCurrentPrayerIndex(this)-2].setBackgroundResource(R.drawable.selected_rect_shape);
+
+            allPrayersCheckedList[PrefConfig.loadCurrentPrayerIndex(this)-1].setBackgroundResource(R.drawable.selected_rect_shape);
 
 
         }
@@ -242,13 +239,7 @@ public class CalendarDateLog extends AppCompatActivity {
 
 
     }
-    private String getLastDate() {
-        String s;
-        int dateInt = currentDate;
-        dateInt--;
-        s = String.valueOf(dateInt);
-        return s;
-    }
+
 
 
 

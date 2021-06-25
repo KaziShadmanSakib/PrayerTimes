@@ -9,6 +9,10 @@
         <item>No sound or visual interruption</item>
 
     </string-array>
+    <string-array name="madzhab_type">
+        <item>Hanafi</item>
+        <item>shafii</item>
+    </string-array>
 
     <string-array name="notification_details">
         <item>"High"</item>

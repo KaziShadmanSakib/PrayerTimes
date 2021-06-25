@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress DeprecatedClassUsageInspection -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         android:key="notifications_category"
@@ -18,7 +19,7 @@
             android:title="Notification Type"
             android:entries="@array/notification_type"
             android:entryValues="@array/notification_details"
-            android:dialogTitle="Choose a type" />
+            android:dialogTitle="Select A Type" />
         <Preference
             android:dependency="pref_notification"
             android:id="@+id/soundSettings"
@@ -27,6 +28,35 @@
             android:title="Sound" />
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="time_category"
+        android:title="Time">
+        <ListPreference
+            android:key="mazhab_type"
+            android:title="Mazhab"
+            android:entries="@array/madzhab_type"
+            android:entryValues="@array/madzhab_type"
+            android:dialogTitle="Select Your Mazhab" />
+        <SwitchPreference
+            android:id="@+id/extraTime"
+            android:key="pref_extra"
+            android:title="Extra time for caution"
+            android:summary=" Do you want to add/subtract extra time for Sahri and Iftar?(1-10)"
+            android:defaultValue="false" />
+        <EditTextPreference
+            android:dependency="pref_extra"
+            android:id="@+id/rojaTime"
+            android:key="pref_extra_time_input"
+            android:numeric="integer"
+            android:dialogMessage="How many minutes do you want to add / subtract? "
+            android:summary="0 min"
+            android:title="Set minutes"
+            tools:ignore="Deprecated" />
+
+
+     </PreferenceCategory>
+
 
 
     <PreferenceCategory

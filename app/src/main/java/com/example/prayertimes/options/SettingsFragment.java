@@ -37,6 +37,7 @@ public class SettingsFragment extends PreferenceFragment {
     SwitchPreference locationPreference;
     CheckBoxPreference logAccessCheckBoxPreference;
     ListPreference notification_preference;
+    ListPreference mazhabPreference;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +47,9 @@ public class SettingsFragment extends PreferenceFragment {
         notification_preference = (ListPreference) findPreference("notification_importance");
         notificationPreference = (SwitchPreference) findPreference("pref_notification");
         logAccessCheckBoxPreference = (CheckBoxPreference)findPreference("pref_change_log") ;
+        mazhabPreference = (ListPreference)findPreference("mazhab_type");
 
-
+        mazhabPref();
         deleteLog();
         logAccessPref();
         internetPref();
@@ -58,6 +60,47 @@ public class SettingsFragment extends PreferenceFragment {
         notificationImportancePref();
     }
 
+    private void mazhabPref() {
+        if(mazhabPreference!=null){
+
+            if(PrefConfig.loadMazhabType(getContext())==0){
+                mazhabPreference.setSummary("Hanafi");
+            }
+
+            else{
+                mazhabPreference.setSummary("Shafeii");
+            }
+
+
+
+            mazhabPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                    setNotificationImportance((String)newValue);
+                    return false;
+                }
+
+                private void setNotificationImportance(String s) {
+
+
+
+                    if(s.equals("Hanafi")){
+
+                        PrefConfig.saveMazhabType(getContext(),0);
+                        mazhabPreference.setSummary("Hanafi");
+                    }
+                    else{
+                        PrefConfig.saveMazhabType(getContext(),1);
+                        mazhabPreference.setSummary("Shafeii");
+                    }
+                    JasonFetcher jasonFetcher = new JasonFetcher(getContext());
+                }
+
+            });
+        }
+
+    }
 
 
     private void deleteLog() {
@@ -201,12 +244,6 @@ public class SettingsFragment extends PreferenceFragment {
                 return true;
             });
         }
-
-
-
-
-
-
 
 
 
