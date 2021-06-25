@@ -88,4 +88,5 @@ public class PrayerTimeInMiliSecond extends TimeParser {
 
     }
 
+
 }

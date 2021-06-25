@@ -57,7 +57,7 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= fazrTime && currentTime1 < sunrise){
 
-            haveYouPrayed  = "Get ready for the next Prayer";
+            setPrayed("Fajr");
             nowPrayerName  = "Now - Fajr";
             nextPrayerName = "Sunrise";
             nextPrayerTime = sunriseAMPM;
@@ -112,7 +112,7 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= midNight && currentTime1 < fazrTime){
 
-            haveYouPrayed  = "Get ready for the next Prayer";
+            setPrayed("Ishaa");
             nowPrayerName = "Now - Midnight";
             nextPrayerName = "Fajr";
             nextPrayerTime = fajrNamazAMPM;
@@ -125,17 +125,34 @@ public class NowAndNextPrayer {
     private void setPrayed(String prayer) {
 
         DatabaseHandler databaseHandler = new DatabaseHandler(context);
-        Contact contact = databaseHandler.getContact(currentDateSet());
-
+        Contact contact;
         String s = "Have you prayed "+prayer +"?";
+        if(prayer=="Ishaa"){
+            contact = databaseHandler.getContact(getLastDate());
+            s = "Have you prayed Isha?";
+
+        }
+        else{
+            contact = databaseHandler.getContact(currentDateSet());
+
+        }
+
+
+
         if(contact!=null) {
+
+
             if((prayer == "Magrib"&&contact.getMagrib())
-                    ||(prayer == "Asar"&&contact.getAsar())
+                    ||(prayer == "Asar"&&contact.getFajr())
                     ||(prayer == "Dhuhr"&&contact.getDhuhr())
                     ||(prayer == "Fajr"&&contact.getFajr())
-                    ||(prayer == "Isha"&&contact.getIsha())){
+                    ||(prayer == "Isha"&&contact.getIsha())
+                    ||(prayer == "Ishaa"&&contact.getIsha())){
 
                 s = "You've prayed "+ prayer;
+                if(prayer=="Ishaa"){
+                    s = "You've prayed isha";
+                }
             }
 
 
@@ -149,6 +166,7 @@ public class NowAndNextPrayer {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());
+        Log.i("uga",date);
         return  date;
 
     }
@@ -157,6 +175,7 @@ public class NowAndNextPrayer {
         int dateInt = Integer.parseInt(s);
         dateInt--;
         s = String.valueOf(dateInt);
+        Log.i("uga",s);
         return s;
     }
 

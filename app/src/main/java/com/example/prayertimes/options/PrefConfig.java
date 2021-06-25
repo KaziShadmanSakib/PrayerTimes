@@ -44,6 +44,38 @@ public class PrefConfig {
     private static final String Pref_Mazhab_Key = "pref_mazhab_key";
     private static final String Pref_extra_time_Key = "pref_extra_time_key";
     private static final String Pref_extra_minutes_Key = "pref_extra_minutes_key";
+    private static final String Pref_sehri_alarm_Key = "pref_sehri_alarm_key";
+    private static final String Pref_sehri_alarm_time_key = "pref_sehri_alarm_time_key";
+
+    public static int loadSehriAlarmtime(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_sehri_alarm_time_key, 30);
+
+    }
+    public static void saveSehriAlarmTime(Context context, int type){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_sehri_alarm_time_key, type);
+        editor.apply();
+
+    }
+
+    public static int loadSehriAlarmConfig(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_sehri_alarm_Key, 0);
+
+    }
+    public static void saveSehriAlarmConfig(Context context, int type){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_sehri_alarm_Key, type);
+        editor.apply();
+
+    }
 
 
     public static int loadMazhabType(Context context){

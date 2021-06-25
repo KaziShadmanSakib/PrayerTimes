@@ -45,6 +45,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -732,18 +733,45 @@ public class MainActivity extends AppCompatActivity {
     //abd's update Database
     @SuppressLint("SimpleDateFormat")
     public void updateDB(View v) {
+        NowAndNextPrayer nowAndNextPrayer = new NowAndNextPrayer(this);
+        nowAndNextPrayer.setNowAndNext();
+
+        String mystring = nowAndNextPrayer.getHaveYouPrayed();
+        String arr[] = mystring.split(" ", 2);
+        String firstWord = arr[0];
+        String lastWord = mystring.substring(mystring.lastIndexOf(" ")+1);
+
+        if(firstWord.equals("Have")){
+            calendar = Calendar.getInstance();
+            simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+            String date = simpleDateFormat.format(calendar.getTime());
+            Intent i = new Intent(this, CalendarDateLog.class);
+
+            Date currentTimeDate = Calendar.getInstance().getTime();
+            PrayerTimeInMiliSecond prayerTimeInMiliSecond = new PrayerTimeInMiliSecond(this);
+            prayerTimeInMiliSecond.toMiliSec();
+            int currentTime = prayerTimeInMiliSecond.getCurrentTimeInMiliSec(currentTimeDate);
+            int fajr = prayerTimeInMiliSecond.getFajrInMili();
+
+
+            if(currentTime>0&&currentTime<fajr){
+                i.putExtra("clickedDate",date);
+                startActivity(i);
+            }
+            else{
+                int dateInt = Integer.parseInt(date);
+                dateInt +=1;
+                date = String.valueOf(dateInt);
+                i.putExtra("clickedDate",date);
+                startActivity(i);
+            }
+
+
+        }
 
 
 
-        calendar = Calendar.getInstance();
-        simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-        String date = simpleDateFormat.format(calendar.getTime());
-        Intent i = new Intent(this, CalendarDateLog.class);
-        int dateInt = Integer.parseInt(date);
-        dateInt +=1;
-        date = String.valueOf(dateInt);
-        i.putExtra("clickedDate",date);
-        startActivity(i);
+
 
 
 
@@ -824,32 +852,29 @@ public class MainActivity extends AppCompatActivity {
     private void setSahriIftariCityText() {
         String sehriAMPM = "00:00";
         String iftarAMPM = "00:00";
-
-        if(PrefConfig.loadExtraTimePref(this)==0){
-            sehriAMPM = PrefConfig.loadImsakTimeAMPM(this);
-            iftarAMPM = PrefConfig.loadMagribTimeAMPM(this);
-        }
-        else{
-
-            int extraMin = PrefConfig.loadExtraMinutesCount(this);
-            PrayerTimeInMiliSecond prayerTimeInMiliSecond = new PrayerTimeInMiliSecond(this);
-            prayerTimeInMiliSecond.toMiliSec();
+        int extraMin = PrefConfig.loadExtraMinutesCount(this);
+        if(PrefConfig.loadExtraTimePref(this)==0) extraMin = 0;
 
 
-            int sehri = prayerTimeInMiliSecond.getFajrInMili();
-            sehri = sehri - extraMin*60*1000;
-            String sehriTime = prayerTimeInMiliSecond.militoHour(sehri);
-            sehriTime = prayerTimeInMiliSecond.timeParseToAMPM(sehriTime);
-            sehriAMPM = sehriTime;
+
+        PrayerTimeInMiliSecond prayerTimeInMiliSecond = new PrayerTimeInMiliSecond(this);
+        prayerTimeInMiliSecond.toMiliSec();
 
 
-            int iftari = prayerTimeInMiliSecond.getMagribInMili();
-            iftari = iftari + extraMin*60*1000;
-            String iftariTime = prayerTimeInMiliSecond.militoHour(iftari);
-            iftariTime = prayerTimeInMiliSecond.timeParseToAMPM(iftariTime);
-            iftarAMPM = iftariTime;
+        int sehri = prayerTimeInMiliSecond.getFajrInMili();
+        sehri = sehri - extraMin*60*1000;
+        String sehriTime = prayerTimeInMiliSecond.militoHour(sehri);
+        sehriTime = prayerTimeInMiliSecond.timeParseToAMPM(sehriTime);
+        sehriAMPM = sehriTime;
 
-        }
+
+        int iftari = prayerTimeInMiliSecond.getMagribInMili();
+        iftari = iftari + extraMin*60*1000;
+        String iftariTime = prayerTimeInMiliSecond.militoHour(iftari);
+        iftariTime = prayerTimeInMiliSecond.timeParseToAMPM(iftariTime);
+        iftarAMPM = iftariTime;
+
+
 
         city = PrefConfig.loadCurrentCity(this);
         cityLocation.setText(city);

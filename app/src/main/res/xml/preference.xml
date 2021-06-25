@@ -20,8 +20,22 @@
             android:entries="@array/notification_type"
             android:entryValues="@array/notification_details"
             android:dialogTitle="Select A Type" />
+        <SwitchPreference
+            android:id="@+id/sehriAlarm"
+            android:key="pref_sehri_alarm"
+            android:summary="Set notification for sehri"
+            android:title="Sehri Notification"
+            android:defaultValue="false"/>
+        <EditTextPreference
+            android:dependency="pref_sehri_alarm"
+            android:id="@+id/sehriTime"
+            android:key="pref_extra_sehri_time_input"
+            android:numeric="integer"
+            android:dialogMessage="How many minutes before Sahri do you want to set the alarm"
+            android:summary="30 min"
+            android:title="Set minutes for alarm"
+            tools:ignore="Deprecated" />
         <Preference
-            android:dependency="pref_notification"
             android:id="@+id/soundSettings"
             android:key="pref_sound"
             android:summary="Set notification Sound"
@@ -42,7 +56,7 @@
             android:id="@+id/extraTime"
             android:key="pref_extra"
             android:title="Extra time for caution"
-            android:summary="Do you want to add/subtract extra time for Sahri and Iftar?"
+            android:summary="Do you want to add/subtract extra time for Sehri and Iftar?"
             android:defaultValue="false" />
         <EditTextPreference
             android:dependency="pref_extra"
@@ -108,13 +122,13 @@
 
     <PreferenceCategory
         android:key="other_category"
-        android:title="Others">
+        android:title="Help">
 
         <Preference
-            android:id="@+id/internetSettings"
-            android:key="pref_network"
-            android:summary="Open Internet Settings"
-            android:title="Internet Settings" />
+            android:id="@+id/feedback"
+            android:key="pref_feedback"
+            android:summary="Send Feedback"
+            android:title="Feedback" />
 
         ></PreferenceCategory>
 

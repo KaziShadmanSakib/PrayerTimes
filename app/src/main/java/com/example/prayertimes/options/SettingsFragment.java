@@ -39,19 +39,18 @@ public class SettingsFragment extends PreferenceFragment {
     ListPreference notification_preference;
     ListPreference mazhabPreference;
     SwitchPreference extraTimePref;
+    SwitchPreference sehriAlarmSwitchPreference;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preference);
 
-        extraTimePref = (SwitchPreference)findPreference("pref_extra");
-        locationPreference = (SwitchPreference)findPreference("pref_location_check") ;
-        notification_preference = (ListPreference) findPreference("notification_importance");
-        notificationPreference = (SwitchPreference) findPreference("pref_notification");
-        logAccessCheckBoxPreference = (CheckBoxPreference)findPreference("pref_change_log") ;
-        mazhabPreference = (ListPreference)findPreference("mazhab_type");
 
+        setPreferences();
 
+        sehriAlarmTimePref();
+        sehriAlarmPref();
         extraMinutePref();
         extratimePref();
         mazhabPref();
@@ -61,8 +60,96 @@ public class SettingsFragment extends PreferenceFragment {
         locationPref();
         setLocation();
         notificationPref();
-        soundPref();
+        feedbackPref();
         notificationImportancePref();
+    }
+
+    private void setPreferences() {
+        sehriAlarmSwitchPreference = (SwitchPreference)findPreference("pref_sehri_alarm");
+        extraTimePref = (SwitchPreference)findPreference("pref_extra");
+        locationPreference = (SwitchPreference)findPreference("pref_location_check") ;
+        notification_preference = (ListPreference) findPreference("notification_importance");
+        notificationPreference = (SwitchPreference) findPreference("pref_notification");
+        logAccessCheckBoxPreference = (CheckBoxPreference)findPreference("pref_change_log") ;
+        mazhabPreference = (ListPreference)findPreference("mazhab_type");
+    }
+
+    private void sehriAlarmTimePref() {
+        String s = String.valueOf(PrefConfig.loadSehriAlarmtime(getContext()));
+
+        EditTextPreference sehriAlarmTime = (EditTextPreference)findPreference("pref_extra_sehri_time_input") ;
+
+        if(sehriAlarmTime!=null){
+
+            sehriAlarmTime.setSummary(s);
+            sehriAlarmTime.setText(s);
+
+            sehriAlarmTime.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                    String minutes = newValue.toString();
+
+
+                    if(minutes!=null){
+                        int min = Integer.parseInt(minutes);
+
+                        if(min>=10) {
+
+                            PrefConfig.saveSehriAlarmTime(getContext(),min);
+                            sehriAlarmTime.setSummary(String.valueOf(min));
+                            sehriAlarmTime.setText(String.valueOf(min));
+                            DoNotification doNotification = new DoNotification(getContext());
+                            doNotification.setNotification();
+
+                        }
+                        else{
+                            Toast toast = Toast.makeText(getContext(), "Input is too low", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+
+
+                    }
+
+
+
+
+
+                    return true;
+                }
+            });
+
+
+
+
+        }
+    }
+
+    private void sehriAlarmPref() {
+
+        if(sehriAlarmSwitchPreference!=null){
+            if(PrefConfig.loadSehriAlarmConfig(getContext())==1){
+                sehriAlarmSwitchPreference.setChecked(true);
+                DoNotification doNotification = new DoNotification(getContext());
+                doNotification.setNotification();
+            }
+            else
+                sehriAlarmSwitchPreference.setChecked(false);
+
+
+            sehriAlarmSwitchPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                if(sehriAlarmSwitchPreference.isChecked()){
+                    PrefConfig.saveSehriAlarmConfig(getContext(),0);
+
+                }
+                else if(!sehriAlarmSwitchPreference.isChecked()){
+                    PrefConfig.saveSehriAlarmConfig(getContext(),1);
+
+                }
+                return true;
+            });
+        }
+
     }
 
     private void extraMinutePref() {
@@ -408,13 +495,10 @@ public class SettingsFragment extends PreferenceFragment {
         }
 
     }
-    private void soundPref() {
-        Preference myPref = (Preference)findPreference("pref_sound");
+    private void feedbackPref() {
+        Preference myPref = (Preference)findPreference("pref_feedback");
         if(myPref!=null){
-            myPref.setOnPreferenceClickListener(preference -> {
-                startActivity(new Intent(Settings.ACTION_SOUND_SETTINGS));
-                return true;
-            });
+
         }
 
     }
