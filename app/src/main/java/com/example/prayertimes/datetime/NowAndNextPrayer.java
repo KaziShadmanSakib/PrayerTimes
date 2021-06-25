@@ -186,7 +186,6 @@ public class NowAndNextPrayer {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());
-        Log.i("uga",date);
         return  date;
 
     }
@@ -216,7 +215,7 @@ public class NowAndNextPrayer {
             Calendar c = Calendar.getInstance();
             c.setTime(date);
             day = new SimpleDateFormat("EEEE").format(date);
-            Log.i("uga",day);
+
         }
 
 
