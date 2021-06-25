@@ -78,7 +78,7 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= dhuhrTime && currentTime1 < asarTime){
 
-            setPrayed("Fajr");
+            setPrayed("Dhuhr");
             nowPrayerName = "Now - Dhuhr";
             nextPrayerName = "Asar";
             nextPrayerTime = asarNamazAMPM;
@@ -87,7 +87,7 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= asarTime && currentTime1 < magribTime){
 
-            setPrayed("Dhuhr");
+            setPrayed("Asar");
             nowPrayerName = "Now - Asar";
             nextPrayerName = "Magrib";
             nextPrayerTime = magribNamazAMPM;
@@ -96,7 +96,7 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= magribTime && currentTime1 <ishaTime){
 
-            setPrayed("Asar");
+            setPrayed("Magrib");
             nowPrayerName = "Now - Magrib";
             nextPrayerName = "Isha";
             nextPrayerTime = ishaNamazAMPM;
@@ -104,7 +104,7 @@ public class NowAndNextPrayer {
         }
 
         if(currentTime1 >= ishaTime && currentTime1 > midNight){
-            setPrayed("Magrib");
+            setPrayed("Isha");
             nowPrayerName = "Now - Isha";
             nextPrayerName = "Fajr";
             nextPrayerTime = fajrNamazAMPM;
@@ -112,7 +112,7 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= midNight && currentTime1 < fazrTime){
 
-            setPrayed("Isha");
+            haveYouPrayed  = "Get ready for the next Prayer";
             nowPrayerName = "Now - Midnight";
             nextPrayerName = "Fajr";
             nextPrayerTime = fajrNamazAMPM;
@@ -132,7 +132,8 @@ public class NowAndNextPrayer {
             if((prayer == "Magrib"&&contact.getMagrib())
                     ||(prayer == "Asar"&&contact.getAsar())
                     ||(prayer == "Dhuhr"&&contact.getDhuhr())
-                    ||(prayer == "Fajr"&&contact.getFajr())){
+                    ||(prayer == "Fajr"&&contact.getFajr())
+                    ||(prayer == "Isha"&&contact.getIsha())){
 
                 s = "You've prayed "+ prayer;
             }
@@ -140,16 +141,7 @@ public class NowAndNextPrayer {
 
 
         }
-        if(prayer == "Isha"){
-            contact = databaseHandler.getContact(getLastDate());
-            if(contact!=null){
-                if(contact.getIsha()){
 
-                    s = "You've prayed "+ prayer;
-
-                }
-            }
-        }
         haveYouPrayed = s;
 
     }

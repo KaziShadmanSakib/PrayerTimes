@@ -1,5 +1,7 @@
 package com.example.prayertimes.datetime;
 
+import android.util.Log;
+
 public class TimeParser {
 
     private long parsedTime;
@@ -77,6 +79,27 @@ public class TimeParser {
 
         }
 
+    }
+    public String militoHour(int milisec){
+        String hourString,minuteString;
+        String time = "00:00";
+        int minutes = milisec/60000;
+        int hour = minutes/60;
+        if(hour<10){
+            hourString = "0"+hour;
+        }
+        else
+            hourString = String.valueOf(hour);
+        int min = minutes%60;
+        if(min<10){
+           minuteString = "0"+min;
+        }
+        else
+            minuteString = String.valueOf(min);
+
+
+        time = hourString+":"+minuteString;
+        return time;
     }
 
 }
