@@ -4,12 +4,12 @@ public class Contact {
 
     //private variables
     String _date ;
-    Boolean _fajr;
-    Boolean _dhuhr;
-    Boolean _asar;
-    Boolean _magrib;
-    Boolean _isha;
-    Boolean _prayerName;
+    Boolean _fajr = false;
+    Boolean _dhuhr = false;
+    Boolean _asar = false;
+    Boolean _magrib = false;
+    Boolean _isha = false;
+    Boolean _prayerName = false;
 
 
 

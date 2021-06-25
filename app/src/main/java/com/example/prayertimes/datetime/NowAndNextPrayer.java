@@ -1,9 +1,14 @@
 package com.example.prayertimes.datetime;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.example.prayertimes.activity.AllPrayers;
+import com.example.prayertimes.database.Contact;
+import com.example.prayertimes.database.DatabaseHandler;
 import com.example.prayertimes.options.PrefConfig;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -14,6 +19,7 @@ public class NowAndNextPrayer {
      String nowPrayerName;
      String nextPrayerName;
      String nextPrayerTime;
+    private static final String[] ALL_Prayers = {"Isha","Fajr","Dhuhr","Asar","Magrib","Isha"};
     public NowAndNextPrayer(Context c){
         context = c;
     }
@@ -60,7 +66,8 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= sunrise && currentTime1 < dhuhrTime){
 
-            haveYouPrayed = "Have you prayed Fajr?";
+
+            setPrayed("Fajr");
             nowPrayerName = "Good Morning";
             nextPrayerName = "Dhuhr";
             nextPrayerTime = dhuhrNamazAMPM;
@@ -71,7 +78,7 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= dhuhrTime && currentTime1 < asarTime){
 
-            haveYouPrayed = "Have you prayed Fajr?";
+            setPrayed("Fajr");
             nowPrayerName = "Now - Dhuhr";
             nextPrayerName = "Asar";
             nextPrayerTime = asarNamazAMPM;
@@ -80,7 +87,7 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= asarTime && currentTime1 < magribTime){
 
-            haveYouPrayed = "Have you prayed Dhuhr?";
+            setPrayed("Dhuhr");
             nowPrayerName = "Now - Asar";
             nextPrayerName = "Magrib";
             nextPrayerTime = magribNamazAMPM;
@@ -89,7 +96,7 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= magribTime && currentTime1 <ishaTime){
 
-            haveYouPrayed = "Have you prayed Asar?";
+            setPrayed("Asar");
             nowPrayerName = "Now - Magrib";
             nextPrayerName = "Isha";
             nextPrayerTime = ishaNamazAMPM;
@@ -97,7 +104,7 @@ public class NowAndNextPrayer {
         }
 
         if(currentTime1 >= ishaTime && currentTime1 > midNight){
-            haveYouPrayed = "Have you prayed Magrib?";
+            setPrayed("Magrib");
             nowPrayerName = "Now - Isha";
             nextPrayerName = "Fajr";
             nextPrayerTime = fajrNamazAMPM;
@@ -105,7 +112,7 @@ public class NowAndNextPrayer {
 
         if(currentTime1 >= midNight && currentTime1 < fazrTime){
 
-            haveYouPrayed = "Have you prayed Isha?";
+            setPrayed("Isha");
             nowPrayerName = "Now - Midnight";
             nextPrayerName = "Fajr";
             nextPrayerTime = fajrNamazAMPM;
@@ -113,6 +120,52 @@ public class NowAndNextPrayer {
         }
 
 
+    }
+
+    private void setPrayed(String prayer) {
+
+        DatabaseHandler databaseHandler = new DatabaseHandler(context);
+        Contact contact = databaseHandler.getContact(currentDateSet());
+
+        String s = "Have you prayed "+prayer +"?";
+        if(contact!=null) {
+            if((prayer == "Magrib"&&contact.getMagrib())
+                    ||(prayer == "Asar"&&contact.getAsar())
+                    ||(prayer == "Dhuhr"&&contact.getDhuhr())
+                    ||(prayer == "Fajr"&&contact.getFajr())){
+
+                s = "You've prayed "+ prayer;
+            }
+
+
+
+        }
+        if(prayer == "Isha"){
+            contact = databaseHandler.getContact(getLastDate());
+            if(contact!=null){
+                if(contact.getIsha()){
+
+                    s = "You've prayed "+ prayer;
+
+                }
+            }
+        }
+        haveYouPrayed = s;
+
+    }
+    private String currentDateSet() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String date = simpleDateFormat.format(calendar.getTime());
+        return  date;
+
+    }
+    private String getLastDate(){
+        String s = currentDateSet();
+        int dateInt = Integer.parseInt(s);
+        dateInt--;
+        s = String.valueOf(dateInt);
+        return s;
     }
 
     public String getHaveYouPrayed(){

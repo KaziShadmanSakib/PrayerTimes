@@ -57,7 +57,7 @@ public class JasonFetcher {
 
 
 
-
+        url = "";
         url = "http://api.aladhan.com/v1/timingsByCity?city="+ city +"&country="+ country +"&method=1&school=1";
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
