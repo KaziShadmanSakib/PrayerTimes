@@ -166,7 +166,7 @@
 
     <TextView
         android:id="@+id/haveYouPrayed"
-        android:layout_width="218dp"
+        android:layout_width="204dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginStart="12dp"
@@ -182,7 +182,7 @@
 
     <TextView
         android:id="@+id/nowPrayerName"
-        android:layout_width="160dp"
+        android:layout_width="178dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginStart="12dp"
@@ -192,7 +192,7 @@
         android:text="Now -"
         android:textColor="#FFFFFF "
         android:textSize="18sp"
-        android:translationX="230dp"
+        android:translationX="215dp"
         android:translationY="-25dp" />
 
     <TextView

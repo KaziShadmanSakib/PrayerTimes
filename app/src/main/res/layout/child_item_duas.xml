@@ -14,7 +14,8 @@
         android:paddingLeft="55dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:text="Child Item"/>
+        android:text="Child Item"
+        android:textColor="#000000 " />
 
 
 
