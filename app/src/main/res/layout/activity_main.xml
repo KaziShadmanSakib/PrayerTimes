@@ -129,9 +129,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="All prayers"
                     android:onClick="openAllPrayers"
+                    android:text="All prayers"
                     android:textColor="@color/DarkGreen"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/haveYouPrayed" />
