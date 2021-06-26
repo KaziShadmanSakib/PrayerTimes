@@ -293,6 +293,48 @@ public class Duas extends AppCompatActivity {
 
                         break;
 
+                    case "When beginning a meal":
+
+                        changeIntent(27, 0);
+
+                        break;
+
+                    case "If one forgets to mention Allah at the beginning":
+
+                        changeIntent(28, 0);
+
+                        break;
+
+                    case "After finishing a meal":
+
+                        changeIntent(29,0);
+
+                        break;
+
+                    case "When given a drink":
+
+                        changeIntent(30, 0);
+
+                        break;
+
+                    case "Upon drinking milk":
+
+                        changeIntent(31, 0);
+
+                        break;
+
+                    case "When dining at someone's house":
+
+                        changeIntent(32, 0);
+
+                        break;
+
+                    case "For someone who offers you a meal":
+
+                        changeIntent(33, 0);
+
+                        break;
+
                 }
 
                 return true;

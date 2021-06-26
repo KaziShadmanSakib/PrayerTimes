@@ -364,7 +364,6 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.sleepingdua01);
 
-            imageView.setTranslationY(-100);
 
 
 
@@ -379,9 +378,96 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.sleepingdua02);
 
+
+        }
+
+        else if(i==27){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Food");
+
+            imageView.setImageResource(R.drawable.fooddua01);
+
             imageView.setTranslationY(-100);
 
 
+        }
+
+        else if(i==28){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Food");
+
+            imageView.setImageResource(R.drawable.fooddua02);
+
+            imageView.setTranslationY(-100);
+
+
+        }
+
+        else if(i==29){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Food");
+
+            imageView.setImageResource(R.drawable.fooddua03);
+
+            imageView.setTranslationY(-100);
+
+
+        }
+
+        else if(i==30){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Food");
+
+            imageView.setImageResource(R.drawable.fooddua04);
+
+            imageView.setTranslationY(-100);
+
+
+        }
+
+        else if(i==31){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Food");
+
+            imageView.setImageResource(R.drawable.fooddua05);
+
+            imageView.setTranslationY(-100);
+
+
+        }
+
+        else if(i==32){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Food");
+
+            imageView.setImageResource(R.drawable.fooddua06);
+
+            imageView.setTranslationY(-100);
+
+
+        }
+
+        else if(i==33){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Food");
+
+            imageView.setImageResource(R.drawable.fooddua07);
+
+            imageView.setTranslationY(-100);
 
 
         }
