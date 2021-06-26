@@ -234,6 +234,60 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
         }
 
+        else if(i==15){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Mosque");
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+            imageView.setImageResource(R.drawable.mosque01);
+
+            imageView.setTranslationY(-100);
+
+        }
+
+        else if(i==16){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Mosque");
+
+            imageView.setImageResource(R.drawable.mosque02_01);
+
+        }
+
+        else if(i==17){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Mosque");
+
+            imageView.setImageResource(R.drawable.mosque02_02);
+
+        }
+
+        else if(i==18){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Mosque");
+
+            imageView.setImageResource(R.drawable.mosque03_01);
+
+        }
+
+        else if(i==19){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Mosque");
+
+            imageView.setImageResource(R.drawable.mosque03_02);
+
+        }
+
     }
 }
 

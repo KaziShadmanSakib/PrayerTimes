@@ -239,6 +239,24 @@ public class Duas extends AppCompatActivity {
                         changeIntent(14, 0);
                         break;
 
+                    case "When going to the Mosque":
+
+                        changeIntent(15, 0);
+
+                        break;
+
+                    case "Upon Entering Mosque":
+
+                        changeIntent(16, 17);
+
+                        break;
+
+                    case "Upon Leaving Mosque":
+
+                        changeIntent(18, 19);
+
+                        break;
+
                 }
 
                 return true;
