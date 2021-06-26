@@ -27,8 +27,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/today"
                     android:textColor="@color/DarkCyan"
-                    android:textSize="25sp"
-                    android:textStyle="bold">
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:translationY="-5sp">
 
 
                 </TextView>
@@ -647,7 +648,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
 
-                            android:text="05:10 am"
+                            android:text="12:00 AM"
 
                             android:textAlignment="viewEnd"
                             android:textColor="#F44336"
@@ -675,9 +676,8 @@
                     android:layout_marginEnd="10dp"
                     android:text="@string/city"
 
-                    android:textColor="#20b020"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/countryId"
@@ -686,9 +686,8 @@
                     android:layout_marginEnd="20dp"
                     android:text="@string/country"
 
-                    android:textColor="#20b020"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
