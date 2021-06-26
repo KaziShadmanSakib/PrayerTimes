@@ -356,6 +356,36 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
         }
 
+        else if(i==25){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Sleeping");
+
+            imageView.setImageResource(R.drawable.sleepingdua01);
+
+            imageView.setTranslationY(-100);
+
+
+
+
+        }
+
+        else if(i==26){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Sleeping");
+
+            imageView.setImageResource(R.drawable.sleepingdua02);
+
+            imageView.setTranslationY(-100);
+
+
+
+
+        }
+
     }
 }
 

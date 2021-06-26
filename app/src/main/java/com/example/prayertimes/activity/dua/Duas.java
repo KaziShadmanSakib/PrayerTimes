@@ -281,6 +281,17 @@ public class Duas extends AppCompatActivity {
 
                         break;
 
+                    case "When you wake up":
+
+                        changeIntent(25, 0);
+
+                        break;
+
+                    case "Before sleeping":
+
+                        changeIntent(26, 0);
+
+                        break;
 
                 }
 
