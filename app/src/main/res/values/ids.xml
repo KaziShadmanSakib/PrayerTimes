@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="magribNamazEndId" type="id" />
+    <item name="asarNamazEndId" type="id" />
+    <item name="dhuhrNamazEndId" type="id" />
+    <item name="fazrNamazEndId" type="id" />
+</resources>
