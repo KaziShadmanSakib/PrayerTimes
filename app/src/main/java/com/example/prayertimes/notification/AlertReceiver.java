@@ -30,6 +30,11 @@ public class AlertReceiver extends BroadcastReceiver {
             contentTitle = "Sunrise Time";
             contentText = "Fajr waqt has finished. Good morning";
         }
+        if(PrefConfig.loadSehriAlarmConfig(context)==1){
+            contentTitle = "Sehri Time";
+            contentText = "Have you done your sehri";
+        }
+
         long[] vibrate = { 0, 100, 200, 300 };
 
 

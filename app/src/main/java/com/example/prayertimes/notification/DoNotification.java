@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.prayertimes.datetime.PrayerTimeInMiliSecond;
 import com.example.prayertimes.options.PrefConfig;
@@ -35,15 +36,31 @@ public class DoNotification {
                 startAlarm(c,prayerMiliSec[i+1]);
             }
         }
-
+        //fajr notification
         if((currentMiliSec>prayerMiliSec[4]&&currentMiliSec<24*3600*1000)||(currentMiliSec>0&&currentMiliSec<prayerMiliSec[0])){
+
             PrefConfig.saveCurrentPrayerIndex(_context,0);
             startAlarm(c,prayerMiliSec[0]);
         }
+        //sunrise notification
         if(currentMiliSec>prayerMiliSec[0]&&currentMiliSec<sunrise){
             PrefConfig.saveCurrentPrayerIndex(_context,5);
             startAlarm(c,sunrise);
         }
+        //sahri notification
+        if(PrefConfig.loadSehriAlarmConfig(_context)==1){
+            int time = PrefConfig.loadSehriAlarmtime(_context);
+            time = time*60000;
+            if((currentMiliSec>prayerMiliSec[4]&&currentMiliSec<24*3600*1000)||(currentMiliSec>0&&currentMiliSec<prayerMiliSec[0]-time)){
+                PrefConfig.saveCurrentPrayerIndex(_context,0);
+                startAlarm(c,prayerMiliSec[0]-time);
+            }
+            else if(currentMiliSec>(prayerMiliSec[0]-time)&&currentMiliSec<prayerMiliSec[0]){
+                PrefConfig.saveCurrentPrayerIndex(_context,0);
+                startAlarm(c,prayerMiliSec[0]);
+            }
+        }
+
 
 
         

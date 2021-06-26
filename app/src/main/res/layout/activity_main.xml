@@ -7,6 +7,284 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/cityLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="5sp"
+                android:text="Dhaka"
+                android:textColor="@color/DarkGreen"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/hijriDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginBottom="15sp"
+                android:text="Date"
+                android:textColor="@color/DarkGreen" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/backgroundHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="220sp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/background" />
+
+                <ImageView
+                    android:id="@+id/black_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="220sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/backgroundHome"
+                    app:layout_constraintTop_toTopOf="@+id/backgroundHome"
+                    app:srcCompat="@drawable/black"
+                    android:scaleType="centerCrop"
+                    android:alpha="0.5"/>
+
+                <TextView
+                    android:id="@+id/haveYouPrayed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Have you prayed?"
+                    android:onClick="toClaendarDateLog"
+                    android:textColor="@color/AliceBlue"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/nowPrayerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Now - Midnight"
+                    android:textColor="@color/AliceBlue"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/haveYouPrayed"
+                    app:layout_constraintStart_toEndOf="@+id/haveYouPrayed"
+                    app:layout_constraintTop_toTopOf="@+id/haveYouPrayed" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@+id/allPrayers"
+                    app:layout_constraintStart_toStartOf="@+id/haveYouPrayed"
+                    app:layout_constraintTop_toBottomOf="@+id/haveYouPrayed">
+
+                    <TextView
+                        android:id="@+id/next"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Next"
+                        android:textColor="@color/AliceBlue"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/nextPrayerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5sp"
+                        android:text="Fazar"
+                        android:textColor="@color/AliceBlue"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/nextPrayerTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="00:00"
+                        android:textColor="@color/AliceBlue"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/allPrayers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:onClick="openAllPrayers"
+                    android:text="All prayers"
+                    android:textColor="@color/DarkGreen"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/haveYouPrayed" />
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="?android:attr/progressBarStyle"
+                    android:indeterminateOnly="false"
+                    android:progress="60"
+                    android:progressDrawable="@drawable/circle"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/backgroundHome"
+                    app:layout_constraintEnd_toEndOf="@+id/backgroundHome"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/timerId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00:00"
+                    android:textColor="@color/AliceBlue"
+                    app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
+                    app:layout_constraintEnd_toEndOf="@+id/progress_bar"
+                    app:layout_constraintStart_toStartOf="@+id/progress_bar"
+                    app:layout_constraintTop_toTopOf="@+id/progress_bar" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/Today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="30sp"
+                android:layout_marginEnd="20sp"
+                android:text="Today -"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="15sp"
+                android:layout_marginEnd="20sp"
+                android:orientation="horizontal"
+                android:background="@drawable/background_light_blue">
+
+                <TextView
+                    android:id="@+id/sehri"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_weight="1"
+                    android:text="Sehri Time :"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sehriTimeId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_weight="1"
+                    android:text="04 : 23 AM"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="15sp"
+                android:layout_marginEnd="20sp"
+                android:orientation="horizontal"
+                android:background="@drawable/background_light_green">
+
+                <TextView
+                    android:id="@+id/iftar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_weight="1"
+                    android:text="Iftar Time : "
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/iftarTimeId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_weight="1"
+                    android:text="06 : 40 PM"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/quoteOfTheDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="25sp"
+                android:layout_marginEnd="20sp"
+                android:text="Quotes of the day -"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/background_light_pink"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="15sp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="10sp">
+
+                <TextView
+                    android:id="@+id/quote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginBottom="5sp"
+
+                    android:text="“Be like a diamond, precious and rare, not like a stone, found everywhere.” – Anonymous."
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -16,257 +294,5 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation" />
-
-    <TextView
-        android:id="@+id/cityLocation"
-        android:layout_width="180dp"
-        android:layout_height="29dp"
-        android:onClick="locationUpdate"
-        android:text="Location"
-        android:textColor="#056608 "
-        android:textSize="18sp"
-        android:translationX="20sp"
-        android:translationY="15sp" />
-
-    <ImageView
-        android:id="@+id/backgroundHome"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@+id/cityLocation"
-        android:layout_marginTop="-34dp"
-        android:scaleType="centerCrop"
-        android:translationY="80sp"
-        app:srcCompat="@drawable/background" />
-
-    <Button
-        android:id="@+id/allPrayers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/backgroundHome"
-        android:layout_marginTop="7dp"
-        android:background="#08FFFFFF"
-        android:onClick="openAllPrayers"
-        android:text="All Prayers"
-        android:textColor="#028B7C"
-        android:textStyle="bold"
-        android:translationX="-5sp"
-        android:translationY="225sp" />
-
-    <TextView
-        android:id="@+id/hijriDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/cityLocation"
-        android:layout_marginBottom="-32dp"
-        android:text="Date"
-        android:textColor="#056608 "
-        android:textSize="12sp"
-        android:translationX="20dp"
-        android:translationY="0dp" />
-
-    <TextView
-        android:id="@+id/Today"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="292dp"
-        android:layout_marginBottom="222dp"
-        android:background="#FFFFFF	"
-        android:text="Today -"
-        android:textColor="#000000 "
-        android:textSize="17sp" />
-
-    <TextView
-        android:id="@+id/iftar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="253dp"
-        android:layout_marginBottom="120dp"
-        android:background="#FFFFFF	"
-        android:text="Iftar Time :"
-        android:textColor="#000000 "
-        android:textSize="16sp"
-        android:translationX="10sp"
-        android:translationY="-30sp" />
-
-    <TextView
-        android:id="@+id/iftarTimeId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="94dp"
-        android:layout_marginBottom="131dp"
-        android:background="#FFFFFF	"
-        android:text="Iftar"
-        android:textColor="#000000 "
-        android:textSize="16sp"
-        android:translationX="-65sp"
-        android:translationY="-17.5sp" />
-
-    <TextView
-        android:id="@+id/sehri"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="237dp"
-        android:layout_marginBottom="187dp"
-        android:background="#FFFFFF	"
-        android:text="Sehri Time :"
-        android:textColor="#000000 "
-        android:textSize="16sp"
-        android:translationX="0sp"
-        android:translationY="0sp" />
-
-    <TextView
-        android:id="@+id/sehriTimeId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="88dp"
-        android:layout_marginBottom="196dp"
-        android:background="#FFFFFF	"
-        android:text="Sehri"
-        android:textColor="#000000 "
-        android:textSize="16sp"
-        android:translationX="-70sp"
-        android:translationY="10sp" />
-
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:indeterminateOnly="false"
-        android:progress="60"
-        android:progressDrawable="@drawable/circle"
-        android:translationX="200dp"
-        android:translationY="110dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/timerId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="53dp"
-        android:text="00:00:00"
-        android:textColor="#FFFFFF "
-        android:textSize="15.80sp"
-        android:translationX="215dp"
-        android:translationY="135sp" />
-
-    <TextView
-        android:id="@+id/haveYouPrayed"
-        android:layout_width="204dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="-2dp"
-        android:layout_marginBottom="534dp"
-        android:onClick="updateDB"
-        android:text="Have you prayed?"
-        android:textColor="#FFFFFF "
-        android:textSize="18.5sp"
-        android:translationX="5dp"
-        android:translationY="-25dp" />
-
-    <TextView
-        android:id="@+id/nowPrayerName"
-        android:layout_width="178dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="-45dp"
-        android:layout_marginBottom="534dp"
-        android:text="Now -"
-        android:textColor="#FFFFFF "
-        android:textSize="18sp"
-        android:translationX="215dp"
-        android:translationY="-25dp" />
-
-    <TextView
-        android:id="@+id/next"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="-7dp"
-        android:layout_marginBottom="534dp"
-        android:text="Next"
-        android:textColor="#FFFFFF "
-        android:textSize="15sp"
-        android:translationX="5dp"
-        android:translationY="40dp" />
-
-    <TextView
-        android:id="@+id/nextPrayerName"
-        android:layout_width="183dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="-183dp"
-        android:layout_marginBottom="534dp"
-        android:layout_toStartOf="@id/next"
-        android:textColor="#FFFFFF "
-        android:textSize="20sp"
-        android:translationX="5dp"
-        android:translationY="70dp" />
-
-    <TextView
-        android:id="@+id/nextPrayerTime"
-        android:layout_width="186dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="-186dp"
-        android:layout_marginBottom="534dp"
-        android:layout_toStartOf="@id/nextPrayerName"
-        android:textColor="#FFFFFF "
-        android:textSize="18sp"
-        android:translationX="5dp"
-        android:translationY="100dp" />
-
-    <TextView
-        android:id="@+id/quoteOfTheDay"
-        android:layout_width="147dp"
-        android:layout_height="26dp"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="200dp"
-        android:layout_marginBottom="100dp"
-        android:background="#FFFFFF	"
-        android:text="Quotes of the day -"
-        android:textColor="#000000 "
-        android:textSize="17sp"
-        android:translationX="1dp"
-        android:translationY="10dp" />
-
-    <TextView
-        android:id="@+id/quote"
-        android:layout_width="312dp"
-        android:layout_height="69dp"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="13dp"
-        android:background="#FFFFFF	"
-        android:text="Quote"
-        android:textColor="#000000 "
-        android:textSize="16sp"
-        android:translationY="5dp" />
 
 </RelativeLayout>

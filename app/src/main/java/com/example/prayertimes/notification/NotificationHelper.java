@@ -52,8 +52,6 @@ public class NotificationHelper extends ContextWrapper {
         }
 
 
-
-
         getManager().createNotificationChannel(channel);
     }
 
@@ -75,13 +73,25 @@ public class NotificationHelper extends ContextWrapper {
         date = String.valueOf(dateInt);
         clickedIntent.putExtra("clickedDate",date);
         PendingIntent clickedPendingIntent = PendingIntent.getActivities(this,1, new Intent[]{clickedIntent},PendingIntent.FLAG_UPDATE_CURRENT);
-        return new NotificationCompat.Builder(getApplicationContext(), channelID)
-                .setContentTitle(title)
-                .setContentText(text)
-                .setSmallIcon(R.drawable.ic_android)
-                .setAutoCancel(true)
-                .setContentIntent(clickedPendingIntent)
-                .setSound(sound);
+
+        if(title == "Sehri Time"){
+            return new NotificationCompat.Builder(getApplicationContext(), channelID)
+                    .setContentTitle(title)
+                    .setContentText(text)
+                    .setSmallIcon(R.drawable.ic_android)
+                    .setAutoCancel(true)
+                    .setSound(sound);
+        }
+        else{
+            return new NotificationCompat.Builder(getApplicationContext(), channelID)
+                    .setContentTitle(title)
+                    .setContentText(text)
+                    .setSmallIcon(R.drawable.ic_android)
+                    .setAutoCancel(true)
+                    .setContentIntent(clickedPendingIntent)
+                    .setSound(sound);
+        }
+
 
     }
 
