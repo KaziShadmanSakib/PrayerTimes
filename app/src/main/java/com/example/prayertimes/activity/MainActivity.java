@@ -121,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
         setTimer();
         setNowAndNext();
         setQuote();
-        setProgressBarTimer();
         setSahriIftariCityText();
 
+        setProgressBarTimer();
 
 
     }
@@ -162,8 +162,6 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= isha || current >= 0 && current < fazr){
 
-            i = 0;
-
             startTime2 = (int) (midNight - isha) + (int) fazr;
 
             PrefConfig.saveStartTimeProgressBar(this, startTime2);
@@ -178,8 +176,6 @@ public class MainActivity extends AppCompatActivity {
         // fazr -> sunrise
 
         if(current >= fazr && current < sunrise ){
-
-            i = 0;
 
             //startTime2 = (int) sunrise - (int) current;
 
@@ -197,8 +193,6 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= sunrise && current < dhuhr ){
 
-            i = 0;
-
 
             //startTime2 = (int) dhuhr - (int) current;
 
@@ -215,8 +209,6 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= dhuhr && current < asar){
 
-            i = 0;
-
 
             //startTime2 = (int) asar - (int) current;
 
@@ -231,8 +223,6 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= asar && current < magrib){
 
-            i = 0;
-
 
             //startTime2 = (int) magrib - (int) current;
 
@@ -246,8 +236,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(current >= magrib && current < isha){
-
-            i = 0;
 
             //startTime2 = (int) isha - (int)current;
 

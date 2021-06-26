@@ -24,7 +24,7 @@
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="20sp"
                 android:layout_marginBottom="5sp"
-                android:text="Dhaka"
+                android:text="Location"
                 android:textColor="@color/DarkGreen"
                 android:textSize="20sp" />
 
@@ -53,13 +53,13 @@
                     app:srcCompat="@drawable/background" />
 
                 <ImageView
-                    android:id="@+id/black_background"
+                    android:id="@+id/background"
                     android:layout_width="wrap_content"
                     android:layout_height="220sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/backgroundHome"
                     app:layout_constraintTop_toTopOf="@+id/backgroundHome"
-                    app:srcCompat="@drawable/black"
+                    app:srcCompat="@drawable/background"
                     android:scaleType="centerCrop"
                     android:alpha="0.5"/>
 
@@ -69,10 +69,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Have you prayed?"
                     android:onClick="toClaendarDateLog"
+                    android:text="Have you prayed?"
                     android:textColor="@color/AliceBlue"
-                    android:textSize="18sp"
+                    android:textSize="19sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -84,6 +84,7 @@
                     android:text="Now - Midnight"
                     android:textColor="@color/AliceBlue"
                     android:textSize="18sp"
+                    android:translationX="35sp"
                     app:layout_constraintBottom_toBottomOf="@+id/haveYouPrayed"
                     app:layout_constraintStart_toEndOf="@+id/haveYouPrayed"
                     app:layout_constraintTop_toTopOf="@+id/haveYouPrayed" />
@@ -103,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:text="Next"
                         android:textColor="@color/AliceBlue"
-                        android:textSize="16sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/nextPrayerName"
@@ -111,9 +112,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5sp"
                         android:layout_marginBottom="5sp"
-                        android:text="Fazar"
+                        android:text="Fajr"
                         android:textColor="@color/AliceBlue"
-                        android:textSize="16sp" />
+                        android:textSize="20sp"
+                        android:translationY="5dp" />
 
                     <TextView
                         android:id="@+id/nextPrayerTime"
@@ -121,7 +123,8 @@
                         android:layout_height="wrap_content"
                         android:text="00:00"
                         android:textColor="@color/AliceBlue"
-                        android:textSize="16sp" />
+                        android:textSize="18sp"
+                        android:translationY="5dp" />
                 </LinearLayout>
 
                 <TextView
@@ -130,9 +133,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:onClick="openAllPrayers"
-                    android:text="All prayers"
+                    android:text="All Prayers"
                     android:textColor="@color/DarkGreen"
-                    android:textSize="18sp"
+                    android:textSize="19sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/haveYouPrayed" />
@@ -140,12 +143,13 @@
                 <ProgressBar
                     android:id="@+id/progress_bar"
                     style="?android:attr/progressBarStyle"
-                    android:indeterminateOnly="false"
-                    android:progress="60"
-                    android:progressDrawable="@drawable/circle"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginEnd="16dp"
+                    android:indeterminateOnly="false"
+                    android:progress="60"
+                    android:progressDrawable="@drawable/circle"
+                    android:translationY="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/backgroundHome"
                     app:layout_constraintEnd_toEndOf="@+id/backgroundHome"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -156,6 +160,8 @@
                     android:layout_height="wrap_content"
                     android:text="00:00:00"
                     android:textColor="@color/AliceBlue"
+                    android:translationX="1dp"
+                    android:translationY="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
                     app:layout_constraintEnd_toEndOf="@+id/progress_bar"
                     app:layout_constraintStart_toStartOf="@+id/progress_bar"
@@ -169,7 +175,7 @@
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="30sp"
                 android:layout_marginEnd="20sp"
-                android:text="Today -"
+                android:text="Today"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />
