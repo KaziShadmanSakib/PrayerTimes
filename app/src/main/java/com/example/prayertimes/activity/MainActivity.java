@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     CountDownTimer progressBarCountDownTimer;
     int i;
-    private boolean isProgressBarRunningFirstTime = true;
+    private boolean isProgressBarRunningFirstTime;
 
     //abd's variables
     public DatabaseHandler databaseHandler;
@@ -139,9 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
         TimeParser tP = new TimeParser();
 
-        /*long emni1 = tP.timeParserMethod("02:10");
-        long emni2 = tP.timeParserMethod("02:15");
-        long emniCurr = tP.timeParserMethodForCurrentTime("02:11:00");*/
 
         long isha = tP.timeParserMethod(ishaNamazTime);
         long current = tP.timeParserMethodForCurrentTime(currentTime);
@@ -156,33 +153,19 @@ public class MainActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         i = PrefConfig.loadProgressBar(this);
-        progressBar.setProgress(i);
 
+        startTime2 = PrefConfig.loadStartTimeProgressBar(this);
 
-        /*if(emniCurr >= emni1 && emniCurr < emni2){
+        progressBar.setProgress((int)i*100/(startTime2/1000));
 
-            startTime2 = (int) emni2 - (int) emniCurr;
-
-
-            startProgressBar();
-
-        }*/
 
         if(current >= isha || current >= 0 && current < fazr){
 
-            if(isProgressBarRunningFirstTime){
+            i = 0;
 
-                isProgressBarRunningFirstTime = false;
+            startTime2 = (int) (midNight - isha) + (int) fazr;
 
-                startTime2 = (int) (midNight - current) + (int) fazr;
-
-            }
-
-            else{
-
-                startTime2 = (int) (midNight - isha) + (int) fazr;
-
-            }
+            PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
 
             startProgressBar();
@@ -195,22 +178,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= fazr && current < sunrise ){
 
+            i = 0;
+
             //startTime2 = (int) sunrise - (int) current;
 
 
-            if(isProgressBarRunningFirstTime){
+            startTime2 = (int) sunrise - (int) fazr;
 
-                isProgressBarRunningFirstTime = false;
-
-                startTime2 = (int) sunrise - (int) current;
-
-            }
-
-            else{
-
-                startTime2 = (int) sunrise - (int) fazr;
-
-            }
+            PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
 
             startProgressBar();
@@ -221,22 +196,16 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= sunrise && current < dhuhr ){
 
+            i = 0;
+
+
             //startTime2 = (int) dhuhr - (int) current;
 
 
-            if(isProgressBarRunningFirstTime){
+            startTime2 = (int) dhuhr - (int) sunrise;
 
-                isProgressBarRunningFirstTime = false;
+            PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
-                startTime2 = (int) dhuhr - (int) current;
-
-            }
-
-            else{
-
-                startTime2 = (int) dhuhr - (int) sunrise;
-
-            }
 
 
             startProgressBar();
@@ -245,21 +214,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= dhuhr && current < asar){
 
+            i = 0;
+
+
             //startTime2 = (int) asar - (int) current;
 
-            if(isProgressBarRunningFirstTime){
+            startTime2 = (int) asar - (int) dhuhr;
 
-                isProgressBarRunningFirstTime = false;
+            PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
-                startTime2 = (int) asar - (int) current;
-
-            }
-
-            else{
-
-                startTime2 = (int) asar - (int) dhuhr;
-
-            }
 
             startProgressBar();
 
@@ -267,21 +230,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= asar && current < magrib){
 
+            i = 0;
+
+
             //startTime2 = (int) magrib - (int) current;
 
-            if(isProgressBarRunningFirstTime){
+            startTime2 = (int) magrib - (int) asar;
 
-                isProgressBarRunningFirstTime = false;
+            PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
-                startTime2 = (int) magrib - (int) current;
-
-            }
-
-            else{
-
-                startTime2 = (int) magrib - (int) asar;
-
-            }
 
             startProgressBar();
 
@@ -289,21 +246,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= magrib && current < isha){
 
+            i = 0;
+
             //startTime2 = (int) isha - (int)current;
 
-            if(isProgressBarRunningFirstTime){
+            startTime2 = (int) isha - (int) magrib;
 
-                isProgressBarRunningFirstTime = false;
+            PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
-                startTime2 = (int) isha - (int) current;
-
-            }
-
-            else{
-
-                startTime2 = (int) isha - (int) magrib;
-
-            }
 
 
             startProgressBar();
@@ -384,6 +334,8 @@ public class MainActivity extends AppCompatActivity {
             PrefConfig.saveCurrentCountry(this,"United States");
 
             PrefConfig.saveProgressBar(this, 0);
+
+            PrefConfig.saveStartTimeProgressBar(this, 1000);
 
             JasonFetcher jasonFetcher = new JasonFetcher(this);
             jasonFetcher.getData();
