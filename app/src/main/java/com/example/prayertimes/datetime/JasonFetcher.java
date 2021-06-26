@@ -132,9 +132,6 @@ public class JasonFetcher {
                             NowAndNextPrayer nowAndNextPrayer = new NowAndNextPrayer(context);
                             nowAndNextPrayer.setNowAndNext();
                             PrefConfig.savefirstTime(context,"NotFirstTime");
-
-
-
                             loadingDialog.dismissDialog();
 
 

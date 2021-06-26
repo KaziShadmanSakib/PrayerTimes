@@ -2,6 +2,9 @@
     <string name="app_name">PrayerTimes</string>
     <string name="location_settings">Location Settings</string>
     <string name="internet_settings">Internet Settings</string>
+    <string name="today">Today :</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
 
     <string-array name="notification_type">
         <item>Make Sound and popup</item>
