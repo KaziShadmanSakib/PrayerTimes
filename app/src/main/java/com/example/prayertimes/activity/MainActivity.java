@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished)
             {
                 i++;
-                Toast.makeText(MainActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
                 PrefConfig.saveProgressBar(MainActivity.this, i);
                 progressBar.setProgress((int)i*100/(startTime2/1000));
             }
