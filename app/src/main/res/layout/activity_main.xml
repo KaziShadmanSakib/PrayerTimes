@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eae6e6"
     tools:context=".activity.MainActivity">
 
 
@@ -15,7 +16,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:background="#eae6e6">
+
 
             <TextView
                 android:id="@+id/cityLocation"
@@ -61,7 +64,7 @@
                     app:layout_constraintTop_toTopOf="@+id/backgroundHome"
                     app:srcCompat="@drawable/background"
                     android:scaleType="centerCrop"
-                    android:alpha="0.5"/>
+                    android:alpha="0.15"/>
 
                 <TextView
                     android:id="@+id/haveYouPrayed"
@@ -286,6 +289,13 @@
                     android:text="“Be like a diamond, precious and rare, not like a stone, found everywhere.” – Anonymous."
                     android:textStyle="bold" />
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                />
+
+
+
 
         </LinearLayout>
 
@@ -296,7 +306,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/White"
+        app:itemBackground="@color/LightCyan"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation" />

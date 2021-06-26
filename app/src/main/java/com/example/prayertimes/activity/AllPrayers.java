@@ -13,7 +13,8 @@ import com.example.prayertimes.datetime.JasonFetcher;
 public class AllPrayers extends AppCompatActivity{
 
     private TextView fazrNamazId, sunriseId, dhuhrNamazId, asarNamazId, sunsetId, magribNamazId, ishaNamazId;
-    String fajrNamazAMPM, sunriseAMPM, dhuhrNamazAMPM, asarNamazAMPM, sunsetAMPM, magribNamazAMPM, ishaNamazAMPM, imsakTimeAMPM;
+    private TextView fazrNamazEndId, sunriseEndId, dhuhrNamazEndId, asarNamazEndId, sunsetEndId, magribNamazEndId, ishaNamazEndId;
+    String fajrNamazAMPM, sunriseAMPM, dhuhrNamazAMPM, asarNamazAMPM, sunsetAMPM, magribNamazAMPM, ishaNamazAMPM, imsakTimeAMPEndM;
     private TextView cityId, countryId;
     private String city;
     private String country;
@@ -79,16 +80,20 @@ public class AllPrayers extends AppCompatActivity{
         ishaNamazAMPM = PrefConfig.loadIshaTimeAMPM(this);
 
 
-        fazrNamazId.setText(fajrNamazAMPM + " - " + sunriseAMPM);
+        fazrNamazId.setText(fajrNamazAMPM );
+        fazrNamazEndId.setText(sunriseAMPM);
         setSunrise();
-        dhuhrNamazId.setText(dhuhrNamazAMPM + " - " + asarNamazAMPM);
-        asarNamazId.setText(asarNamazAMPM + " - " + sunsetAMPM);
+        dhuhrNamazId.setText(dhuhrNamazAMPM);
+        dhuhrNamazEndId.setText(asarNamazAMPM);
+        asarNamazId.setText(asarNamazAMPM);
+        asarNamazEndId.setText(sunsetAMPM);
         setSunset();
-        magribNamazId.setText(magribNamazAMPM + " - " + ishaNamazAMPM);
+        magribNamazId.setText(magribNamazAMPM);
+        magribNamazEndId.setText(ishaNamazAMPM);
         ishaNamazId.setText(ishaNamazAMPM);
 
         if(NowAndNextPrayer.getWeekDay()=="Friday"){
-            TextView dhuhrNamaz = findViewById(R.id.dhuhrNamaz);
+            TextView dhuhrNamaz = findViewById(R.id.dhuhr);
             dhuhrNamaz.setText("Jumu'ah");
         }
 
@@ -112,7 +117,8 @@ public class AllPrayers extends AppCompatActivity{
         sunrise = sunrise + time*60*1000;
         String sunriseEnd = prayerTimeInMiliSecond.militoHour(sunrise);
         sunriseEnd = prayerTimeInMiliSecond.timeParseToAMPM(sunriseEnd);
-        sunriseId.setText(sunriseAMPM + " - " + sunriseEnd);
+        sunriseId.setText(sunriseAMPM);
+        sunriseEndId.setText(sunriseEnd);
 
 
     }
@@ -134,7 +140,8 @@ public class AllPrayers extends AppCompatActivity{
         sunset = sunset - time*60*1000;
         String sunsetStart = prayerTimeInMiliSecond.militoHour(sunset);
         sunsetStart = prayerTimeInMiliSecond.timeParseToAMPM(sunsetStart);
-        sunsetId.setText(sunsetStart+ " - " +sunsetAMPM  );
+        sunsetId.setText(sunsetStart);
+        sunsetEndId.setText(sunsetAMPM);
 
 
     }
@@ -148,6 +155,14 @@ public class AllPrayers extends AppCompatActivity{
         sunsetId = findViewById(R.id.sunsetId);
         magribNamazId = findViewById(R.id.magribNamazId);
         ishaNamazId = findViewById(R.id.ishaNamazId);
+        fazrNamazEndId = findViewById(R.id.fazrNamazEndId);
+        sunriseEndId = findViewById(R.id.sunriseEndId);
+        dhuhrNamazEndId = findViewById(R.id.dhuhrNamazEndId);
+        asarNamazEndId = findViewById(R.id.asarNamazEndId);
+        sunsetEndId = findViewById(R.id.sunsetEndId);
+        magribNamazEndId = findViewById(R.id.magribNamazEndId);
+        ishaNamazEndId = findViewById(R.id.ishaNamazEndId);
+
         cityId = findViewById(R.id.cityId);
         countryId = findViewById(R.id.countryId);
     }
