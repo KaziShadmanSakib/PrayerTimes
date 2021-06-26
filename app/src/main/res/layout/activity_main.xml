@@ -83,14 +83,15 @@
                     android:id="@+id/nowPrayerName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="220dp"
                     android:text="Now - Midnight"
                     android:textColor="@color/AliceBlue"
                     android:textSize="18sp"
                     android:translationX="35sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/haveYouPrayed"
-                    app:layout_constraintStart_toEndOf="@+id/haveYouPrayed"
-                    app:layout_constraintTop_toTopOf="@+id/haveYouPrayed" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/haveYouPrayed"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
@@ -107,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:text="Next"
                         android:textColor="@color/AliceBlue"
-                        android:textSize="18sp" />
+                        android:textSize="19sp" />
 
                     <TextView
                         android:id="@+id/nextPrayerName"
@@ -140,6 +141,8 @@
                     android:textColor="@color/DarkGreen"
                     android:textSize="19sp"
                     android:textStyle="bold"
+                    android:translationX="-5sp"
+                    android:translationY="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/haveYouPrayed" />
 
@@ -180,6 +183,7 @@
                 android:layout_marginEnd="20sp"
                 android:text="Today"
                 android:textAlignment="center"
+                android:textColor="#000000 "
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -202,6 +206,7 @@
                     android:layout_marginBottom="5sp"
                     android:layout_weight="1"
                     android:text="Sehri Time :"
+                    android:textColor="#000000 "
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -215,6 +220,7 @@
                     android:layout_marginBottom="5sp"
                     android:layout_weight="1"
                     android:text="04 : 23 AM"
+                    android:textColor="#000000"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -238,6 +244,7 @@
                     android:layout_marginBottom="5sp"
                     android:layout_weight="1"
                     android:text="Iftar Time : "
+                    android:textColor="#000000 "
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -251,6 +258,7 @@
                     android:layout_marginBottom="5sp"
                     android:layout_weight="1"
                     android:text="06 : 40 PM"
+                    android:textColor="#000000 "
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -264,6 +272,7 @@
                 android:layout_marginEnd="20sp"
                 android:text="Quotes of the day -"
                 android:textAlignment="center"
+                android:textColor="#000000 "
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -287,6 +296,7 @@
                     android:layout_marginBottom="5sp"
 
                     android:text="“Be like a diamond, precious and rare, not like a stone, found everywhere.” – Anonymous."
+                    android:textColor="#000000 "
                     android:textStyle="bold" />
             </LinearLayout>
             <TextView
