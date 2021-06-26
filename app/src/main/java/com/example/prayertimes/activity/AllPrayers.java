@@ -53,8 +53,8 @@ public class AllPrayers extends AppCompatActivity{
 
         city = PrefConfig.loadCurrentCity(this);
         country = PrefConfig.loadCurrentCountry(this);
-        cityId.setText(city);
-        countryId.setText(country);
+       // cityId.setText(city);
+       // countryId.setText(country);
 
         /* Setting all waqts time /
 
@@ -163,8 +163,8 @@ public class AllPrayers extends AppCompatActivity{
         magribNamazEndId = findViewById(R.id.magribNamazEndId);
         ishaNamazEndId = findViewById(R.id.ishaNamazEndId);
 
-        cityId = findViewById(R.id.cityId);
-        countryId = findViewById(R.id.countryId);
+        //cityId = findViewById(R.id.cityId);
+        //countryId = findViewById(R.id.countryId);
     }
 
 }

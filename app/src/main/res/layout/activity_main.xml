@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eae6e6"
+    android:background="#f5fcf5"
     tools:context=".activity.MainActivity">
 
 
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#eae6e6">
+            android:background="#f5fcf5">
 
 
             <TextView
@@ -294,7 +294,6 @@
                     android:layout_marginTop="5sp"
                     android:layout_marginEnd="10sp"
                     android:layout_marginBottom="5sp"
-
                     android:text="“Be like a diamond, precious and rare, not like a stone, found everywhere.” – Anonymous."
                     android:textColor="#000000 "
                     android:textStyle="bold" />
