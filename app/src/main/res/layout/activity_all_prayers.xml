@@ -10,635 +10,692 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-
-
         <LinearLayout
-            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="12dp"
-            android:background="@drawable/background_white"
-            android:elevation="10dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
+            android:orientation="vertical">
             <LinearLayout
+                android:id="@+id/topTextlinear"
+                android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginStart="12dp">
+
+                <TextView
+                    android:id="@+id/todayId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/today"
+                    android:textColor="@color/DarkCyan"
+                    android:textSize="25sp"
+                    android:textStyle="bold">
+
+
+                </TextView>
 
 
             </LinearLayout>
 
 
-
-
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/background_white"
+                android:elevation="10dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginTop="20dp"
 
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/background_light_blue"
-                android:orientation="horizontal">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/fajrText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Prayers are better than sleep"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/fajrImage"
-                        app:layout_constraintStart_toEndOf="@+id/fajrImage"
-                        app:layout_constraintTop_toTopOf="@+id/fajrImage"
-                        app:layout_constraintVertical_bias="0.82" />
 
-                    <ImageView
-                        android:id="@+id/fajrImage"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/fajr" />
-
-                    <TextView
-                        android:id="@+id/fajr"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="FAJR"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/fajrImage"
-                        app:layout_constraintTop_toTopOf="@+id/fajrImage" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/fazrNamazId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:text="04:00 am"
-
-                        android:textAlignment="viewEnd"
-                        android:textColor="#4CAF50"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/fazrNamazEndId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:text="05:10 am"
-
-                        android:textAlignment="viewEnd"
-                        android:textColor="#F44336"
-                        android:textSize="18sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/background_gray"
-                android:orientation="horizontal">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/sunriseText"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="20dp"
+
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/background_light_blue"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Prayers are better than sleep"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/sunriseImage"
-                        app:layout_constraintStart_toEndOf="@+id/sunriseImage"
-                        app:layout_constraintTop_toTopOf="@+id/sunriseImage"
-                        app:layout_constraintVertical_bias="0.82" />
+                        android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/sunriseImage"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/sunrise" />
+                        <TextView
+                            android:id="@+id/fajrText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text=" "
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/fajrImage"
+                            app:layout_constraintStart_toEndOf="@+id/fajrImage"
+                            app:layout_constraintTop_toTopOf="@+id/fajrImage"
+                            app:layout_constraintVertical_bias="0.82" />
 
-                    <TextView
-                        android:id="@+id/sunrise"
+                        <ImageView
+                            android:id="@+id/fajrImage"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/fajr" />
+
+                        <TextView
+                            android:id="@+id/fajr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Fajr"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@+id/fajrImage"
+                            app:layout_constraintTop_toTopOf="@+id/fajrImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Sunrise"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/sunriseImage"
-                        app:layout_constraintTop_toTopOf="@+id/sunriseImage" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/fazrNamazId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:text="04:00 am"
+
+                            android:textAlignment="viewEnd"
+                            android:textColor="#4CAF50"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/fazrNamazEndId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:text="05:10 am"
+
+                            android:textAlignment="viewEnd"
+                            android:textColor="#F44336"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/sunriseId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="04:00 am"
-                        android:textAlignment="viewEnd"
-                        android:textColor="#4CAF50"
-                        android:textSize="18sp" />
-                    <TextView
-                        android:id="@+id/sunriseEndId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:text="05:10 am"
-
-                        android:textAlignment="viewEnd"
-                        android:textColor="#F44336"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/background_light_pink"
-                android:orientation="horizontal">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/dhuhrText"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/background_gray"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Prayers are better than sleep"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/dhuhrImage"
-                        app:layout_constraintStart_toEndOf="@+id/dhuhrImage"
-                        app:layout_constraintTop_toTopOf="@+id/dhuhrImage"
-                        app:layout_constraintVertical_bias="0.82" />
+                        android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/dhuhrImage"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/johr" />
+                        <TextView
+                            android:id="@+id/sunriseText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text=" "
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/sunriseImage"
+                            app:layout_constraintStart_toEndOf="@+id/sunriseImage"
+                            app:layout_constraintTop_toTopOf="@+id/sunriseImage"
+                            app:layout_constraintVertical_bias="0.82" />
 
-                    <TextView
-                        android:id="@+id/dhuhr"
+                        <ImageView
+                            android:id="@+id/sunriseImage"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/sunrise" />
+
+                        <TextView
+                            android:id="@+id/sunrise"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Sunrise"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@+id/sunriseImage"
+                            app:layout_constraintTop_toTopOf="@+id/sunriseImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="DHUHR"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/dhuhrImage"
-                        app:layout_constraintTop_toTopOf="@+id/dhuhrImage" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/sunriseId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="04:00 am"
+                            android:textAlignment="viewEnd"
+                            android:textColor="#4CAF50"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/sunriseEndId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:text="05:10 am"
+
+                            android:textAlignment="viewEnd"
+                            android:textColor="#F44336"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/dhuhrNamazId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:text="04:00 am"
-
-                        android:textAlignment="viewEnd"
-                        android:textColor="#4CAF50"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/dhuhrNamazEndId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:text="05:10 am"
-
-                        android:textAlignment="viewEnd"
-                        android:textColor="#F44336"
-                        android:textSize="18sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/background_light_yellow"
-                android:orientation="horizontal">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/asarText"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/background_light_pink"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Prayers are better than sleep"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/asarImage"
-                        app:layout_constraintStart_toEndOf="@+id/asarImage"
-                        app:layout_constraintTop_toTopOf="@+id/asarImage"
-                        app:layout_constraintVertical_bias="0.82" />
+                        android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/asarImage"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/asar" />
+                        <TextView
+                            android:id="@+id/dhuhrText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text=" "
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/dhuhrImage"
+                            app:layout_constraintStart_toEndOf="@+id/dhuhrImage"
+                            app:layout_constraintTop_toTopOf="@+id/dhuhrImage"
+                            app:layout_constraintVertical_bias="0.82" />
 
-                    <TextView
-                        android:id="@+id/asar"
+                        <ImageView
+                            android:id="@+id/dhuhrImage"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/johr" />
+
+                        <TextView
+                            android:id="@+id/dhuhr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Dhuhr"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@+id/dhuhrImage"
+                            app:layout_constraintTop_toTopOf="@+id/dhuhrImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="ASR"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/asarImage"
-                        app:layout_constraintTop_toTopOf="@+id/asarImage" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/dhuhrNamazId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:text="04:00 am"
+
+                            android:textAlignment="viewEnd"
+                            android:textColor="#4CAF50"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/dhuhrNamazEndId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:text="05:10 am"
+
+                            android:textAlignment="viewEnd"
+                            android:textColor="#F44336"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/asarNamazId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:text="04:00 am"
-
-                        android:textAlignment="viewEnd"
-                        android:textColor="#4CAF50"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/asarNamazEndId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:text="05:10 am"
-
-                        android:textAlignment="viewEnd"
-                        android:textColor="#F44336"
-                        android:textSize="18sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/background_gray"
-                android:orientation="horizontal">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/sunsetText"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/background_light_yellow"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Prayers are better than sleep"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/sunsetImage"
-                        app:layout_constraintStart_toEndOf="@+id/sunsetImage"
-                        app:layout_constraintTop_toTopOf="@+id/sunsetImage"
-                        app:layout_constraintVertical_bias="0.82" />
+                        android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/sunsetImage"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/sunset" />
+                        <TextView
+                            android:id="@+id/asarText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text=" "
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/asarImage"
+                            app:layout_constraintStart_toEndOf="@+id/asarImage"
+                            app:layout_constraintTop_toTopOf="@+id/asarImage"
+                            app:layout_constraintVertical_bias="0.82" />
 
-                    <TextView
-                        android:id="@+id/sunset"
+                        <ImageView
+                            android:id="@+id/asarImage"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/asar" />
+
+                        <TextView
+                            android:id="@+id/asar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Asar"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@+id/asarImage"
+                            app:layout_constraintTop_toTopOf="@+id/asarImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Sunset"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/sunsetImage"
-                        app:layout_constraintTop_toTopOf="@+id/sunsetImage" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/asarNamazId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:text="04:00 am"
+
+                            android:textAlignment="viewEnd"
+                            android:textColor="#4CAF50"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/asarNamazEndId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:text="05:10 am"
+
+                            android:textAlignment="viewEnd"
+                            android:textColor="#F44336"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/sunsetId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="04:00 am"
-                        android:textAlignment="viewEnd"
-                        android:textColor="#4CAF50"
-                        android:textSize="18sp" />
-                    <TextView
-                        android:id="@+id/sunsetEndId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:text="05:10 am"
-
-                        android:textAlignment="viewEnd"
-                        android:textColor="#F44336"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/background_light_red"
-                android:orientation="horizontal">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/magribText"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/background_gray"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Prayers are better than sleep"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/magribImage"
-                        app:layout_constraintStart_toEndOf="@+id/magribImage"
-                        app:layout_constraintTop_toTopOf="@+id/magribImage"
-                        app:layout_constraintVertical_bias="0.82" />
+                        android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/magribImage"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/magrib" />
+                        <TextView
+                            android:id="@+id/sunsetText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text=" "
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/sunsetImage"
+                            app:layout_constraintStart_toEndOf="@+id/sunsetImage"
+                            app:layout_constraintTop_toTopOf="@+id/sunsetImage"
+                            app:layout_constraintVertical_bias="0.82" />
 
-                    <TextView
-                        android:id="@+id/magrib"
+                        <ImageView
+                            android:id="@+id/sunsetImage"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/sunset" />
+
+                        <TextView
+                            android:id="@+id/sunset"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Sunset"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@+id/sunsetImage"
+                            app:layout_constraintTop_toTopOf="@+id/sunsetImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="MAGRIB"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/magribImage"
-                        app:layout_constraintTop_toTopOf="@+id/magribImage" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/sunsetId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="04:00 am"
+                            android:textAlignment="viewEnd"
+                            android:textColor="#4CAF50"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/sunsetEndId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:text="05:10 am"
+
+                            android:textAlignment="viewEnd"
+                            android:textColor="#F44336"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/magribNamazId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:text="04:00 am"
-
-                        android:textAlignment="viewEnd"
-                        android:textColor="#4CAF50"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/magribNamazEndId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:text="05:10 am"
-
-                        android:textAlignment="viewEnd"
-                        android:textColor="#F44336"
-                        android:textSize="18sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/background_light_green"
-                android:orientation="horizontal">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/ishaText"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/background_light_red"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Prayers are better than sleep"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/ishaimage"
-                        app:layout_constraintStart_toEndOf="@+id/ishaimage"
-                        app:layout_constraintTop_toTopOf="@+id/ishaimage"
-                        app:layout_constraintVertical_bias="0.82" />
+                        android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/ishaimage"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/isha" />
+                        <TextView
+                            android:id="@+id/magribText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text=" "
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/magribImage"
+                            app:layout_constraintStart_toEndOf="@+id/magribImage"
+                            app:layout_constraintTop_toTopOf="@+id/magribImage"
+                            app:layout_constraintVertical_bias="0.82" />
 
-                    <TextView
-                        android:id="@+id/isha"
+                        <ImageView
+                            android:id="@+id/magribImage"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/magrib" />
+
+                        <TextView
+                            android:id="@+id/magrib"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Magrib"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@+id/magribImage"
+                            app:layout_constraintTop_toTopOf="@+id/magribImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="ISHA"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/ishaimage"
-                        app:layout_constraintTop_toTopOf="@+id/ishaimage" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/magribNamazId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:text="04:00 am"
+
+                            android:textAlignment="viewEnd"
+                            android:textColor="#4CAF50"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/magribNamazEndId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:text="05:10 am"
+
+                            android:textAlignment="viewEnd"
+                            android:textColor="#F44336"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-                    <TextView
-                        android:id="@+id/ishaNamazId"
-                        android:layout_width="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/background_light_green"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/ishaText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/ishaimage"
+                            app:layout_constraintStart_toEndOf="@+id/ishaimage"
+                            app:layout_constraintTop_toTopOf="@+id/ishaimage"
+                            app:layout_constraintVertical_bias="0.82" />
+
+                        <ImageView
+                            android:id="@+id/ishaimage"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/isha" />
+
+                        <TextView
+                            android:id="@+id/isha"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Isha"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@+id/ishaimage"
+                            app:layout_constraintTop_toTopOf="@+id/ishaimage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
                         android:layout_weight="1"
+                        android:orientation="vertical">
 
-                        android:text="04:00 am"
+                        <TextView
+                            android:id="@+id/ishaNamazId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
 
-                        android:textAlignment="viewEnd"
-                        android:textColor="#4CAF50"
-                        android:textSize="18sp" />
+                            android:text="04:00 am"
 
-                    <TextView
-                        android:id="@+id/ishaNamazEndId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                            android:textAlignment="viewEnd"
+                            android:textColor="#4CAF50"
+                            android:textSize="16sp" />
 
-                        android:text="05:10 am"
+                        <TextView
+                            android:id="@+id/ishaNamazEndId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
 
-                        android:textAlignment="viewEnd"
-                        android:textColor="#F44336"
-                        android:textSize="18sp" />
+                            android:text="05:10 am"
+
+                            android:textAlignment="viewEnd"
+                            android:textColor="#F44336"
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </LinearLayout>
+
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/bottomTextlinear"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/cityId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/city"
+
+                    android:textColor="#20b020"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/countryId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/country"
+
+                    android:textColor="#20b020"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
+
+
 
 
     </ScrollView>
@@ -667,25 +724,7 @@ app:layout_constraintTop_toTopOf="parent">
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/cityId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="20dp"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/countryId" />
 
-            <TextView
-                android:id="@+id/countryId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
                 <linearLayout
             android:layout_width="match_parent"

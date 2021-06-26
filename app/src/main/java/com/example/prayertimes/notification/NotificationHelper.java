@@ -1,5 +1,6 @@
 package com.example.prayertimes.notification;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -23,7 +24,7 @@ import java.util.Calendar;
 public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
     public static final String channelName = "Channel Name";
-    private int importance = 1;
+    private final int importance;
 
     private NotificationManager mManager;
     Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.kalimba);
@@ -66,7 +67,7 @@ public class NotificationHelper extends ContextWrapper {
 
         Intent clickedIntent = new Intent(this, CalendarDateLog.class);
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());
         int dateInt = Integer.parseInt(date);
         dateInt +=1;
@@ -74,7 +75,7 @@ public class NotificationHelper extends ContextWrapper {
         clickedIntent.putExtra("clickedDate",date);
         PendingIntent clickedPendingIntent = PendingIntent.getActivities(this,1, new Intent[]{clickedIntent},PendingIntent.FLAG_UPDATE_CURRENT);
 
-        if(title == "Sehri Time"){
+        if(title.equals("Sehri Time")){
             return new NotificationCompat.Builder(getApplicationContext(), channelID)
                     .setContentTitle(title)
                     .setContentText(text)

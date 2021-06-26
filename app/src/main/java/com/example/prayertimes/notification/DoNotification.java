@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.example.prayertimes.datetime.PrayerTimeInMiliSecond;
 import com.example.prayertimes.options.PrefConfig;
