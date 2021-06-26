@@ -162,6 +162,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= isha || current >= 0 && current < fazr){
 
+            if(isProgressBarRunningFirstTime == false){
+
+                isProgressBarRunningFirstTime = true;
+
+                i = 0;
+
+            }
+
             startTime2 = (int) (midNight - isha) + (int) fazr;
 
             PrefConfig.saveStartTimeProgressBar(this, startTime2);
@@ -176,6 +184,14 @@ public class MainActivity extends AppCompatActivity {
         // fazr -> sunrise
 
         if(current >= fazr && current < sunrise ){
+
+            if(isProgressBarRunningFirstTime == false){
+
+                isProgressBarRunningFirstTime = true;
+
+                i = 0;
+
+            }
 
             //startTime2 = (int) sunrise - (int) current;
 
@@ -193,6 +209,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= sunrise && current < dhuhr ){
 
+            if(isProgressBarRunningFirstTime == false){
+
+                isProgressBarRunningFirstTime = true;
+
+                i = 0;
+
+            }
+
 
             //startTime2 = (int) dhuhr - (int) current;
 
@@ -209,6 +233,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= dhuhr && current < asar){
 
+            if(isProgressBarRunningFirstTime == false){
+
+                isProgressBarRunningFirstTime = true;
+
+                i = 0;
+
+            }
+
 
             //startTime2 = (int) asar - (int) current;
 
@@ -223,6 +255,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(current >= asar && current < magrib){
 
+            if(isProgressBarRunningFirstTime == false){
+
+                isProgressBarRunningFirstTime = true;
+
+                i = 0;
+
+            }
+
 
             //startTime2 = (int) magrib - (int) current;
 
@@ -236,6 +276,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(current >= magrib && current < isha){
+
+            if(isProgressBarRunningFirstTime == false){
+
+                isProgressBarRunningFirstTime = true;
+
+                i = 0;
+
+            }
 
             //startTime2 = (int) isha - (int)current;
 
@@ -259,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 i++;
                 Toast.makeText(MainActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
+                Log.v("Log_tag", "Tick of Progress"+ i+ millisUntilFinished);
                 PrefConfig.saveProgressBar(MainActivity.this, i);
                 progressBar.setProgress((int)i*100/(startTime2/1000));
             }
@@ -267,6 +316,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 i = 0;
                 progressBar.setProgress(100);
+                isProgressBarRunningFirstTime = false;
             }
         }.start();
 
@@ -323,9 +373,7 @@ public class MainActivity extends AppCompatActivity {
             PrefConfig.saveCurrentCity(this,"Seattle");
             PrefConfig.saveCurrentCountry(this,"United States");
 
-            PrefConfig.saveProgressBar(this, 0);
-
-            PrefConfig.saveStartTimeProgressBar(this, 1000);
+            isProgressBarRunningFirstTime = false;
 
             JasonFetcher jasonFetcher = new JasonFetcher(this);
             jasonFetcher.getData();

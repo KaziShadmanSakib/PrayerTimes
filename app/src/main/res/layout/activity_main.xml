@@ -83,12 +83,13 @@
                     android:id="@+id/nowPrayerName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="184dp"
                     android:text="Now - Midnight"
                     android:textColor="@color/AliceBlue"
                     android:textSize="18sp"
                     android:translationX="60sp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.639"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/haveYouPrayed"
                     app:layout_constraintVertical_bias="0.0" />
@@ -141,7 +142,7 @@
                     android:textColor="@color/DarkGreen"
                     android:textSize="19sp"
                     android:textStyle="bold"
-                    android:translationX="-5sp"
+                    android:translationX="-10sp"
                     android:translationY="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/haveYouPrayed" />
