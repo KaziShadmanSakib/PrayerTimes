@@ -257,6 +257,31 @@ public class Duas extends AppCompatActivity {
 
                         break;
 
+                    case "When Leaving Home":
+
+                        changeIntent(20, 21);
+
+                        break;
+
+                    case "Upon Entering Home":
+
+                        changeIntent(22, 0);
+
+                        break;
+
+                    case "When going up the Stairs / Ascending a high place":
+
+                        changeIntent(23, 0);
+
+                        break;
+
+                    case "When coming down of Stairs / Descending from high place":
+
+                        changeIntent(24, 0);
+
+                        break;
+
+
                 }
 
                 return true;

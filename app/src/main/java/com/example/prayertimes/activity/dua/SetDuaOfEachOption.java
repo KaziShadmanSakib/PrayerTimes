@@ -288,6 +288,74 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
         }
 
+        else if(i==20){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Home");
+
+            imageView.setImageResource(R.drawable.homedua01_01);
+
+
+        }
+
+        else if(i==21){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Home");
+
+            imageView.setImageResource(R.drawable.homedua01_02);
+
+
+
+        }
+
+        else if(i==22){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Home");
+
+            imageView.setImageResource(R.drawable.homedua02);
+
+            imageView.setTranslationY(-100);
+
+
+
+
+        }
+
+        else if(i==23){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Home");
+
+            imageView.setImageResource(R.drawable.homedua03);
+
+            imageView.setTranslationY(-100);
+
+
+
+
+        }
+
+        else if(i==24){
+
+            /*App bar config */
+
+            getSupportActionBar().setTitle("Home");
+
+            imageView.setImageResource(R.drawable.homedua04);
+
+            imageView.setTranslationY(-100);
+
+
+
+
+        }
+
     }
 }
 
