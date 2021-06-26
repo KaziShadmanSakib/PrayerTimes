@@ -32,6 +32,10 @@ public class Duas extends AppCompatActivity {
 
         ParentList.add("Ramadan");
         ParentList.add("Hajj / Umrah");
+        ParentList.add("Mosque");
+        ParentList.add("Home");
+        ParentList.add("Sleeping");
+        ParentList.add("Food");
 
     }
 
@@ -48,6 +52,35 @@ public class Duas extends AppCompatActivity {
             "Upon reaching the Yemeni corner during Tawaf", "When going to Mount Safa",
             "When at Mount Safa and Mount Marwah", "For reciting at Al-Mash'ar Al-Haraam (Muzdalifah)",
             "When throwing stones at Jamaraat", "At Arafat", "When sacrificing an animal"
+
+    };
+
+    String[] mosqueDuaName = {
+
+            "When going to the Mosque", "Upon Entering Mosque", "Upon Leaving Mosque"
+
+
+    };
+
+    String[] homeDuaName = {
+
+            "When Leaving Home", "Upon Entering Home", "When going up the Stairs / Ascending a high place",
+            "When coming down of Stairs / Descending from high place"
+
+    };
+
+    String[] sleepingDuaName = {
+
+            "When you wake up", "Before sleeping"
+
+    };
+
+    String[] foodDuaName = {
+
+            "When beginning a meal", "If one forgets to mention Allah at the beginning", "After finishing a meal",
+            "When given a drink" , "Upon drinking milk", "When dining at someone's house", "For someone who offers you a meal",
+            "When opening your fast", "For someone who provides you with Iftar"
+
 
     };
 
@@ -91,6 +124,30 @@ public class Duas extends AppCompatActivity {
             else if(HoldItem.equals("Hajj / Umrah")){
 
                 loadChild(hajjUmrahDuaName);
+
+            }
+
+            else if(HoldItem.equals("Mosque")){
+
+                loadChild(mosqueDuaName);
+
+            }
+
+            else if(HoldItem.equals("Home")){
+
+                loadChild(homeDuaName);
+
+            }
+
+            else if(HoldItem.equals("Sleeping")){
+
+                loadChild(sleepingDuaName);
+
+            }
+
+            else if(HoldItem.equals("Food")){
+
+                loadChild(foodDuaName);
 
             }
 
