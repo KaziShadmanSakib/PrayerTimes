@@ -87,7 +87,7 @@
                     android:text="Now - Midnight"
                     android:textColor="@color/AliceBlue"
                     android:textSize="18sp"
-                    android:translationX="40sp"
+                    android:translationX="60sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/haveYouPrayed"
@@ -184,8 +184,7 @@
                 android:text="Today"
                 android:textAlignment="center"
                 android:textColor="#000000 "
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -207,8 +206,7 @@
                     android:layout_weight="1"
                     android:text="Sehri Time :"
                     android:textColor="#000000 "
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/sehriTimeId"
@@ -221,8 +219,7 @@
                     android:layout_weight="1"
                     android:text="04 : 23 AM"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -245,8 +242,7 @@
                     android:layout_weight="1"
                     android:text="Iftar Time : "
                     android:textColor="#000000 "
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/iftarTimeId"
@@ -259,8 +255,7 @@
                     android:layout_weight="1"
                     android:text="06 : 40 PM"
                     android:textColor="#000000 "
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <TextView
@@ -273,8 +268,7 @@
                 android:text="Quotes of the day -"
                 android:textAlignment="center"
                 android:textColor="#000000 "
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -295,8 +289,7 @@
                     android:layout_marginEnd="10sp"
                     android:layout_marginBottom="5sp"
                     android:text="“Be like a diamond, precious and rare, not like a stone, found everywhere.” – Anonymous."
-                    android:textColor="#000000 "
-                    android:textStyle="bold" />
+                    android:textColor="#000000 " />
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
