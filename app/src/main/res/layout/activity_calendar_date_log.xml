@@ -31,7 +31,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#eae6e6"
-                    android:text="Clicked Date"
                     android:textColor="@color/DarkCyan"
                     android:textSize="25sp"
                     android:textStyle="bold"

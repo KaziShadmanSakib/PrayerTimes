@@ -48,6 +48,7 @@ public class LogActivity extends AppCompatActivity {
         //create calender View with dots
         calendarView = findViewById(R.id.calendarView);
 
+
             new Thread(() -> {
 
                try {
