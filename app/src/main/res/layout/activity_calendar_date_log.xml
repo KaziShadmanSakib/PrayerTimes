@@ -1,111 +1,328 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="#eae6e6">
+    android:background="#aef6f6"
+    tools:context=".activity.CalendarDateLog">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="60sp"
-        android:background="#eae6e6">
+        android:background="#f5fcf5"
+        android:layout_height="match_parent">
 
-
-        <CheckedTextView
-            android:id="@+id/checkedTextview1"
+        <LinearLayout
+            android:id="@+id/topLinearLayout"
+            android:background="#f5fcf5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/checkedTextview2"
-            android:layout_marginTop="80sp"
-            android:background="@drawable/default_rect_shape"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="true"
-            android:gravity="center"
-            android:padding="25sp"
-            android:text="    Fajr"
-            android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="@id/datetextView"
-            tools:layout_editor_absoluteX="0dp" />
+            android:orientation="vertical">
 
-        <CheckedTextView
-            android:id="@+id/checkedTextview2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/checkedTextview3"
-            android:background="@drawable/default_rect_shape"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="true"
-            android:gravity="center"
-            android:padding="25sp"
-            android:text="   Dhuhr"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/checkedTextview1"
-            tools:layout_editor_absoluteX="0dp" />
+            <LinearLayout
+                android:id="@+id/topTextlinear"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp">
+                <TextView
+                    android:id="@+id/datetextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#f5fcf5"
+                    android:text="Clicked Date"
+                    android:textColor="@color/DarkCyan"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    />
 
-        <CheckedTextView
-            android:id="@+id/checkedTextview3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/checkedTextview4"
-            android:background="@drawable/default_rect_shape"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="true"
-            android:gravity="center"
-            android:padding="25sp"
-            android:text="   Asar"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/checkedTextview2"
-            tools:layout_editor_absoluteX="0dp" />
 
-        <CheckedTextView
-            android:id="@+id/checkedTextview4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/checkedTextview5"
-            android:background="@drawable/default_rect_shape"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="true"
-            android:gravity="center"
-            android:padding="25sp"
-            android:text="   Magrib"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/checkedTextview3"
-            tools:layout_editor_absoluteX="0dp" />
 
-        <CheckedTextView
-            android:id="@+id/checkedTextview5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/default_rect_shape"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="true"
-            android:gravity="center"
-            android:padding="25sp"
-            android:text="   Isha"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/checkedTextview4"
-            tools:layout_editor_absoluteX="0dp" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/datetextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#eae6e6"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textColor="#028B7C"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="0dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/background_white"
+                android:elevation="10dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
-</RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="25dp"
+
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/background_light_blue2"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/fajrLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/fajrNamajImage"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/fajr" />
+
+                        <TextView
+                            android:id="@+id/textView544565"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="Fajr"
+                            android:textColor="#011627"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/fajrNamajImage"
+                            app:layout_constraintTop_toTopOf="@+id/fajrNamajImage" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="32dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/fajrNamajImage"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/fajrNamajImage" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/background_light_lime_2"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/dhuhrLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/DhuhrNamajImage"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/johr" />
+
+                        <TextView
+                            android:id="@+id/textView5544"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="Dhuhr"
+                            android:textColor="#011627"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/DhuhrNamajImage"
+                            app:layout_constraintStart_toEndOf="@+id/DhuhrNamajImage"
+                            app:layout_constraintTop_toTopOf="@+id/DhuhrNamajImage" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="32dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/DhuhrNamajImage"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/DhuhrNamajImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/background_light_yellow_1"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/asarLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imageView34"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/asar" />
+
+                        <TextView
+                            android:id="@+id/asarNamajImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="Asar"
+                            android:textColor="#011627"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView34"
+                            app:layout_constraintStart_toEndOf="@+id/imageView34"
+                            app:layout_constraintTop_toTopOf="@+id/imageView34" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="32dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView34"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/imageView34" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/background_light_red_pink"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/magribLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/magribNamajImage"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/magrib" />
+
+                        <TextView
+                            android:id="@+id/textView554"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="Magrib"
+                            android:textColor="#011627"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/magribNamajImage"
+                            app:layout_constraintTop_toTopOf="@+id/magribNamajImage" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="32dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/magribNamajImage"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/magribNamajImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/background_lightlime"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ishaLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/ishaNamajImage"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/isha" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="Isha"
+                            android:textColor="#011627"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/ishaNamajImage"
+                            app:layout_constraintStart_toEndOf="@+id/ishaNamajImage"
+                            app:layout_constraintTop_toTopOf="@+id/ishaNamajImage" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="32dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/ishaNamajImage"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/ishaNamajImage" />
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

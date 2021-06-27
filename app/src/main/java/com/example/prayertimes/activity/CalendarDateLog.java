@@ -1,12 +1,15 @@
 package com.example.prayertimes.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +30,9 @@ public class CalendarDateLog extends AppCompatActivity {
     String date;
     int currentDate;
     int clickedDate;
-    CheckedTextView[] allPrayersCheckedList;
+    CheckBox[] allPrayersCheckedList;
     TextView dateTextView;
+    ConstraintLayout[] allPrayerLayout;
     int currentMiliSec;
 
     @Override
@@ -62,13 +66,14 @@ public class CalendarDateLog extends AppCompatActivity {
         dateTextView.setText("Selected Date : " + formattedDate(date));
         //set checkbox ids
         createCheckBoxId();
+        createLayoutId();
 
 
         databaseHandler = new DatabaseHandler(this);
         currentDateSet();
 
 
-
+/*
         if(currentDate+1==clickedDate){
 
             if(PrefConfig.loadCurrentPrayerIndex(this)!=0)
@@ -79,6 +84,8 @@ public class CalendarDateLog extends AppCompatActivity {
                 allPrayersCheckedList[4].setBackgroundResource(R.drawable.selected_rect_shape);
 
         }
+
+ */
 
         //create checkbox
         if(databaseHandler.getContact(date).getDate() == null){
@@ -95,7 +102,7 @@ public class CalendarDateLog extends AppCompatActivity {
         //change checkbox on Click and update DB
         for(int i = 0; i < 5; i++ ){
             int finalI = i;
-            allPrayersCheckedList[i].setOnClickListener(view -> {
+            allPrayerLayout[i].setOnClickListener(view -> {
 
                 if((currentDate-clickedDate)>99){
                     if(PrefConfig.loadLogAccessPref(this)==0){
@@ -143,6 +150,15 @@ public class CalendarDateLog extends AppCompatActivity {
 
     }
 
+    private void createLayoutId() {
+        allPrayerLayout = new ConstraintLayout[5];
+        allPrayerLayout[0] =  findViewById(R.id.fajrLayout);
+        allPrayerLayout[1] =  findViewById(R.id.dhuhrLayout);
+        allPrayerLayout[2] =  findViewById(R.id.asarLayout);
+        allPrayerLayout[3] =  findViewById(R.id.magribLayout);
+        allPrayerLayout[4] =  findViewById(R.id.ishaLayout);
+    }
+
     private void setCOnditionForCurrentDate(int finalI) {
         int[] prayerTime = getData();
         if(currentMiliSec>prayerTime[finalI]){
@@ -174,12 +190,12 @@ public class CalendarDateLog extends AppCompatActivity {
 
 
     private void createCheckBoxId() {
-        allPrayersCheckedList = new CheckedTextView[5];
-        allPrayersCheckedList[0] =  findViewById(R.id.checkedTextview1);
-        allPrayersCheckedList[1] =  findViewById(R.id.checkedTextview2);
-        allPrayersCheckedList[2] =  findViewById(R.id.checkedTextview3);
-        allPrayersCheckedList[3] =  findViewById(R.id.checkedTextview4);
-        allPrayersCheckedList[4] =  findViewById(R.id.checkedTextview5);
+        allPrayersCheckedList = new CheckBox[5];
+        allPrayersCheckedList[0] =  findViewById(R.id.checkBox);
+        allPrayersCheckedList[1] =  findViewById(R.id.checkBox2);
+        allPrayersCheckedList[2] =  findViewById(R.id.checkBox3);
+        allPrayersCheckedList[3] =  findViewById(R.id.checkBox4);
+        allPrayersCheckedList[4] =  findViewById(R.id.checkBox5);
     }
 
 

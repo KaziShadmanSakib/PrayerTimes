@@ -9,8 +9,10 @@
     tools:context=".activity.AllPrayers">
     <ScrollView
         android:layout_width="match_parent"
+        android:background="#f5fcf5"
         android:layout_height="match_parent">
         <LinearLayout
+            android:background="#f5fcf5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
