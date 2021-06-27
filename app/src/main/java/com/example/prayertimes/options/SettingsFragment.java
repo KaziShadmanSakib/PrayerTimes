@@ -4,6 +4,7 @@ package com.example.prayertimes.options;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -498,7 +499,24 @@ public class SettingsFragment extends PreferenceFragment {
     private void feedbackPref() {
         Preference myPref = (Preference)findPreference("pref_feedback");
         if(myPref!=null){
+            myPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Open Browser")
+                            .setMessage("It will open your default browser")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", (dialog, which) -> {
 
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/KaziShadmanSakib/PrayerTimes/issues/new"));
+                                startActivity(browserIntent);
+
+                            }).setNegativeButton("No", null)
+                            .show();
+
+                    return false;
+                }
+            });
         }
 
     }
