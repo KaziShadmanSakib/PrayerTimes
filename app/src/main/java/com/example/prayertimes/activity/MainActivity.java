@@ -213,8 +213,13 @@ public class MainActivity extends AppCompatActivity {
 
         if(currentTime >= ishaTime || currentTime >= 0 && currentTime < fazrTime){
 
+            if(currentTime>=ishaTime){
+                startTime = midNight - currentTime +fazrTime;
+            }
+            else{
+                startTime = 0-currentTime + fazrTime;
+            }
 
-            startTime = 0-currentTime + fazrTime;
             timeLeftInMillies = startTime;
             startTime2 = (int) (midNight - ishaTime) + (int) fazrTime;
 
