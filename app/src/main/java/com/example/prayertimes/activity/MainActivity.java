@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -16,10 +17,13 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
+import android.text.Editable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,6 +32,7 @@ import com.example.prayertimes.datetime.PrayerTimeInMiliSecond;
 import com.example.prayertimes.notification.DoNotification;
 import com.example.prayertimes.activity.dua.Duas;
 import com.example.prayertimes.options.PrefConfig;
+import com.example.prayertimes.others.LoadingDialog;
 import com.example.prayertimes.others.QuoteGetter;
 import com.example.prayertimes.R;
 import com.example.prayertimes.database.DatabaseHandler;
@@ -43,6 +48,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -62,6 +68,7 @@ import com.google.android.gms.location.LocationResult;
 
 
 public class MainActivity extends AppCompatActivity {
+
 
     private TextView cityLocation, sehriTimeId, iftarTimeId, nextPrayerName, nextPrayerTime, haveYouPrayed, nowPrayerName;
     private FusedLocationProviderClient fusedLocationClient;
@@ -94,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
     public static double finalAlti = 0;
     List<Address> addresses;
     Geocoder geocoder;
+    static String edittedLocation = "Dhaka,Bangladesh";
+    static boolean isLocationChanged = false;
 
 
 
@@ -120,8 +129,44 @@ public class MainActivity extends AppCompatActivity {
         setNowAndNext();
         setQuote();
         setSahriIftariCityText();
+        setnewLocation();
 
 
+    }
+
+    private void setnewLocation() {
+        if(isLocationChanged){
+            Log.i("uga","why");
+            isLocationChanged = false;
+
+
+            List<String> locationList = Arrays.asList(edittedLocation.split("\\s*,\\s*"));
+
+
+
+            JasonFetcher jasonFetcher = new JasonFetcher(this);
+            if(locationList.size()>1){
+                jasonFetcher.getTempData(locationList.get(0),locationList.get(1));
+
+
+                if(jasonFetcher.isNoError()){
+                    PrefConfig.saveCurrentCity(this,locationList.get(0));
+                    PrefConfig.saveCurrentCountry(this,locationList.get(1));
+                    setSahriIftariCityText();
+
+                }
+                else {
+                    Toast toast = Toast.makeText(this,"Invalid Country or City",Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
+            }
+            else{
+                Toast toast = Toast.makeText(this,"Invalid Country or City",Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+        }
     }
 
 
@@ -699,6 +744,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         city = PrefConfig.loadCurrentCity(this);
+
+        city = city.substring(0, 1).toUpperCase() + city.substring(1);
         cityLocation.setText(city);
         sehriTimeId.setText(sehriAMPM);
         iftarTimeId.setText(iftarAMPM);
@@ -730,6 +777,48 @@ public class MainActivity extends AppCompatActivity {
         nextPrayerTime.setText(nowAndNextPrayer.getNextPrayerTime());
 
     }
+    public void changeLocation(View v){
+        if(PrefConfig.loadLocationType(getApplicationContext())==1){
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            final EditText edittext = new EditText(getApplicationContext());
+            edittext.setGravity(1);
+
+            alert.setMessage("Format : city,country\nExample : Dhaka,Bangladesh");
+            alert.setTitle("Set Location");
+
+
+            alert.setView(edittext);
+
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+
+
+                    edittedLocation = edittext.getText().toString();
+                    isLocationChanged = true;
+                    finish();
+                    startActivity(getIntent());
+
+                }
+            });
+
+            alert.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+
+                }
+            });
+
+            alert.show();
+        }
+
+
+
+
+
+
+
+
+    }
+
 
 
 }

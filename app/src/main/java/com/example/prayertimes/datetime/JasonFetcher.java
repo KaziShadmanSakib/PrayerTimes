@@ -24,6 +24,7 @@ public class JasonFetcher {
     Context context;
     Boolean isOk = true;
     String city,country;
+    boolean manual = false;
 
     // Tag used to cancel the request
     String tag_json_obj = "json_obj_req";
@@ -41,6 +42,7 @@ public class JasonFetcher {
     public void getTempData(String tempCity , String tempCountry){
         city = tempCity;
         country = tempCountry;
+        manual=true;
         getData();
 
     }
@@ -49,7 +51,7 @@ public class JasonFetcher {
     public void getData(){
         LoadingDialog loadingDialog = new LoadingDialog((Activity) context);
 
-        if(PrefConfig.loadFirstTime(context)=="FirstTime") {
+        if(PrefConfig.loadFirstTime(context)=="FirstTime"||manual) {
             Toast toast = Toast.makeText(context,"Please check if the internet is on",Toast.LENGTH_SHORT);
             toast.show();
             loadingDialog.startLoadingDialog();
@@ -128,7 +130,7 @@ public class JasonFetcher {
                         PrefConfig.saveIshaTimeAMPM(context, ishaNamazTimeAMPM);
                         PrefConfig.saveImsakTimeAMPM(context, imsakTimeAMPM);
                         //pDialog.hide();
-                        if(PrefConfig.loadFirstTime(context)=="FirstTime") {
+                        if(PrefConfig.loadFirstTime(context)=="FirstTime"||manual) {
                             NowAndNextPrayer nowAndNextPrayer = new NowAndNextPrayer(context);
                             nowAndNextPrayer.setNowAndNext();
                             PrefConfig.savefirstTime(context,"NotFirstTime");

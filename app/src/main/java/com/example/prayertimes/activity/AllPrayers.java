@@ -53,7 +53,9 @@ public class AllPrayers extends AppCompatActivity{
 
         city = PrefConfig.loadCurrentCity(this);
         country = PrefConfig.loadCurrentCountry(this);
+        city = city.substring(0, 1).toUpperCase() + city.substring(1);
         cityId.setText(city);
+        country = country.substring(0, 1).toUpperCase() + country.substring(1);
         countryId.setText(country);
 
         /* Setting all waqts time /

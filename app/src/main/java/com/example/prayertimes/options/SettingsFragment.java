@@ -450,21 +450,18 @@ public class SettingsFragment extends PreferenceFragment {
                      JasonFetcher jasonFetcher = new JasonFetcher(getContext());
                      if(locationList.size()>1){
                          jasonFetcher.getTempData(locationList.get(0),locationList.get(1));
-                         LoadingDialog loadingDialog = new LoadingDialog(getActivity());
-                         loadingDialog.startLoadingDialog();
-                         new Handler(Looper.getMainLooper()).postDelayed(() -> {
 
-                             if(jasonFetcher.isNoError()){
-                                 PrefConfig.saveCurrentCity(getContext(),locationList.get(0));
-                                 PrefConfig.saveCurrentCountry(getContext(),locationList.get(1));
-                                 locationEditText.setSummary(locationList.get(0)+", "+locationList.get(1));
-                             }
-                             else {
-                                 Toast toast = Toast.makeText(getContext(),"Invalid Country or City",Toast.LENGTH_SHORT);
-                                 toast.show();
-                             }
-                             loadingDialog.dismissDialog();
-                         }, 2000);
+
+                         if(jasonFetcher.isNoError()){
+                             PrefConfig.saveCurrentCity(getContext(),locationList.get(0));
+                             PrefConfig.saveCurrentCountry(getContext(),locationList.get(1));
+                             locationEditText.setSummary(locationList.get(0)+", "+locationList.get(1));
+                         }
+                         else {
+                             Toast toast = Toast.makeText(getContext(),"Invalid Country or City",Toast.LENGTH_SHORT);
+                             toast.show();
+                         }
+
                      }
                      else{
                          Toast toast = Toast.makeText(getContext(),"Invalid Country or City",Toast.LENGTH_SHORT);
