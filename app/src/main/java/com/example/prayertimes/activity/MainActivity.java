@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -67,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView cityLocation, sehriTimeId, iftarTimeId, nextPrayerName, nextPrayerTime, haveYouPrayed, nowPrayerName;
     private FusedLocationProviderClient fusedLocationClient;
     private String city = "Seattle";
-    private String country = "United States";
     private Boolean isLocationActive = false;
     private String currentTimeString, imsakTime, sehri, iftar, fajrNamazTime, dhuhrNamazTime, asarNamazTime, magribNamazTime, ishaNamazTime, sunriseTime, sunsetTime;
     private TextView timerId;
@@ -123,142 +121,10 @@ public class MainActivity extends AppCompatActivity {
         setQuote();
         setSahriIftariCityText();
 
-      //  setProgressBarTimer();
-
 
     }
 
 
-    /* Progress bar */
-/*
-    public void setProgressBarTimer(){
-
-        long midNight = 86400000;
-
-        /* Converting String time to Milliseconds
-
-
-        TimeParser tP = new TimeParser();
-
-
-        long isha = tP.timeParserMethod(ishaNamazTime);
-        long current = tP.timeParserMethodForCurrentTime(currentTime);
-        long magrib = tP.timeParserMethod(magribNamazTime);
-        long imsak = tP.timeParserMethod(imsakTime);
-        long fazr = tP.timeParserMethod(fajrNamazTime);
-        long sunrise = tP.timeParserMethod(sunriseTime);
-        long dhuhr = tP.timeParserMethod(dhuhrNamazTime);
-        long asar = tP.timeParserMethod(asarNamazTime);
-        long sunset = tP.timeParserMethod(sunsetTime);
-
-
-
-        //i = PrefConfig.loadProgressBar(this);
-        //Toast.makeText(MainActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
-
-        //startTime2 = PrefConfig.loadStartTimeProgressBar(this);
-
-        //progressBar.setProgress((int)i*100/(startTime2/1000));
-
-
-
-
-        if(current >= isha || current >= 0 && current < fazr){
-
-            startTime2 = (int) (midNight - isha) + (int) fazr;
-
-            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
-                PrefConfig.saveStartTimeProgressBar(this, startTime2);
-
-
-            startProgressBar();
-
-
-
-        }
-
-        // fazr -> sunrise
-
-        else if(current >= fazr && current < sunrise ){
-
-            //startTime2 = (int) sunrise - (int) current;
-
-
-            startTime2 = (int) sunrise - (int) fazr;
-
-            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
-                PrefConfig.saveStartTimeProgressBar(this, startTime2);
-
-
-            startProgressBar();
-
-        }
-
-        // sunrise -> dhuhr
-
-        else if(current >= sunrise && current < dhuhr ){
-
-
-            //startTime2 = (int) dhuhr - (int) current;
-
-
-            startTime2 = (int) dhuhr - (int) sunrise;
-
-            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
-                PrefConfig.saveStartTimeProgressBar(this, startTime2);
-
-
-
-            startProgressBar();
-
-        }
-
-        else if(current >= dhuhr && current < asar){
-
-
-            //startTime2 = (int) asar - (int) current;
-
-            startTime2 = (int) asar - (int) dhuhr;
-
-            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
-                PrefConfig.saveStartTimeProgressBar(this, startTime2);
-
-
-            startProgressBar();
-
-        }
-
-        else if(current >= asar && current < magrib){
-
-
-            //startTime2 = (int) magrib - (int) current;
-
-            startTime2 = (int) magrib - (int) asar;
-
-            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
-                PrefConfig.saveStartTimeProgressBar(this, startTime2);
-
-
-            startProgressBar();
-
-        }
-
-        else if(current >= magrib && current < isha){
-
-            //startTime2 = (int) isha - (int)current;
-
-            startTime2 = (int) isha - (int) magrib;
-
-            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
-                PrefConfig.saveStartTimeProgressBar(this, startTime2);
-
-
-
-            startProgressBar();
-        }
-
-    }
-*/
 
 
     /* Option bar */
@@ -324,29 +190,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void startProgressBar(){
 
-        progressBarCountDownTimer = new CountDownTimer(startTime2, 1000)
-        {
-
-
-            public void onTick(long millisUntilFinished)
-            {
-
-                double barvalue = (startTime-timeLeftInMillies)*100/startTime;
-                progressBar.setProgress((int)barvalue);
-            }
-
-            public void onFinish()
-            {
-                i = 0;
-                PrefConfig.saveProgressBar(MainActivity.this, i);
-                progressBar.setProgress(100);
-            }
-        }.start();
-
-
-    }
 
 
     public void setTimer() {
@@ -370,16 +214,13 @@ public class MainActivity extends AppCompatActivity {
         if(currentTime >= ishaTime || currentTime >= 0 && currentTime < fazrTime){
 
 
-            startTime = (0- currentTime) + fazrTime;
+            startTime = 0-currentTime + fazrTime;
             timeLeftInMillies = startTime;
-            PrefConfig.saveLeftTimes(this,(int)timeLeftInMillies);
             startTime2 = (int) (midNight - ishaTime) + (int) fazrTime;
 
             if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
                 PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
-
-            //startProgressBar();
             startTimer();
 
 
@@ -473,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void startTimer() {
-        Log.i("ugab",String.valueOf(timeLeftInMillies));
+
 
         countDownTimer = new CountDownTimer(timeLeftInMillies, 1000) {
 
@@ -482,10 +323,7 @@ public class MainActivity extends AppCompatActivity {
                 timeLeftInMillies = millisUntilFinished;
                 updateCountDownText();
                 int fullTime = PrefConfig.loadStartTimeProgressBar(getApplicationContext());
-
-
                 double barvalue = (fullTime-millisUntilFinished)*100/fullTime;
-                Log.i("uga",String.valueOf(fullTime)+" "+millisUntilFinished+" "+timeLeftInMillies);
                 progressBar.setProgress((int)barvalue);
 
             }
@@ -669,7 +507,7 @@ public class MainActivity extends AppCompatActivity {
 
             if(addresses.size()>0){
                 city = addresses.get(0).getLocality();
-                country = addresses.get(0).getCountryName();
+                String country = addresses.get(0).getCountryName();
 
                 /* Saves the location to PrefConfig (SharedPreferences) */
 
