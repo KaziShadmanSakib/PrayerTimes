@@ -49,7 +49,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="12dp"
-                android:background="#f5fcf5"
+                android:background="@drawable/calendar_date_log_background"
                 android:elevation="10dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"

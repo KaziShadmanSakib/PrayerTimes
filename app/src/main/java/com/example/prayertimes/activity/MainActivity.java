@@ -123,19 +123,19 @@ public class MainActivity extends AppCompatActivity {
         setQuote();
         setSahriIftariCityText();
 
-        setProgressBarTimer();
+      //  setProgressBarTimer();
 
 
     }
 
 
     /* Progress bar */
-
+/*
     public void setProgressBarTimer(){
 
         long midNight = 86400000;
 
-        /* Converting String time to Milliseconds */
+        /* Converting String time to Milliseconds
 
 
         TimeParser tP = new TimeParser();
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         long asar = tP.timeParserMethod(asarNamazTime);
         long sunset = tP.timeParserMethod(sunsetTime);
 
-        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
 
         //i = PrefConfig.loadProgressBar(this);
         //Toast.makeText(MainActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
@@ -167,7 +167,8 @@ public class MainActivity extends AppCompatActivity {
 
             startTime2 = (int) (midNight - isha) + (int) fazr;
 
-            PrefConfig.saveStartTimeProgressBar(this, startTime2);
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
 
             startProgressBar();
@@ -178,14 +179,15 @@ public class MainActivity extends AppCompatActivity {
 
         // fazr -> sunrise
 
-        if(current >= fazr && current < sunrise ){
+        else if(current >= fazr && current < sunrise ){
 
             //startTime2 = (int) sunrise - (int) current;
 
 
             startTime2 = (int) sunrise - (int) fazr;
 
-            PrefConfig.saveStartTimeProgressBar(this, startTime2);
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
 
             startProgressBar();
@@ -194,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
         // sunrise -> dhuhr
 
-        if(current >= sunrise && current < dhuhr ){
+        else if(current >= sunrise && current < dhuhr ){
 
 
             //startTime2 = (int) dhuhr - (int) current;
@@ -202,7 +204,8 @@ public class MainActivity extends AppCompatActivity {
 
             startTime2 = (int) dhuhr - (int) sunrise;
 
-            PrefConfig.saveStartTimeProgressBar(this, startTime2);
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
 
 
@@ -210,41 +213,44 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        if(current >= dhuhr && current < asar){
+        else if(current >= dhuhr && current < asar){
 
 
             //startTime2 = (int) asar - (int) current;
 
             startTime2 = (int) asar - (int) dhuhr;
 
-            PrefConfig.saveStartTimeProgressBar(this, startTime2);
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
 
             startProgressBar();
 
         }
 
-        if(current >= asar && current < magrib){
+        else if(current >= asar && current < magrib){
 
 
             //startTime2 = (int) magrib - (int) current;
 
             startTime2 = (int) magrib - (int) asar;
 
-            PrefConfig.saveStartTimeProgressBar(this, startTime2);
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
 
             startProgressBar();
 
         }
 
-        if(current >= magrib && current < isha){
+        else if(current >= magrib && current < isha){
 
             //startTime2 = (int) isha - (int)current;
 
             startTime2 = (int) isha - (int) magrib;
 
-            PrefConfig.saveStartTimeProgressBar(this, startTime2);
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
 
 
@@ -252,32 +258,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+*/
 
-    private void startProgressBar(){
-
-        progressBarCountDownTimer = new CountDownTimer(startTime2, 1000)
-        {
-
-            public void onTick(long millisUntilFinished)
-            {
-                i = ((int) startTime2 - (int) millisUntilFinished) / 1000;
-                Toast.makeText(MainActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
-                Log.v("Log_tag", "Tick of StartTime"+ startTime2);
-                Log.v("Log_tag", "Tick of Progress "+ (int)i*100/(startTime2/1000));
-                PrefConfig.saveProgressBar(MainActivity.this, i);
-                progressBar.setProgress((int)i*100/(startTime2/1000));
-            }
-
-            public void onFinish()
-            {
-                i = 0;
-                PrefConfig.saveProgressBar(MainActivity.this, i);
-                progressBar.setProgress(100);
-            }
-        }.start();
-
-
-    }
 
     /* Option bar */
 
@@ -342,7 +324,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void startProgressBar(){
 
+        progressBarCountDownTimer = new CountDownTimer(startTime2, 1000)
+        {
+
+
+            public void onTick(long millisUntilFinished)
+            {
+
+                double barvalue = (startTime-timeLeftInMillies)*100/startTime;
+                progressBar.setProgress((int)barvalue);
+            }
+
+            public void onFinish()
+            {
+                i = 0;
+                PrefConfig.saveProgressBar(MainActivity.this, i);
+                progressBar.setProgress(100);
+            }
+        }.start();
+
+
+    }
 
 
     public void setTimer() {
@@ -367,9 +371,14 @@ public class MainActivity extends AppCompatActivity {
 
             startTime = (midNight - currentTime1) + fazrTime;
             timeLeftInMillies = startTime;
+            PrefConfig.saveLeftTimes(this,(int)timeLeftInMillies);
+            startTime2 = (int) (midNight - ishaTime) + (int) fazrTime;
 
-            timerId = findViewById(R.id.timerId);
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
 
+
+            //startProgressBar();
             startTimer();
 
 
@@ -378,12 +387,16 @@ public class MainActivity extends AppCompatActivity {
 
         // fazr -> sunrise
 
-        if(currentTime1 >= fazrTime && currentTime1 < sunrise ){
+        else if(currentTime1 >= fazrTime && currentTime1 < sunrise ){
 
             startTime = sunrise - currentTime1;
             timeLeftInMillies = startTime;
+            startTime2 = (int) sunrise - (int) fazrTime;
 
-            timerId = findViewById(R.id.timerId);
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
+
+
 
             startTimer();
 
@@ -391,49 +404,66 @@ public class MainActivity extends AppCompatActivity {
 
         // sunrise -> dhuhr
 
-        if(currentTime1 >= sunrise && currentTime1 < dhuhrTime ){
+        else if(currentTime1 >= sunrise && currentTime1 < dhuhrTime ){
 
             startTime = dhuhrTime - currentTime1;
             timeLeftInMillies = startTime;
 
-            timerId = findViewById(R.id.timerId);
+            startTime2 = (int) dhuhrTime - (int) sunrise;
+
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
+
+
 
             startTimer();
 
         }
 
-        if(currentTime1 >= dhuhrTime && currentTime1 < asarTime){
+        else if(currentTime1 >= dhuhrTime && currentTime1 < asarTime){
 
             startTime = asarTime - currentTime1;
 
             timeLeftInMillies = startTime;
+            startTime2 = (int) asarTime - (int) dhuhrTime;
 
-            timerId = findViewById(R.id.timerId);
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
+
+
 
 
             startTimer();
 
         }
 
-        if(currentTime1 >= asarTime && currentTime1 < magribTime){
+        else if(currentTime1 >= asarTime && currentTime1 < magribTime){
 
             startTime = magribTime - currentTime1;
 
             timeLeftInMillies = startTime;
+            startTime2 = (int) magribTime - (int) asarTime;
 
-            timerId = findViewById(R.id.timerId);
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
+
+
 
             startTimer();
 
         }
 
-        if(currentTime1 >= magribTime && currentTime1 < ishaTime){
+        else if(currentTime1 >= magribTime && currentTime1 < ishaTime){
 
             startTime = ishaTime - currentTime1;
 
             timeLeftInMillies = startTime;
+            startTime2 = (int) ishaTime - (int) magribTime;
 
-            timerId = findViewById(R.id.timerId);
+            if(startTime2!=PrefConfig.loadStartTimeProgressBar(this))
+                PrefConfig.saveStartTimeProgressBar(this, startTime2);
+
+
 
             startTimer();
         }
@@ -442,6 +472,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void startTimer() {
+        Log.i("ugab",String.valueOf(timeLeftInMillies));
 
         countDownTimer = new CountDownTimer(timeLeftInMillies, 1000) {
 
@@ -449,6 +480,12 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillies = millisUntilFinished;
                 updateCountDownText();
+                int fullTime = PrefConfig.loadStartTimeProgressBar(getApplicationContext());
+
+
+                double barvalue = (fullTime-millisUntilFinished)*100/fullTime;
+                Log.i("uga",String.valueOf(fullTime)+" "+millisUntilFinished+" "+timeLeftInMillies);
+                progressBar.setProgress((int)barvalue);
 
             }
 
@@ -767,6 +804,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTextviewid() {
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        timerId = findViewById(R.id.timerId);
         cityLocation = (TextView) findViewById(R.id.cityLocation);
         quoteOfTheDay = (TextView) findViewById(R.id.quote);
         nowPrayerName = findViewById(R.id.nowPrayerName);

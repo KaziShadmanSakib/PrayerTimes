@@ -34,6 +34,7 @@ public class PrefConfig {
 
     private static final String Pref_ProgressBar_Key = "pref_progressbar_key";
     private static final String Pref_StartTimeProgressBar_Key = "pref_start_time_progress_bar_key";
+    private static final String Pref_Time_Left_Key = "pref_time_left_key";
 
 
     private static final String Pref_Index_Key = "pref_index_key";
@@ -148,7 +149,22 @@ public class PrefConfig {
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt(Pref_StartTimeProgressBar_Key, value);
-        editor.commit();
+        editor.apply();
+
+    }
+    public static int loadLeftTimes(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        return pref.getInt(Pref_Time_Left_Key, 1000);
+
+    }
+
+    public static void saveLeftTimes(Context context, int value){
+
+        SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(Pref_Time_Left_Key, value);
+        editor.apply();
 
     }
 
