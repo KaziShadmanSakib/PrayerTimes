@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private String city = "Seattle";
     private String country = "United States";
     private Boolean isLocationActive = false;
-    private String currentTime, imsakTime, sehri, iftar, fajrNamazTime, dhuhrNamazTime, asarNamazTime, magribNamazTime, ishaNamazTime, sunriseTime, sunsetTime;
+    private String currentTimeString, imsakTime, sehri, iftar, fajrNamazTime, dhuhrNamazTime, asarNamazTime, magribNamazTime, ishaNamazTime, sunriseTime, sunsetTime;
     private TextView timerId;
     private CountDownTimer countDownTimer;
     private boolean isTimerRunning;
@@ -364,12 +364,13 @@ public class MainActivity extends AppCompatActivity {
         long magribTime = timeParser.timeParserMethod(magribNamazTime);
         long ishaTime = timeParser.timeParserMethod(ishaNamazTime);
         long imsak = timeParser.timeParserMethod(imsakTime);
-        long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
+        setCurrentTime();
+        long currentTime = timeParser.timeParserMethodForCurrentTime(PrefConfig.loadCurrentTime(this));
 
-        if(currentTime1 >= ishaTime || currentTime1 >= 0 && currentTime1 < fazrTime){
+        if(currentTime >= ishaTime || currentTime >= 0 && currentTime < fazrTime){
 
 
-            startTime = (midNight - currentTime1) + fazrTime;
+            startTime = (0- currentTime) + fazrTime;
             timeLeftInMillies = startTime;
             PrefConfig.saveLeftTimes(this,(int)timeLeftInMillies);
             startTime2 = (int) (midNight - ishaTime) + (int) fazrTime;
@@ -387,9 +388,9 @@ public class MainActivity extends AppCompatActivity {
 
         // fazr -> sunrise
 
-        else if(currentTime1 >= fazrTime && currentTime1 < sunrise ){
+        else if(currentTime >= fazrTime && currentTime < sunrise ){
 
-            startTime = sunrise - currentTime1;
+            startTime = sunrise - currentTime;
             timeLeftInMillies = startTime;
             startTime2 = (int) sunrise - (int) fazrTime;
 
@@ -404,9 +405,9 @@ public class MainActivity extends AppCompatActivity {
 
         // sunrise -> dhuhr
 
-        else if(currentTime1 >= sunrise && currentTime1 < dhuhrTime ){
+        else if(currentTime >= sunrise && currentTime < dhuhrTime ){
 
-            startTime = dhuhrTime - currentTime1;
+            startTime = dhuhrTime - currentTime;
             timeLeftInMillies = startTime;
 
             startTime2 = (int) dhuhrTime - (int) sunrise;
@@ -420,9 +421,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        else if(currentTime1 >= dhuhrTime && currentTime1 < asarTime){
+        else if(currentTime >= dhuhrTime && currentTime < asarTime){
 
-            startTime = asarTime - currentTime1;
+            startTime = asarTime - currentTime;
 
             timeLeftInMillies = startTime;
             startTime2 = (int) asarTime - (int) dhuhrTime;
@@ -437,9 +438,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        else if(currentTime1 >= asarTime && currentTime1 < magribTime){
+        else if(currentTime >= asarTime && currentTime < magribTime){
 
-            startTime = magribTime - currentTime1;
+            startTime = magribTime - currentTime;
 
             timeLeftInMillies = startTime;
             startTime2 = (int) magribTime - (int) asarTime;
@@ -453,9 +454,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        else if(currentTime1 >= magribTime && currentTime1 < ishaTime){
+        else if(currentTime >= magribTime && currentTime < ishaTime){
 
-            startTime = ishaTime - currentTime1;
+            startTime = ishaTime - currentTime;
 
             timeLeftInMillies = startTime;
             startTime2 = (int) ishaTime - (int) magribTime;
@@ -693,7 +694,7 @@ public class MainActivity extends AppCompatActivity {
         sunsetTime = PrefConfig.loadSunsetTime(this);
         magribNamazTime = PrefConfig.loadMagribTime(this);
         ishaNamazTime = PrefConfig.loadIshaTime(this);
-        currentTime = PrefConfig.loadCurrentTime(this);
+        currentTimeString = PrefConfig.loadCurrentTime(this);
         imsakTime = PrefConfig.loadImsakTime(this);
     }
 
@@ -863,8 +864,9 @@ public class MainActivity extends AppCompatActivity {
     private void setQuote() {
 
         TimeParser timeParser = new TimeParser();
-        long currentTime1 = timeParser.timeParserMethodForCurrentTime(currentTime);
-        QuoteGetter quoteGetter = new QuoteGetter(this, currentTime1);
+        setCurrentTime();
+        long currentTime = timeParser.timeParserMethodForCurrentTime(PrefConfig.loadCurrentTime(this));
+        QuoteGetter quoteGetter = new QuoteGetter(this, currentTime);
         quoteOfTheDay.setText(quoteGetter.quoteOfTheDayFunction());
 
     }
@@ -872,8 +874,8 @@ public class MainActivity extends AppCompatActivity {
     private void setCurrentTime() {
         Calendar calendar1 = Calendar.getInstance();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm:ss");
-        currentTime = simpleDateFormat1.format(calendar1.getTime());
-        PrefConfig.saveCurrentTime(getApplicationContext(), currentTime);
+        currentTimeString = simpleDateFormat1.format(calendar1.getTime());
+        PrefConfig.saveCurrentTime(getApplicationContext(), currentTimeString);
     }
     private void setNowAndNext() {
 
