@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ public class CalendarDateLog extends AppCompatActivity {
     int clickedDate;
     CheckBox[] allPrayersCheckedList;
     TextView dateTextView;
-    ConstraintLayout[] allPrayerLayout;
+    ImageView[] invisibleImageview;
     int currentMiliSec;
 
     @Override
@@ -66,7 +67,7 @@ public class CalendarDateLog extends AppCompatActivity {
         dateTextView.setText("Selected Date : " + formattedDate(date));
         //set checkbox ids
         createCheckBoxId();
-        createLayoutId();
+        createInvisibleImageId();
 
 
         databaseHandler = new DatabaseHandler(this);
@@ -102,7 +103,7 @@ public class CalendarDateLog extends AppCompatActivity {
         //change checkbox on Click and update DB
         for(int i = 0; i < 5; i++ ){
             int finalI = i;
-            allPrayerLayout[i].setOnClickListener(view -> {
+            invisibleImageview[i].setOnClickListener(view -> {
 
                 if((currentDate-clickedDate)>99){
                     if(PrefConfig.loadLogAccessPref(this)==0){
@@ -150,13 +151,13 @@ public class CalendarDateLog extends AppCompatActivity {
 
     }
 
-    private void createLayoutId() {
-        allPrayerLayout = new ConstraintLayout[5];
-        allPrayerLayout[0] =  findViewById(R.id.fajrLayout);
-        allPrayerLayout[1] =  findViewById(R.id.dhuhrLayout);
-        allPrayerLayout[2] =  findViewById(R.id.asarLayout);
-        allPrayerLayout[3] =  findViewById(R.id.magribLayout);
-        allPrayerLayout[4] =  findViewById(R.id.ishaLayout);
+    private void createInvisibleImageId() {
+        invisibleImageview = new ImageView[5];
+        invisibleImageview[0] =  findViewById(R.id.backImage);
+        invisibleImageview[1] =  findViewById(R.id.backImage2);
+        invisibleImageview[2] =  findViewById(R.id.backImage3);
+        invisibleImageview[3] =  findViewById(R.id.backImage4);
+        invisibleImageview[4] =  findViewById(R.id.backImage5);
     }
 
     private void setCOnditionForCurrentDate(int finalI) {
