@@ -550,26 +550,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void convertLocation(double lat,double lon){
-        try {
+        if(PrefConfig.loadLocationType(this)==0){
+            try {
 
-            if(lat != 0 && lon != 0){
-                addresses = geocoder.getFromLocation(lat ,lon, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                if(lat != 0 && lon != 0){
+                    addresses = geocoder.getFromLocation(lat ,lon, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
+                }
+
+                if(addresses.size()>0){
+                    city = addresses.get(0).getLocality();
+                    String country = addresses.get(0).getCountryName();
+
+                    /* Saves the location to PrefConfig (SharedPreferences) */
+
+                    PrefConfig.saveCurrentCity(getApplicationContext(), city);
+                    PrefConfig.saveCurrentCountry(getApplicationContext(), country);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            if(addresses.size()>0){
-                city = addresses.get(0).getLocality();
-                String country = addresses.get(0).getCountryName();
-
-                /* Saves the location to PrefConfig (SharedPreferences) */
-
-                PrefConfig.saveCurrentCity(getApplicationContext(), city);
-                PrefConfig.saveCurrentCountry(getApplicationContext(), country);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
     }
 
 
