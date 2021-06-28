@@ -87,7 +87,7 @@
                     android:text="Now - Midnight"
                     android:textColor="@color/AliceBlue"
                     android:textSize="18sp"
-                    android:translationX="60sp"
+                    android:translationX="65sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.69"
