@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     PrefConfig.saveCurrentCity(this,locationList.get(0));
                     PrefConfig.saveCurrentCountry(this,locationList.get(1));
                     setSahriIftariCityText();
-
+                    setTimer();
                 }
                 else {
                     Toast toast = Toast.makeText(this,"Invalid Country or City",Toast.LENGTH_SHORT);
