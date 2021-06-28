@@ -1,4 +1,4 @@
-/* On Beta Test */
+/* Version: 1.0.0 */
 
 package com.example.prayertimes.activity;
 
