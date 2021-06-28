@@ -276,7 +276,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/background_light_pink"
+                android:background="@drawable/quote_background"
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="15sp"
                 android:layout_marginEnd="20sp"
