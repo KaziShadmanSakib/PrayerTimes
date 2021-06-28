@@ -376,18 +376,21 @@ public class Duas extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.log:
-                        startActivity(new Intent(getApplicationContext(), LogActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.duas:
-                        return true;
+                if(item.getItemId()==R.id.log){
+                    startActivity(new Intent(getApplicationContext(), LogActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
                 }
+                else if(item.getItemId()==R.id.home){
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                }
+                else if(item.getItemId()==R.id.duas){
+
+                    return true;
+                }
+
                 return false;
             }
         });

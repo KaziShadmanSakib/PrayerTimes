@@ -649,18 +649,20 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.log:
-                    startActivity(new Intent(getApplicationContext(), LogActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                case R.id.home:
-                    return true;
-                case R.id.duas:
-                    startActivity(new Intent(getApplicationContext(), Duas.class));
-                    overridePendingTransition(0, 0);
-                    return true;
+            if(item.getItemId()==R.id.log){
+                startActivity(new Intent(getApplicationContext(), LogActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
             }
+            else if(item.getItemId()==R.id.home){
+                return true;
+            }
+            else if(item.getItemId()==R.id.duas){
+                startActivity(new Intent(getApplicationContext(), Duas.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }
+
             return false;
         });
         /*App bar config */
