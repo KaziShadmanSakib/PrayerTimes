@@ -85,19 +85,33 @@ public class LogActivity extends AppCompatActivity {
         /* Perform Item Selected Listener */
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()){
-                case R.id.log:
-                    return true;
-                case R.id.home:
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0,0);
-                    return true;
-                case R.id.duas:
-                    startActivity(new Intent(getApplicationContext(), Duas.class));
-                    overridePendingTransition(0,0);
-                    return true;
+            if(item.getItemId() == R.id.log){
+
+                return  true;
+
             }
-            return false;
+
+            else if(item.getItemId() == R.id.home){
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(0,0);
+                return true;
+
+            }
+
+            else if(item.getItemId() == R.id.duas){
+
+                startActivity(new Intent(getApplicationContext(), Duas.class));
+                overridePendingTransition(0,0);
+                return  true;
+
+            }
+
+            else {
+
+                return  false;
+
+            }
         });
     }
 

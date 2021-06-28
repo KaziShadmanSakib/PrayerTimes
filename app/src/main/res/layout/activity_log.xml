@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eae6e6"
+    android:background="#e8ffec"
     tools:context=".activity.LogActivity">
 
     <com.applandeo.materialcalendarview.CalendarView
@@ -13,8 +13,9 @@
         android:layout_height="418sp"
         android:layout_above="@+id/bottom_navigation"
         android:layout_alignParentTop="true"
-        app:abbreviationsBarColor="#eae6e6"
-        app:pagesColor="#f5fcf5"
+        app:abbreviationsBarColor="#52b788"
+        app:pagesColor="#B7e4c7"
+        app:headerColor="#028B7C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
