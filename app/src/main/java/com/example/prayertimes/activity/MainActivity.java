@@ -1,3 +1,5 @@
+/* On Beta Test */
+
 package com.example.prayertimes.activity;
 
 import androidx.annotation.NonNull;
