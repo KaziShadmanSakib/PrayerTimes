@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#47478F"
+    android:background="#5e60ce"
     tools:context=".options.QiblaDirectionOption">
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="100dp"
         android:text="Heading: 0.0"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 
     <ImageView

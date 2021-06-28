@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         app:abbreviationsBarColor="#52b788"
         app:pagesColor="#B7e4c7"
-        app:headerColor="#028B7C"
+        app:headerColor="#40917c"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
