@@ -140,10 +140,10 @@
                     android:layout_marginBottom="16dp"
                     android:onClick="openAllPrayers"
                     android:text="All Prayers"
-                    android:textColor="@color/DarkGreen"
-                    android:textSize="19sp"
+                    android:textColor="#40c454"
+                    android:textSize="23sp"
                     android:textStyle="bold"
-                    android:translationX="-10sp"
+                    android:translationX="-9sp"
                     android:translationY="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/haveYouPrayed" />
