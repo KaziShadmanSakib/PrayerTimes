@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setnewLocation() {
         if(isLocationChanged){
-            Log.i("uga","why");
+
             isLocationChanged = false;
 
 
@@ -554,7 +554,7 @@ public class MainActivity extends AppCompatActivity {
             try {
 
                 if(lat != 0 && lon != 0){
-                    addresses = geocoder.getFromLocation(lat ,lon, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                    addresses = geocoder.getFromLocation(lat ,lon, 1);
 
                 }
 

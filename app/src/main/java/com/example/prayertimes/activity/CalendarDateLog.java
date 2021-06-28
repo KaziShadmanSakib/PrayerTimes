@@ -55,7 +55,6 @@ public class CalendarDateLog extends AppCompatActivity {
         if(bundle!=null)
         {
             date =(String) bundle.get("clickedDate");
-            Log.i("uga",date);
             clickedDate = Integer.parseInt(date);
 
             date = modifiedDate(date);
