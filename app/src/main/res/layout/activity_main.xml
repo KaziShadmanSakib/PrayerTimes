@@ -231,7 +231,7 @@
                 android:layout_marginTop="15sp"
                 android:layout_marginEnd="20sp"
                 android:orientation="horizontal"
-                android:background="@drawable/background_light_cyan">
+                android:background="@drawable/background_light_lime_3">
 
                 <TextView
                     android:id="@+id/iftar"

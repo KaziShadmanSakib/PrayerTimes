@@ -1,16 +1,14 @@
 package com.example.prayertimes.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.CheckBox;
-import android.widget.CheckedTextView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +18,11 @@ import com.example.prayertimes.datetime.PrayerTimeInMiliSecond;
 import com.example.prayertimes.R;
 import com.example.prayertimes.options.PrefConfig;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 
@@ -55,11 +55,15 @@ public class CalendarDateLog extends AppCompatActivity {
         if(bundle!=null)
         {
             date =(String) bundle.get("clickedDate");
-            clickedDate = Integer.valueOf(date);
+            Log.i("uga",date);
+            clickedDate = Integer.parseInt(date);
 
             date = modifiedDate(date);
 
+
+
         }
+        dhuhrtojummah();
 
 
 
@@ -89,15 +93,7 @@ public class CalendarDateLog extends AppCompatActivity {
  */
 
         //create checkbox
-        if(databaseHandler.getContact(date).getDate() == null){
-
-            checkBox(true,date);
-
-        }
-        else{
-            checkBox(false,date);
-
-        }
+        checkBox(databaseHandler.getContact(date).getDate() == null,date);
 
 
         //change checkbox on Click and update DB
@@ -111,11 +107,7 @@ public class CalendarDateLog extends AppCompatActivity {
                                 .setTitle("Are You Sure")
                                 .setMessage("You can stop the warning from settings")
                                 .setCancelable(false)
-                                .setPositiveButton("Yes", (dialog, which) -> {
-
-                                    updateChecked(finalI);
-
-                                }).setNegativeButton("No", null)
+                                .setPositiveButton("Yes", (dialog, which) -> updateChecked(finalI)).setNegativeButton("No", null)
                                 .show();
                     }
 
@@ -151,6 +143,31 @@ public class CalendarDateLog extends AppCompatActivity {
 
     }
 
+    private void dhuhrtojummah() {
+
+        if(getWeekday(date).equals("Friday")){
+            TextView textView = findViewById(R.id.dhuhrTextView);
+            textView.setText("Jumu'ah");
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private String getWeekday(String date) {
+        String s = "today";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
+        Date weekDate;
+        try {
+            weekDate = formatter.parse(date);
+            s = new SimpleDateFormat("EEEE").format(weekDate);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return s;
+
+    }
+
     private void createInvisibleImageId() {
         invisibleImageview = new ImageView[5];
         invisibleImageview[0] =  findViewById(R.id.backImage);
@@ -173,18 +190,13 @@ public class CalendarDateLog extends AppCompatActivity {
     }
 
     private void updateChecked(int finalI) {
-        if(allPrayersCheckedList[finalI].isChecked()){
-            databaseHandler.updateCell(date, finalI,true);
-        }
-        else{
-            databaseHandler.updateCell(date, finalI,false);
-        }
+        databaseHandler.updateCell(date, finalI, allPrayersCheckedList[finalI].isChecked());
         allPrayersCheckedList[finalI].toggle();
     }
 
     private void currentDateSet() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());
         currentDate = Integer.parseInt(date);
     }

@@ -154,7 +154,7 @@ public class NowAndNextPrayer {
 
 
             if((prayer == "Magrib"&&contact.getMagrib())
-                    ||(prayer == "Asar"&&contact.getFajr())
+                    ||(prayer == "Asar"&&contact.getAsar())
                     ||(prayer == "Dhuhr"&&contact.getDhuhr())
                     ||(prayer == "Fajr"&&contact.getFajr())
                     ||(prayer == "Isha"&&contact.getIsha())
