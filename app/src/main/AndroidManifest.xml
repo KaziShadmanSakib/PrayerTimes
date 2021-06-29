@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.prayertimes">
+    package="com.kssabd.prayertimes">
     <!-- API for User Specific Location -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".others.AppController"
+        android:name="com.kssabd.prayertimes.others.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,26 +20,26 @@
         android:theme="@style/Theme.PrayerTimes"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.dua.SetDuaOfEachOption"
-            android:parentActivityName=".activity.dua.Duas" />
+            android:name="com.kssabd.prayertimes.activity.dua.SetDuaOfEachOption"
+            android:parentActivityName="com.kssabd.prayertimes.activity.dua.Duas" />
         <activity
-            android:name=".options.AboutUsOption"
-            android:parentActivityName=".activity.MainActivity" />
+            android:name="com.kssabd.prayertimes.options.AboutUsOption"
+            android:parentActivityName="com.kssabd.prayertimes.activity.MainActivity" />
         <activity
-            android:name=".options.SettingsOption"
-            android:parentActivityName=".activity.MainActivity" />
+            android:name="com.kssabd.prayertimes.options.SettingsOption"
+            android:parentActivityName="com.kssabd.prayertimes.activity.MainActivity" />
         <activity
-            android:name=".options.QiblaDirectionOption"
-            android:parentActivityName=".activity.MainActivity" />
+            android:name="com.kssabd.prayertimes.options.QiblaDirectionOption"
+            android:parentActivityName="com.kssabd.prayertimes.activity.MainActivity" />
         <activity
-            android:name=".activity.CalendarDateLog"
-            android:parentActivityName=".activity.LogActivity" />
+            android:name="com.kssabd.prayertimes.activity.CalendarDateLog"
+            android:parentActivityName="com.kssabd.prayertimes.activity.LogActivity" />
         <activity
-            android:name=".activity.AllPrayers"
-            android:parentActivityName=".activity.MainActivity" />
-        <activity android:name=".activity.dua.Duas" />
-        <activity android:name=".activity.LogActivity" />
-        <activity android:name=".activity.MainActivity">
+            android:name="com.kssabd.prayertimes.activity.AllPrayers"
+            android:parentActivityName="com.kssabd.prayertimes.activity.MainActivity" />
+        <activity android:name="com.kssabd.prayertimes.activity.dua.Duas" />
+        <activity android:name="com.kssabd.prayertimes.activity.LogActivity" />
+        <activity android:name="com.kssabd.prayertimes.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".notification.AlertReceiver" />
+        <receiver android:name="com.kssabd.prayertimes.notification.AlertReceiver" />
 
         <uses-library
             android:name="org.apache.http.legacy"
