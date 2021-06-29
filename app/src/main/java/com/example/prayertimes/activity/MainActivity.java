@@ -1,11 +1,9 @@
-/* Version: 1.0.0 */
-
-/* Tuesday, June 29, 2021 */
-
-/* Created by -
+/* Version: 1.0.0
+* Tuesday, June 29, 2021
+*
+* Created by -
 *   Kazi Shadman Sakib
-*   Abdullah Ibne Masud
-*  */
+*   Abdullah Ibne Masud */
 
 package com.example.prayertimes.activity;
 
