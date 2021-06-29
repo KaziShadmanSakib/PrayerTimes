@@ -146,10 +146,13 @@ public class JasonFetcher {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                isOk = false;
+                if(loadingDialog != null && loadingDialog.isShowing()){
+                    loadingDialog.dismissDialog();
+                    isOk = false;
+                }
+
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
 
-                Toast.makeText(context, "Please turn on location or internet to be always updated", Toast.LENGTH_SHORT).show();
 
                 // hide the progress dialog
                 //pDialog.hide();

@@ -25,6 +25,11 @@ public class LoadingDialog {
         dialog = builder.create();
         dialog.show();
     }
+    public boolean isShowing(){
+
+
+        return dialog.isShowing();
+    }
 
     public void dismissDialog() {
         dialog.dismiss();

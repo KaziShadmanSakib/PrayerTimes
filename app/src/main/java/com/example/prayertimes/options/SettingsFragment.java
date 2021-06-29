@@ -452,15 +452,18 @@ public class SettingsFragment extends PreferenceFragment {
                          jasonFetcher.getTempData(locationList.get(0),locationList.get(1));
 
 
-                         if(jasonFetcher.isNoError()){
-                             PrefConfig.saveCurrentCity(getContext(),locationList.get(0));
-                             PrefConfig.saveCurrentCountry(getContext(),locationList.get(1));
-                             locationEditText.setSummary(locationList.get(0)+", "+locationList.get(1));
-                         }
-                         else {
-                             Toast toast = Toast.makeText(getContext(),"Invalid Country or City",Toast.LENGTH_SHORT);
-                             toast.show();
-                         }
+                         new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                             if(jasonFetcher.isNoError()){
+                                 Log.i("uga","why");
+                                 PrefConfig.saveCurrentCity(getContext(),locationList.get(0));
+                                 PrefConfig.saveCurrentCountry(getContext(),locationList.get(1));
+
+                             }
+                             else {
+                                 Toast toast = Toast.makeText(getContext(),"Invalid Country or City",Toast.LENGTH_SHORT);
+                                 toast.show();
+                             }
+                         }, 1500);
 
                      }
                      else{

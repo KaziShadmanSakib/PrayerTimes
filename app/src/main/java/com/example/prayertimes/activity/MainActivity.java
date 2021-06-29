@@ -154,10 +154,10 @@ public class MainActivity extends AppCompatActivity {
 
 
             JasonFetcher jasonFetcher = new JasonFetcher(this);
-            if(locationList.size()>1){
-                jasonFetcher.getTempData(locationList.get(0),locationList.get(1));
 
+            jasonFetcher.getTempData(locationList.get(0),locationList.get(1));
 
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if(jasonFetcher.isNoError()){
                     PrefConfig.saveCurrentCity(this,locationList.get(0));
                     PrefConfig.saveCurrentCountry(this,locationList.get(1));
@@ -168,12 +168,15 @@ public class MainActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(this,"Invalid Country or City",Toast.LENGTH_SHORT);
                     toast.show();
                 }
+            }, 1500);
 
-            }
-            else{
-                Toast toast = Toast.makeText(this,"Invalid Country or City",Toast.LENGTH_SHORT);
-                toast.show();
-            }
+
+
+
+
+
+
+
 
         }
     }
@@ -507,7 +510,9 @@ public class MainActivity extends AppCompatActivity {
             PrefConfig.saveLatitude(getApplicationContext(), (float) finalLat);
             PrefConfig.saveAltitude(getApplicationContext(), (float) finalAlti);
 
-            new Handler(Looper.getMainLooper()).postDelayed(() -> convertLocation(finalLat,finalLong), 1000);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                convertLocation(finalLat, finalLong);
+            }, 1000);
 
         }
     };
@@ -808,9 +813,18 @@ public class MainActivity extends AppCompatActivity {
 
 
                     edittedLocation = edittext.getText().toString();
-                    isLocationChanged = true;
-                    finish();
-                    startActivity(getIntent());
+
+                    List<String> locationList = Arrays.asList(edittedLocation.split("\\s*,\\s*"));
+                    if(locationList.size()==2){
+                        isLocationChanged = true;
+                        finish();
+                        startActivity(getIntent());
+                    }
+                    else{
+                        Toast toast = Toast.makeText(getApplicationContext(),"Invalid Country or City",Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+
 
                 }
             });
