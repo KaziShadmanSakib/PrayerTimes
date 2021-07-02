@@ -51,8 +51,12 @@ public class JasonFetcher {
         LoadingDialog loadingDialog = new LoadingDialog((Activity) context);
 
         if(PrefConfig.loadFirstTime(context)=="FirstTime"||manual) {
-            Toast toast = Toast.makeText(context,"Please check if the internet is on",Toast.LENGTH_SHORT);
-            toast.show();
+            if(PrefConfig.loadFirstTime(context)=="FirstTime"){
+
+                Toast toast = Toast.makeText(context,"Please check if the internet is on",Toast.LENGTH_SHORT);
+                toast.show();
+
+            }
             loadingDialog.startLoadingDialog();
         }
 

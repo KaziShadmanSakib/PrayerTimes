@@ -1,5 +1,5 @@
-/* Version: 1.0.0
-* Tuesday, June 29, 2021
+/* Version: 1.0.1
+* Friday, July 02, 2021
 *
 * Created by -
 *   Kazi Shadman Sakib
@@ -516,7 +516,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkPermissions() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ;
-        //&&ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
 
     }

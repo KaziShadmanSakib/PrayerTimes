@@ -16,10 +16,12 @@ import androidx.core.app.NotificationCompat;
 
 import com.kssabd.prayertimes.activity.CalendarDateLog;
 import com.kssabd.prayertimes.R;
+import com.kssabd.prayertimes.datetime.PrayerTimeInMiliSecond;
 import com.kssabd.prayertimes.options.PrefConfig;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
@@ -65,11 +67,23 @@ public class NotificationHelper extends ContextWrapper {
 
     public NotificationCompat.Builder getChannelNotification(String title, String text ) {
 
+        PrayerTimeInMiliSecond prayerTimeToMiliSecond = new PrayerTimeInMiliSecond(this);
+        prayerTimeToMiliSecond.toMiliSec();
+
+        Date currentTime = Calendar.getInstance().getTime();
+        int currentMiliSec  =prayerTimeToMiliSecond.getCurrentTimeInMiliSec(currentTime);
+        int fajrTime = prayerTimeToMiliSecond.getFajrInMili();
+
         Intent clickedIntent = new Intent(this, CalendarDateLog.class);
         Calendar calendar = Calendar.getInstance();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String date = simpleDateFormat.format(calendar.getTime());
         int dateInt = Integer.parseInt(date);
+
+        if(PrefConfig.loadCurrentPrayerIndex(this) == 0 &&  currentMiliSec < fajrTime){
+            dateInt -= 1;
+
+        }
         dateInt +=1;
         date = String.valueOf(dateInt);
         clickedIntent.putExtra("clickedDate",date);

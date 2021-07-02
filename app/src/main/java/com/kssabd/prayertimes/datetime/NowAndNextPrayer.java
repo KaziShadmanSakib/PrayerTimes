@@ -69,7 +69,7 @@ public class NowAndNextPrayer {
             setPrayed("Fajr");
             nowPrayerName = "Good Morning";
             nextPrayerName = "Dhuhr";
-            if(getWeekDay()=="Friday"){
+            if(getWeekDay().equals("Friday")){
                 nextPrayerName = "Jumu'ah";
             }
             nextPrayerTime = dhuhrNamazAMPM;
@@ -82,7 +82,7 @@ public class NowAndNextPrayer {
 
             setPrayed("Dhuhr");
             nowPrayerName = "Now - Dhuhr";
-            if(getWeekDay()=="Friday"){
+            if(getWeekDay().equals("Friday")){
                 nowPrayerName = "Now - Jumu'ah";
             }
             nextPrayerName = "Asar";
@@ -141,8 +141,14 @@ public class NowAndNextPrayer {
             contact = databaseHandler.getContact(currentDateSet());
 
         }
-        if(getWeekDay()=="Friday"){
-            s = "Have you prayed Jumu'ah?";
+
+
+        if(prayer=="Dhuhr"){
+
+            if(getWeekDay().equals("Friday")){
+                s = "Have you prayed Jumu'ah?";
+            }
+
         }
 
 
@@ -165,7 +171,7 @@ public class NowAndNextPrayer {
 
                 if(prayer=="Dhuhr"){
 
-                    if(getWeekDay()=="Friday"){
+                    if(getWeekDay().equals("Friday")){
                         s = "You've prayed Jumu'ah";
                     }
 

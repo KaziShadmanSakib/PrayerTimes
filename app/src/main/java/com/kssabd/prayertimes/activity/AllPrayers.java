@@ -1,5 +1,9 @@
 package com.kssabd.prayertimes.activity;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -19,6 +23,7 @@ public class AllPrayers extends AppCompatActivity{
     private String city;
     private String country;
 
+    boolean connected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +41,49 @@ public class AllPrayers extends AppCompatActivity{
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //use Jason to get Data and save it to preConfig
-        JasonFetcher jasonFetcher = new JasonFetcher(this);
-        jasonFetcher.getData();
+        connectedOrNot();
+
+        if(connected){
+
+            //use Jason to get Data and save it to preConfig
+            JasonFetcher jasonFetcher = new JasonFetcher(this);
+            jasonFetcher.getData();
+
+        }
+
+        else{
+
+            fajrNamazAMPM = PrefConfig.loadFajrTimeAMPM(this);
+            sunriseAMPM = PrefConfig.loadSunriseTimeAMPM(this);
+            dhuhrNamazAMPM = PrefConfig.loadDhuhrTimeAMPM(this);
+            asarNamazAMPM = PrefConfig.loadAsarTimeAMPM(this);
+            sunsetAMPM = PrefConfig.loadSunsetTimeAMPM(this);
+            magribNamazAMPM = PrefConfig.loadMagribTimeAMPM(this);
+            ishaNamazAMPM = PrefConfig.loadIshaTimeAMPM(this);
+            city = PrefConfig.loadCurrentCity(this);
+            country = PrefConfig.loadCurrentCountry(this);
+
+        }
+
+
 
 
         getTextviewId();
         showDataonTextView();
 
+
+    }
+
+    private void connectedOrNot(){
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
 
     }
 
