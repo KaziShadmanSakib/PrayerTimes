@@ -483,7 +483,7 @@ public class PrefConfig {
     public static String loadDhuhrTime(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Dhuhr_Key, "12;03");
+        return pref.getString(Pref_Dhuhr_Key, "12:03");
 
     }
 
@@ -532,56 +532,56 @@ public class PrefConfig {
     public static String loadFajrTimeAMPM(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Fajr_AM_PM_Key, "03:48");
+        return pref.getString(Pref_Fajr_AM_PM_Key, "03:48 AM");
 
     }
 
     public static String loadDhuhrTimeAMPM(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Dhuhr_AM_PM_Key, "12:03");
+        return pref.getString(Pref_Dhuhr_AM_PM_Key, "12:03 PM");
 
     }
 
     public static String loadAsarTimeAMPM(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Asar_AM_PM_Key, "04:44");
+        return pref.getString(Pref_Asar_AM_PM_Key, "04:44 PM");
 
     }
 
     public static String loadMagribTimeAMPM(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Magrib_AM_PM_Key, "06:51");
+        return pref.getString(Pref_Magrib_AM_PM_Key, "06:51 PM");
 
     }
 
     public static String loadIshaTimeAMPM(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Isha_AM_PM_Key, "08:19");
+        return pref.getString(Pref_Isha_AM_PM_Key, "08:19 PM");
 
     }
 
     public static String loadImsakTimeAMPM(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Imsak_AM_PM_Key, "03:48");
+        return pref.getString(Pref_Imsak_AM_PM_Key, "03:48 AM");
 
     }
 
     public static String loadSunriseTimeAMPM(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Sunrise_AM_PM_Key, "05:15");
+        return pref.getString(Pref_Sunrise_AM_PM_Key, "05:15 AM");
 
     }
 
     public static String loadSunsetTimeAMPM(Context context){
 
         SharedPreferences pref = context.getSharedPreferences(My_Preference_Name, Context.MODE_PRIVATE);
-        return pref.getString(Pref_Sunset_AM_PM_Key, "06:51");
+        return pref.getString(Pref_Sunset_AM_PM_Key, "06:51 PM");
 
     }
 

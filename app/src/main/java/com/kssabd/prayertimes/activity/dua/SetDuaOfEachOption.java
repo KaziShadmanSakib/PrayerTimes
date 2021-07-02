@@ -67,6 +67,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.ramadan01_01);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
 
         }
         else if(i==2){
@@ -76,6 +78,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
             getSupportActionBar().setTitle("Ramadan");
 
             imageView.setImageResource(R.drawable.ramadan01_02);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
 
         }
@@ -100,6 +104,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.ramadan03);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
             imageView.setTranslationY(-100);
 
 
@@ -113,6 +119,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.ramadan04);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
             imageView.setTranslationY(-100);
 
         }
@@ -124,8 +132,9 @@ public class SetDuaOfEachOption extends AppCompatActivity {
             getSupportActionBar().setTitle("Hajj / Umrah");
 
 
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setImageResource(R.drawable.hajj01);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -137,8 +146,9 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             getSupportActionBar().setTitle("Hajj / Umrah");
 
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setImageResource(R.drawable.hajj02);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -150,8 +160,9 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             getSupportActionBar().setTitle("Hajj / Umrah");
 
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setImageResource(R.drawable.hajj03);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -165,6 +176,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.hajj04);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
             imageView.setTranslationY(-100);
 
         }
@@ -175,8 +188,9 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             getSupportActionBar().setTitle("Hajj / Umrah");
 
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setImageResource(R.drawable.hajj05);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -188,8 +202,9 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             getSupportActionBar().setTitle("Hajj / Umrah");
 
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setImageResource(R.drawable.hajj06);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -202,8 +217,9 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             getSupportActionBar().setTitle("Hajj / Umrah");
 
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setImageResource(R.drawable.hajj07);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -215,8 +231,9 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             getSupportActionBar().setTitle("Hajj / Umrah");
 
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setImageResource(R.drawable.hajj08);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -230,6 +247,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.hajj09);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
             imageView.setTranslationY(-100);
 
         }
@@ -240,9 +259,10 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             getSupportActionBar().setTitle("Mosque");
 
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setImageResource(R.drawable.mosque01);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -256,6 +276,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.mosque02_01);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
         }
 
         else if(i==17){
@@ -265,6 +287,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
             getSupportActionBar().setTitle("Mosque");
 
             imageView.setImageResource(R.drawable.mosque02_02);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         }
 
@@ -276,6 +300,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.mosque03_01);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
         }
 
         else if(i==19){
@@ -286,6 +312,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.mosque03_02);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
         }
 
         else if(i==20){
@@ -295,6 +323,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
             getSupportActionBar().setTitle("Home");
 
             imageView.setImageResource(R.drawable.homedua01_01);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
 
         }
@@ -307,6 +337,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.homedua01_02);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
 
 
         }
@@ -318,6 +350,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
             getSupportActionBar().setTitle("Home");
 
             imageView.setImageResource(R.drawable.homedua02);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -334,6 +368,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.homedua03);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
             imageView.setTranslationY(-100);
 
 
@@ -348,6 +384,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
             getSupportActionBar().setTitle("Home");
 
             imageView.setImageResource(R.drawable.homedua04);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -364,7 +402,7 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.sleepingdua01);
 
-
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
 
 
@@ -378,6 +416,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.sleepingdua02);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
 
         }
 
@@ -388,6 +428,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
             getSupportActionBar().setTitle("Food");
 
             imageView.setImageResource(R.drawable.fooddua01);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -402,6 +444,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.fooddua02);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
             imageView.setTranslationY(-100);
 
 
@@ -414,6 +458,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
             getSupportActionBar().setTitle("Food");
 
             imageView.setImageResource(R.drawable.fooddua03);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -428,6 +474,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.fooddua04);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
             imageView.setTranslationY(-100);
 
 
@@ -440,6 +488,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
             getSupportActionBar().setTitle("Food");
 
             imageView.setImageResource(R.drawable.fooddua05);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
@@ -454,6 +504,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
 
             imageView.setImageResource(R.drawable.fooddua06);
 
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
             imageView.setTranslationY(-100);
 
 
@@ -466,6 +518,8 @@ public class SetDuaOfEachOption extends AppCompatActivity {
             getSupportActionBar().setTitle("Food");
 
             imageView.setImageResource(R.drawable.fooddua07);
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             imageView.setTranslationY(-100);
 
